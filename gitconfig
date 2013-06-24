@@ -1,0 +1,52 @@
+[user]
+	email = simon.frost@accenture.com
+	name = simon.frost
+
+[core]
+#	autocrlf = true
+	pager = less -FRSX
+#	whitespace=fix,-indent-with-non-tab,training-space,cr-at-eol
+
+[apply]
+#	whitespace=fix
+
+[alias]
+	di = diff
+	ci = commit
+	co = checkout
+	ann = blame
+	st = status
+	w = whatchanged
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%C(white) %s %Creset- %C(yellow)%an %Cgreen%cr%Creset' --abbrev-commit --date=relative
+
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = auto
+	ui = auto
+	pager = true
+
+[color "branch"]
+	remote = red
+
+[color "status"]
+	added = blue
+	changed = red
+	untracked = red
+
+[status]
+	showuntrackedfiles = all
+
+[push]
+	default = tracking
+
+[rerere]
+	enabled = true
+	autoupdate = true
+
+[rebase]
+	stat = true
+
+[credential]
+	helper = osxkeychain

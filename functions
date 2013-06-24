@@ -1,0 +1,48 @@
+#################################################################
+# Automatically perform some cool operations after changing dir #
+#################################################################
+cd() {
+	if [ -n "$1" ]; then
+		# List the directory contents
+		echo ''
+		builtin cd "$@" && clear && ls -lah
+		echo ''
+		
+		if [ -d ".git" ]; then
+			echo "$bg[red]$fg[white]Git status$reset_color"
+			git status
+			echo ''
+		fi
+		
+		if [ -e "todo.txt" ]; then
+			echo "$bg[red]$fg[white]Todo list:$reset_color"
+			cat todo.txt
+			echo ''
+		fi
+	else
+		builtin cd ~ && clear && ls -lah
+	fi
+}
+
+
+##########################
+# Tree printing function #
+##########################
+function mytree {
+	find ${1:-.} -print | sed -e 's;[^/]*/;|___;g;s;___|;  |;g'
+}
+
+function settitle() {
+	#echo -ne "\e]2;$@\a\e]1;$@\a";
+	echo -ne "\033]0;$@\007";
+}
+
+
+#############################
+# View man pages in Preview #
+#############################
+function pman() {
+	ps=`mktemp -t manpageXXXX`.ps;
+	man -t $@ > "$ps";
+	open "$ps";
+}

@@ -1,0 +1,29 @@
+# General shortcuts
+alias cls='clear'
+alias du='du -h'
+alias ..='cd ..'
+alias cp='rsync --progress -ah'
+
+# Useful stuff
+alias myip='ifconfig | grep broadcast | awk -F " " '"'"'{print $2}'"'"
+alias sshtunnel='ssh -C2qTnN -D 10000 apollo.apisnetworks.com'
+alias sedrecurse='find . -type f -print | xargs sed -i ""'
+alias androidemu='~/Code/SDKs/android-sdk-macosx/tools/emulator @4.0.3'
+
+# Web-dev related stuff
+alias senchabuild='sencha create jsb -a index.htm -p temp.jsb3 && sencha build -p temp.jsb3 -d .'
+alias senchaclean='rm all-classes.js && rm app-all.js && rm temp.jsb3'
+alias chromedev='open /Applications/Google\ Chrome.app --args --allow-file-access-from-files --enable-file-cookies --disable-web-security'
+alias chromium='open /Applications/Chromium.app --args --allow-file-access-from-files --enable-file-cookies --disable-web-security'
+
+# Source control
+alias gitcompress='git repack && git prune'
+alias diffmate='git diff | mate -m GitDiff'
+alias gerritpush='git push origin HEAD:refs/for/master'
+
+# Fun stuff
+alias adventure='emacs -batch -l dunnet'
+
+# Now unused
+#alias wget='curl -O'
+#alias tree='find . -print | sed -e "s;[^/]*/;|___;g;s;___|;  |;g"'

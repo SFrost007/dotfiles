@@ -1,0 +1,20 @@
+# Not sure this is needed any more? May have been entered by WebOS SDK
+#export PATH=/opt/local/bin:$PATH
+
+# Cordova entries
+#export PATH=/cordova/bin:$PATH
+
+# Add sencha paths
+export PATH=/Applications/SenchaSDKTools-2.0.0-beta3:$PATH
+export SENCHA_SDK_TOOLS_2_0_0_BETA3="/Applications/SenchaSDKTools-2.0.0-beta3"
+#export PATH=/Applications/SenchaSDKTools-2.0.0-Beta:$PATH
+#export PATH=/Applications/SenchaSDKTools-2.0.0-Beta/bin:$PATH
+#export PATH=/Applications/SenchaSDKTools-2.0.0-Beta/jsbuilder:$PATH
+
+# Add Android paths
+#export PATH=~/Code/android-sdk-macosx/platforms:$PATH
+#export PATH=~/Code/android-sdk-macosx/tools:$PATH
+#export PATH=~/Code/android-sdk-macosx/platform-tools:$PATH
+
+# Add RVM to PATH for scripting
+export PATH=$PATH:$HOME/.rvm/bin
