@@ -49,6 +49,7 @@ COMPLETION_WAITING_DOTS="true"
 POWERLINE_HIDE_USER_NAME="true"
 POWERLINE_HIDE_HOST_NAME="true"
 POWERLINE_DETECT_SSH="true"
+POWERLINE_GIT_UNTRACKED="%F{magenta}✭%F{black}"
 
 
 ##########################################
@@ -63,3 +64,9 @@ source $ZSH/oh-my-zsh.sh
 source ~/.aliases
 source ~/.functions
 source ~/.path
+
+
+#####################
+# RVM Related Stuff #
+#####################
+[[ -s "$HOME/.rvm/scripts/rvm" ]]  && . "$HOME/.rvm/scripts/rvm"

@@ -1,26 +1,33 @@
 #################################################################
 # Automatically perform some cool operations after changing dir #
+#  - This chpwd function is only called by ZSH, not Bash.       #
+#  - For Bash support, override the cd function.                #
+#                                                               #
+#  cd() {                                                       #
+#      if [ -n "$1" ]; then                                     #
+#          builtin cd "$@" && clear && ls -lah                  #
+#          ...                                                  #
+#      else                                                     #
+#          builtin cd ~ && clear && ls -lah                     #
+#      fi                                                       #
+#  }                                                            #
+#                                                               #
 #################################################################
-cd() {
-	if [ -n "$1" ]; then
-		# List the directory contents
+function chpwd() {
+	emulate -L zsh
+	ls -lAh
+	echo ''
+	
+	if [ -d ".git" ]; then
+		echo "$bg[red]$fg[white] Git status $reset_color"
+		git status
 		echo ''
-		builtin cd "$@" && clear && ls -lah
+	fi
+	
+	if [ -e "todo.txt" ]; then
+		echo "$bg[red]$fg[white] TODO list $reset_color"
+		cat todo.txt
 		echo ''
-		
-		if [ -d ".git" ]; then
-			echo "$bg[red]$fg[white]Git status$reset_color"
-			git status
-			echo ''
-		fi
-		
-		if [ -e "todo.txt" ]; then
-			echo "$bg[red]$fg[white]Todo list:$reset_color"
-			cat todo.txt
-			echo ''
-		fi
-	else
-		builtin cd ~ && clear && ls -lah
 	fi
 }
 
