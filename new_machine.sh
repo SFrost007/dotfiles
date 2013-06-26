@@ -7,7 +7,8 @@ curl -o ~/.oh-my-zsh/themes/powerline.zsh-theme https://raw.github.com/jeremyFre
 # Set up Homebrew
 ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
 
-# Install commonly used brew recipes
+# Install commonly used brew recipes/gemspecs
 brew install wget
+brew install cloc
+gem install pygmentize
 
-# TODO: Install cloc?
