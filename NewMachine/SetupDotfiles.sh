@@ -1,4 +1,8 @@
-dir=$(pwd)
+#!/usr/bin/env bash
+
+# Simple script to create symlinks for all supplied dotfiles.
+# TODO: Should this safely delete the old versions of these files?
+dir=$(pwd)/..
 
 # Set up user-based config files
 ln -sf "$dir/aliases" ~/.aliases
@@ -12,4 +16,5 @@ ln -sf "$dir/vimrc" ~/.vimrc
 ln -sf "$dir/zshrc" ~/.zshrc
 
 # Set up global config files
+# TODO: Delete previous hosts file - requires sudo
 ln -sf "$dir/hosts" /etc/hosts

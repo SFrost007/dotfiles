@@ -33,12 +33,8 @@ function chpwd() {
 
 
 ##########################
-# Tree printing function #
+# SetTitle for Terminal  #
 ##########################
-function mytree {
-	find ${1:-.} -print | sed -e 's;[^/]*/;|___;g;s;___|;  |;g'
-}
-
 function settitle() {
 	#echo -ne "\e]2;$@\a\e]1;$@\a";
 	echo -ne "\033]0;$@\007";

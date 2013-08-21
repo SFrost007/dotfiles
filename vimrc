@@ -9,6 +9,7 @@
 "  for MS-DOS and Win32:  $VIM\_vimrc
 "	    for OpenVMS:  sys$login:.vimrc
 
+
 " When started as "evim", evim.vim will already have done these settings.
 if v:progname =~? "evim"
   finish
@@ -101,3 +102,11 @@ endif
 :set number
 highlight LineNr ctermfg=darkgrey
 
+set rtp+=/Users/Simon/Code/TerminalUtils/powerline/powerline/bindings/vim
+
+"if has("mouse")
+    set mouse=a
+"endif
+
+" Allow :w!! to ask for sudo permission
+cmap w!! %!sudo tee > /dev/null %

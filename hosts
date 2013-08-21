@@ -21,9 +21,8 @@ fe80::1%lo0		localhost
 127.0.0.1	sc.local
 
 
-# Puppet configuration
-144.36.182.116 webs1.ams.accenture.com
-indcldaesvs1001.ams.accenture.com indcldaesvs1001
+# Work puppet configuration
+144.36.182.116 webs1.ams.accenture.com  indcldaesvs1001.ams.accenture.com  indcldaesvs1001
 
 
 # Block PhotoShop from phoning home
