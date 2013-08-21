@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # New machine setup script. Installs:
 #  - Homebrew
@@ -6,12 +6,18 @@
 #  - wget
 #  - cloc
 #  - tree
-#  - TODO: iTerm 2, Adium, RVM & Gems
+#  - TODO: Adium, RVM & Gems
 #  - TODO: Generate SSH keys & upload to appropriate servers?
+#  - TODO: Figure out RVM stuff
+#  - TODO: Configure Apache/PHP?
+#  - TODO: Fluid? DiffMerge? Handbrake? iExplorer? PhoneClean? RestClient? ScreenFlow? Sencha/Cordova tools? Spotify? VirtualBox? VLC?
+#  - TODO: Developer Certs
+#  - TODO: Create script for FullScreenIfying Outlook
 
 
 # Call external script to set OSX options
 sh ./OSX_Config.sh
+# TODO: sh ./SetupDotfiles.sh
 
 # Set up Homebrew
 ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
@@ -26,7 +32,8 @@ brew install wget
 #gem install compass
 #gem install pygmentize
 
-# Install Textmate
+
+
 echo '' && echo 'Fetching latest TextMate release...'
 wget https://api.textmate.org/downloads/release -O textmate.tbz
 if [ -f textmate.tbz ];
@@ -39,6 +46,8 @@ else
 	echo ' ***** Failed to download TextMate ***** '
 fi
 
+
+
 # TODO: Install MySql
 	#brew install mysql #TODO: Do we want this? May need more setup
 	#setup daemon
@@ -50,9 +59,24 @@ fi
 	#secure mysql
 	#/usr/local/Cellar/mysql/5.5.20/bin/mysql_secure_installation
 
-# TODO: Download/install iTerm 2 nightly
+
+
+echo '' && echo 'Fetching latest iTerm2 nightly release...'
+wget http://www.iterm2.com/nightly/latest -O iTerm.zip
+if [ -f iTerm.zip];
+then
+	unzip -q iTerm.zip && rm iTerm.zip
+	mv iTerm.app /Applications
+	# TODO: Use plistbuddy to set winshade options and hide from Dock
+else
+	echo ' ***** Failed to download iTerm ***** '
+fi
+
+
 
 # TODO: Download/install Adium
+
+
 
 # Clone command line tools
 mkdir -p ~/Code/TerminalUtils && pushd ~/Code/TerminalUtils
@@ -67,8 +91,4 @@ git clone git://github.com/altercation/solarized.git
 # curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 # curl -o ~/.oh-my-zsh/themes/powerline.zsh-theme https://raw.github.com/jeremyFreeAgent/oh-my-zsh-powerline-theme/master/powerline.zsh-theme
 popd
-
-# TODO: Figure out RVM stuff
-# TODO: sh ./SetupDotfiles.sh
-# TODO: Configure Apache/PHP?
 

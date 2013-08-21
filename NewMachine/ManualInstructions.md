@@ -20,6 +20,7 @@ Sign into AppStore and install:
 * Hyperdock
 * Growl
 * Alfred - Should move to v2 outside AppStore?
+* DaisyDisk - Need to buy!
 
 Install Xcode command line tools
 
