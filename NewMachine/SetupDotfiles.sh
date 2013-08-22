@@ -4,6 +4,8 @@
 # TODO: Should this safely delete the old versions of these files?
 dir=$(pwd)/..
 
+mkdir -p ~/.ssh
+
 # Set up user-based config files
 ln -sf "$dir/aliases" ~/.aliases
 ln -sf "$dir/bashrc" ~/.bashrc
