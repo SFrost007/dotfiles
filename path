@@ -1,12 +1,5 @@
-# Default path entries? Are these needed?
-#export PATH=$PATH:/usr/bin:/bin:/usr/bin:/sbin:/usr/local/bin:/usr/X11/bin
-
-# Cordova entries
-#export PATH=/cordova/bin:$PATH
-
-# Add sencha paths
-export PATH=/Applications/SenchaSDKTools-2.0.0-beta3:$PATH
-export SENCHA_SDK_TOOLS_2_0_0_BETA3="/Applications/SenchaSDKTools-2.0.0-beta3"
+# Set path to point to Homebrew before standard paths
+export PATH=/usr/local/bin:/usr/local/sbin:~/bin:$PATH
 
 # Add Android paths
 #export PATH=~/Code/android-sdk-macosx/platforms:$PATH

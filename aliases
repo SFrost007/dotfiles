@@ -10,6 +10,7 @@ alias sshtunnel='ssh -C2qTnN -D 10000 apollo.apisnetworks.com'
 alias sedrecurse='find . -type f -print | xargs sed -i ""'
 alias androidemu='~/Code/SDKs/android-sdk-macosx/tools/emulator @4.0.3'
 alias rot13="tr a-zA-Z n-za-mN-ZA-M"
+alias fuxcode='rm -rf ~/Library/Developer/Xcode/DerivedData'
 
 # Web-dev related stuff
 alias senchabuild='sencha create jsb -a index.htm -p temp.jsb3 && sencha build -p temp.jsb3 -d .'

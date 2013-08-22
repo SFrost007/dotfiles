@@ -1,13 +1,11 @@
 #!/bin/bash
 
 #  - TODO: Powerline for tmux
-#  - TODO: Fluid? PhoneClean? RestClient? ScreenFlow? Sencha/Cordova tools? iPhone Config Utility
-#          - Submit pull requests to brew-cask?
 
-
-casks=(adium daisy-disk diffmerge dropbox google-chrome handbrake i-explorer sequel-pro sourcetree spotify steam textmate transmission unrarx vlc)
-brews=(cloc tmux tree wget)
-rgems=(compass pygmentize)
+casks=(adium cocoa-rest-client daisy-disk diffmerge dropbox fluid google-chrome handbrake i-explorer iphone-configuration-utility phone-clean sequel-pro sourcetree spotify steam textmate transmission unrarx vlc)
+brews=(cloc ios-sim npm tmux tree wget)
+rgems=(compass nomad-cli pygmentize)
+nodes=(cordova)
 
 echo ''
 echo ' ***** New machine setup script ***** '
@@ -40,6 +38,9 @@ for i in "${brews[@]}"; do :
 	echo ' * '$i
 done
 for i in "${rgems[@]}"; do :
+	echo ' * '$i
+done
+for i in "${nodes[@]}"; do :
 	echo ' * '$i
 done
 echo ''
@@ -113,6 +114,21 @@ for i in "${rgems[@]}"; do :
 	gem install $i
 	echo ''
 done
+
+
+
+# Install any configured node.js packages
+if hash npm 2>/dev/null; then
+	echo -e '\nInstalling Node.js packages...\n'
+	for i in "${nodes[@]}"; do :
+		npm install -g $i
+		echo ''
+	done
+else
+	echo -e '\nNode.js not installed/working, cannot install packages\n\n'
+	read -p 'Press any key to continue' -n 1 -s
+	echo ''
+fi
 
 
 
