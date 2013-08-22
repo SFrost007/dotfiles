@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#  - TODO: Powerline etc
+#  - TODO: Powerline for tmux
 #  - TODO: Fluid? PhoneClean? RestClient? ScreenFlow? Sencha/Cordova tools? iPhone Config Utility
 #          - Submit pull requests to brew-cask?
 
@@ -204,17 +204,28 @@ mkdir -p ~/Code/WorkProjects
 echo -e '\n\nCloning terminal utilities'
 pushd ~/Code/TerminalUtils
 git clone https://github.com/robbyrussell/oh-my-zsh.git
+git clone https://github.com/jeremyFreeAgent/oh-my-zsh-powerline-theme.git
 git clone https://github.com/Lokaltog/powerline.git
 git clone https://github.com/Lokaltog/powerline-fonts.git
 git clone https://github.com/altercation/solarized.git
-# TODO: open solarized.terminal, sleep 1, then set as default with:
-# defaults write com.apple.terminal "Default Window Settings" -string "Mathias"
-# defaults write com.apple.terminal "Startup Window Settings" -string "Mathias"
-# TODO: Run setup scripts for above, including installing fonts
-# curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
-# curl -o ~/.oh-my-zsh/themes/powerline.zsh-theme https://raw.github.com/jeremyFreeAgent/oh-my-zsh-powerline-theme/master/powerline.zsh-theme
 popd
 
+
+echo -e '\nIf you have any backed up dotfiles you should set them up now\n'
+read -p 'Press any key when ready' -n 1 -s
+echo ''
+
+
+# Set up command line tools
+echo -e '\nSetting up Powerline'
+echo -e 'Remember to set Terminal/iTerm font to Source Code Pro'
+ln -f ~/Code/TerminalUtils/oh-my-zsh-powerline-theme/powerline.zsh-theme ~/Code/TerminalUtils/oh-my-zsh/themes/
+cp ~/Code/TerminalUtils/powerline-fonts/SourceCodePro/*.otf ~/Library/Fonts
+
+echo -e '\nSetting ZSH as default shell'
+chsh -s `which zsh`
+/usr/bin/env zsh
+source ~/.zshrc
 
 
 # Generate new SSH key
