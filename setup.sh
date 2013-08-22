@@ -2,7 +2,7 @@
 
 # Simple script to create symlinks for all supplied dotfiles.
 # TODO: Should this safely delete the old versions of these files?
-dir=$(pwd)/..
+dir=$(pwd)
 
 mkdir -p ~/.ssh
 
