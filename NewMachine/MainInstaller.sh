@@ -1,6 +1,5 @@
 #!/bin/bash
 
-#  - TODO: Test RVM & Gems
 #  - TODO: Powerline etc
 #  - TODO: Fluid? PhoneClean? RestClient? ScreenFlow? Sencha/Cordova tools? iPhone Config Utility
 #          - Submit pull requests to brew-cask?
@@ -36,7 +35,7 @@ echo ' * Apache and PHP configuration'
 echo ''
 echo 'CLI software:'
 echo ' * Homebrew'
-echo ' * RVM'
+echo ' * RVM (optional)'
 for i in "${brews[@]}"; do :
 	echo ' * '$i
 done
@@ -97,11 +96,16 @@ done
 
 
 # Install RVM, create a default gemset and install the listed gems
-curl -L https://get.rvm.io | bash -s stable
-source ~/.rvm/scripts/rvm
-rvm install ruby-1.9.3-p448
-rvm --rvmrc --create 1.9.3@default-gemset
-rvm use 1.9.3@default-gemset --default
+echo ''
+read -p 'Install RVM? ' -n 1 -r
+echo ''
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+	# export rvm_ignore_dotfiles=yes
+	curl -L https://get.rvm.io | bash -s stable --ruby=1.9.3
+	source ~/.rvm/scripts/rvm
+	rvm --create 1.9.3@default-gemset
+	rvm use 1.9.3@default-gemset --default
+fi
 for i in "${rgems[@]}"; do :
 	gem install $i
 done
