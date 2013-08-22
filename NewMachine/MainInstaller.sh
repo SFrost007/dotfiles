@@ -5,7 +5,7 @@
 #          - Submit pull requests to brew-cask?
 
 
-casks=(adium daisy-disk diffmerge dropbox google-chrome handbrake i-explorer sequel-pro spotify steam textmate transmission unrarx)
+casks=(adium daisy-disk diffmerge dropbox google-chrome handbrake i-explorer sequel-pro spotify steam textmate transmission unrarx vlc)
 brews=(cloc tmux tree wget)
 rgems=(compass pygmentize)
 
