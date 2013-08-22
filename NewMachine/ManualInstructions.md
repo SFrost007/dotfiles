@@ -2,9 +2,10 @@
 * CheckPoint (after unlock)
 * Login (system prefs)
 
-Allow encryption to finish
-Update OS X/iTunes/etc through AppStore
-Update Office
+##Initial updates
+* Allow encryption to finish
+* Update OS X/iTunes/etc through AppStore
+* Update Office
 
 ##Sign into AppStore and install:
 * Pixelmator
@@ -17,10 +18,8 @@ Update Office
 * Growl
 * Alfred - Should move to v2 outside AppStore?
 
-Install Xcode command line tools
-
-Sign in to Dropbox with selective sync:
-* No Safebox
+##Manual installs
+* Install Xcode command line tools
 
 ##TODO:
 * Fetch Developer Certs
