@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #  - TODO: Test RVM & Gems
+#  - TODO: Powerline etc
 #  - TODO: Fluid? PhoneClean? RestClient? ScreenFlow? Sencha/Cordova tools? iPhone Config Utility
 #          - Submit pull requests to brew-cask?
 

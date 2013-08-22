@@ -27,3 +27,4 @@
 * Create script for FullScreenIfying Outlook
 * Set Alfred shortcut, conflicts with Spotlight
 * Set Alfred, Hyperdock, Fantastical, iTerm options/startup
+* Configure Finder sidebar items

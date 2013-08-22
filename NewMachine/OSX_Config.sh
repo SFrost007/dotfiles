@@ -14,12 +14,6 @@
 #  * http://chris-gerke.blogspot.co.uk/2012/03/mac-osx-soe-master-image-day-6.html
 
 
-# TODO:
-#  - Change Finder sidebar items
-#  - Switch ctrl/alt/cmd buttons on external keyboard
-#  - Change 2 finger back/forward to 3
-
-
 
 ###############################################################################
 # General System stuff
@@ -54,6 +48,9 @@ defaults write NSGlobalDomain AppleFontSmoothing -int 2
 
 # Enable built-in Apache to start at boot
 sudo defaults write /System/Library/LaunchDaemons/org.apache.httpd Disabled -bool false
+
+# Show system info on login screen (when clicking clock)
+sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
 
 
 
@@ -119,17 +116,30 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 # Disable autocorrect
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
-# TODO: Maps internal keyboard's capslock to no action
-#defaults -currentHost write -g 'com.apple.keyboard.modifiermapping.1452-566-0' -array '<dict><key>HIDKeyboardModifierMappingDst</key><integer>-1</integer><key>HIDKeyboardModifierMappingSrc</key><integer>0</integer></dict>'
-
-# TODO: Maps external keyboard's capslock to no action
-#defaults -currentHost write -g 'com.apple.keyboard.modifiermapping.1452-544-0' -array '<dict><key>HIDKeyboardModifierMappingDst</key><integer>-1</integer><key>HIDKeyboardModifierMappingSrc</key><integer>0</integer></dict>'
+# Keyboard: Swap command and control when using a Microsoft Natural keyboard
+# (To find out the numeric code for other keyboards, manually change the setting and run defaults -currentHost read -g)
+defaults -currentHost write NSGlobalDomain com.apple.keyboard.modifiermapping.1118-1821-0 '
+(
+	{
+		HIDKeyboardModifierMappingDst = 4;
+		HIDKeyboardModifierMappingSrc = 2;
+	}, {
+		HIDKeyboardModifierMappingDst = 12;
+		HIDKeyboardModifierMappingSrc = 10;
+	}, {
+		HIDKeyboardModifierMappingDst = 2;
+		HIDKeyboardModifierMappingSrc = 4;
+	}, {
+		HIDKeyboardModifierMappingDst = 10;
+		HIDKeyboardModifierMappingSrc = 12;
+	}
+)'
 
 # Enable input menu on login screen
 sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bool "TRUE"
 sudo defaults write /var/ard/Library/Preferences/com.apple.menuextra.textinput ModeNameVisible -bool "TRUE"
 
-# Enable British-PC keyboard layout
+# Keyboard: Enable British-PC layout
 # To modify for other layouts, manually enable the layout and check for the name/ID in
 # ~/Library/Preferences/ByHost/com.apple.HIToolbox*.plist
 # NOTE: This will only work if there is only one current keyboard layout ('1' in each command is array index)
@@ -151,7 +161,7 @@ for i in "${KB_LAYOUT_FILES[@]}"; do :
 	/usr/libexec/PlistBuddy -c "Set :AppleSelectedInputSources:1:KeyboardLayout\ Name ${KB_LAYOUT_NAME}" $i
 done
 
-#Enable the input language switcher
+# Keyboard: Enable the input language switcher
 defaults write com.apple.systemuiserver 'menuExtras' -array-add '/System/Library/CoreServices/Menu Extras/TextInput.menu'
 
 
