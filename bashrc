@@ -16,6 +16,7 @@ export GREP_OPTIONS='--color=auto'
 source ~/.aliases
 source ~/.functions
 source ~/.path
+source ~/.exports
 
 #####################
 # RVM Related Stuff #

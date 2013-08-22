@@ -10,6 +10,7 @@ mkdir -p ~/.ssh
 ln -sf "$dir/aliases" ~/.aliases
 ln -sf "$dir/bashrc" ~/.bashrc
 ln -sf "$dir/bashprofile" ~/.bash_profile
+ln -sf "$dir/exports" ~/.exports
 ln -sf "$dir/functions" ~/.functions
 ln -sf "$dir/gitconfig" ~/.gitconfig
 ln -sf "$dir/path" ~/.path
