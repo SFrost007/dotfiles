@@ -5,7 +5,7 @@
 #          - Submit pull requests to brew-cask?
 
 
-casks=(adium daisy-disk diffmerge dropbox google-chrome handbrake i-explorer sequel-pro spotify steam textmate transmission unrarx vlc)
+casks=(adium daisy-disk diffmerge dropbox google-chrome handbrake i-explorer sequel-pro sourcetree spotify steam textmate transmission unrarx vlc)
 brews=(cloc tmux tree wget)
 rgems=(compass pygmentize)
 
@@ -151,6 +151,7 @@ if [ -f iTerm.zip ]; then
 else
 	echo -e '\n ***** Failed to download iTerm nightly, falling back to brew cask ***** \n'
 	brew cask install iterm2 2> /dev/null
+	echo ''
 fi
 
 

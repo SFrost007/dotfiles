@@ -9,7 +9,6 @@
 
 ##Sign into AppStore and install:
 * Pixelmator
-* SourceTree
 * Tweetbot
 * Fantastical
 * Xcode

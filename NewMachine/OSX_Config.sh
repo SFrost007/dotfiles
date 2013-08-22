@@ -52,6 +52,9 @@ sudo defaults write /System/Library/LaunchDaemons/org.apache.httpd Disabled -boo
 # Show system info on login screen (when clicking clock)
 sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
 
+# Hide user-specific Applications folder
+chflags hidden ~/Applications
+
 
 
 
