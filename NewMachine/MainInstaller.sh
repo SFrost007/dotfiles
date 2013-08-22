@@ -1,85 +1,191 @@
 #!/bin/bash
 
-# New machine setup script. Installs:
-#  - Homebrew
-#  - TextMate
-#  - wget
-#  - cloc
-#  - tree
-#  - TODO: Adium, RVM & Gems
-#  - TODO: Generate SSH keys & upload to appropriate servers?
-#  - TODO: Figure out RVM stuff
-#  - TODO: Configure Apache/PHP?
-#  - TODO: Fluid? DiffMerge? Handbrake? iExplorer? PhoneClean? RestClient? ScreenFlow? Sencha/Cordova tools? Spotify? VirtualBox? VLC?
-#  - TODO: Developer Certs
-#  - TODO: Create script for FullScreenIfying Outlook
+#  - TODO: Test RVM & Gems
+#  - TODO: Fluid? PhoneClean? RestClient? ScreenFlow? Sencha/Cordova tools? iPhone Config Utility
+#          - Submit pull requests to brew-cask?
+
+
+casks=(adium daisy-disk diffmerge dropbox google-chrome handbrake i-explorer sequel-pro spotify steam textmate transmission unrarx)
+brews=(cloc tmux tree wget)
+rgems=(compass pygmentize)
+
+echo ''
+echo ' ***** New machine setup script ***** '
+echo ''
+echo 'This script will install the following software, mostly WITHOUT PROMPTS'
+echo '(will pause on errors)'
+echo ''
+echo 'General:'
+echo ' * Change computer name (optional)'
+echo ' * General OSX configuration'
+echo ' * Solarized editor themes'
+echo ''
+echo 'GUI software:'
+echo ' * iTerm 2 Nightly'
+for i in "${casks[@]}"; do :
+	echo ' * '$i
+done
+echo ''
+echo 'Server software:'
+echo ' * MySql'
+echo ''
+echo 'CLI software:'
+echo ' * Homebrew'
+echo ' * RVM'
+for i in "${brews[@]}"; do :
+	echo ' * '$i
+done
+for i in "${rgems[@]}"; do :
+	echo ' * '$i
+done
+echo ''
+echo 'CLI environment:'
+echo ' * Oh-My-ZSH'
+echo ' * Powerline plus modified fonts'
+echo ''
+read -p 'Are you sure you wish to proceed with this script? ' -n 1 -r
+echo ''
+echo ''
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+	exit 1
+fi
+
 
 
 # Call external script to set OSX options
+# TODO: Will this path break if the script is run from another folder?
 sh ./OSX_Config.sh
-# TODO: sh ./SetupDotfiles.sh
+
+
 
 # Set up Homebrew
 ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
 brew doctor
 
-# Install commonly used brew recipes/gemspecs
-brew install cloc
-brew install tree
-brew install wget
-
-# TODO: Re-check Gem options once RVM is sussed out
-#gem install compass
-#gem install pygmentize
 
 
+# Install commonly used brew recipes
+# Full list at https://github.com/mxcl/homebrew/tree/master/Library/Formula
+for i in "${brews[@]}"; do :
+	brew install $i
+done
 
-echo '' && echo 'Fetching latest TextMate release...'
-wget https://api.textmate.org/downloads/release -O textmate.tbz
-if [ -f textmate.tbz ];
-then
-	tar -xjf textmate.tbz && rm textmate.tbz
-	mv TextMate.app/ /Applications
-	cp /Applications/TextMate.app/Contents/Resources/mate /usr/local/bin
-	# TODO: Add HTML snippet
+
+
+# Use Homebrew to install common GUI applications
+# Full list at https://github.com/phinze/homebrew-cask/tree/master/Casks
+# Will prompt for sudo for first cask
+brew tap phinze/homebrew-cask
+brew install brew-cask
+if [ brew cask alfred status ]; then
+	brew cask alfred link
 else
-	echo ' ***** Failed to download TextMate ***** '
+	echo -e '\n ***** Could not link Casks to Alfred *****'
+	echo -e "If integration is required, add /opt/homebrew-cask/Caskroom to Alfred's search paths\n"
+	read -p 'Press any key to continue' -n 1 -s
 fi
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+for i in "${casks[@]}"; do :
+	brew cask install $i 2> /dev/null
+done
 
 
 
-# TODO: Install MySql
-	#brew install mysql #TODO: Do we want this? May need more setup
-	#setup daemon
-	#mkdir -p ~/Library/LaunchAgents && cp /usr/local/Cellar/mysql/5.5.20/homebrew.mxcl.mysql.plist ~/Library/LaunchAgents/ && launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
-	#Set up databases to run as your user account
-	#unset TMPDIR && mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
-	#start mysql
-	#mysql.server start
-	#secure mysql
-	#/usr/local/Cellar/mysql/5.5.20/bin/mysql_secure_installation
+# Install RVM, create a default gemset and install the listed gems
+curl -L https://get.rvm.io | bash -s stable
+source ~/.rvm/scripts/rvm
+rvm install ruby-1.9.3-p448
+rvm --rvmrc --create 1.9.3@default-gemset
+rvm use 1.9.3@default-gemset --default
+for i in "${rgems[@]}"; do :
+	gem install $i
+done
 
 
 
-echo '' && echo 'Fetching latest iTerm2 nightly release...'
+# Install MySql from Brew and setup to run correctly
+brew install mysql
+# Setup daemon
+mkdir -p ~/Library/LaunchAgents
+ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents/
+launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
+# Start MySql server and run secure script
+mysql.server start
+mysql_secure_installation
+
+
+
+# Configure Apache and PHP
+sudo chmod -R o+w /Library/WebServer/Documents
+sudo sed -i '' 's/#LoadModule php5/LoadModule php5/g' /etc/apache2/httpd.conf
+echo "<?php phpinfo(); ?>" | sudo tee /Library/WebServer/Documents/phpinfo.php
+sudo cp /etc/php.ini.default /etc/php.ini
+sudo sed -i '' 's/;extension=php_mysql\./extension=php_mysql\./g' /etc/php.ini
+sudo sed -i '' 's/display_errors = Off/display_errors = On/g' /etc/php.ini
+sudo sed -i '' 's/html_errors = Off/html_errors = On/g' /etc/php.ini
+sudo sed -i '' 's/mysql.default_socket = \/var\/mysql\/mysql.sock/mysql.default_socket = \/tmp\/mysql.sock/g' /etc/php.ini
+sudo apachectl restart
+
+
+
+# Manually install latest iTerm nightly as brew-cask prefers stable
+echo -e '\n\n\nFetching latest iTerm2 nightly release...\n'
 wget http://www.iterm2.com/nightly/latest -O iTerm.zip
-if [ -f iTerm.zip];
-then
+if [ -f iTerm.zip ]; then
 	unzip -q iTerm.zip && rm iTerm.zip
 	mv iTerm.app /Applications
 	# TODO: Use plistbuddy to set winshade options and hide from Dock
+	echo -e '\nInstalled iTerm 2 to /Applications\n'
 else
-	echo ' ***** Failed to download iTerm ***** '
+	echo -e '\n ***** Failed to download iTerm nightly, falling back to brew cask ***** \n'
+	brew cask install iterm2 2> /dev/null
 fi
 
 
 
-# TODO: Download/install Adium
+# Install QuickLook plugins for non-extensioned files (README) and Markdown
+# Xcode now supplies a syntax-highlighted code viewer plugin.
+echo -e '\n\nInstalling extra QuickLook plugins...\n'
+mkdir -p ~/Library/QuickLook
+wget https://github.com/downloads/whomwah/qlstephen/QLStephen.qlgenerator.zip
+if [ -f QLStephen.qlgenerator.zip ]; then
+	unzip -q QLStephen.qlgenerator.zip && rm QLStephen.qlgenerator.zip
+	mv QLStephen.qlgenerator ~/Library/QuickLook
+	echo -e '\nInstalled plugin for plain text files (README etc)\n'
+else
+	echo -e '\n ***** Failed to download QuickLook plugin for plain text files ***** \n'
+	read -p 'Press any key to continue' -n 1 -s
+fi
+wget https://github.com/downloads/toland/qlmarkdown/QLMarkdown-1.3.zip
+if [ -f QLMarkdown-1.3.zip ]; then
+	unzip -q QLMarkdown-1.3.zip && rm QLMarkdown-1.3.zip
+	mv QLMarkdown/QLMarkdown.qlgenerator ~/Library/QuickLook
+	rm -rf QLMarkdown
+	echo -e '\nInstalled plugin for Markdown files\n'
+else
+	echo -e '\n ***** Failed to download QuickLook plugin for Markdown files ***** \n'
+	read -p 'Press any key to continue' -n 1 -s
+fi
+rm -rf __MACOSX
+qlmanage -r
+
+
+
+
+# Create code folder tree
+# TODO: "Projects" should be symlinked here, but we haven't set up Dropbox yet
+mkdir -p ~/Code/CodeDownloads
+mkdir -p ~/Code/Libraries
+mkdir -p ~/Code/Resources
+mkdir -p ~/Code/SDKs
+mkdir -p ~/Code/TerminalUtils
+mkdir -p ~/Code/TestProjects
+mkdir -p ~/Code/WorkProjects
 
 
 
 # Clone command line tools
-mkdir -p ~/Code/TerminalUtils && pushd ~/Code/TerminalUtils
+pushd ~/Code/TerminalUtils
 git clone https://github.com/robbyrussell/oh-my-zsh.git
 git clone https://github.com/Lokaltog/powerline.git
 git clone https://github.com/Lokaltog/powerline-fonts.git
@@ -92,3 +198,13 @@ git clone git://github.com/altercation/solarized.git
 # curl -o ~/.oh-my-zsh/themes/powerline.zsh-theme https://raw.github.com/jeremyFreeAgent/oh-my-zsh-powerline-theme/master/powerline.zsh-theme
 popd
 
+
+
+# Generate new SSH key
+echo ''
+read -p 'Generate new SSH keypair? ' -n 1 -r
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+	ssh-keygen -t rsa
+	pbcopy < ~/.ssh/id_rsa.pub
+	echo -e '\nPublic key copied to clipboard\n'
+fi

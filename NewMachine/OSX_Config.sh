@@ -2,35 +2,93 @@
 
 # Script to set as many OSX configuration options as possible.
 # Several of these configurations only take effect after a reboot.
-# Cribbed together from mathiasbynens, 
+# Cribbed together mostly from mathiasbynens:
+#  * https://github.com/mathiasbynens/dotfiles/blob/master/.osx
+#
+# Other good sources:
+#  * http://www.defaults-write.com/tag/10-8/
+#  * http://secrets.blacktree.com/ (Seems slightly outdated)
+#  * https://github.com/ptb/Mac-OS-X-Lion-Setup/blob/master/setup.sh
+#  * https://github.com/davelens/dotfiles/blob/master/osx/defaults-overrides
+#  * https://gist.github.com/saetia/1623487
 
 
 # TODO:
 #  - Change Finder sidebar items
-#  - Power options
-#  - Set startup apps?
-#  - Customise clock format
-#  - Remove volume and time machine icons from menubar
-#  - Enable terminal from location in services menu (leon's instructions)
-#  - Add (commented out) showAllFiles option
-
-# TODO: May want this for external monitors
-# defaults write NSGlobalDomain AppleFontSmoothing -int 2
-# TODO: Default Terminal to UTF8?
-# defaults write com.apple.terminal StringEncodings -array 4
+#  - Add British PC keyboard and enable language switcher
+#  - Switch ctrl/alt/cmd buttons on external keyboard
+#  - Change 2 finger back/forward to 3
 
 
 
+###############################################################################
+# General System stuff
+###############################################################################
+echo 'Setting general system options, will require root..'
 
-# Hostname options, if required - should be different for each machine so commented
-#sudo scutil --set ComputerName "SimonsMBP"
-#sudo scutil --set HostName "SimonsMBP"
-#sudo scutil --set LocalHostName "SimonsMBP"
-#sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "SimonsMBP"
+# Disables GateKeeper (app signing checks)
+sudo spctl --master-disable
 
-# Maybe just this? Might want to avoid Sudo
-#sudo /usr/sbin/networksetup -setcomputername 'Macbook Pro'
+# Allow computer name to be set if required
+read -p 'Change computer name? ' -n 1 -r
+echo ''
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+	read -p 'Enter new computer name: ' -r
+	if [[ $REPLY =~ ^[a-zA-Z0-9\_\-]+$ ]]; then
+		echo 'Changing computer name to' $REPLY
+		sudo scutil --set ComputerName $REPLY
+		sudo scutil --set HostName $REPLY
+		sudo scutil --set LocalHostName $REPLY
+		sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $REPLY
+	else
+		echo 'Invalid computer name entered, skipping'
+	fi
+	echo ''
+fi
 
+# TimeMachine: Prevent prompting for use of new drives for backup
+defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+
+# Enable font smoothing on external monitors
+defaults write NSGlobalDomain AppleFontSmoothing -int 2
+
+# Enable built-in Apache to start at boot
+sudo defaults write /System/Library/LaunchDaemons/org.apache.httpd Disabled -bool false
+
+
+
+
+###############################################################################
+# Power management
+###############################################################################
+echo 'Setting power options..'
+
+# Battery
+sudo pmset -b sleep 30
+sudo pmset -b displaysleep 10
+
+# AC Power
+sudo pmset -c sleep 0
+sudo pmset -c displaysleep 60
+
+# Screensaver password requirement
+defaults write com.apple.screensaver 'askForPassword' -int 1
+defaults write com.apple.screensaver 'askForPasswordDelay' -int 10
+
+
+
+
+###############################################################################
+# Menu bar configuration
+###############################################################################
+echo 'Setting menu bar preferences..'
+
+defaults -currentHost write com.apple.systemuiserver 'dontAutoLoad' -array-add '/System/Library/CoreServices/Menu Extras/TimeMachine.menu'
+defaults -currentHost write com.apple.systemuiserver 'dontAutoLoad' -array-add '/System/Library/CoreServices/Menu Extras/User.menu'
+defaults -currentHost write com.apple.systemuiserver 'dontAutoLoad' -array-add '/System/Library/CoreServices/Menu Extras/Volume.menu'
+
+# Set clock format to hh:mm
+defaults write com.apple.menuextra.clock 'DateFormat' -string 'HH:mm'
 
 
 
@@ -49,7 +107,7 @@ defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
 # Trackpad: Set mouse speed
-defaults write NSGlobalDomain com.apple.mouse.scaling -float 3
+defaults write NSGlobalDomain com.apple.mouse.scaling -float 1.5
 defaults write NSGlobalDomain com.apple.trackpad.scaling -float 3
 
 # Keyboard: Enable key repeat rather than input menu
@@ -61,6 +119,11 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 # Disable autocorrect
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
+# TODO: Maps internal keyboard's capslock to no action
+#defaults -currentHost write -g 'com.apple.keyboard.modifiermapping.1452-566-0' -array '<dict><key>HIDKeyboardModifierMappingDst</key><integer>-1</integer><key>HIDKeyboardModifierMappingSrc</key><integer>0</integer></dict>'
+
+# TODO: Maps external keyboard's capslock to no action
+#defaults -currentHost write -g 'com.apple.keyboard.modifiermapping.1452-544-0' -array '<dict><key>HIDKeyboardModifierMappingDst</key><integer>-1</integer><key>HIDKeyboardModifierMappingSrc</key><integer>0</integer></dict>'
 
 
 
@@ -122,6 +185,9 @@ defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 # Show the ~/Library folder
 chflags nohidden ~/Library
 
+# Show all files
+#defaults write com.apple.finder AppleShowAllFiles -bool true
+
 
 
 
@@ -155,12 +221,13 @@ defaults write com.apple.dock showhidden -bool true
 # Clear out all standard dock icons, and add a few spacer items
 # Destructive if script is run again, so move behind prompt
 read -p 'Reset Dock items? ' -n 1 -r
-if [[ $REPLY =~ ^[Yy]$ ]]
-then
+echo ''
+if [[ $REPLY =~ ^[Yy]$ ]]; then
 	defaults write com.apple.dock persistent-apps -array
 	defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type="spacer-tile";}'
 	defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type="spacer-tile";}'
 	defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type="spacer-tile";}'
+	killall Dock
 fi
 
 
@@ -179,10 +246,10 @@ defaults write com.apple.dock dashboard-in-overlay -bool true
 defaults write com.apple.dock mru-spaces -bool false
 
 # Set up hot corners
-defaults write com.apple.dock wvous-tl-corner -int 2
-defaults write com.apple.dock wvous-tr-corner -int 4
-defaults write com.apple.dock wvous-bl-corner -int 10
-defaults write com.apple.dock wvous-br-corner -int 5
+defaults write com.apple.dock wvous-tl-corner -int 2	# Mission control
+defaults write com.apple.dock wvous-tr-corner -int 4	# Desktop
+defaults write com.apple.dock wvous-bl-corner -int 10	# Turn off screen
+defaults write com.apple.dock wvous-br-corner -int 5	# Screensaver
 
 
 
@@ -190,13 +257,16 @@ defaults write com.apple.dock wvous-br-corner -int 5
 ###############################################################################
 # Misc apps
 ###############################################################################
-echo 'Setting miscellaneous preferences..'
+echo 'Setting miscellaneous app preferences..'
 
 # TextEdit: Default to plain text
 #defaults write com.apple.TextEdit RichText -int 0
 
 # TextEdit: Hide the ruler as default
 #defaults write com.apple.TextEdit ShowRuler 0
+
+# Terminal: Default to UTF8?
+# defaults write com.apple.terminal StringEncodings -array 4
 
 # Expand 'Save' and 'Print' dialogs as default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
@@ -213,9 +283,6 @@ defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool 
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
-# TimeMachine: Prevent prompting for use of new drives for backup
-defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
-
 # App Store: Enable debug menus
 defaults write com.apple.appstore WebKitDeveloperExtras -bool true
 defaults write com.apple.appstore ShowDebugMenu -bool true
@@ -227,6 +294,3 @@ defaults write com.google.Chrome ExtensionInstallSources -array "https://*.githu
 defaults write org.m0k.transmission DeleteOriginalTorrent -bool true
 defaults write org.m0k.transmission WarningDonate -bool false
 defaults write org.m0k.transmission WarningLegal -bool false
-
-
-
