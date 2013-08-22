@@ -28,6 +28,7 @@ done
 echo ''
 echo 'Server software:'
 echo ' * MySql'
+echo ' * Apache and PHP configuration'
 echo ''
 echo 'CLI software:'
 echo ' * Homebrew'
@@ -53,8 +54,8 @@ fi
 
 
 # Call external script to set OSX options
-# TODO: Will this path break if the script is run from another folder?
-sh ./OSX_Config.sh
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+sh $DIR/OSX_Config.sh
 
 
 

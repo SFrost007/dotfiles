@@ -11,11 +11,11 @@
 #  * https://github.com/ptb/Mac-OS-X-Lion-Setup/blob/master/setup.sh
 #  * https://github.com/davelens/dotfiles/blob/master/osx/defaults-overrides
 #  * https://gist.github.com/saetia/1623487
+#  * http://chris-gerke.blogspot.co.uk/2012/03/mac-osx-soe-master-image-day-6.html
 
 
 # TODO:
 #  - Change Finder sidebar items
-#  - Add British PC keyboard and enable language switcher
 #  - Switch ctrl/alt/cmd buttons on external keyboard
 #  - Change 2 finger back/forward to 3
 
@@ -124,6 +124,35 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
 # TODO: Maps external keyboard's capslock to no action
 #defaults -currentHost write -g 'com.apple.keyboard.modifiermapping.1452-544-0' -array '<dict><key>HIDKeyboardModifierMappingDst</key><integer>-1</integer><key>HIDKeyboardModifierMappingSrc</key><integer>0</integer></dict>'
+
+# Enable input menu on login screen
+sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bool "TRUE"
+sudo defaults write /var/ard/Library/Preferences/com.apple.menuextra.textinput ModeNameVisible -bool "TRUE"
+
+# Enable British-PC keyboard layout
+# To modify for other layouts, manually enable the layout and check for the name/ID in
+# ~/Library/Preferences/ByHost/com.apple.HIToolbox*.plist
+# NOTE: This will only work if there is only one current keyboard layout ('1' in each command is array index)
+KB_LAYOUT_NAME="British-PC"
+KB_LAYOUT_ID=250
+KB_LAYOUT_FILES=$(ls ~/Library/Preferences/ByHost/com.apple.HIToolbox.*.plist)
+for i in "${KB_LAYOUT_FILES[@]}"; do :
+	/usr/libexec/PlistBuddy -c "Add :AppleEnabledInputSources:1:InputSourceKind string Keyboard\ Layout" $i
+	/usr/libexec/PlistBuddy -c "Set :AppleEnabledInputSources:1:InputSourceKind Keyboard\ Layout" $i
+	/usr/libexec/PlistBuddy -c "Add :AppleEnabledInputSources:1:KeyboardLayout\ ID integer ${KB_LAYOUT_ID}" $i
+	/usr/libexec/PlistBuddy -c "Set :AppleEnabledInputSources:1:KeyboardLayout\ ID ${KB_LAYOUT_ID}" $i
+	/usr/libexec/PlistBuddy -c "Add :AppleEnabledInputSources:1:KeyboardLayout\ Name string ${KB_LAYOUT_NAME}" $i
+	/usr/libexec/PlistBuddy -c "Set :AppleEnabledInputSources:1:KeyboardLayout\ Name ${KB_LAYOUT_NAME}" $i
+	/usr/libexec/PlistBuddy -c "Add :AppleSelectedInputSources:1:InputSourceKind string Keyboard\ Layout" $i
+	/usr/libexec/PlistBuddy -c "Set :AppleSelectedInputSources:1:InputSourceKind Keyboard\ Layout" $i
+	/usr/libexec/PlistBuddy -c "Add :AppleSelectedInputSources:1:KeyboardLayout\ ID integer ${KB_LAYOUT_ID}" $i
+	/usr/libexec/PlistBuddy -c "Set :AppleSelectedInputSources:1:KeyboardLayout\ ID ${KB_LAYOUT_ID}" $i
+	/usr/libexec/PlistBuddy -c "Add :AppleSelectedInputSources:1:KeyboardLayout\ Name string ${KB_LAYOUT_NAME}" $i
+	/usr/libexec/PlistBuddy -c "Set :AppleSelectedInputSources:1:KeyboardLayout\ Name ${KB_LAYOUT_NAME}" $i
+done
+
+#Enable the input language switcher
+defaults write com.apple.systemuiserver 'menuExtras' -array-add '/System/Library/CoreServices/Menu Extras/TextInput.menu'
 
 
 
@@ -294,3 +323,15 @@ defaults write com.google.Chrome ExtensionInstallSources -array "https://*.githu
 defaults write org.m0k.transmission DeleteOriginalTorrent -bool true
 defaults write org.m0k.transmission WarningDonate -bool false
 defaults write org.m0k.transmission WarningLegal -bool false
+
+
+
+
+###############################################################################
+# Roundup
+###############################################################################
+KILL_LIST=(Dashboard Dock Finder SystemUIServer)
+for i in "${KILL_LIST[@]}"; do :
+	killall $i
+done
+echo -e '\n\n ***** DONE ***** \n\n'
