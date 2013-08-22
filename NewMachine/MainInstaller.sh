@@ -72,6 +72,7 @@ brew doctor
 # Full list at https://github.com/mxcl/homebrew/tree/master/Library/Formula
 for i in "${brews[@]}"; do :
 	brew install $i
+	echo ''
 done
 
 
@@ -81,16 +82,18 @@ done
 # Will prompt for sudo for first cask
 brew tap phinze/homebrew-cask
 brew install brew-cask
-if [ brew cask alfred status ]; then
+echo ''
+if [ `brew cask alfred status` ]; then
 	brew cask alfred link
 else
-	echo -e '\n ***** Could not link Casks to Alfred *****'
 	echo -e "If integration is required, add /opt/homebrew-cask/Caskroom to Alfred's search paths\n"
 	read -p 'Press any key to continue' -n 1 -s
+	echo ''
 fi
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 for i in "${casks[@]}"; do :
 	brew cask install $i 2> /dev/null
+	echo ''
 done
 
 
@@ -99,7 +102,7 @@ done
 echo ''
 read -p 'Install RVM? ' -n 1 -r
 echo ''
-if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+if [[ $REPLY =~ ^[Yy]$ ]]; then
 	# export rvm_ignore_dotfiles=yes
 	curl -L https://get.rvm.io | bash -s stable --ruby=1.9.3
 	source ~/.rvm/scripts/rvm
@@ -108,6 +111,7 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
 fi
 for i in "${rgems[@]}"; do :
 	gem install $i
+	echo ''
 done
 
 
@@ -143,7 +147,6 @@ wget http://www.iterm2.com/nightly/latest -O iTerm.zip
 if [ -f iTerm.zip ]; then
 	unzip -q iTerm.zip && rm iTerm.zip
 	mv iTerm.app /Applications
-	# TODO: Use plistbuddy to set winshade options and hide from Dock
 	echo -e '\nInstalled iTerm 2 to /Applications\n'
 else
 	echo -e '\n ***** Failed to download iTerm nightly, falling back to brew cask ***** \n'
@@ -164,6 +167,7 @@ if [ -f QLStephen.qlgenerator.zip ]; then
 else
 	echo -e '\n ***** Failed to download QuickLook plugin for plain text files ***** \n'
 	read -p 'Press any key to continue' -n 1 -s
+	echo ''
 fi
 wget https://github.com/downloads/toland/qlmarkdown/QLMarkdown-1.3.zip
 if [ -f QLMarkdown-1.3.zip ]; then
@@ -174,6 +178,7 @@ if [ -f QLMarkdown-1.3.zip ]; then
 else
 	echo -e '\n ***** Failed to download QuickLook plugin for Markdown files ***** \n'
 	read -p 'Press any key to continue' -n 1 -s
+	echo ''
 fi
 rm -rf __MACOSX
 qlmanage -r
@@ -183,6 +188,7 @@ qlmanage -r
 
 # Create code folder tree
 # TODO: "Projects" should be symlinked here, but we haven't set up Dropbox yet
+echo -e '\n\nSetting up Code folder structure..'
 mkdir -p ~/Code/CodeDownloads
 mkdir -p ~/Code/Libraries
 mkdir -p ~/Code/Resources
@@ -194,11 +200,12 @@ mkdir -p ~/Code/WorkProjects
 
 
 # Clone command line tools
+echo -e '\n\nCloning terminal utilities'
 pushd ~/Code/TerminalUtils
 git clone https://github.com/robbyrussell/oh-my-zsh.git
 git clone https://github.com/Lokaltog/powerline.git
 git clone https://github.com/Lokaltog/powerline-fonts.git
-git clone git://github.com/altercation/solarized.git
+git clone https://github.com/altercation/solarized.git
 # TODO: open solarized.terminal, sleep 1, then set as default with:
 # defaults write com.apple.terminal "Default Window Settings" -string "Mathias"
 # defaults write com.apple.terminal "Startup Window Settings" -string "Mathias"
@@ -212,6 +219,7 @@ popd
 # Generate new SSH key
 echo ''
 read -p 'Generate new SSH keypair? ' -n 1 -r
+echo ''
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 	ssh-keygen -t rsa
 	pbcopy < ~/.ssh/id_rsa.pub

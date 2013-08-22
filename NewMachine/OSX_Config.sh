@@ -162,6 +162,7 @@ for i in "${KB_LAYOUT_FILES[@]}"; do :
 done
 
 # Keyboard: Enable the input language switcher
+# FIXME: This will add a duplicate if the icon already exists
 defaults write com.apple.systemuiserver 'menuExtras' -array-add '/System/Library/CoreServices/Menu Extras/TextInput.menu'
 
 
@@ -344,4 +345,8 @@ KILL_LIST=(Dashboard Dock Finder SystemUIServer)
 for i in "${KILL_LIST[@]}"; do :
 	killall $i
 done
-echo -e '\n\n ***** DONE ***** \n\n'
+echo ''
+echo ''
+echo '***** DONE WITH OSX CONFIG *****'
+echo ''
+echo ''
