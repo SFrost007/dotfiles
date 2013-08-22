@@ -16,3 +16,8 @@ export GREP_OPTIONS='--color=auto'
 source ~/.aliases
 source ~/.functions
 source ~/.path
+
+#####################
+# RVM Related Stuff #
+#####################
+[[ -s "$HOME/.rvm/scripts/rvm" ]]  && . "$HOME/.rvm/scripts/rvm"
