@@ -15,7 +15,10 @@ ln -sf "$dir/functions" ~/.functions
 ln -sf "$dir/gitconfig" ~/.gitconfig
 ln -sf "$dir/path" ~/.path
 ln -sf "$dir/rvmrc" ~/.rvmrc
-ln -sf "$dir/sshconfig" ~/.ssh/config
+if [ -f $dir/sshconfig ]; then
+	ln -sf "$dir/sshconfig" ~/.ssh/config
+	chmod 600 ~/.ssh/config
+fi
 ln -sf "$dir/vimrc" ~/.vimrc
 ln -sf "$dir/zprofile" ~/.zprofile
 ln -sf "$dir/zshrc" ~/.zshrc
