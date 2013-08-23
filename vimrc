@@ -110,3 +110,8 @@ set rtp+=/Users/Simon/Code/TerminalUtils/powerline/powerline/bindings/vim
 
 " Allow :w!! to ask for sudo permission
 cmap w!! %!sudo tee > /dev/null %
+
+
+" Enable powerline
+source /usr/local/lib/python2.7/site-packages/powerline/bindings/vim/plugin/powerline.vim
+set laststatus=2

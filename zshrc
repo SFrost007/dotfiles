@@ -5,7 +5,7 @@ ZSH=$HOME/Code/TerminalUtils/oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="powerline"
+#ZSH_THEME="powerline"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -43,15 +43,6 @@ COMPLETION_WAITING_DOTS="true"
 plugins=(colorize)
 
 
-#####################
-# Powerline options #
-#####################
-POWERLINE_HIDE_USER_NAME="true"
-POWERLINE_HIDE_HOST_NAME="true"
-POWERLINE_DETECT_SSH="true"
-POWERLINE_GIT_UNTRACKED="%F{magenta}✭%F{black}"
-
-
 ##########################################
 # Load oh-my-zsh now all configs are set #
 ##########################################
@@ -71,3 +62,9 @@ source ~/.exports
 # RVM Related Stuff #
 #####################
 [[ -s "$HOME/.rvm/scripts/rvm" ]]  && . "$HOME/.rvm/scripts/rvm"
+
+
+#####################
+# Load Powerline    #
+#####################
+source /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
