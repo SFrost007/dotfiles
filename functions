@@ -32,12 +32,15 @@ function chpwd() {
 }
 
 
-##########################
-# SetTitle for Terminal  #
-##########################
+#################################
+# SetTitle for Terminal & Tmux  #
+#################################
 function settitle() {
 	#echo -ne "\e]2;$@\a\e]1;$@\a";
 	echo -ne "\033]0;$@\007";
+}
+function tmuxtitle() {
+    printf "\033k$1\033\\"
 }
 
 
