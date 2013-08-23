@@ -7,6 +7,7 @@ dir=$(pwd)
 mkdir -p ~/.ssh
 
 # Set up user-based config files
+ln -s "$dir/config" ~/.config
 ln -sf "$dir/aliases" ~/.aliases
 ln -sf "$dir/bashrc" ~/.bashrc
 ln -sf "$dir/bashprofile" ~/.bash_profile
