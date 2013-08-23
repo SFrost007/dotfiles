@@ -19,6 +19,7 @@ if [ -f $dir/sshconfig ]; then
 	ln -sf "$dir/sshconfig" ~/.ssh/config
 	chmod 600 ~/.ssh/config
 fi
+ln -sf "$dir/tmux.conf" ~/.tmux.conf
 ln -sf "$dir/vimrc" ~/.vimrc
 ln -sf "$dir/zprofile" ~/.zprofile
 ln -sf "$dir/zshrc" ~/.zshrc
