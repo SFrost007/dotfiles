@@ -114,4 +114,5 @@ cmap w!! %!sudo tee > /dev/null %
 
 " Enable powerline
 source /usr/local/lib/python2.7/site-packages/powerline/bindings/vim/plugin/powerline.vim
-set laststatus=2
+set laststatus=2 " Always show two-line statusbar
+set noshowmode " Hide the default 'insert' text in the statusbar
