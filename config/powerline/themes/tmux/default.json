@@ -21,6 +21,10 @@
 	"segments": {
 		"right": [
 			{
+				"name": "external_ip",
+				"priority": 60
+			},
+			{
 				"name": "uptime",
 				"priority": 50
 			},

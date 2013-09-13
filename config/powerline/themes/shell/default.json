@@ -11,16 +11,16 @@
 			"before": "ⓔ  "
 		},
 		"branch": {
-			"before": " "
+			"before": " ",
+			"args": {
+				"status_colors": true
+			}
 		}
 	},
 	"segments": {
 		"left": [
 			{
 				"name": "hostname"
-			},
-			{
-				"name": "user"
 			},
 			{
 				"name": "virtualenv"
