@@ -23,7 +23,7 @@ alias canary='open /Applications/Google\ Chrome\ Canary.app --args --allow-file-
 # Source control
 alias gitcompress='git repack && git prune'
 alias diffmate='git diff | mate -m GitDiff'
-alias gerritpush='git push origin HEAD:refs/for/master'
+alias gerritpush='CURR_BRANCH=$(git rev-parse --abbrev-ref HEAD) && git push origin HEAD:refs/for/$CURR_BRANCH'
 
 # Fun stuff
 alias adventure='emacs -batch -l dunnet'
