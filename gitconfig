@@ -15,6 +15,7 @@
 	di = diff
 	ci = commit
 	co = checkout
+	cp = cherry-pick
 	ann = blame
 	st = status
 	w = whatchanged
