@@ -19,6 +19,7 @@
 	st = status
 	w = whatchanged
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%C(white) %s %Creset- %C(yellow)%an %Cgreen%cr%Creset' --abbrev-commit --date=relative
+	email = config user.email
 
 [color]
 	diff = auto
