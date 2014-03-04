@@ -19,6 +19,7 @@ alias senchaclean='rm all-classes.js && rm app-all.js && rm temp.jsb3'
 alias chromedev='open /Applications/Google\ Chrome.app --args --allow-file-access-from-files --enable-file-cookies --disable-web-security'
 alias chromium='open /Applications/Chromium.app --args --allow-file-access-from-files --enable-file-cookies --disable-web-security'
 alias canary='open /Applications/Google\ Chrome\ Canary.app --args --allow-file-access-from-files --enable-file-cookies --disable-web-security'
+alias sub='/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl'
 
 # Source control
 alias gitcompress='git repack && git prune'
