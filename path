@@ -6,5 +6,8 @@ export PATH=/usr/local/bin:/usr/local/sbin:~/bin:$PATH
 #export PATH=~/Code/android-sdk-macosx/tools:$PATH
 #export PATH=~/Code/android-sdk-macosx/platform-tools:$PATH
 
+# Add Sencha paths
+export PATH=~/Code/SDKs/SenchaSDKTools-2.0.0-beta3:$PATH
+
 # Add RVM to PATH for scripting
 export PATH=$PATH:$HOME/.rvm/bin
