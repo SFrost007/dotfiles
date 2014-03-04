@@ -4,8 +4,6 @@
 # TODO: Should this safely delete the old versions of these files?
 dir=$(pwd)
 
-mkdir -p ~/.ssh
-
 # Set up user-based config files
 ln -s "$dir/config" ~/.config
 ln -sf "$dir/aliases" ~/.aliases
@@ -17,6 +15,7 @@ ln -sf "$dir/gitconfig" ~/.gitconfig
 ln -sf "$dir/path" ~/.path
 ln -sf "$dir/rvmrc" ~/.rvmrc
 if [ -f $dir/sshconfig ]; then
+	mkdir -p ~/.ssh
 	ln -sf "$dir/sshconfig" ~/.ssh/config
 	chmod 600 ~/.ssh/config
 fi
