@@ -20,13 +20,7 @@ fe80::1%lo0		localhost
 127.0.0.1	wp.local
 127.0.0.1	sc.local
 
-
-# Work puppet configuration
-144.36.182.116 webs1.ams.accenture.com  indcldaesvs1001.ams.accenture.com  indcldaesvs1001
-
-
-# Block PhotoShop from phoning home
-127.0.0.1	activate.adobe.com
+# Adobe blocker
 127.0.0.1	192.150.14.69
 127.0.0.1	192.150.18.101
 127.0.0.1	192.150.18.108
@@ -75,6 +69,7 @@ fe80::1%lo0		localhost
 127.0.0.1	wip1.adobe.com
 127.0.0.1	wip2.adobe.com
 127.0.0.1	wip3.adobe.com
-127.0.0.1	wip3.adobe.com
 127.0.0.1	wip4.adobe.com
 127.0.0.1	wwis-dubc1-vip60.adobe.com
+127.0.0.1	lm.licenses.adobe.com
+127.0.0.1	lmlicenses.wip4.adobe.com
