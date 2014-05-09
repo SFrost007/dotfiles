@@ -11,3 +11,7 @@ export PATH=~/Code/SDKs/SenchaSDKTools-2.0.0-beta3:$PATH
 
 # Add RVM to PATH for scripting
 export PATH=$PATH:$HOME/.rvm/bin
+
+# Add RealVNC paths
+export PATH=$PATH:$HOME/Code/WorkProjects/builds:$PATH
+export PATH=$PATH:$HOME/Code/WorkProjects/tools:$PATH
