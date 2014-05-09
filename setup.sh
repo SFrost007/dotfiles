@@ -12,6 +12,7 @@ ln -sf "$dir/bashprofile" ~/.bash_profile
 ln -sf "$dir/exports" ~/.exports
 ln -sf "$dir/functions" ~/.functions
 ln -sf "$dir/gitconfig" ~/.gitconfig
+ln -sf "$dir/gitignore_global" ~/.gitignore_global
 ln -sf "$dir/path" ~/.path
 ln -sf "$dir/rvmrc" ~/.rvmrc
 if [ -f $dir/sshconfig ]; then

@@ -6,6 +6,7 @@ mklink %HOMEPATH%\.bash_profile %CD%\bashprofile
 mklink %HOMEPATH%\.exports %CD%\exports
 mklink %HOMEPATH%\.functions %CD%\functions
 mklink %HOMEPATH%\.gitconfig %CD%\gitconfig
+mklink %HOMEPATH%\.gitignore_global %CD%\gitignore_global
 mklink %HOMEPATH%\.path %CD%\path
 mklink %HOMEPATH%\.rvmrc %CD%\rvmrc
 mklink %HOMEPATH%\.tmux.conf %CD%\tmux.conf
@@ -21,6 +22,7 @@ attrib /L +h %HOMEPATH%\.bash_profile
 attrib /L +h %HOMEPATH%\.exports
 attrib /L +h %HOMEPATH%\.functions
 attrib /L +h %HOMEPATH%\.gitconfig
+attrib /L +h %HOMEPATH%\.gitignore_global
 attrib /L +h %HOMEPATH%\.path
 attrib /L +h %HOMEPATH%\.rvmrc
 attrib /L +h %HOMEPATH%\.tmux.conf
