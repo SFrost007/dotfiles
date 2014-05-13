@@ -50,6 +50,11 @@
 			fi; \
 		fi; \
 	}; f"
+	incoming = "!f() { \
+		curbranch=$(git rev-parse --abbrev-ref HEAD); \
+		git fetch; \
+		git log --no-merges --pretty=format:'%Cred%h%Creset -%C(white) %<(80,trunc)%s %Creset- %C(yellow)%an %Cgreen%cr%Creset' $curbranch..origin/$curbranch;\
+	}; f"
 
 [color]
 	diff = auto
