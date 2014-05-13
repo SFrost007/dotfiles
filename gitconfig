@@ -24,6 +24,32 @@
 	email = config user.email
 	tempignore = update-index --assume-unchanged
 	unignore = update-index --really-refresh
+	deletebranch = "!f() { \
+		if [ $(git rev-parse --abbrev-ref HEAD) == $1 ]; then \
+			echo \"Error: Cannot delete current branch, aborting..\"; \
+			exit 1; \
+		fi; \
+		locid=$(git rev-parse $1); \
+		remid=$(git ls-remote --exit-code origin $1); \
+		if [ $? -eq 2 ]; then \
+			echo \"Branch '$1' does not exist on origin, aborting..\"; \
+			exit 1; \
+		else \
+			remid=$(echo \"$remid\" | awk 'END {print $1}'); \
+		fi; \
+		if [ $locid != $remid ]; then \
+			echo \"Remote and local refs for '$1' differ, aborting..\"; \
+			echo \"Local:  $locid\"; \
+			echo \"Remote: $remid\"; \
+		else \
+			git branch -d $1; \
+			if [ $? -ne 0 ]; then \
+				echo \"Local delete failed, remote delete aborted..\"; \
+			else \
+				git push origin --delete $1; \
+			fi; \
+		fi; \
+	}; f"
 
 [color]
 	diff = auto
