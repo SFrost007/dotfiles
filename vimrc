@@ -96,6 +96,12 @@ cmap w!! %!sudo tee > /dev/null %
 
 
 " =================== Load Powerline and required options =====================
-source /usr/local/lib/python2.7/site-packages/powerline/bindings/vim/plugin/powerline.vim
+if filereadable("/usr/local/lib/python2.7/site-packages/powerline/bindings/vim/plugin/powerline.vim")
+  source /usr/local/lib/python2.7/site-packages/powerline/bindings/vim/plugin/powerline.vim
+elseif filereadable("/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/plugin/powerline.vim")
+  source /usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/plugin/powerline.vim
+endif
+
+
 set laststatus=2		" Always show two-line statusbar
 set noshowmode			" Hide the default 'insert' text in the statusbar
