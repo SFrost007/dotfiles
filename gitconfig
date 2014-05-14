@@ -51,7 +51,7 @@
 			fi; \
 		fi; \
 	}; f"
-	incoming = "!git fetch && git log --no-merges --pretty=format:'%Cred%h%Creset -%C(white) %<(80,trunc)%s %Creset- %C(yellow)%an %Cgreen%cr%Creset' $(git currbranch)..origin/$(git currbranch);"
+	incoming = "!git fetch -q && git log --no-merges --pretty=format:'%Cred%h%Creset -%C(white) %<(80,trunc)%s %Creset- %C(yellow)%an %Cgreen%cr%Creset' $(git currbranch)..origin/$(git currbranch);"
 	supush = "!git push --set-upstream origin $(git currbranch);"
 
 [color]
