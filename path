@@ -1,5 +1,5 @@
 # Set path to point to Homebrew before standard paths
-export PATH=/usr/local/bin:/usr/local/sbin:~/bin:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:~/bin:~/local/bin:$PATH
 
 # Add Android paths
 export PATH=~/Code/SDKs/android-sdk-macosx/platforms:$PATH
