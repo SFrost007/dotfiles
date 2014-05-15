@@ -71,5 +71,7 @@ if [[ -f /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline
   source /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 elif [[ -f /usr/local/lib/python2.7/dist-packages/powerline/bindings/zsh/powerline.zsh ]]; then
   source /usr/local/lib/python2.7/dist-packages/powerline/bindings/zsh/powerline.zsh
+elif [[ -f ~/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
+  source ~/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 fi
 
