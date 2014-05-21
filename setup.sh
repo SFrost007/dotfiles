@@ -5,7 +5,9 @@
 dir=$(pwd)
 
 # Set up user-based config files
-ln -s "$dir/config" ~/.config
+if [ ! -h ~/.config ]; then
+  ln -sf "$dir/config" ~/.config
+fi
 ln -sf "$dir/aliases" ~/.aliases
 ln -sf "$dir/bashrc" ~/.bashrc
 ln -sf "$dir/bashprofile" ~/.bash_profile
