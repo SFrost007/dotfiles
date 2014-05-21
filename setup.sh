@@ -25,6 +25,3 @@ ln -sf "$dir/vimrc" ~/.vimrc
 ln -sf "$dir/zprofile" ~/.zprofile
 ln -sf "$dir/zshrc" ~/.zshrc
 
-# Set up global config files
-# TODO: Delete previous hosts file - requires sudo
-ln -sf "$dir/hosts" /etc/hosts

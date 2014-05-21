@@ -30,5 +30,4 @@ attrib /L +h %HOMEPATH%\.vimrc
 attrib /L +h %HOMEPATH%\.zprofile
 attrib /L +h %HOMEPATH%\.zshrc
 
-REM TODO: Hosts file link?
 REM TODO: SSHConfig?
