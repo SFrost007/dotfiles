@@ -15,6 +15,7 @@ ln -sf "$dir/gitconfig" ~/.gitconfig
 ln -sf "$dir/gitignore_global" ~/.gitignore_global
 ln -sf "$dir/path" ~/.path
 ln -sf "$dir/rvmrc" ~/.rvmrc
+ln -sf "$dir/Breakpoints_v2.xcbkptlist" ~/Library/Developer/Xcode/UserData/xcdebugger
 if [ -f $dir/sshconfig ]; then
 	mkdir -p ~/.ssh
 	ln -sf "$dir/sshconfig" ~/.ssh/config
