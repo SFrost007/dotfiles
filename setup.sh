@@ -8,6 +8,9 @@ dir=$(pwd)
 if [ ! -h ~/.config ]; then
   ln -sf "$dir/config" ~/.config
 fi
+if [ ! -h ~/.irssi ]; then
+  ln -sf "$dir/irssi" ~/.irssi
+fi
 ln -sf "$dir/aliases" ~/.aliases
 ln -sf "$dir/bashrc" ~/.bashrc
 ln -sf "$dir/bashprofile" ~/.bash_profile
