@@ -20,9 +20,6 @@ ln -sf "$dir/gitconfig" ~/.gitconfig
 ln -sf "$dir/gitignore_global" ~/.gitignore_global
 ln -sf "$dir/path" ~/.path
 ln -sf "$dir/rvmrc" ~/.rvmrc
-if [ ! -h ~/Library/Developer/Xcode/UserData/xcdebugger ]; then
-  ln -sf "$dir/xcdebugger" ~/Library/Developer/Xcode/UserData/xcdebugger
-fi
 if [ -f $dir/sshconfig ]; then
 	mkdir -p ~/.ssh
 	ln -sf "$dir/sshconfig" ~/.ssh/config
