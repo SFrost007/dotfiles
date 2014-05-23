@@ -11,6 +11,7 @@ set ruler								" Show the cursor position all the time
 set showcmd								" Display incomplete commands
 set incsearch							" Do incremental searching
 set nobackup							" Do not create backup file
+set noswapfile            " Do not create .swp files
 set autoread							" Reload files changed outside vim
 syntax on								" Enable syntax highlighting
 set hlsearch							" Highlight last used search pattern
