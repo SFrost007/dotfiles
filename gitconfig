@@ -24,6 +24,7 @@
 	email = config user.email
 	tempignore = update-index --assume-unchanged
 	unignore = update-index --really-refresh
+	ignoreproj = "!git update-index --assume-unchanged $(git status -s | grep -i .pbxproj | awk {'print $2'})"
 	currbranch = rev-parse --abbrev-ref HEAD
 	deletebranch = "!f() { \
 		if [ $(git rev-parse --abbrev-ref HEAD) == $1 ]; then \
