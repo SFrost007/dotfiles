@@ -35,6 +35,9 @@ for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
 	alias "$method"="lwp-request -m '$method'"
 done
 
+# Ubuntu helpers
+alias xopen='xdg-open'
+
 # Now unused
 #alias wget='curl -O'
 #alias tree='find . -print | sed -e "s;[^/]*/;|___;g;s;___|;  |;g"'
