@@ -10,7 +10,6 @@ alias sshtunnel='ssh -C2qTnN -D 10000 apollo.apisnetworks.com'
 alias sedrecurse='find . -type f -print | xargs sed -i ""'
 alias androidemu='~/Code/SDKs/android-sdk-macosx/tools/emulator @4.0.3'
 alias rot13="tr a-zA-Z n-za-mN-ZA-M"
-alias fuxcode='rm -rf ~/Library/Developer/Xcode/DerivedData'
 alias updatepl='pip install -U --user git+git://github.com/Lokaltog/powerline'
 
 # Web-dev related stuff
@@ -34,8 +33,22 @@ for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
 	alias "$method"="lwp-request -m '$method'"
 done
 
-# Ubuntu helpers
-alias xopen='xdg-open'
+
+# OS-specific aliases
+case $(uname) in
+  Linux)
+    alias apt-get='sudo apt-get'
+    alias mount='mount | column -t'
+    alias xopen='xdg-open'
+    alias ports='netstat -tulanp'
+    ;;
+  Darwin)
+    alias fuxcode='rm -rf ~/Library/Developer/Xcode/DerivedData'
+    ;;
+  *)
+    ;;
+esac
+
 
 # Now unused
 #alias wget='curl -O'
