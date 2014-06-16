@@ -1,11 +1,6 @@
 # Set path to point to Homebrew before standard paths
 export PATH=/usr/local/bin:/usr/local/sbin:~/bin:~/local/bin:$PATH
 
-# Add Android paths
-export PATH=~/Code/SDKs/android-sdk-macosx/platforms:$PATH
-export PATH=~/Code/SDKs/android-sdk-macosx/tools:$PATH
-export PATH=~/Code/SDKs/android-sdk-macosx/platform-tools:$PATH
-
 # Add RVM to PATH for scripting
 export PATH=$PATH:$HOME/.rvm/bin
 

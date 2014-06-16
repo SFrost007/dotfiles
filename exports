@@ -1,4 +1,1 @@
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-
-export ANDROID_HOME=~/Code/SDKs/android-sdk-macosx
-export ANDROID_SDK=~/Code/SDKs/android-sdk-macosx
