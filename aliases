@@ -8,7 +8,7 @@ alias cp='rsync --progress -ah'
 alias myip='ifconfig | grep broadcast | awk -F " " '"'"'{print $2}'"'"
 alias sshtunnel='ssh -C2qTnN -D 10000 apollo.apisnetworks.com'
 alias sedrecurse='find . -type f -print | xargs sed -i ""'
-alias androidemu='~/Code/SDKs/android-sdk-macosx/tools/emulator @4.0.3'
+alias androidemu='emulator @4.0.3'
 alias rot13="tr a-zA-Z n-za-mN-ZA-M"
 alias updatepl='pip install -U --user git+git://github.com/Lokaltog/powerline'
 
