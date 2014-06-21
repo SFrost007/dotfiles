@@ -10,7 +10,7 @@ alias sshtunnel='ssh -C2qTnN -D 10000 apollo.apisnetworks.com'
 alias sedrecurse='find . -type f -print | xargs sed -i ""'
 alias androidemu='emulator @4.0.3'
 alias rot13="tr a-zA-Z n-za-mN-ZA-M"
-alias updatepl='pip install -U --user git+git://github.com/Lokaltog/powerline'
+alias updatepl='pip install -U git+git://github.com/Lokaltog/powerline'
 alias pathlist='echo $PATH | sed -e "s/:/\n/g"'
 
 # Web-dev related stuff
@@ -25,6 +25,10 @@ alias serve='python -m SimpleHTTPServer &'
 alias gitcompress='git repack && git prune'
 alias diffmate='git diff | mate -m GitDiff'
 alias gerritpush='CURR_BRANCH=$(git rev-parse --abbrev-ref HEAD) && git push origin HEAD:refs/for/$CURR_BRANCH'
+alias master='git checkout master'
+
+# Quick Access
+alias p='cd $WORKSPACE'
 
 # Fun stuff
 alias adventure='emacs -batch -l dunnet'
