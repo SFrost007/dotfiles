@@ -1,3 +1,5 @@
+alias naclbuild='build/build-viewer --nacl --no-js --no-jslint --no-clean --no-distclean --no-optimize --no-minify --log-verbose'
+
 # General shortcuts
 alias cls='clear'
 alias du='du -h'
@@ -46,6 +48,7 @@ case $(uname) in
     alias mount='mount | column -t'
     alias xopen='xdg-open'
     alias ports='netstat -tulanp'
+    alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
     ;;
   Darwin)
     alias fuxcode='rm -rf ~/Library/Developer/Xcode/DerivedData'
