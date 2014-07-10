@@ -55,6 +55,7 @@
 	incoming = "!git fetch -q && git log --no-merges --pretty=format:'%Cred%h%Creset -%C(white) %<(80,trunc)%s %Creset- %C(yellow)%an %Cgreen%cr%Creset' $(git currbranch)..origin/$(git currbranch);"
 	supush = "!git push --set-upstream origin $(git currbranch);"
 	difflog = "!git log $1 ^$(git currbranch) --oneline"
+	stashpull = "!git stash && git pull && git stash pop"
 
 [color]
 	diff = auto
