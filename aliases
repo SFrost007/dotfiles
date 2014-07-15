@@ -52,6 +52,7 @@ case $(uname) in
     ;;
   Darwin)
     alias fuxcode='rm -rf ~/Library/Developer/Xcode/DerivedData'
+    alias ql='quick-look'
     alias stopserve="kill $(ps -e | grep SimpleHTTPServer | grep -v grep | awk {'print $1'})"
     ;;
   *)

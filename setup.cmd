@@ -12,6 +12,7 @@ mklink %HOMEPATH%\.path %CD%\path
 mklink %HOMEPATH%\.rvmrc %CD%\rvmrc
 mklink %HOMEPATH%\.tmux.conf %CD%\tmux.conf
 mklink %HOMEPATH%\.vimrc %CD%\vimrc
+mklink %HOMEPATH%\.warprc %CD%\warprc
 mklink %HOMEPATH%\.zprofile %CD%\zprofile
 mklink %HOMEPATH%\.zshrc %CD%\zshrc
 
@@ -29,6 +30,7 @@ attrib /L +h %HOMEPATH%\.path
 attrib /L +h %HOMEPATH%\.rvmrc
 attrib /L +h %HOMEPATH%\.tmux.conf
 attrib /L +h %HOMEPATH%\.vimrc
+attrib /L +h %HOMEPATH%\.warprc
 attrib /L +h %HOMEPATH%\.zprofile
 attrib /L +h %HOMEPATH%\.zshrc
 

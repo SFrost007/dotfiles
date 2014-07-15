@@ -28,6 +28,7 @@ if [ -f $dir/sshconfig ]; then
 fi
 ln -sf "$dir/tmux.conf" ~/.tmux.conf
 ln -sf "$dir/vimrc" ~/.vimrc
+ln -sf "$dir/warprc" ~/.warprc
 ln -sf "$dir/zprofile" ~/.zprofile
 ln -sf "$dir/zshrc" ~/.zshrc
 
