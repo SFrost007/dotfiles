@@ -5,6 +5,7 @@ mklink %HOMEPATH%\.bashrc %CD%\bashrc
 mklink %HOMEPATH%\.bash_profile %CD%\bashprofile
 mklink %HOMEPATH%\.exports %CD%\exports
 mklink %HOMEPATH%\.functions %CD%\functions
+mklink %HOMEPATH%\.gdbinit %CD%\functions
 mklink %HOMEPATH%\.gitconfig %CD%\gitconfig
 mklink %HOMEPATH%\.gitignore_global %CD%\gitignore_global
 mklink %HOMEPATH%\.path %CD%\path
@@ -21,6 +22,7 @@ attrib /L +h %HOMEPATH%\.bashrc
 attrib /L +h %HOMEPATH%\.bash_profile
 attrib /L +h %HOMEPATH%\.exports
 attrib /L +h %HOMEPATH%\.functions
+attrib /L +h %HOMEPATH%\.gdbinit
 attrib /L +h %HOMEPATH%\.gitconfig
 attrib /L +h %HOMEPATH%\.gitignore_global
 attrib /L +h %HOMEPATH%\.path
