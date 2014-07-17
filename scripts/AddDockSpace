@@ -2,6 +2,9 @@
 #
 # Adds a blank space to the dock
 
-defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'
-killall Dock
-
+if [ $(uname) == 'Darwin' ]; then
+	defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'
+	killall Dock
+else
+	echo 'AddDockSpace is only applicable on OS X'
+fi

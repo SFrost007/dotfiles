@@ -2,5 +2,8 @@
 #
 # Sets the plist flag to show iTerm icon in the dock
 
-/usr/libexec/PlistBuddy -c 'Delete :LSUIElement' /Applications/iTerm.app/Contents/Info.plist
-
+if [ -f /Applications/iTerm.app/Contents/Info.plist ]; then
+	/usr/libexec/PlistBuddy -c 'Delete :LSUIElement' /Applications/iTerm.app/Contents/Info.plist
+else
+	echo 'iTerm does not appear to be installed'
+fi
