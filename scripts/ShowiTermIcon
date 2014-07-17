@@ -1,0 +1,6 @@
+#!/bin/bash
+#
+# Sets the plist flag to show iTerm icon in the dock
+
+/usr/libexec/PlistBuddy -c 'Delete :LSUIElement' /Applications/iTerm.app/Contents/Info.plist
+

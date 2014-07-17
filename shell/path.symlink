@@ -7,3 +7,7 @@ export PATH=$PATH:$HOME/.rvm/bin
 # Add RealVNC paths
 export PATH=$HOME/Code/WorkProjects/builds:$PATH
 export PATH=$HOME/Code/WorkProjects/tools:$PATH
+
+# Add scripts path
+export PATH=$HOME/Code/TerminalUtils/dotfiles/scripts:$PATH
+

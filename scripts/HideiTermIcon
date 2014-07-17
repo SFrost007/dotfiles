@@ -1,0 +1,6 @@
+#!/bin/bash
+#
+# Sets the plist flag to hide iTerm from the dock
+
+/usr/libexec/PlistBuddy -c 'Add :LSUIElement bool true' /Applications/iTerm.app/Contents/Info.plist
+
