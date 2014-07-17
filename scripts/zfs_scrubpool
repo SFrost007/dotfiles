@@ -1,0 +1,21 @@
+#!/bin/bash
+#
+# Performs a scrub on the configured zpool and sends a status email before/after
+# the operation.
+
+type zpool >/dev/null 2>&1 || { echo >&2 "Zpool command does not appear to be installed, exiting.."; exit 1; }
+
+
+hostname=`hostname -s`
+pool="mypool"
+fromemail="zion@orangeninja.com"
+toemail="sfrost007@gmail.com"
+
+status=`/sbin/zpool status $pool`
+
+echo "About to scrub pool $pool, current status is: $status " | mailx -s "$hostname: zpool scrub started on pool $pool" -r $fromemail $toemail
+/sbin/zpool scrub $pool
+
+status=`/sbin/zpool status $pool`
+echo "Scrub finished on pool $pool, status is now: $status" | mailx -s "$hostname: zpool scrub finished on pool $pool" -r $fromemail $toemail
+

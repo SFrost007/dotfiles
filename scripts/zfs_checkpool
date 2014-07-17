@@ -1,0 +1,21 @@
+#!/bin/bash
+#
+# Checks the status of all zpools and sends an email notification if
+# any are unhealthy
+
+type zpool >/dev/null 2>&1 || { echo >&2 "Zpool command does not appear to be installed, exiting.."; exit 1; }
+
+zpstatus=`/sbin/zpool status -x`
+hostname=`hostname -s`
+fromemail="zion@orangeninja.com"
+toemail="sfrost007@gmail.com"
+
+if [ "$zpstatus" != "all pools are healthy" ] ; then
+  touch -d "-24 hour" /var/tmp/zp_tmp
+  if [ /var/tmp/zp_tmp -nt /var/tmp/zp_lastalert ] ; then
+    echo 'Sending email...'
+    /sbin/zpool status | mailx -s "POOL ERROR on $hostname" -r $fromemail $toemail
+    touch /var/tmp/zp_lastalert
+  fi
+fi
+
