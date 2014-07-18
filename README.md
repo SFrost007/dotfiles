@@ -28,8 +28,8 @@ curl -#L https://github.com/sfrost007/dotfiles/tarball/master | tar -xzv --strip
 
 Rather than have a single install script which explicitly links any dotfiles into the correct place, the installer takes a more generic approach based on filename suffixes:
 
-* ***.symlink**: Any file/folder ending with `.symlink` will be prefixed with a dot and symlinked into `$HOME`
-* ***.configdir**: Any file/folder ending with `.configdir` will be symlinked into `$HOME/.config`
+* **\*.symlink**: Any file/folder ending with `.symlink` will be prefixed with a dot and symlinked into `$HOME`
+* **\*.configdir**: Any file/folder ending with `.configdir` will be symlinked into `$HOME/.config`
 
 Interactive prompts will be shown for any file which already exists (unless matching the target symlink), allowing skip/overwrite/backup options.
 
