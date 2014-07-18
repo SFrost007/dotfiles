@@ -2,6 +2,7 @@
 #
 # Backs up specified directories from hosting server using RSync
 # Relies upon host being correctly configured in ssh/config
+#
 
 if [ $(hostname) == 'zion' ]; then
 

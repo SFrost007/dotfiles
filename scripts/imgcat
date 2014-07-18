@@ -1,5 +1,7 @@
 #!/bin/bash
-
+#
+# SF: From https://github.com/gnachman/iTerm2/blob/master/tests/imgcat
+#
 # print_image filename inline base64contents
 #   filename: Filename to convey to client
 #   inline: 0 or 1

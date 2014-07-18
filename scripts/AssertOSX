@@ -1,0 +1,21 @@
+#!/bin/bash
+#
+# Tiny script to check whether the user is running on OS X.
+# Takes an optional argument which will be included in the
+# displayed error message ($0 should be passed in to print
+# the name of the calling script).
+#
+# The calling script should manually exit if the return code
+# is non-zero. e.g:
+#
+#    AssertOSX $0 || exit 1
+#
+
+if [ $(uname) != 'Darwin' ]; then
+	if [ -n "$1" ]; then
+		echo "$(basename $1) is only applicable on OS X"
+	fi
+	exit 1
+fi
+
+exit 0

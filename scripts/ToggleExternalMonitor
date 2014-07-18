@@ -1,0 +1,28 @@
+#!/usr/bin/osascript
+#
+# A small script to toggle mirroring to an external monitor
+# Tested on Mavericks (10.9.3)
+#
+# The first time you run this (or any UI-based AppleScript)
+# OSX will prompt for permission for the your terminal app
+# to control the computer. 
+
+tell application "System Preferences"
+	activate
+	set current pane to pane "com.apple.preference.displays"
+end tell
+
+tell application "System Events"
+	try
+		tell tab group 1 of window 1 of process "System Preferences" to click radio button "Arrangement"
+	on error
+		return "Only one display available"
+	end try
+	tell tab group 1 of window 1 of process "System Preferences"
+		click checkbox "Mirror Displays"
+	end tell
+end tell
+
+tell application "System Preferences"
+	quit
+end tell

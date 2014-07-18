@@ -1,0 +1,17 @@
+#!/bin/bash
+#
+# Writes the entry into Outlook 2011's MainWindow file to enable the
+# full screen toggle button.
+#
+# This could potentially break Outlook! Use with caution.
+
+AssertOSX $0 || exit 1
+
+if [ -f "/Applications/Microsoft Office 2011/Microsoft Outlook.app/Contents/Resources/en.lproj" ]; then
+	cd "/Applications/Microsoft Office 2011/Microsoft Outlook.app/Contents/Resources/en.lproj"
+	plutil -convert xml1 OutlookMainWindow.nib
+	sed -i.bu 's/<key>NSWindowBacking<\/key>/<key>NSWindowCollectionBehavior<\/key><integer>128<\/integer><key>NSWindowBacking<\/key>/' OutlookMainWindow.nib
+	plutil -convert binary1 OutlookMainWindow.nib
+else
+	echo 'Outlook 2011 does not appear to be installed'
+fi

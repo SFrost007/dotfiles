@@ -1,10 +1,10 @@
 #!/bin/bash
 #
+# SF: From https://github.com/danro/dotfiles/blob/master/scripts/dockspace
+#
 # Adds a blank space to the dock
 
-if [ $(uname) == 'Darwin' ]; then
-	defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'
-	killall Dock
-else
-	echo 'AddDockSpace is only applicable on OS X'
-fi
+AssertOSX $0 || exit 1
+
+defaults write com.apple.dock persistent-apps -array-add '{"tile-type"="spacer-tile";}'
+killall Dock
