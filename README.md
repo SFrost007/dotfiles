@@ -38,12 +38,12 @@ As per the entry in `shell/paths`, any items in `scripts` will be made available
 
 ### Special cases
 
-* If a file exists at ssh/config (not committed), this will be symlinked into $HOME/.ssh/.
+* If a file exists at `ssh/config` (not committed), this will be symlinked into `$HOME/.ssh/`.
 * TODO: Sublime handling
 
 
 ### Thanks to:
 
-* [Zach Holman](https://github.com/holman/dotfiles) for the install.sh inspiration
+* [Zach Holman](http://github.com/holman/dotfiles) for the install.sh inspiration
 * [Mathias Bynens](http://github.com/mathiasbynens/dotfiles) for the README inspiration
 * Anyone else who I stole any of the useful commands/aliases/scripts from (sorry for forgetting you!)
