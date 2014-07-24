@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+# Initialise the current dir as a git repo and add/commit all files
+
+git init
+cp ~/Code/TerminalUtils/dotfiles/git/gitignore_project ./.gitignore
+git add .
+git commit -m "Initial commit"
+
