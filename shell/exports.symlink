@@ -2,3 +2,6 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export WORKSPACE='$HOME/Code/'
 export TERM=xterm-256color
 
+# Ensure dotfiles are listed first in ls
+export LC_COLLATE="C"
+
