@@ -22,6 +22,7 @@ alias chromedev='open /Applications/Google\ Chrome.app --args --allow-file-acces
 alias chromium='open /Applications/Chromium.app --args --allow-file-access-from-files --enable-file-cookies --disable-web-security'
 alias canary='open /Applications/Google\ Chrome\ Canary.app --args --allow-file-access-from-files --enable-file-cookies --disable-web-security'
 alias serve='python -m SimpleHTTPServer &'
+alias stopserve='pkill -f SimpleHTTPServer'
 
 # Source control
 alias gitcompress='git repack && git prune'
@@ -53,7 +54,6 @@ case $(uname) in
   Darwin)
     alias fuxcode='rm -rf ~/Library/Developer/Xcode/DerivedData'
     alias ql='quick-look'
-    alias stopserve="kill $(ps -e | grep SimpleHTTPServer | grep -v grep | awk {'print $1'})"
     ;;
   *)
     ;;
