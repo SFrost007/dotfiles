@@ -1,5 +1,3 @@
-alias naclbuild='build/build-viewer --nacl --no-js --no-jslint --no-clean --no-distclean --no-optimize --no-minify --log-verbose'
-
 # General shortcuts
 alias cls='clear'
 alias du='du -h'
@@ -16,15 +14,12 @@ alias updatepl='pip install -U git+git://github.com/Lokaltog/powerline'
 alias pathlist='echo $PATH | sed -e "s/:/\n/g"'
 
 # Web-dev related stuff
-alias senchabuild='sencha create jsb -a index.htm -p temp.jsb3 && sencha build -p temp.jsb3 -d .'
-alias senchaclean='rm all-classes.js && rm app-all.js && rm temp.jsb3'
 alias serve='python -m SimpleHTTPServer &'
 alias stopserve='pkill -f SimpleHTTPServer'
 
 # Source control
 alias gitcompress='git repack && git prune'
 alias diffmate='git diff | mate -m GitDiff'
-alias gerritpush='CURR_BRANCH=$(git rev-parse --abbrev-ref HEAD) && git push origin HEAD:refs/for/$CURR_BRANCH'
 alias master='git checkout master'
 
 # Quick Access
@@ -64,3 +59,7 @@ esac
 # Now unused
 #alias wget='curl -O'
 #alias tree='find . -print | sed -e "s;[^/]*/;|___;g;s;___|;  |;g"'
+#alias senchabuild='sencha create jsb -a index.htm -p temp.jsb3 && sencha build -p temp.jsb3 -d .'
+#alias senchaclean='rm all-classes.js && rm app-all.js && rm temp.jsb3'
+#alias gerritpush='CURR_BRANCH=$(git rev-parse --abbrev-ref HEAD) && git push origin HEAD:refs/for/$CURR_BRANCH'
+#alias naclbuild='build/build-viewer --nacl --no-js --no-jslint --no-clean --no-distclean --no-optimize --no-minify --log-verbose'
