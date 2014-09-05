@@ -53,10 +53,10 @@ source $ZSH/oh-my-zsh.sh
 ############################
 # Load other related files #
 ############################
+source ~/.exports
 source ~/.aliases
 source ~/.functions
 source ~/.path
-source ~/.exports
 
 
 #####################
