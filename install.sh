@@ -130,12 +130,29 @@ install_sublime() {
 	local overwrite_all=false backup_all=false skip_all=false
 	$(./scripts/AssertOSX);
 	if [[ $? -eq 0 ]]; then
-		mkdir -p ${HOME}/Library/Application\ Support/Sublime\ Text\ 2/Packages
-		link_file ${DOTFILES_ROOT}/sublime/User ${HOME}/Library/Application\ Support/Sublime\ Text\ 2/Packages/User
- 	else
-		mkdir -p ${HOME}/.config/sublime-text-2/Packages
-		link_file ${DOTFILES_ROOT}/sublime/User ${HOME}/.config/sublime-text-2/Packages/User
- 	fi
+		SUBLIME_DIR=${HOME}/Library/Application\ Support/Sublime\ Text\ 2
+	else
+		SUBLIME_DIR=${HOME}/.config/sublime-text-2
+	fi
+
+	SUBLIME_DIR=${HOME}/Desktop/sub
+
+	mkdir -p ${SUBLIME_DIR}/Packages
+	link_file ${DOTFILES_ROOT}/sublime/User ${SUBLIME_DIR}/Packages/User
+
+	if [[ ! -f ${SUBLIME_DIR}/Installed\ Packages/Package\ Control.sublime-package ]]; then
+		mkdir -p ${SUBLIME_DIR}/Installed\ Packages
+		pushd ${SUBLIME_DIR}/Installed\ Packages > /dev/null
+		wget http://sublime.wbond.net/Package%20Control.sublime-package -o /dev/null
+		if [[ $? -eq 0 ]]; then
+			success 'Installed Package Control for Sublime'
+		else
+			fail 'Failed to download Package Control'
+		fi
+		popd > /dev/null
+	else
+		success 'Skipped installing Package Control - already exists'
+	fi
 }
 
 
