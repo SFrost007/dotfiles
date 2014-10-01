@@ -124,8 +124,23 @@ install_configdirs() {
 	done
 }
 
+install_sublime() {
+	info 'Linking Sublime Text config'
+
+	local overwrite_all=false backup_all=false skip_all=false
+	$(./scripts/AssertOSX);
+	if [[ $? -eq 0 ]]; then
+		mkdir -p ${HOME}/Library/Application\ Support/Sublime\ Text\ 2/Packages
+		link_file ${DOTFILES_ROOT}/sublime/User ${HOME}/Library/Application\ Support/Sublime\ Text\ 2/Packages/User
+ 	else
+		mkdir -p ${HOME}/.config/sublime-text-2/Packages
+		link_file ${DOTFILES_ROOT}/sublime/User ${HOME}/.config/sublime-text-2/Packages/
+ 	fi
+}
+
 
 install_dotfiles
 install_sshconfig
 install_configdirs
+install_sublime
 
