@@ -134,7 +134,7 @@ install_sublime() {
 		link_file ${DOTFILES_ROOT}/sublime/User ${HOME}/Library/Application\ Support/Sublime\ Text\ 2/Packages/User
  	else
 		mkdir -p ${HOME}/.config/sublime-text-2/Packages
-		link_file ${DOTFILES_ROOT}/sublime/User ${HOME}/.config/sublime-text-2/Packages/
+		link_file ${DOTFILES_ROOT}/sublime/User ${HOME}/.config/sublime-text-2/Packages/User
  	fi
 }
 
