@@ -135,8 +135,6 @@ install_sublime() {
 		SUBLIME_DIR=${HOME}/.config/sublime-text-2
 	fi
 
-	SUBLIME_DIR=${HOME}/Desktop/sub
-
 	mkdir -p ${SUBLIME_DIR}/Packages
 	link_file ${DOTFILES_ROOT}/sublime/User ${SUBLIME_DIR}/Packages/User
 
