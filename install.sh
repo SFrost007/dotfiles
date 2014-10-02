@@ -136,7 +136,7 @@ install_sublime() {
 	fi
 
 	mkdir -p ${SUBLIME_DIR}/Packages
-	link_file "${DOTFILES_ROOT}/sublime" "${SUBLIME_DIR}/Packages/User"
+	link_file "${DOTFILES_ROOT}/sublime/" "${SUBLIME_DIR}/Packages/User"
 
 	if [[ ! -f ${SUBLIME_DIR}/Installed\ Packages/Package\ Control.sublime-package ]]; then
 		mkdir -p ${SUBLIME_DIR}/Installed\ Packages
