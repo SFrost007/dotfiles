@@ -1,13 +1,44 @@
 {
+
+	/* Aqua Theme
+	"theme": "ProKit.sublime-theme", // Has "AppKit" light version
+	"color_scheme": "Packages/Theme - Aqua/Color Schemes/Monokai Aqua.tmTheme",
+	//*/
+
+	/* Flatland Theme
+	"theme": "Flatland Dark.sublime-theme",
 	"color_scheme": "Packages/Theme - Flatland/Flatland Dark.tmTheme",
+	//"flatland_square_tabs": true,
+	//*/
+
+	//* Phoenix Theme
+	"theme": "Phoenix Dark.sublime-theme", // Has a Light version too
+	"phoenix_color_orange": true, // Can be red, green, blue, orange, yellow, pink
+	"phoenix_eighties": true,
+	"phoenix_dirty_bottom_bar": true,
+	"phoenix_dirty_bottom_bar_orange": true,
+	//"phoenix_sidebar_tree_xlarge": true,
+	"phoenix_tabs_small": true,
+	"phoenix_tabs_auto_width": true,
+	"color_scheme": "Packages/Theme - Phoenix/Color Scheme/Phoenix Dark Orange - Eighties.tmTheme",
+	//*/
+
+
+	"caret_style": "phase", // Can be smooth, phase, wide, blink, solid
+	"wide_caret": true,
+	"rulers": [ 80, 100 ],
+	"highlight_line": true,
+	"file_exclude_patterns":
+	[
+		".DS_Store"
+	],
+	"folder_exclude_patterns":
+	[
+		".git"
+	],
+
 	"ignored_packages":
 	[
 		"Vintage"
-	],
-	"rulers":
-	[
-		80,
-		100
-	],
-	"theme": "ProKit.sublime-theme"
+	]
 }
