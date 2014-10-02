@@ -153,7 +153,17 @@ install_sublime() {
 	fi
 }
 
+setup_pull_hook() {
+	if [[ ! -f ${DOTFILES_ROOT}/.git/hooks/post-merge ]]; then
+		info 'Setting up git merge hook'
+		ln -s ${DOTFILES_ROOT}/install.sh ${DOTFILES_ROOT}/.git/hooks/post-merge
+		success 'Linked merge hook to install script'
+	else
+		success 'Merge hook already set up'
+	fi
+}
 
+setup_pull_hook
 install_dotfiles
 install_sshconfig
 install_configdirs
