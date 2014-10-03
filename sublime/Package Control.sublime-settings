@@ -1,6 +1,7 @@
 {
 	"installed_packages":
 	[
+		"Bash Build System",
 		"BracketHighlighter",
 		"Color Highlighter",
 		"Git",
