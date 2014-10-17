@@ -138,9 +138,9 @@ install_sublime() {
 	mkdir -p "${SUBLIME_DIR}/Packages"
 	link_file "${DOTFILES_ROOT}/sublime/" "${SUBLIME_DIR}/Packages/User"
 
-	if [[ ! -f ${SUBLIME_DIR}/Installed\ Packages/Package\ Control.sublime-package ]]; then
-		mkdir -p "${SUBLIME_DIR}/Installed\ Packages"
-		pushd ${SUBLIME_DIR}/Installed\ Packages > /dev/null
+	if [[ ! -f "${SUBLIME_DIR}/Installed Packages/Package Control.sublime-package" ]]; then
+		mkdir -p "${SUBLIME_DIR}/Installed Packages"
+		pushd "${SUBLIME_DIR}/Installed Packages" > /dev/null
 		wget http://sublime.wbond.net/Package%20Control.sublime-package -o /dev/null
 		if [[ $? -eq 0 ]]; then
 			success 'Installed Package Control for Sublime'
