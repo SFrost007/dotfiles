@@ -34,7 +34,7 @@ cask install handbrake
 cask install iexplorer
 cask install iphone-configuration-utility
 cask install iterm2-nightly
-cask install mou
+cask install macdown
 cask install reveal
 cask install sequel-pro
 cask install skype
