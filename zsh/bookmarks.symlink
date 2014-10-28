@@ -1,4 +1,8 @@
+# Code locations
 $HOME/Code/TerminalUtils/dotfiles|dotfiles
+$HOME/Code/TerminalUtils/oh-my-zsh|omz
+$HOME/Code/Projects/iOS/Awful|awful
+
+# Zion locations
 /storage/Media/TV Programs|tv
 /storage/Media/Movies|movies
-$HOME/Code/TerminalUtils/oh-my-zsh|omz
