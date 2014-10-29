@@ -19,6 +19,9 @@ install tmux
 install tree
 install wget
 
+# TODO: Install these as recommended?
+# install coreutils findutils bash
+
 # Casks
 cask install adium
 cask install alfred
@@ -37,6 +40,7 @@ cask install iterm2-nightly
 cask install macdown
 cask install reveal
 cask install sequel-pro
+cask install skitch
 cask install skype
 cask install sourcetree
 cask install spotify
@@ -54,12 +58,12 @@ cask install font-sauce-code-powerline
 
 # Quicklook plugins
 cask install betterzipql
-cask install qlmarkdown
-cask install qlstephen
 cask install qlcolorcode
-cask install quicklook-json
+cask install qlmarkdown
 cask install qlprettypatch
+cask install qlstephen
 cask install quicklook-csv
+cask install quicklook-json
 cask install suspicious-package
 cask install webp-quicklook
 
