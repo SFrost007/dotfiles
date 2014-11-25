@@ -3,6 +3,7 @@
 	[
 		"Bash Build System",
 		"BracketHighlighter",
+		"CMake",
 		"Color Highlighter",
 		"Git",
 		"HexViewer",
