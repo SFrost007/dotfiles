@@ -1,6 +1,8 @@
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export WORKSPACE='$HOME/Code/'
 export TERM=xterm-256color
+export TMUXIFIER_LAYOUT_PATH="$HOME/Code/TerminalUtils/dotfiles/tmux/"
+export EDITOR="subl"
 
 # Ensure dotfiles are listed first in ls
 export LC_COLLATE="C"

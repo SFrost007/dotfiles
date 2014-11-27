@@ -10,6 +10,7 @@ export PATH=$HOME/Code/WorkProjects/tools:$PATH
 
 # Add scripts path
 export PATH=$HOME/Code/TerminalUtils/dotfiles/scripts:$PATH
+export PATH=$HOME/Code/TerminalUtils/tmuxifier/bin:$PATH
 
 # Temporary: Add cmake 3.0 and Emscripten paths
 export PATH="$HOME/Code/WorkProjects/emscripten-tools/emsdk-portable/emscripten/incoming:$PATH"
