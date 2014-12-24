@@ -49,10 +49,13 @@ plugins=(
 	osx
 	sudo
 	web-search
-	xcode
 	zshmarks
 )
 
+# Only include the Xcode plugin on OS X
+if [[ $(uname) == 'Darwin' ]]; then
+  plugins+=(xcode)
+fi
 
 
 ##########################################
