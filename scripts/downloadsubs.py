@@ -72,7 +72,7 @@ def getfilehash(fn):
 		f.close()
 		returnedhash =  "%016x" % hash
 		return returnedhash
-	except(IOError): 
+	except(IOError):
 		return "IOError"
 
 
@@ -81,15 +81,21 @@ def getfilehash(fn):
 def downloadSub(url, fn):
 	request = urllib2.Request(url)
 	response = urllib2.urlopen(request)
-	# We will just assume the response is gzipped
-	buf = StringIO.StringIO(response.read())
-	f = gzip.GzipFile(fileobj=buf)
 
-	# Write to the output file
-	out = open(fn, 'w+')
-	out.write(f.read())
-	out.close()
-	print "Downloaded to " + fn
+	if response.info().get('Content-Type') == 'application/x-gzip':
+		# We've got a gzipped subtitle
+		buf = StringIO.StringIO(response.read())
+		f = gzip.GzipFile(fileobj=buf)
+		# Write to the output file
+		out = open(fn, 'w+')
+		out.write(f.read())
+		out.close()
+		print "Downloaded to " + fn
+
+	else:
+		print "Did not receive a gzipped response, manually check url:"
+		print url
+		exit(1)
 
 
 # Searches opensubtitles.org for subtitles for the given file. This method uses
@@ -104,7 +110,7 @@ def findSub(fn, token):
 	if token == '':
 		token = getlogintoken()
 
-	response = proxy.SearchSubtitles(token, [{'moviehash': hash, 'moviebytesize': size}])
+	response = proxy.SearchSubtitles(token, [{'moviehash': hash, 'moviebytesize': str(size)}])
 	url=''
 	fmt=''
 	downloads=0
@@ -121,7 +127,7 @@ def findSub(fn, token):
 		extpos = fn.rfind('.')
 		downloadSub(url, fn[:extpos]+'.'+fmt)
 	else:
-		print "Failed to find subtitles for " + fn
+		print " *** Failed to find subtitles for " + fn
 		exit(1)
 
 
