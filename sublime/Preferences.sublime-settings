@@ -1,6 +1,7 @@
 {
 	"caret_style": "phase",
 	"color_scheme": "Packages/Theme - Phoenix/Color Scheme/Phoenix Dark Orange - Eighties.tmTheme",
+	"draw_white_space": "all",
 	"enable_hexadecimal_encoding": false,
 	"file_exclude_patterns":
 	[
