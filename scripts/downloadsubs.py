@@ -109,7 +109,7 @@ def findSub(fn, token):
 	fmt=''
 	downloads=0
 
-	if checkStatus(response):
+	if checkStatus(response) and response['data']:
 		for result in response['data']:
 			if result['ISO639'] == 'en':
 				if result['SubDownloadsCnt'] > downloads:
