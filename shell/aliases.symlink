@@ -33,6 +33,10 @@ for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
 done
 
 
+# LAN stuff
+alias wakezion='wakeonlan 2c:76:8a:ab:d4:56'
+
+
 # OS-specific aliases
 case $(uname) in
   Linux)

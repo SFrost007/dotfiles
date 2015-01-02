@@ -17,6 +17,7 @@ install python
 install spark
 install tmux
 install tree
+install wakeonlan
 install wget
 
 # TODO: Install these as recommended?
