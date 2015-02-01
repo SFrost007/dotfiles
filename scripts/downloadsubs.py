@@ -128,7 +128,7 @@ def findSub(fn, token):
 		downloadSub(url, fn[:extpos]+'.'+fmt)
 	else:
 		print " *** Failed to find subtitles for " + fn
-		exit(1)
+		exit(0)
 
 
 # Main
