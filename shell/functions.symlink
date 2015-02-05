@@ -60,3 +60,12 @@ function pman() {
 function commitgraph() {
   git log --pretty=format:'%an: %at' --author="Simon Frost" | awk '{system("date -r "$NF" '+%H'")}' | sort | uniq -c | ruby -e 'puts STDIN.readlines.inject(Hash[Array("00".."23").map{|x| [x,0]}]) {|h, x| h.merge(Hash[*x.split(" ").reverse])}.sort.map(&:last)' | spark
 }
+
+
+# Configuration-based checks for scripting
+function isWorkMachine() {
+	if [[ `hostname -s` = spf-mac-d || `hostname -s` = spf-ubu-d ]]; then
+		return true
+	fi
+	return false
+}

@@ -1,19 +1,33 @@
-# Set path to point to Homebrew before standard paths
-export PATH=/usr/local/bin:/usr/local/sbin:~/bin:~/local/bin:$PATH
+# Only adds existing directories to path, and only if they don't already exist
+function addPathDir() {
+	if [ -d $1 ] && [[ ":$PATH:" != *":$1:"* ]]; then
+		PATH=$1:$PATH
+	fi
+}
+
+# Useful alias for printing readable path
+alias pathlist='echo $PATH | sed -e "s/:/\n/g"'
+
+# Set path to point to Homebrew and user bin before standard paths
+addPathDir $HOME/bin
+addPathDir /usr/local/sbin
+addPathDir /usr/local/bin
 
 # Add RVM to PATH for scripting
-export PATH=$PATH:$HOME/.rvm/bin
+addPathDir $HOME/.rvm/bin
 
-# Add RealVNC paths
-export PATH=$HOME/Code/WorkProjects/builds:$PATH
-export PATH=$HOME/Code/WorkProjects/tools:$PATH
+# Add work paths
+if isWorkMachine; then
+	# Add consumer viewers build tools
+	addPathDir $HOME/Code/WorkProjects/builds
+	addPathDir $HOME/Code/WorkProjects/tools
 
-# Add scripts path
-export PATH=$HOME/Code/TerminalUtils/dotfiles/scripts:$PATH
-export PATH=$HOME/Code/TerminalUtils/tmuxifier/bin:$PATH
+	# Add CMake 3.0 and Emscripten paths
+	addPathDir $HOME/Code/WorkProjects/emscripten-tools/emsdk-portable/emscripten/incoming
+	addPathDir $HOME/Code/WorkProjects/emscripten-tools/emsdk-portable/clang/fastcomp/build_incoming_64/bin
+	addPathDir $HOME/Code/WorkProjects/emscripten-tools/cmake-3.0.0-Linux-i386/bin
+fi
 
-# Temporary: Add cmake 3.0 and Emscripten paths
-export PATH="$HOME/Code/WorkProjects/emscripten-tools/emsdk-portable/emscripten/incoming:$PATH"
-export PATH="$HOME/Code/WorkProjects/emscripten-tools/emsdk-portable/clang/fastcomp/build_incoming_64/bin:$PATH"
-export PATH="$HOME/Code/WorkProjects/emscripten-tools/cmake-3.0.0-Linux-i386/bin:$PATH"
-
+# Add dotfiles script paths
+addPathDir $HOME/Code/TerminalUtils/dotfiles/scripts
+addPathDir $HOME/Code/TerminalUtils/tmuxifier/bin
