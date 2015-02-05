@@ -6,7 +6,7 @@ function addPathDir() {
 }
 
 # Useful alias for printing readable path
-alias pathlist='echo $PATH | sed -e "s/:/\n/g"'
+alias pathlist='echo $PATH | tr : "\n"'
 
 # Set path to point to Homebrew and user bin before standard paths
 addPathDir $HOME/bin
@@ -26,6 +26,9 @@ if isWorkMachine; then
 	addPathDir $HOME/Code/WorkProjects/emscripten-tools/emsdk-portable/emscripten/incoming
 	addPathDir $HOME/Code/WorkProjects/emscripten-tools/emsdk-portable/clang/fastcomp/build_incoming_64/bin
 	addPathDir $HOME/Code/WorkProjects/emscripten-tools/cmake-3.0.0-Linux-i386/bin
+
+	# Add OSX's CMake to path
+	addPathDir /Applications/CMake.app/Contents/bin
 fi
 
 # Add dotfiles script paths
