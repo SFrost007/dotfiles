@@ -1,22 +1,31 @@
 #!/bin/bash
 
-TARGET_DIR="/media/usb0"
-BACKUP_TYPE_FILE="$TARGET_DIR/.backup-type"
-BACKUPTYPE=$(<$BACKUP_TYPE_FILE)
-LOGFILE="$BACKUPTYPE-backup-$(date +"%Y%m%d-%H%M").txt"
-LOGPATH="/var/log/backupscript/$LOGFILE"
-START_TIME=$(date +%s)
-MESSAGE_CONTENT=""
-CLEANUP_DELETED=0
-REQUIRES_DELETIONS=0
-
 # Process args
+BACKUP_TYPE=$1; shift
+if [ -z $BACKUP_TYPE ] || [ ! -d "/var/run/usbmount/$BACKUP_TYPE" ]; then
+  echo "Usage: $(basename $0) drive_label [--cleanup]"
+  echo "   Drive label must exist as a symlink in /var/run/usbmount."
+  echo "   --cleanup will remove files which have been deleted on the source."
+  echo " "
+  exit 1
+fi
+
+CLEANUP_DELETED=0
+UNMOUNT_WHEN_DONE=0
 while test $# -gt 0; do
   case "$1" in
     --cleanup) CLEANUP_DELETED=1;;
+    --unmount) UNMOUNT_WHEN_DONE=1;;
   esac
   shift
 done
+
+TARGET_DIR="/var/run/usbmount/$BACKUP_TYPE"
+LOGFILE="$BACKUP_TYPE-backup-$(date +"%Y%m%d-%H%M").txt"
+LOGPATH="/var/log/backupscript/$LOGFILE"
+START_TIME=$(date +%s)
+MESSAGE_CONTENT=""
+REQUIRES_DELETIONS=0
 
 
 function backup_dir() {
@@ -66,21 +75,17 @@ function sendEmailSummary() {
 
 echo "Giving filesystem chance to mount.."
 sleep 10
-if [[ ! -f $BACKUP_TYPE_FILE ]]; then
-  echo "No backup-type identifier found, exiting.."
-  exit 0
-fi
 
-if [[ "$BACKUPTYPE" = "Movies" ]]; then
-  echo "Running Movies backup"
+if [[ "$BACKUP_TYPE" = "MoviesEtc" ]]; then
+  echo "Running Movies backup" | wall
   backup_dir "/storage/Media/Movies"
   backup_dir "/storage/Media/Snowboard Movies"
   backup_dir "/storage/Media/Skate Movies"
   backup_dir "/storage/Media/Documentaries"
   backup_dir "/storage/Documents/My Videos"
 
-elif [[ "$BACKUPTYPE" = "TV" ]]; then
-  echo "Running TV Shows backup"
+elif [[ "$BACKUP_TYPE" = "TV" ]]; then
+  echo "Running TV Shows backup" | wall
   backup_dir "/storage/Media/TV Programs"
 
 else
@@ -89,4 +94,8 @@ else
 fi
 
 sendEmailSummary
+
+if [ $UNMOUNT_WHEN_DONE -eq 1 ]; then
+  umount $TARGET_DIR
+fi
 
