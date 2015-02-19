@@ -49,7 +49,7 @@ plugins=(
 	osx
 	sudo
 	web-search
-	zshmarks
+	z
 )
 
 # Only include the Xcode plugin on OS X
