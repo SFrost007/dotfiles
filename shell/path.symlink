@@ -6,7 +6,7 @@ function addPathDir() {
 }
 
 # Useful alias for printing readable path
-alias pathlist='echo $PATH | tr : "\n"'
+alias pathlist='echo -e "${PATH//:/\n}"'
 
 # Set path to point to Homebrew and user bin before standard paths
 addPathDir $HOME/bin
