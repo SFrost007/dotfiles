@@ -108,3 +108,11 @@ endif
 
 set laststatus=2		" Always show two-line statusbar
 set noshowmode			" Hide the default 'insert' text in the statusbar
+
+
+" Fix up and down in wordwrap mode
+map j gj
+map k gk
+map <Up> k
+map <Down> j
+
