@@ -1,12 +1,7 @@
 set -g default-terminal "xterm-256color"
 
 # Load powerline config
-if-shell '[ -f /usr/local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf ]' \
-  'source /usr/local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf'
-if-shell '[ -f /usr/local/lib/python2.7/dist-packages/powerline/bindings/tmux/powerline.conf ]' \
-  'source /usr/local/lib/python2.7/dist-packages/powerline/bindings/tmux/powerline.conf'
-if-shell '[ -f ~/local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf ]' \
-  'source ~/local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf'
+source "$HOME/Code/TerminalUtils/powerline/powerline/bindings/tmux/powerline.conf"
 
 # Fix pbcopy and pbpaste on OSX
 if-shell 'test "$(uname)" = "Darwin"' \
