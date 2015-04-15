@@ -41,12 +41,10 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(
-	brew
 	colorize
 	encode64
 	jira
 	nyan
-	osx
 	sudo
 	web-search
 	z
@@ -54,7 +52,11 @@ plugins=(
 
 # Only include the Xcode plugin on OS X
 if [[ $(uname) == 'Darwin' ]]; then
-  plugins+=(xcode)
+	plugins+=(
+		brew
+		osx
+		xcode
+	)
 fi
 
 
