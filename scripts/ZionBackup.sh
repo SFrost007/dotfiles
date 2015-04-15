@@ -82,6 +82,8 @@ if [[ "$BACKUP_TYPE" = "MoviesEtc" ]]; then
   backup_dir "/storage/Media/Snowboard Movies"
   backup_dir "/storage/Media/Skate Movies"
   backup_dir "/storage/Media/Documentaries"
+  backup_dir "/storage/Media/Podcasts"
+  backup_dir "/storage/Media/Stand-Up"
   backup_dir "/storage/Documents/My Videos"
 
 elif [[ "$BACKUP_TYPE" = "TV" ]]; then
