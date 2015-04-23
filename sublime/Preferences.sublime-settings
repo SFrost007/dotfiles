@@ -5,7 +5,8 @@
 	"enable_hexadecimal_encoding": false,
 	"file_exclude_patterns":
 	[
-		".DS_Store"
+		".DS_Store",
+		"*.pyc"
 	],
 	"folder_exclude_patterns":
 	[
