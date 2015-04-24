@@ -17,7 +17,7 @@ addPathDir /usr/local/bin
 addPathDir $HOME/.rvm/bin
 
 # Add work paths
-if isWorkMachine; then
+if [[ `hostname -s` = spf-mac-d || `hostname -s` = spf-ubu-d ]]; then
 	# Add consumer viewers build tools
 	addPathDir $HOME/Code/WorkProjects/builds
 	addPathDir $HOME/Code/WorkProjects/tools
