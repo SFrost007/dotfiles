@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+SAMPLES_ROOT="../sdksamples"
+SAMPLES_DIR="$SAMPLES_ROOT/samples"
+
+# Work out which build to run
+PLAT=$1; if [[ -z "${PLAT}" ]]; then
+	echo "Usage: $0 [ios|mac|js|linux]"
+	exit 1
+fi
+
+case ${PLAT} in
+	ios)
+		BLD_CMD="distr/mobile/build-sdk-ios 1 shared ${SAMPLES_DIR}"
+		SAMPLES_CLEAN_DIR="lib/ios"
+		AUTOTEST_COPY_CMD="cp -r lib/ios/vncsdk.framework ../sdkautotest/ios"
+		;;
+	mac)
+		BLD_CMD="distr/mac/build-sdk-dist 1 shared-64 ${SAMPLES_DIR}"
+		SAMPLES_CLEAN_DIR="include lib/mac64"
+		;;
+	js)
+		# TODO: Test this!
+		CONFIGURATION=Debug
+		BLD_CMD="distr/emscripten/build-sdk-dist ${SAMPLES_DIR}"
+		SAMPLES_CLEAN_DIR="include lib/js"
+		;;
+	linux)
+		BLD_CMD="distr/unix/build-sdk-dist 64 1 shared-64 ${SAMPLES_DIR}"
+		SAMPLES_CLEAN_DIR="include lib/linux64"
+		;;
+esac
+
+
+# Run the build
+rm -rf artifacts
+${BLD_CMD} || exit 1
+
+echo ""
+echo "Extracting SDK to samples & autotest"
+
+# Find the output archive and unzip it in samples
+pushd artifacts > /dev/null
+ARCHIVE_NAME=$(find . -name *.tar.gz)
+popd > /dev/null
+cp "artifacts/${ARCHIVE_NAME}" "${SAMPLES_ROOT}"
+pushd "${SAMPLES_ROOT}" > /dev/null
+echo "  Cleaning old build"
+rm -rf "${SAMPLES_CLEAN_DIR}"
+echo "  Extracting new build"
+tar -xf "${ARCHIVE_NAME}" || exit 1
+
+# Copy the relevant directories out of it and clean up
+cp -r vncsdk/lib vncsdk/include .
+rm -rf "${ARCHIVE_NAME}" vncsdk
+
+if [[ -n "${AUTOTEST_COPY_CMD}" ]]; then
+	echo "  Copying to sdkautotest"
+	${AUTOTEST_COPY_CMD}
+fi
+
+popd > /dev/null
+echo "Done"
+
+if hash osascript 2> /dev/null; then
+	osascript -e 'display notification "SDK build complete"'
+fi
