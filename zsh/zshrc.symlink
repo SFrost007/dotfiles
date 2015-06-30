@@ -43,7 +43,7 @@ COMPLETION_WAITING_DOTS="true"
 plugins=(
 	colorize
 	encode64
-	jira
+	#jira
 	nyan
 	sudo
 	web-search
