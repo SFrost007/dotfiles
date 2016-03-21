@@ -12,7 +12,7 @@
 	email = config user.email
 	tempignore = update-index --assume-unchanged
 	unignore = update-index --really-refresh
-	currbranch = rev-parse --abbrev-ref HEAD
+	currbranch = symbolic-ref --short HEAD
 	incoming = "!git fetch -q && git log --pretty=myformat --no-merges $(git currbranch)..origin/$(git currbranch);"
 	supush = "!git push --set-upstream origin $(git currbranch);"
 	difflog = "!git log $1 ^$(git currbranch) --oneline"
