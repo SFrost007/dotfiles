@@ -11,10 +11,8 @@ if-shell 'test "$(uname)" = "Darwin"' \
 bind-key r source-file ~/.tmux.conf \; display 'Config reloaded!'
 
 # Enable mouse support
-set -g mode-mouse on
-set -g mouse-resize-pane on
-set -g mouse-select-pane on
-set -g mouse-select-window on
+set -g mouse on
+bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'copy-mode -e'"
 
 # Set the window height to be 2 rows shorter than iTerm's config'
 set -g force-height 48
