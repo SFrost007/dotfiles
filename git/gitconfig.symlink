@@ -8,12 +8,12 @@
 
 [alias]
 	st = status
-	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%C(white) %s %Creset- %C(yellow)%an %Cgreen%cr%Creset' --abbrev-commit --date=relative
+	lg = log --graph --pretty=myformat --abbrev-commit --date=relative
 	email = config user.email
 	tempignore = update-index --assume-unchanged
 	unignore = update-index --really-refresh
 	currbranch = rev-parse --abbrev-ref HEAD
-	incoming = "!git fetch -q && git log --no-merges --pretty=format:'%Cred%h%Creset -%C(white) %<(80,trunc)%s %Creset- %C(yellow)%an %Cgreen%cr%Creset' $(git currbranch)..origin/$(git currbranch);"
+	incoming = "!git fetch -q && git log --pretty=myformat --no-merges $(git currbranch)..origin/$(git currbranch);"
 	supush = "!git push --set-upstream origin $(git currbranch);"
 	difflog = "!git log $1 ^$(git currbranch) --oneline"
 	conflicts = "!git diff --name-only | uniq | xargs subl"
@@ -50,3 +50,5 @@
 
 [credential]
 	helper = osxkeychain
+[pretty]
+	myformat = "format:%Cred%h%Creset -%C(yellow)%d%C(white) %s %Creset- %C(yellow)%an %Cgreen%cr%Creset"
