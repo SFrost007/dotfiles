@@ -2,14 +2,9 @@
 	name = Simon Frost
 
 [core]
-#	autocrlf = true
 	pager = less -FRSX
 	editor = vim
 	excludesfile = ~/.gitignore_global
-#	whitespace=fix,-indent-with-non-tab,training-space,cr-at-eol
-
-[apply]
-#	whitespace=fix
 
 [alias]
 	st = status
