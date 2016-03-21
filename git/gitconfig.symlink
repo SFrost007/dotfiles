@@ -12,50 +12,15 @@
 #	whitespace=fix
 
 [alias]
-	di = diff
-	ci = commit
-	co = checkout
-	cp = cherry-pick
-	ff = merge FETCH_HEAD
-	ann = blame
 	st = status
-	w = whatchanged
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%C(white) %s %Creset- %C(yellow)%an %Cgreen%cr%Creset' --abbrev-commit --date=relative
 	email = config user.email
 	tempignore = update-index --assume-unchanged
 	unignore = update-index --really-refresh
-	ignoreproj = "!git update-index --assume-unchanged $(git status -s | grep -i .pbxproj | awk {'print $2'})"
 	currbranch = rev-parse --abbrev-ref HEAD
-	deletebranch = "!f() { \
-		if [ $(git rev-parse --abbrev-ref HEAD) == $1 ]; then \
-			echo \"Error: Cannot delete current branch, aborting..\"; \
-			exit 1; \
-		fi; \
-		locid=$(git rev-parse $1); \
-		remid=$(git ls-remote --exit-code origin $1); \
-		if [ $? -eq 2 ]; then \
-			echo \"Branch '$1' does not exist on origin, aborting..\"; \
-			exit 1; \
-		else \
-			remid=$(echo \"$remid\" | awk 'END {print $1}'); \
-		fi; \
-		if [ $locid != $remid ]; then \
-			echo \"Remote and local refs for '$1' differ, aborting..\"; \
-			echo \"Local:  $locid\"; \
-			echo \"Remote: $remid\"; \
-		else \
-			git branch -d $1; \
-			if [ $? -ne 0 ]; then \
-				echo \"Local delete failed, remote delete aborted..\"; \
-			else \
-				git push origin --delete $1; \
-			fi; \
-		fi; \
-	}; f"
 	incoming = "!git fetch -q && git log --no-merges --pretty=format:'%Cred%h%Creset -%C(white) %<(80,trunc)%s %Creset- %C(yellow)%an %Cgreen%cr%Creset' $(git currbranch)..origin/$(git currbranch);"
 	supush = "!git push --set-upstream origin $(git currbranch);"
 	difflog = "!git log $1 ^$(git currbranch) --oneline"
-	stashpull = "!git stash && git pull && git stash pop"
 	conflicts = "!git diff --name-only | uniq | xargs subl"
 	restoredeleted = "!git ls-files -d | xargs git checkout --"
 
