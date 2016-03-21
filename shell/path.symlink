@@ -22,13 +22,8 @@ if [[ `hostname -s` = spf-mac-d || `hostname -s` = spf-ubu-d ]]; then
 	addPathDir $HOME/Code/WorkProjects/builds
 	addPathDir $HOME/Code/WorkProjects/tools
 
-	# Add CMake 3.0 and Emscripten paths
-	addPathDir $HOME/Code/WorkProjects/emscripten-tools/emsdk-portable/emscripten/incoming
-	addPathDir $HOME/Code/WorkProjects/emscripten-tools/emsdk-portable/clang/fastcomp/build_incoming_64/bin
-	addPathDir $HOME/Code/WorkProjects/emscripten-tools/cmake-3.0.0-Linux-i386/bin
-
 	# Add OSX's CMake to path
-	addPathDir /Applications/CMake.app/Contents/bin
+	addPathDir /Applications/CMake_3.4.3.app/Contents/bin
 fi
 
 # Add dotfiles script paths
