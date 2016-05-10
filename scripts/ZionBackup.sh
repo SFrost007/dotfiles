@@ -90,6 +90,18 @@ elif [[ "$BACKUP_TYPE" = "TV" ]]; then
   echo "Running TV Shows backup" | wall
   backup_dir "/storage/Media/TV Programs"
 
+elif [[ "$BACKUP_TYPE" = "Software" ]]; then
+  echo "Running Software/ROMs backup" | wall
+  backup_dir "/storage/ROMs"
+  backup_dir "/storage/Software"
+  backup_dir "/storage/Code"
+  backup_dir "/storage/HostingBackup"
+  backup_dir "/storage/HostingBackup.old"
+  backup_dir "/storage/Documents/Design"
+  backup_dir "/storage/Documents/Sonniss.com - GDC - Game Audio Bundle"
+  backup_dir "/storage/Documents/Wii Backup"
+  backup_dir "/storage/Documents/eBooks"
+
 else
   echo "Unknown backup type!"
   exit 1
