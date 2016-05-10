@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+git fetch
+git log origin/idroid ^origin/master --oneline --no-merges
