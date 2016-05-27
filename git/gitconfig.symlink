@@ -15,6 +15,7 @@
 	unignore = update-index --really-refresh
 	currbranch = symbolic-ref --short HEAD
 	incoming = "!git fetch -q && git log --pretty=myformat --no-merges $(git currbranch)..origin/$(git currbranch);"
+	incomingdiff = "!git fetch -q && git diff --stat $(git currbranch)..origin/$(git currbranch);"
 	outgoing = "!git fetch -q && git log --pretty=myformat --no-merges origin/$(git currbranch)..$(git currbranch);"
 	supush = "!git push --set-upstream origin $(git currbranch);"
 	difflog = "!git log $1 ^$(git currbranch) --oneline"
