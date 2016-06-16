@@ -51,7 +51,14 @@
 [rebase]
 	stat = true
 
+[diff]
+	compactionHeuristic = true
+
 [credential]
 	helper = osxkeychain
 [pretty]
 	myformat = "format:%Cred%h%Creset -%C(yellow)%d%C(white) %s %Creset- %C(yellow)%an %Cgreen%cr%Creset"
+
+[pager]
+	show = diff-highlight | less
+	diff = diff-highlight | less
