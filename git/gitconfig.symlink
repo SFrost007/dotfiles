@@ -10,6 +10,7 @@
 	cp = cherry-pick
 	st = status
 	lg = log --graph --pretty=myformat --abbrev-commit --date=relative
+	br = branch -vv
 	email = config user.email
 	tempignore = update-index --assume-unchanged
 	unignore = update-index --really-refresh
