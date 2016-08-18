@@ -63,3 +63,6 @@
 [pager]
 	show = diff-highlight | less
 	diff = diff-highlight | less
+
+[help]
+	autocorrect = 1
