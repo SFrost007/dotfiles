@@ -94,13 +94,15 @@ elif [[ "$BACKUP_TYPE" = "Software" ]]; then
   echo "Running Software/ROMs backup" | wall
   backup_dir "/storage/ROMs"
   backup_dir "/storage/Software"
-  backup_dir "/storage/Code"
+  backup_dir "/storage/Code/Web"
   backup_dir "/storage/HostingBackup"
   backup_dir "/storage/HostingBackup.old"
   backup_dir "/storage/Documents/Design"
   backup_dir "/storage/Documents/Sonniss.com - GDC - Game Audio Bundle"
   backup_dir "/storage/Documents/Wii Backup"
   backup_dir "/storage/Documents/eBooks"
+  backup_dir "/home/simon/HSTemp"
+  backup_dir "/home/simon/Code"
 
 else
   echo "Unknown backup type!"
