@@ -12,6 +12,7 @@ upgrade
 install cloc
 install git
 install ios-sim
+install mas
 install npm
 install python
 install spark
