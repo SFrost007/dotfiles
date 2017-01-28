@@ -69,7 +69,25 @@ source $ZSH/oh-my-zsh.sh
 source ~/.exports
 source ~/.aliases
 source ~/.functions
-source ~/.path
+
+###########################################################
+# Setup Path                                              #
+###########################################################
+alias pathlist='echo -e "${PATH//:/\n}"'
+function addPathDir() {
+	if [ -d $1 ] && [[ ":$PATH:" != *":$1:"* ]]; then
+		PATH=$1:$PATH
+	fi
+}
+# Work paths
+addPathDir $HOME/Code/WorkProjects/builds
+addPathDir $HOME/Code/WorkProjects/tools
+addPathDir /Applications/CMake.app/Contents/bin
+# Powerline install location
+addPathDir $HOME/Library/Python/2.7/bin
+# My scripts
+addPathDir $HOME/.dotfiles/scripts
+
 
 
 #####################
