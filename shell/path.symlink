@@ -28,4 +28,3 @@ fi
 
 # Add dotfiles script paths
 addPathDir $HOME/Code/TerminalUtils/dotfiles/scripts
-addPathDir $HOME/Code/TerminalUtils/tmuxifier/bin

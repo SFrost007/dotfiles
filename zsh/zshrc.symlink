@@ -84,5 +84,3 @@ source ~/.path
 #####################
 source ~/Code/TerminalUtils/powerline/powerline/bindings/zsh/powerline.zsh
 
-
-eval "$(tmuxifier init -)"
