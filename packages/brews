@@ -1,0 +1,13 @@
+cloc
+exiftool
+ffmpeg
+ \ lame
+ \ x264
+ \ xvid
+node
+tmux
+ \ openssl
+ \ libevent
+tree
+wakeonlan
+wget
