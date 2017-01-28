@@ -73,12 +73,6 @@ source ~/.path
 
 
 #####################
-# RVM Related Stuff #
-#####################
-[[ -s "$HOME/.rvm/scripts/rvm" ]]  && . "$HOME/.rvm/scripts/rvm"
-
-
-#####################
 # Load Powerline    #
 #####################
 source ~/Code/TerminalUtils/powerline/powerline/bindings/zsh/powerline.zsh
