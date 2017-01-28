@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+# Script to create a timelapse video from a series of GoPro stills in a folder
+#
+# TODO: Auto-detect start number
+# TODO: Check for ffmpeg being installed
+# TODO: Parameter for output filename
+
+ffmpeg \
+	-f image2 \
+	-start_number 14053 \
+	-i G00%05d.JPG \
+	-vcodec libx264 \
+	-b:v 5000k \
+	-s 1280x720 \
+	../seq3_timelapse.mp4
