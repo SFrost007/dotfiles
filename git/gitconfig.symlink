@@ -4,7 +4,7 @@
 [core]
 	pager = less -FRSX
 	editor = vim
-	excludesfile = ~/.gitignore_global
+	excludesfile = ~/.dotfiles/git/gitignore_global
 
 [alias]
 	cp = cherry-pick
