@@ -6,7 +6,11 @@ DOTFILES=$HOME/.dotfiles
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-#ZSH_THEME="powerline"
+ZSH_THEME="powerlevel9k/powerlevel9k"
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator dir)
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status vcs time)
+POWERLEVEL9K_STATUS_VERBOSE=false
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -99,12 +103,6 @@ function chpwd() {
 	fi
 }
 
-
-
-#####################
-# Load Powerline    #
-#####################
-source ~/Code/TerminalUtils/powerline/powerline/bindings/zsh/powerline.zsh
 
 ###########################################################
 # Load external scripts for extra functionality           #
