@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Sets the tmux window title
+# TODO: Argument validation
+
+printf "\033k$1\033\\"

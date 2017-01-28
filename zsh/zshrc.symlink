@@ -41,6 +41,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(
+	colored-man-pages
 	colorize
 	encode64
 	sudo
@@ -68,7 +69,6 @@ source $ZSH/oh-my-zsh.sh
 ############################
 source ~/.exports
 source ~/.aliases
-source ~/.functions
 
 ###########################################################
 # Setup Path                                              #
@@ -87,6 +87,28 @@ addPathDir /Applications/CMake.app/Contents/bin
 addPathDir $HOME/Library/Python/2.7/bin
 # My scripts
 addPathDir $HOME/.dotfiles/scripts
+
+
+###########################################################
+# Change Dir override                                     #
+# Lists contents of directory & runs git status for repos #
+###########################################################
+function chpwd() {
+	emulate -L zsh
+	# List the items if there aren't too many (2 * window
+	# height), otherwise show in the non-list mode.
+	if (( `ls -l | wc -l` > `tput lines`/2 )); then
+		ls -AG
+	else
+		ls -lAhG
+	fi
+	echo ''
+	if [ -d ".git" ]; then
+		echo "$bg[red]$fg[white] Git status $reset_color"
+		git status
+		echo '' 
+	fi
+}
 
 
 

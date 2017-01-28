@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Script to view a little ASCII graph of commits per hour.
+# Relies on spark: https://github.com/holman/spark
+
+# TODO: Add a check that the spark command actually exists.
+
+git log --pretty=format:'%an: %at' --author="Simon Frost" \
+	| awk '{system("date -r "$NF" '+%H'")}' \
+	| sort | uniq -c \
+	| ruby -e 'puts STDIN.readlines.inject(Hash[Array("00".."23").map{|x| [x,0]}]) {|h, x| h.merge(Hash[*x.split(" ").reverse])}.sort.map(&:last)' \
+	| spark

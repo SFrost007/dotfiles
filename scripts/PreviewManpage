@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Script to view a manpage in a more readable format in Preview.app
+
+ps=`mktemp -t manpageXXXX`.ps;
+man -t $@ > "$ps";
+open "$ps";
