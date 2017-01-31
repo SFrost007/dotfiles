@@ -1,10 +1,13 @@
+chitchat
 cloc
+cmake
 exiftool
 ffmpeg
  \ lame
  \ x264
  \ xvid
 node
+slack
 tmux
  \ openssl
  \ libevent
