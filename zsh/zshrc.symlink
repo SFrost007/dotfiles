@@ -28,7 +28,6 @@ plugins=(
 # Only include the Xcode plugin on OS X
 if [[ $(uname) == 'Darwin' ]]; then
 	plugins+=(
-		brew
 		osx
 		xcode
 	)
@@ -47,7 +46,6 @@ function addPathDir() {
 # Work paths
 addPathDir $HOME/Code/WorkProjects/builds
 addPathDir $HOME/Code/WorkProjects/tools
-addPathDir /Applications/CMake.app/Contents/bin
 # Powerline install location
 addPathDir $HOME/Library/Python/2.7/bin
 # My scripts
