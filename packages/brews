@@ -1,16 +1,23 @@
-chitchat
-cloc
-cmake
-exiftool
-ffmpeg
- \ lame
- \ x264
- \ xvid
-node
-slack
-tmux
- \ openssl
- \ libevent
-tree
-wakeonlan
-wget
+#!/bin/sh
+
+PACKAGES=(
+  chitchat
+  cloc
+  node
+  python3
+  tmux                # +openssl, libevent
+  tree
+  wget
+)
+
+PACKAGES_HOME=(
+  exiftool
+  ffmpeg              # +lame, x264, xvid
+  wakeonlan
+)
+
+PACKAGES_WORK=(
+  maven
+)
+
+INSTALL_CMD="brew install"

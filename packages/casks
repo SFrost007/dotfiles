@@ -1,26 +1,40 @@
-1password
-arduino
-atom
-beyond-compare
-cocoarestclient
-dropbox
-fluid
-flux
-fritzing
-geekbench
-geotag
-google-chrome
-handbrake
-iterm2
-key-codes
-kodi
-openemu
-real-vnc
-skype
-sourcetree
-spotify
-steam
-sublime-text
-transmission
-unrarx
-vlc
+#!/bin/sh
+
+PACKAGES=(
+  1password
+  beyond-compare
+  cocoarestclient
+  dropbox
+  fluid
+  geekbench
+  google-chrome
+  iterm2
+  skype
+  slack
+  sourcetree
+  spotify
+  sublime-text
+  unrarx
+  vlc
+)
+
+PACKAGES_HOME=(
+  arduino
+  flux
+  fritzing
+  geotag
+  kodi
+  openemu
+  real-vnc
+  steam
+  transmission
+)
+
+PACKAGES_WORK=(
+  cmake               # v3.4.3
+  intellij-idea-ce
+  java
+  key-codes
+)
+
+INSTALL_CMD="brew cask install"

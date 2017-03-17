@@ -1,1 +1,13 @@
-figlet-cli
+#!/bin/sh
+
+PACKAGES=(
+  figlet-cli
+)
+
+PACKAGES_HOME=(
+)
+
+PACKAGES_WORK=(
+)
+
+INSTALL_CMD="sudo npm install -g"

@@ -1,2 +1,13 @@
-nomad-cli
-pygmentize
+#!/bin/sh
+
+PACKAGES=(
+  pygmentize
+)
+
+PACKAGES_HOME=(
+)
+
+PACKAGES_WORK=(
+)
+
+INSTALL_CMD="sudo gem install"
