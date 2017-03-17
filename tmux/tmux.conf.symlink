@@ -4,7 +4,7 @@ set -g default-terminal "xterm-256color"
 source "$HOME/Code/TerminalUtils/powerline/powerline/bindings/tmux/powerline.conf"
 
 # Fix pbcopy and pbpaste on OSX
-if-shell 'test "$(uname)" = "Darwin"' \
+if -b 'command -v reattach-to-user-namespace > /dev/null 2>&1' \
   'set-option -g default-command "reattach-to-user-namespace -l zsh"'
 
 # Add a shortcut for reloading .tmux.conf
