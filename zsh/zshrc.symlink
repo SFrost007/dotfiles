@@ -71,9 +71,9 @@ function chpwd() {
 		ls -lAhG
 	fi
 	echo ''
-	if [ -e ".git" ]; then
+	if [[ -e ".git" ]] && [[ $(git status -s) ]]; then
 		echo "$bg[red]$fg[white] Git status $reset_color"
-		git status
+		git status -s
 		echo '' 
 	fi
 }
