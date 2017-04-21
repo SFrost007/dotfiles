@@ -1,8 +1,5 @@
 set -g default-terminal "xterm-256color"
 
-# Load powerline config
-source "$HOME/Code/TerminalUtils/powerline/powerline/bindings/tmux/powerline.conf"
-
 # Fix pbcopy and pbpaste on OSX
 if -b 'command -v reattach-to-user-namespace > /dev/null 2>&1' \
   'set-option -g default-command "reattach-to-user-namespace -l zsh"'
@@ -15,7 +12,7 @@ set -g mouse on
 bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'copy-mode -e'"
 
 # Set the window height to be 2 rows shorter than iTerm's config'
-set -g force-height 48
+#set -g force-height 48
 
 # Highlight activity in other windows
 setw -g monitor-activity on
@@ -33,3 +30,14 @@ unbind %
 unbind '"'
 bind | split-window -h
 bind - split-window -v
+
+# Load powerline config
+set-option -g status on
+set-option -g status-interval 2
+set-option -g status-left-length 60
+set-option -g status-right-length 90
+set-option -g status-left "#(~/.dotfiles/tmux/tmux-powerline/powerline.sh left)"
+set-option -g status-right "#(~/.dotfiles/tmux/tmux-powerline/powerline.sh right)"
+# Add powerline styling to the window list
+set -g status-bg colour235
+set-window-option -g window-status-current-format "#[fg=colour240, bg=colour27]#[fg=colour255, bg=colour27] #I  #W #[fg=colour27, bg=colour235]"
