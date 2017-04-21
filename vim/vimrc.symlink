@@ -96,15 +96,18 @@ autocmd BufReadPost *
 cmap w!! %!sudo tee > /dev/null %
 
 
-" =================== Load Powerline and required options =====================
-source ~/Code/TerminalUtils/powerline/powerline/bindings/vim/plugin/powerline.vim
-set laststatus=2		" Always show two-line statusbar
-set noshowmode			" Hide the default 'insert' text in the statusbar
-
-
 " Fix up and down in wordwrap mode
 map j gj
 map k gk
 map <Up> k
 map <Down> j
 
+" =================== Load Lightline and required options =====================
+set runtimepath^=~/.vim/bundle/lightline.vim
+set laststatus=2    " Always show two-line statusbar
+set noshowmode      " Hide the default 'insert' text in the statusbar
+let g:lightline = {
+  \ 'colorscheme': 'wombat',
+  \ 'separator': { 'left': '', 'right': '' },
+  \ 'subseparator': { 'left': '', 'right': '' }
+  \ }
