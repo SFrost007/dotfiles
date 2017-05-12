@@ -63,4 +63,4 @@
 	diff = diff-highlight | less
 
 [help]
-	autocorrect = 1
+	autocorrect = 50
