@@ -1,17 +1,13 @@
 # General shortcuts
 alias cls='clear'
 alias du='du -h'
-alias ..='cd ..'
 alias cp='rsync --progress -ah'
 alias ccat='colorize'
+alias shutdown='sudo shutdown -h now'
 
 # Useful stuff
 alias myip='ifconfig | grep broadcast | awk -F " " '"'"'{print $2}'"'"
-alias sshtunnel='ssh -C2qTnN -D 10000 apollo.apisnetworks.com'
 alias sedrecurse='find . -type f -print | xargs sed -i ""'
-alias androidemu='emulator @4.0.3'
-alias rot13="tr a-zA-Z n-za-mN-ZA-M"
-alias updatepl='pip install -U git+git://github.com/Lokaltog/powerline'
 
 # Web-dev related stuff
 alias serve='python -m SimpleHTTPServer &'
@@ -19,11 +15,6 @@ alias stopserve='pkill -f SimpleHTTPServer'
 
 # Source control
 alias gitcompress='git repack && git prune'
-alias diffmate='git diff | mate -m GitDiff'
-alias master='git checkout master'
-
-# Quick Access
-alias p='cd $WORKSPACE'
 
 # Fun stuff
 alias adventure='emacs -batch -l dunnet'
@@ -33,11 +24,6 @@ for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
 	alias "$method"="lwp-request -m '$method'"
 done
 
-
-# LAN stuff
-alias wakezion='wakeonlan 2c:76:8a:ab:d4:56'
-
-
 # OS-specific aliases
 case $(uname) in
   Linux)
@@ -45,26 +31,10 @@ case $(uname) in
     alias mount='mount | column -t'
     alias xopen='xdg-open'
     alias ports='netstat -tulanp'
-    alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-    alias chromedev='google-chrome --disable-web-security --allow-running-insecure-content'
     alias sudoedit='gksudo gedit'
     ;;
   Darwin)
     alias fuxcode='rm -rf ~/Library/Developer/Xcode/DerivedData'
     alias ql='quick-look'
-    alias chromedev='open /Applications/Google\ Chrome.app --args --allow-file-access-from-files --enable-file-cookies --disable-web-security'
-    alias chromium='open /Applications/Chromium.app --args --allow-file-access-from-files --enable-file-cookies --disable-web-security --allow-running-insecure-content'
-    alias canary='open /Applications/Google\ Chrome\ Canary.app --args --allow-file-access-from-files --enable-file-cookies --disable-web-security --allow-running-insecure-content'
-    ;;
-  *)
     ;;
 esac
-
-
-# Now unused
-#alias wget='curl -O'
-#alias tree='find . -print | sed -e "s;[^/]*/;|___;g;s;___|;  |;g"'
-#alias senchabuild='sencha create jsb -a index.htm -p temp.jsb3 && sencha build -p temp.jsb3 -d .'
-#alias senchaclean='rm all-classes.js && rm app-all.js && rm temp.jsb3'
-#alias gerritpush='CURR_BRANCH=$(git rev-parse --abbrev-ref HEAD) && git push origin HEAD:refs/for/$CURR_BRANCH'
-#alias naclbuild='build/build-viewer --nacl --no-js --no-jslint --no-clean --no-distclean --no-optimize --no-minify --log-verbose'
