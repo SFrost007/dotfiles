@@ -51,8 +51,6 @@ function addPathDir() {
 # Work paths
 addPathDir $HOME/Code/WorkProjects/builds
 addPathDir $HOME/Code/WorkProjects/tools
-# Powerline install location
-addPathDir $HOME/Library/Python/2.7/bin
 # My scripts
 addPathDir $DOTFILES/scripts
 
