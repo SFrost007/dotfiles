@@ -75,7 +75,7 @@ function chpwd() {
 	fi
 	echo ''
 	if [[ -e ".git" ]] && [[ $(git status -s) ]]; then
-		echo "$bg[red]$fg[white] Git status $reset_color"
+		echo "$fg_bold[white]Git status $reset_color"
 		git status -s
 		echo '' 
 	fi
