@@ -4,7 +4,6 @@ DOTFILES=$HOME/.dotfiles
 
 # Set name of the theme to load.
 ZSH_THEME="powerlevel9k/powerlevel9k"
-DEFAULT_USER="spf"
 POWERLEVEL9K_MODE='awesome-patched'
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context background_jobs dir)
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
@@ -13,6 +12,12 @@ POWERLEVEL9K_STATUS_VERBOSE=false
 POWERLEVEL9K_DIR_HOME_FOREGROUND="white"
 POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="white"
 POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="white"
+
+# Set the default user based on the hostnames of computers I use
+case $(hostname) in
+	(Simons-MacBook.local)	DEFAULT_USER="simon";;
+	(BURCEI.realvnc.ltd)	DEFAULT_USER="spf";;
+esac
 
 # Uncomment following line if you want to disable autosetting terminal title.
 DISABLE_AUTO_TITLE="true"
