@@ -1,5 +1,5 @@
-[submodule "vim/vim.symlink/lightline.vim"]
-	path = vim/vim.symlink/lightline.vim
+[submodule "vim/.vim/bundle/lightline.vim"]
+	path = vim/.vim/bundle/lightline.vim
 	url = git@github.com:itchyny/lightline.vim.git
 [submodule "tmux/oh-my-tmux"]
 	path = tmux/oh-my-tmux
