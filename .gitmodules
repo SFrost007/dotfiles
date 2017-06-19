@@ -4,3 +4,9 @@
 [submodule "tmux/oh-my-tmux"]
 	path = tmux/oh-my-tmux
 	url = git@github.com:gpakosz/.tmux.git
+[submodule "tools/qtcreator-solarized"]
+	path = tools/solarized/QtCreator
+	url = git@github.com:curonian/qtcreator-solarized.git
+[submodule "tools/solarized-xcode"]
+	path = tools/solarized/Xcode
+	url = git@github.com:ArtSabintsev/Solarized-Dark-for-Xcode.git
