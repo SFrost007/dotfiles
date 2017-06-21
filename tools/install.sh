@@ -161,8 +161,6 @@ run_selected_modules() {
 
 ensure_git_installed() {
   if ! check_command_exists git; then
-    # While we _could_ download the tarball of the dotfiles, this will leave it
-    # disconnected from the git origin. Instead, attempt to install git now.
     echo "Git is not installed. Installing.."
     case `get_platform` in
       PLATFORM_OSX) xcode-select --install;;
@@ -205,6 +203,8 @@ manual_install() {
 }
 
 curl_install() {
+  # While we _could_ download the tarball of the dotfiles, this will leave it
+  # disconnected from the git origin. Instead, attempt to install git now.
   ensure_git_installed
   echo "Cloning dotfiles with git.."
   git clone --depth=1 "${_CLONE_SOURCE}" "${DOTFILES_DIR}"
