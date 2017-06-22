@@ -85,6 +85,6 @@ function chpwd() {
 ###########################################################
 # Load external scripts for extra functionality           #
 ###########################################################
-source $DOTFILES/shell/aliases
-source $DOTFILES/shell/exports
+source $DOTFILES/zsh/aliases.sh
+source $DOTFILES/zsh/exports.sh
 source $ZSH/oh-my-zsh.sh
