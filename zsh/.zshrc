@@ -43,48 +43,5 @@ fi
 
 source $ZSH/oh-my-zsh.sh
 
-
-###########################################################
-# Setup Path                                              #
-###########################################################
-alias pathlist='echo -e "${PATH//:/\n}"'
-function addPathDir() {
-	if [ -d $1 ] && [[ ":$PATH:" != *":$1:"* ]]; then
-		PATH=$1:$PATH
-	fi
-}
-# Work paths
-addPathDir $HOME/Code/WorkProjects/builds
-addPathDir $HOME/Code/WorkProjects/tools
-addPathDir /Applications/CMake_3.4.3.app/Contents/bin
-# My scripts
-addPathDir $DOTFILES/bin
-
-
-###########################################################
-# Change Dir override                                     #
-# Lists contents of directory & runs git status for repos #
-###########################################################
-function chpwd() {
-	emulate -L zsh
-	# List the items if there aren't too many (2 * window
-	# height), otherwise show in the non-list mode.
-	if (( `ls -l | wc -l` > `tput lines`/2 )); then
-		ls -AG
-	else
-		ls -lAhG
-	fi
-	echo ''
-	if [[ -e ".git" ]] && [[ $(git status -s) ]]; then
-		echo "$fg_bold[white]Git status $reset_color"
-		git status -s
-		echo '' 
-	fi
-}
-
-
-###########################################################
-# Load external scripts for extra functionality           #
-###########################################################
-source $DOTFILES/zsh/aliases.sh
-source $DOTFILES/zsh/exports.sh
+# Load all .zsh files within this folder
+for file in ${DOTFILES}/zsh/*.zsh; do source $file; done

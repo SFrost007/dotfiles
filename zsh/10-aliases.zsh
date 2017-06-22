@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 # General shortcuts
 alias cls='clear'
 alias du='du -h'
@@ -21,7 +23,7 @@ alias adventure='emacs -batch -l dunnet'
 
 # One of @janmoesen’s ProTips
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
-	alias "$method"="lwp-request -m '$method'"
+  alias "$method"="lwp-request -m '$method'"
 done
 
 # OS-specific aliases

@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export TERM=xterm-256color
 
