@@ -217,6 +217,7 @@ gitpull_update() {
   # and just run minor (+package?) updates.
   echo "Updating dotfiles..."
   # TODO: Implement. Decide on packages or just updating linked dotfiles.
+  # TODO: Update submodules
 }
 
 
