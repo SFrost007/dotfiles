@@ -24,6 +24,7 @@ DISABLE_AUTO_TITLE="true"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
+ZSH_CUSTOM=$DOTFILES/zsh/omz-custom
 
 # Uncomment following line if you want to disable marking untracked files under
 

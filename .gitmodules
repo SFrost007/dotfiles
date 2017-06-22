@@ -10,3 +10,6 @@
 [submodule "tools/solarized-xcode"]
 	path = tools/solarized/Xcode
 	url = git@github.com:ArtSabintsev/Solarized-Dark-for-Xcode.git
+[submodule "zsh/omz-custom/powerlevel9k"]
+	path = zsh/omz-custom/powerlevel9k
+	url = git@github.com:bhilburn/powerlevel9k.git
