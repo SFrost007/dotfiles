@@ -19,15 +19,14 @@ case $(hostname) in
 	(BURCEI.realvnc.ltd)	DEFAULT_USER="spf";;
 esac
 
-# Uncomment following line if you want to disable autosetting terminal title.
+# Set some ZSH/oh-my-zsh options
 DISABLE_AUTO_TITLE="true"
-
-# Uncomment following line if you want red dots to be displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
+HYPHEN_INSENSITIVE="true"
+ENABLE_CORRECTION="true"
 ZSH_CUSTOM=$DOTFILES/zsh/omz-custom
 
-# Uncomment following line if you want to disable marking untracked files under
-
+# Load oh-my-zsh plugins
 plugins=(
 	colored-man-pages
 	colorize
@@ -35,14 +34,14 @@ plugins=(
 	sudo
 	z
 )
-
-# Only include the Xcode plugin on OS X
 if [[ $(uname) == 'Darwin' ]]; then
 	plugins+=(
 		osx
 		xcode
 	)
 fi
+
+source $ZSH/oh-my-zsh.sh
 
 
 ###########################################################
@@ -89,4 +88,3 @@ function chpwd() {
 ###########################################################
 source $DOTFILES/zsh/aliases.sh
 source $DOTFILES/zsh/exports.sh
-source $ZSH/oh-my-zsh.sh
