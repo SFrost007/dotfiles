@@ -57,7 +57,7 @@ function addPathDir() {
 addPathDir $HOME/Code/WorkProjects/builds
 addPathDir $HOME/Code/WorkProjects/tools
 # My scripts
-addPathDir $DOTFILES/scripts
+addPathDir $DOTFILES/bin
 
 
 ###########################################################
