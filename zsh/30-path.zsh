@@ -14,4 +14,4 @@ addPathDir $HOME/Code/WorkProjects/builds
 addPathDir $HOME/Code/WorkProjects/tools
 addPathDir /Applications/CMake_3.4.3.app/Contents/bin
 # My scripts
-addPathDir $DOTFILES/bin
+addPathDir $DOTFILES_DIR/bin

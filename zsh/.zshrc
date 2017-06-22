@@ -2,7 +2,7 @@
 
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
-DOTFILES=$HOME/.dotfiles
+export DOTFILES_DIR=$HOME/.dotfiles
 
 # Set name of the theme to load.
 ZSH_THEME="powerlevel9k/powerlevel9k"
@@ -26,7 +26,7 @@ DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
 HYPHEN_INSENSITIVE="true"
 ENABLE_CORRECTION="true"
-ZSH_CUSTOM=$DOTFILES/zsh/omz-custom
+ZSH_CUSTOM=$DOTFILES_DIR/zsh/omz-custom
 
 # Load oh-my-zsh plugins
 plugins=(
@@ -46,4 +46,4 @@ fi
 source $ZSH/oh-my-zsh.sh
 
 # Load all .zsh files within this folder
-for file in ${DOTFILES}/zsh/*.zsh; do source $file; done
+for file in ${DOTFILES_DIR}/zsh/*.zsh; do source $file; done
