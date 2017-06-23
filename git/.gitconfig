@@ -61,7 +61,6 @@
 [pager]
 	show = $DOTFILES_DIR/git/diff-highlight | less
 	diff = $DOTFILES_DIR/git/diff-highlight | less
-	log = $DOTFILES_DIR/git/diff-highlight | less
 
 [help]
 	autocorrect = 50
