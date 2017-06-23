@@ -158,7 +158,12 @@ print_install_menu() {
       _OPTION_NUMBER=$((_OPTION_NUMBER+1))
     fi
   done
-  echo "   ${_OPTION_NUMBER}) Continue"
+  if [ -z $_SELECTED_MODULES ]; then
+    local NEXT_CMD="Exit"
+  else
+    local NEXT_CMD="Continue"
+  fi
+  echo "   ${_OPTION_NUMBER}) ${NEXT_CMD}"
 }
 
 run_selected_modules() {
@@ -200,6 +205,7 @@ manual_install() {
     print_current_info
     echo_blank_line
     print_install_menu
+    echo_blank_line
 
     read -p "Enter an option: " CHOICE
     if [ "$CHOICE" -eq "$_OPTION_NUMBER" ]; then
