@@ -112,8 +112,16 @@ print_dotfiles_info() {
     warn "Dotfiles directory does not exist"
 }
 
-print_is_tool_installed() {
-  (check_command_exists $1 && success "$1 installed") || warn "$1 not installed"
+print_tool_info() {
+  local TOOL=$1
+  if check_command_exists $TOOL; then
+    local VERSION_ARG=${2:---version}
+    local VERSION_INFO=`$TOOL $VERSION_ARG 2>&1 | head -n 1 | \
+      sed 's/[^0-9.]*\([0-9.]*\).*/\1/'`
+    success "${TOOL} installed ${_GREEN}(${VERSION_INFO})${_RESET}"
+  else
+    warn "$TOOL is not installed"
+  fi
 }
 
 print_current_info() {
@@ -123,13 +131,17 @@ print_current_info() {
   print_dotfiles_info
   echo_blank_line
 
-  local CORE_TOOLS=(git vim tmux curl tree wget zsh)
-  for tool in "${CORE_TOOLS[@]}"; do
-    print_is_tool_installed $tool
-  done
+  print_tool_info "git"
+  print_tool_info "vim"
+  print_tool_info "tmux" "-V"
+  print_tool_info "curl"
+  print_tool_info "tree"
+  print_tool_info "wget"
+  print_tool_info "zsh"
+  print_tool_info "python"
   case `get_platform` in
-    $PLATFORM_OSX) print_is_tool_installed "brew";;
-    $PLATFORM_LINUX) print_is_tool_installed "apt-get";;
+    $PLATFORM_OSX) print_tool_info "brew";;
+    $PLATFORM_LINUX) print_tool_info "apt-get";;
   esac
 }
 
