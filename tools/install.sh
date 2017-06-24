@@ -51,8 +51,8 @@ fail () {
 # Generic support functions
 # ==============================================================================
 
-PLATFORM_OSX = "macOS"
-PLATFORM_LINUX = "Linux"
+PLATFORM_OSX="macOS"
+PLATFORM_LINUX="Linux"
 # TODO: Support Win10's Linux subsystem
 # TODO: Detect Raspbian as subset of Linux?
 
