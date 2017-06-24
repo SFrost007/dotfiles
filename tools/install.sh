@@ -226,7 +226,7 @@ curl_install() {
   ensure_git_installed
   # TODO: This needs to ensure we have some valid SSH keys configured..
   echo "Cloning dotfiles with git.."
-  git clone --depth=1 "${_CLONE_SOURCE}" "${DOTFILES_DIR}"
+  git clone "${_CLONE_SOURCE}" "${DOTFILES_DIR}"
   cd $DOTFILES_DIR
   git submodule update --init
   echo "Triggering main dotfiles install script.."
