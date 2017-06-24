@@ -19,5 +19,6 @@ _module_exec() {
     $PLATFORM_OSX) FONTS_DIR="$HOME/Library/Fonts";;
     $PLATFORM_LINUX) FONTS_DIR="$HOME/.local/share/fonts";;
   esac
-  cp -r ./fonts/* ~/Library/Fonts && success "Fonts installed" || warn "Error installing fonts"
+  mkdir -p $FONTS_DIR
+  cp -r ./fonts/* $FONTS_DIR && success "Fonts installed" || warn "Error installing fonts"
 }

@@ -9,7 +9,7 @@ _module_run_after_git_pull() {
 }
 
 _module_valid() {
-  if [[ $(get_platform) -ne "${PLATFORM_OSX}" ]]; then
+  if [[ "$(get_platform)" != "${PLATFORM_OSX}" ]]; then
     return 1; # Wrong OS
   elif check_command_exists "brew"; then
     return 1 # Already installed
