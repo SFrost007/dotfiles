@@ -82,4 +82,12 @@ _module_exec() {
   link_file ${DOTFILES_DIR}/vim/.vim ${TARGET_DIR}
   link_file ${DOTFILES_DIR}/zsh/.zshrc ${TARGET_DIR}
   link_file ${DOTFILES_DIR}/zsh/.zshenv ${TARGET_DIR}
+
+  case `get_platform` in
+    $PLATFORM_LINUX)
+      mkdir -p $HOME/.config/lxterminal
+      link_file ${DOTFILES_DIR}/preferences/linux/lxterminal.conf $HOME/.config/lxterminal/
+      ;;
+  esac
 }
+
