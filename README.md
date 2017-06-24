@@ -21,7 +21,7 @@ cd dotfiles && git pull && source install.sh
 To install these dotfiles without Git (untested but should work):
 
 ```bash
-curl -#L https://github.com/sfrost007/dotfiles/tarball/master | tar -xzv --strip-components 1 --exclude={README.md} && cd dotfiles && source install.sh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/SFrost007/dotfiles/master/tools/install.sh)"
 ```
 
 ### Handling

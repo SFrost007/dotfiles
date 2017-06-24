@@ -6,7 +6,7 @@
 # Additionally can be used a git hook to update the installation after a pull.
 
 DOTFILES_DIR="$HOME/.dotfiles"
-_CLONE_SOURCE="git@github.com:SFrost007/dotfiles.git"
+_CLONE_SOURCE="https://github.com/SFrost007/dotfiles.git"
 
 
 # ==============================================================================
@@ -89,7 +89,7 @@ array_contains() {
 # Dotfiles specific setup functions
 # ==============================================================================
 
-_AVAILABLE_MODULES=(${PWD}/setup-modules/*.sh)
+_AVAILABLE_MODULES=(${DOTFILES_DIR}/tools/setup-modules/*.sh)
 _ENABLED_MODULES=()
 _SELECTED_MODULES=()
 
@@ -245,7 +245,7 @@ gitpull_update() {
 
 if [ -z DOTFILES_PULL_HOOK ]; then
   gitpull_update
-elif true; then # TODO: Can we detect a manual execution (vs curled)?
+elif [ -e $DOTFILES_DIR ]; then
   manual_install
 else
   curl_install
