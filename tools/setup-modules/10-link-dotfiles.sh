@@ -74,10 +74,7 @@ link_file() {
 }
 
 _module_exec() {
-  # TODO: This should use the friendlier linking method from the old install.sh
   local TARGET_DIR=$HOME
-
-  link_file ${DOTFILES_DIR}/bash/.bashrc ${TARGET_DIR}
   link_file ${DOTFILES_DIR}/git/.gitconfig ${TARGET_DIR}
   link_file ${DOTFILES_DIR}/tmux/oh-my-tmux/.tmux.conf ${TARGET_DIR}
   link_file ${DOTFILES_DIR}/tmux/.tmux.conf.local ${TARGET_DIR}
