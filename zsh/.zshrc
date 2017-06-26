@@ -25,7 +25,6 @@ esac
 DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
 HYPHEN_INSENSITIVE="true"
-ENABLE_CORRECTION="true"
 ZSH_CUSTOM=$DOTFILES_DIR/zsh/omz-custom
 
 # Load oh-my-zsh plugins
