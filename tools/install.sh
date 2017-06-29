@@ -190,16 +190,16 @@ ensure_git_installed() {
 }
 
 ensure_ssh_key_exists() {
-  local SSH_KEY_PATH="$HOME/.ssh/id_rsa.pub"
+  local SSH_KEY_PATH="$HOME/.ssh/id_rsa"
   if ! check_file_exists "$SSH_KEY_PATH"; then
     echo_blank_line
-    warn "No SSH key found, but this is required to clone from Github.."
+    warn "No SSH key found, but this is required to clone from Github."
     echo_blank_line
-    ssh-keygen -t rsa -b 4096
+    ssh-keygen -t rsa -b 4096 -f "$SSH_KEY_PATH" -N ''
     echo_blank_line
     success "SSH Key generated. Copy the following to Github before proceeding:"
     echo_blank_line
-    cat "$SSH_KEY_PATH"
+    cat "${SSH_KEY_PATH}.pub"
     echo_blank_line
     read -n 1 -s -p "Press any key once ready.."
   else
@@ -264,13 +264,17 @@ gitpull_update() {
 
 
 # ==============================================================================
-# Installer modes
+# Main installer
 # ==============================================================================
 
-if [ -z DOTFILES_PULL_HOOK ]; then
-  gitpull_update
-elif [ -e $DOTFILES_DIR ]; then
-  manual_install
-else
-  curl_install
-fi
+main() {
+  if [ -z DOTFILES_PULL_HOOK ]; then
+    gitpull_update
+  elif [ -e $DOTFILES_DIR ]; then
+    manual_install
+  else
+    curl_install
+  fi
+}
+
+main
