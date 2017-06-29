@@ -178,11 +178,32 @@ run_selected_modules() {
 
 ensure_git_installed() {
   if ! check_command_exists git; then
-    echo "Git is not installed. Installing.."
+    warn "Git is not installed. Installing.."
     case `get_platform` in
       PLATFORM_OSX) xcode-select --install;;
       PLATFORM_LINUX) sudo apt-get install git;;
     esac
+    echo_blank_line
+  else
+    success "Git is installed."
+  fi
+}
+
+ensure_ssh_key_exists() {
+  local SSH_KEY_PATH="$HOME/.ssh/id_rsa.pub"
+  if ! check_file_exists "$SSH_KEY_PATH"; then
+    echo_blank_line
+    warn "No SSH key found, but this is required to clone from Github.."
+    echo_blank_line
+    ssh-keygen -t rsa -b 4096
+    echo_blank_line
+    success "SSH Key generated. Copy the following to Github before proceeding:"
+    echo_blank_line
+    cat "$SSH_KEY_PATH"
+    echo_blank_line
+    read -n 1 -s -p "Press any key once ready.."
+  else
+    success "Using SSH key from $SSH_KEY_PATH."
   fi
 }
 
@@ -224,8 +245,8 @@ curl_install() {
   # While we _could_ download the tarball of the dotfiles, this will leave it
   # disconnected from the git origin. Instead, attempt to install git now.
   ensure_git_installed
-  # TODO: This needs to ensure we have some valid SSH keys configured..
-  echo "Cloning dotfiles with git.."
+  ensure_ssh_key_exists
+  info "Cloning dotfiles with git.."
   git clone "${_CLONE_SOURCE}" "${DOTFILES_DIR}"
   cd $DOTFILES_DIR
   git submodule update --init
