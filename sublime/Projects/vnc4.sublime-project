@@ -6,7 +6,8 @@
       "folder_exclude_patterns": [
         "bld-*",
         "artifacts",
-        "^test"
+        "^test",
+        "apps/test"
       ]
     }
   ]
