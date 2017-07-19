@@ -5,6 +5,7 @@ PACKAGES=(
   cloc
   node
   python3
+  rtv
   tmux                # +openssl, libevent
   tree
   wget
