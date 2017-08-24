@@ -14,7 +14,7 @@ _module_valid() {
   if [[ "$(get_platform)" == "${PLATFORM_OSX}" ]]; then
     if ! check_command_exists "brew"; then return 1; fi
   fi
-  for i in "${_CORE_TOOLS}"; do
+  for i in "${_CORE_TOOLS[@]}"; do
     if ! check_command_exists "$i"; then return 0; fi
   done
   return 1 # Everything already exists.
@@ -30,7 +30,7 @@ _module_coretools_install() {
 }
 
 _module_exec() {
-  for i in "${_CORE_TOOLS}"; do
+  for i in "${_CORE_TOOLS[@]}"; do
     if ! check_command_exists "$i"; then
       _module_coretools_install "$i"
     fi
