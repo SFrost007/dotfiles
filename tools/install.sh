@@ -23,7 +23,7 @@ echo_blank_line() {
 }
 
 echo_divider() {
-  for i in {0..80}; do echo -n "="; done; echo
+  for i in {0..79}; do echo -n "="; done; echo
 }
 
 echo_header() {
@@ -112,6 +112,10 @@ print_dotfiles_info() {
     warn "Dotfiles directory does not exist"
 }
 
+# Prints whether a tool is installed, and if so, which version exists.
+# The version is queried with "--version" as default, but a second argument can
+# be provided if required.
+# Usage: print_tool_info toolname [version_arg]
 print_tool_info() {
   local TOOL=$1
   if check_command_exists $TOOL; then
