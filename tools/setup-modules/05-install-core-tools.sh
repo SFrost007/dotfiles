@@ -11,7 +11,7 @@ _module_run_after_git_pull() {
 }
 
 _module_valid() {
-  if [[ "$(get_platform)" != "${PLATFORM_OSX}" ]]; then
+  if [[ "$(get_platform)" == "${PLATFORM_OSX}" ]]; then
     if ! check_command_exists "brew"; then return 1; fi
   fi
   for i in "${_CORE_TOOLS}"; do
