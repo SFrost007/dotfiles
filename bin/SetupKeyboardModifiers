@@ -1,0 +1,56 @@
+#!/usr/bin/osascript
+#
+# From https://apple.stackexchange.com/questions/105092/how-to-swap-command-and-option-modifier-keys-with-a-script-in-os-x-lion,
+# tweaked to work with the actual ordering of UI elements in the dialog, and my
+# desired settings for using a Windows (Microsoft) keyboard on macOS.
+# e.g. "Ctrl" becomes "Cmd" so muscle memory from Windows (Ctrl+C) still works.
+#
+# This requires the terminal app (iTerm?) to have been granted UI access in
+# System Preferences. macOS will prompt if this is not the case.
+#
+# It would be nicer if this could be achieved through writing system defaults,
+# but all solutions seem to not take effect until a logout.
+
+# Order of popup button indices in the prefpane:
+# 1: Command
+# 2: Caps Lock
+# 3: Control
+# 4: Option
+# 5: Keyboard Selector
+
+# Order of options within menu:
+# 1: Caps Lock
+# 2: Control
+# 3: Option
+# 4: Command
+# 5: Escape
+
+# Desired mapping:
+# Control -> Command
+# Option -> Control
+# Command -> Option
+
+tell application "System Preferences"
+    activate
+    set current pane to pane "com.apple.preference.keyboard"
+    delay 0.5 # Required as UI doesn't update quick enough
+end tell
+
+tell application "System Events"
+    tell process "System Preferences"
+        click button "Modifier Keys…" of tab group 1 of window "Keyboard"
+        
+        click pop up button 3 of sheet 1 of window "Keyboard"
+        click menu item 4 of menu 1 of pop up button 3 of sheet 1 of window "Keyboard"
+        click pop up button 4 of sheet 1 of window "Keyboard"
+        click menu item 2 of menu 1 of pop up button 4 of sheet 1 of window "Keyboard"
+        click pop up button 1 of sheet 1 of window "Keyboard"
+        click menu item 3 of menu 1 of pop up button 1 of sheet 1 of window "Keyboard"
+        
+        click button "OK" of sheet 1 of window "Keyboard"
+    end tell
+end tell
+
+tell application "System Preferences"
+    quit
+end tell
