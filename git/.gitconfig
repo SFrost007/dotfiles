@@ -12,6 +12,7 @@
 	lg = log --graph --pretty=myformat --abbrev-commit --date=relative
 	br = branch -vv
 	email = config user.email
+	amend = commit --amend --no-edit
 	tempignore = update-index --assume-unchanged
 	unignore = update-index --really-refresh
 	currbranch = symbolic-ref --short HEAD
@@ -19,9 +20,9 @@
 	incomingdiff = "!git fetch -q && git diff --stat $(git currbranch)..origin/$(git currbranch);"
 	outgoing = "!git fetch -q && git log --pretty=myformat --no-merges origin/$(git currbranch)..$(git currbranch);"
 	supush = "!git push --set-upstream origin $(git currbranch);"
+	rmorigin = "!git push origin --delete $(git currbranch)"
 	difflog = "!git log $1 ^$(git currbranch) --oneline"
 	conflicts = "!git diff --name-only | uniq | xargs subl"
-	restoredeleted = "!git ls-files -d | xargs git checkout --"
 
 [color]
 	diff = auto
