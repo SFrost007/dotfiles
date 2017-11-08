@@ -184,8 +184,8 @@ ensure_git_installed() {
   if ! check_command_exists git; then
     warn "Git is not installed. Installing.."
     case `get_platform` in
-      PLATFORM_OSX) xcode-select --install;;
-      PLATFORM_LINUX) sudo apt-get install git;;
+      $PLATFORM_OSX) xcode-select --install;;
+      $PLATFORM_LINUX) sudo apt-get install git;;
     esac
     echo_blank_line
   else
