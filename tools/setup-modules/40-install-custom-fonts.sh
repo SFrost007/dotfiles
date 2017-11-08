@@ -18,6 +18,7 @@ _module_exec() {
   case `get_platform` in
     $PLATFORM_OSX) FONTS_DIR="$HOME/Library/Fonts";;
     $PLATFORM_LINUX) FONTS_DIR="$HOME/.local/share/fonts";;
+    $PLATFORM_WSL) FONTS_DIR="/mnt/c/Windows/Fonts";;
   esac
   mkdir -p $FONTS_DIR
   cp -r ./fonts/* $FONTS_DIR && success "Fonts installed" || warn "Error installing fonts"

@@ -53,15 +53,19 @@ fail () {
 
 PLATFORM_OSX="macOS"
 PLATFORM_LINUX="Linux"
-# TODO: Support Win10's Linux subsystem
+PLATFORM_WSL="Linux_WSL"
 # TODO: Detect Raspbian as subset of Linux?
 
 get_platform() {
-  case `uname` in
-    Darwin) echo ${PLATFORM_OSX};;
-    Linux) echo ${PLATFORM_LINUX};;
-    *) ;;
-  esac
+  if grep -sq Microsoft /proc/version; then
+    echo ${PLATFORM_WSL}
+  else
+    case `uname` in
+      Darwin) echo ${PLATFORM_OSX};;
+      Linux) echo ${PLATFORM_LINUX};;
+      *) ;;
+    esac
+  fi
 }
 
 check_file_exists() {
@@ -145,7 +149,7 @@ print_current_info() {
   print_tool_info "python"
   case `get_platform` in
     $PLATFORM_OSX) print_tool_info "brew";;
-    $PLATFORM_LINUX) print_tool_info "apt-get";;
+    $PLATFORM_LINUX*) print_tool_info "apt-get";;
   esac
 }
 
@@ -185,7 +189,7 @@ ensure_git_installed() {
     warn "Git is not installed. Installing.."
     case `get_platform` in
       $PLATFORM_OSX) xcode-select --install;;
-      $PLATFORM_LINUX) sudo apt-get install git;;
+      $PLATFORM_LINUX*) sudo apt-get install git;;
     esac
     echo_blank_line
   else

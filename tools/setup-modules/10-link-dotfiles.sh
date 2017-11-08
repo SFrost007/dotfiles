@@ -88,6 +88,9 @@ _module_exec() {
       mkdir -p $HOME/.config/lxterminal
       link_file ${DOTFILES_DIR}/preferences/linux/lxterminal.conf $HOME/.config/lxterminal/
       ;;
+    $PLATFORM_WSL)
+      # TODO: Link Windows config files (ConEmu, VS?)
+      ;;
   esac
 }
 
