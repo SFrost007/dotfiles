@@ -43,7 +43,6 @@ plugins=(
 )
 if [[ $(uname) == 'Darwin' ]]; then
 	plugins+=(
-		osx
 		xcode
 	)
 fi
