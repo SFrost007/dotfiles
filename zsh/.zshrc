@@ -17,8 +17,10 @@ POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="white"
 
 # Set the default user based on the hostnames of computers I use
 case $(hostname) in
-	(Simons-MacBook.local)	DEFAULT_USER="simon";;
-	(BURCEI.realvnc.ltd)	DEFAULT_USER="spf";;
+	Simons-MacBook.local)
+		DEFAULT_USER="simon";;
+	BURCEI.realvnc.ltd|SILIUS|spf-ubu-d)
+		DEFAULT_USER="spf";;
 esac
 
 # Set some ZSH/oh-my-zsh options
