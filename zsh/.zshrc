@@ -27,12 +27,18 @@ COMPLETION_WAITING_DOTS="true"
 HYPHEN_INSENSITIVE="true"
 ZSH_CUSTOM=$DOTFILES_DIR/zsh/omz-custom
 
+# Bind escape sequences to move around terminal (Needs matching iTerm config)
+# See https://automationengineeringblog.wordpress.com/2017/11/08/oh-my-zsh-and-iterm2-navigation-tip-on-mac-os-x/
+bindkey "[D" backward-word
+bindkey "[C" forward-word
+bindkey "^[a" beginning-of-line
+bindkey "^[e" end-of-line
+
 # Load oh-my-zsh plugins
 plugins=(
 	colored-man-pages
 	colorize
 	encode64
-	sudo
 	z
 )
 if [[ $(uname) == 'Darwin' ]]; then
