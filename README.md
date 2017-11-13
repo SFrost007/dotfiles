@@ -14,6 +14,8 @@ The easiest install method is to execute the install script directly. This will:
 2. Clone the repo to `~/.dotfiles`
 3. Re-run the main interactive setup script
 
+_Note: Ubuntu doesn't install curl as default; run `sudo apt install curl` first._
+
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/sfrost007/dotfiles/master/tools/install.sh)"
 ```
@@ -29,7 +31,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/sfrost007/dotfiles/maste
 * Setup script is modular (see README in tools/setup-modules for details)
 * Mainly built for zsh. Config will auto-load any .zsh files in the zsh folder
 * Custom scripts/binaries live in the `bin` folder
-* Symlinks are defined explici
+* Symlinks are defined explicitly in a setup module
 
 # TODO
 * Actually write setup-modules' README
