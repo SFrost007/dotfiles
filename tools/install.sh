@@ -6,7 +6,7 @@
 # Additionally can be used a git hook to update the installation after a pull.
 
 DOTFILES_DIR="$HOME/.dotfiles"
-_CLONE_SOURCE="git@github.com:SFrost007/dotfiles.git"
+_CLONE_SOURCE="https://github.com/SFrost007/dotfiles.git"
 
 
 # ==============================================================================
@@ -253,10 +253,10 @@ curl_install() {
   # While we _could_ download the tarball of the dotfiles, this will leave it
   # disconnected from the git origin. Instead, attempt to install git now.
   ensure_git_installed
-  ensure_ssh_key_exists
   info "Cloning dotfiles with git.."
   git clone "${_CLONE_SOURCE}" "${DOTFILES_DIR}"
   cd $DOTFILES_DIR
+  info "Updating submodules"
   git submodule update --init
   echo "Triggering main dotfiles install script.."
   source "${DOTFILES_DIR}/tools/install.sh"

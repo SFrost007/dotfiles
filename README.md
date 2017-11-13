@@ -1,49 +1,43 @@
 # Simon's dotfiles
 
-## Installation
+This is my collection of dotfiles, configs, scripts, fonts and everything that
+makes development nice on the machines I use. This is intended to work on:
+* macOS (High Sierra)
+* Ubuntu (16.04)
+* Windows (under WSL)
+* Raspbian (Jessie x86, Stretch ARM)
 
-### Using Git and the install script
+### Automatic install
 
-Clone the repository anywhere, though `~/Code/TerminalUtils/dotfiles` is my convention.
-
-```bash
-git clone https://github.com/sfrost007/dotfiles.git && cd dotfiles && source install.sh
-```
-
-To update:
-
-```bash
-cd dotfiles && git pull && source install.sh
-```
-
-### Git-free install
-
-To install these dotfiles without Git (untested but should work):
+The easiest install method is to execute the install script directly. This will:
+1. Ensure pre-requisites are met (mainly `git` is present)
+2. Clone the repo to `~/.dotfiles`
+3. Re-run the main interactive setup script
 
 ```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/SFrost007/dotfiles/master/tools/install.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/sfrost007/dotfiles/master/tools/install.sh)"
 ```
 
-### Handling
-
-Rather than have a single install script which explicitly links any dotfiles into the correct place, the installer takes a more generic approach based on filename suffixes:
-
-* **\*.symlink**: Any file/folder ending with `.symlink` will be prefixed with a dot and symlinked into `$HOME`
-* **\*.configdir**: Any file/folder ending with `.configdir` will be symlinked into `$HOME/.config`
-
-Interactive prompts will be shown for any file which already exists (unless matching the target symlink), allowing skip/overwrite/backup options.
-
-As per the entry in `shell/paths`, any items in `scripts` will be made available on the path (assuming the dotfiles have been cloned to `~/Code/TerminalUtils/dotfiles/`).
+### Manual install
+1. Install git, with either `xcode-select --install` or `sudo apt install git`
+2. Clone the repository wherever desired
+3. Edit `DOTFILES_DIR` in tools/install.sh (TODO: Only set if not in ENV)
+4. Run tools/install.sh
 
 
-### Special cases
+# Functional overview
+* Setup script is modular (see README in tools/setup-modules for details)
+* Mainly built for zsh. Config will auto-load any .zsh files in the zsh folder
+* Custom scripts/binaries live in the `bin` folder
+* Symlinks are defined explici
 
-* If a file exists at `ssh/config` (not committed), this will be symlinked into `$HOME/.ssh/`.
-* TODO: Sublime handling
-
+# TODO
+* Actually write setup-modules' README
+* Git pull hooks to automatically re-run update scripts
+* Setup module to generate SSH key and replace git origin with ssh version
+* App install via package managers (see packages folder)
 
 ### Thanks to:
-
-* [Zach Holman](http://github.com/holman/dotfiles) for the install.sh inspiration
-* [Mathias Bynens](http://github.com/mathiasbynens/dotfiles) for the README inspiration
-* Anyone else who I stole any of the useful commands/aliases/scripts from (sorry for forgetting you!)
+* [Zach Holman](http://github.com/holman/dotfiles) for the dotfiles inspiration
+* Various people/sources mentioned in script headers in `bin`
+* Anyone else who I stole useful things from and forgot about (please shout!)
