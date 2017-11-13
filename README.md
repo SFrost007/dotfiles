@@ -9,10 +9,9 @@ makes development nice on the machines I use. This is intended to work on:
 
 ### Automatic install
 
-The easiest install method is to execute the install script directly. This will:
-1. Ensure pre-requisites are met (mainly `git` is present)
-2. Clone the repo to `~/.dotfiles`
-3. Re-run the main interactive setup script
+The easiest install method is to execute the install script directly. This will
+ensure pre-requisites are met, clone the repo to `~/.dotfiles` and run the
+interactive setup script.
 
 _Note: Ubuntu doesn't install curl as default; run `sudo apt install curl` first._
 
