@@ -16,6 +16,12 @@ link_file() {
   local src=$1 dst=$2
   local overwrite= backup= skip= action=
 
+  # Protect against doing something unintended and destructive, like removing a
+  # directory when trying to link a file and choosing "Overwrite"
+  if [[ -d "$dst" && ! -d "$src" ]]; then
+    echo "Linking source file to destination directory not supported"; return 1
+  fi
+
   if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]; then
 
     if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]; then
@@ -27,6 +33,7 @@ link_file() {
       else
         prompt "File already exists: $(basename "$dst"). [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
         read -n 1 action
+        echo ""
 
         case "$action" in
           o )
@@ -75,13 +82,15 @@ link_file() {
 
 _module_exec() {
   local TARGET_DIR=$HOME
-  link_file ${DOTFILES_DIR}/git/.gitconfig ${TARGET_DIR}
-  link_file ${DOTFILES_DIR}/tmux/oh-my-tmux/.tmux.conf ${TARGET_DIR}
-  link_file ${DOTFILES_DIR}/tmux/.tmux.conf.local ${TARGET_DIR}
-  link_file ${DOTFILES_DIR}/vim/.vimrc ${TARGET_DIR}
-  link_file ${DOTFILES_DIR}/vim/.vim ${TARGET_DIR}
-  link_file ${DOTFILES_DIR}/zsh/.zshrc ${TARGET_DIR}
-  link_file ${DOTFILES_DIR}/zsh/.zshenv ${TARGET_DIR}
+  local overwrite_all=false backup_all=false skip_all=false
+
+  link_file ${DOTFILES_DIR}/git/.gitconfig ${TARGET_DIR}/.gitconfig
+  link_file ${DOTFILES_DIR}/tmux/oh-my-tmux/.tmux.conf ${TARGET_DIR}/.tmux.conf
+  link_file ${DOTFILES_DIR}/tmux/.tmux.conf.local ${TARGET_DIR}/.tmux.conf.local
+  link_file ${DOTFILES_DIR}/vim/.vimrc ${TARGET_DIR}/.vimrc
+  link_file ${DOTFILES_DIR}/vim/.vim ${TARGET_DIR}/.vim
+  link_file ${DOTFILES_DIR}/zsh/.zshrc ${TARGET_DIR}/.zshrc
+  link_file ${DOTFILES_DIR}/zsh/.zshenv ${TARGET_DIR}/.zshenv
 
   case `get_platform` in
     $PLATFORM_LINUX)

@@ -33,6 +33,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/sfrost007/dotfiles/maste
 * Symlinks are defined explicitly in a setup module
 
 # TODO
+* Find a tidier way to define where symlinks should be created
 * Actually write setup-modules' README
 * Git pull hooks to automatically re-run update scripts
 * Setup module to generate SSH key and replace git origin with ssh version

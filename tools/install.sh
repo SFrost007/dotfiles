@@ -46,6 +46,10 @@ fail () {
   printf "  [${_RED}FAIL${_RESET}] $1\n" && exit
 }
 
+prompt () {
+  printf "  [ \033[0;33m?\033[0m ] $1 "
+}
+
 
 # ==============================================================================
 # Generic support functions
