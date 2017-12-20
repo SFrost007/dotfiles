@@ -12,6 +12,6 @@ function addPathDir() {
 # Work paths
 addPathDir $HOME/Code/WorkProjects/builds
 addPathDir $HOME/Code/WorkProjects/tools
-addPathDir /Applications/CMake_3.10.0.app/Contents/bin
+addPathDir /Applications/CMake.app/Contents/bin
 # My scripts
 addPathDir $DOTFILES_DIR/bin
