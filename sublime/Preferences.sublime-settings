@@ -1,6 +1,6 @@
 {
 	"caret_style": "phase",
-	"color_scheme": "Packages/User/SublimeLinter/Monokai (SL).tmTheme",
+	"color_scheme": "Packages/Boxy Theme/schemes/Boxy Monokai.tmTheme",
 	"draw_white_space": "all",
 	"enable_hexadecimal_encoding": false,
 	"file_exclude_patterns":
@@ -23,7 +23,7 @@
 		120
 	],
 	"tab_size": 2,
-	"theme": "Adaptive.sublime-theme",
+	"theme": "Boxy Monokai.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"wide_caret": true,
 	"word_wrap": "false"
