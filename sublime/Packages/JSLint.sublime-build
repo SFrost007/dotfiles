@@ -1,4 +1,0 @@
-{
-	"cmd": ["/usr/local/bin/jslint", "$file"],
-	"selector": "source.js"
-}

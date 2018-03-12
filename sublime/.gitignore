@@ -1,0 +1,6 @@
+*.sublime-workspace
+
+Package Control.last-run
+Package Control.*-ca-bundle
+Package Control.cache
+oscrypto-ca-bundle.crt
