@@ -5,7 +5,15 @@
 	],
 	"installed_packages":
 	[
+		"ayu",
+		"BracketHighlighter",
+		"CMake",
 		"Filter Lines",
-		"Package Control"
+		"Git",
+		"Git Conflict Resolver",
+		"HexViewer",
+		"Modific",
+		"Package Control",
+		"Swift"
 	]
 }
