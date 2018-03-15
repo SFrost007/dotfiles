@@ -1,0 +1,4 @@
+Host *
+  VisualHostKey no
+
+Include config.d/*
