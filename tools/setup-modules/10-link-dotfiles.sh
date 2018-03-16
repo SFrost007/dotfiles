@@ -92,9 +92,9 @@ _module_exec() {
   link_file ${DOTFILES_DIR}/zsh/.zshrc ${TARGET_DIR}/.zshrc
   link_file ${DOTFILES_DIR}/zsh/.zshenv ${TARGET_DIR}/.zshenv
 
-  mkdir -p ${TARGET_DIR}/ssh
-  link_file ${DOTFILES_DIR}/ssh/config ${TARGET_DIR}/ssh/config
-  link_file ${DOTFILES_DIR}/ssh/config.d ${TARGET_DIR}/ssh/config.d
+  mkdir -p ${TARGET_DIR}/.ssh
+  link_file ${DOTFILES_DIR}/ssh/config ${TARGET_DIR}/.ssh/config
+  link_file ${DOTFILES_DIR}/ssh/config.d ${TARGET_DIR}/.ssh/config.d
 
   case `get_platform` in
     $PLATFORM_LINUX)
