@@ -7,7 +7,8 @@
         "bld-*",
         "artifacts",
         "^test",
-        "apps/test"
+        "apps/test",
+        "3rdparty"
       ]
     }
   ]
