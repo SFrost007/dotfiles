@@ -1,4 +1,5 @@
 Host *
   VisualHostKey no
+  RemoteForward 52698 localhost:52698
 
 Include config.d/*
