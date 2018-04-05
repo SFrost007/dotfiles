@@ -5,6 +5,7 @@
 	pager = less -FRSX
 	editor = vim
 	excludesfile = ~/.dotfiles/git/gitignore_global
+	attributesfile = ~/.dotfiles/git/.gitattributes
 
 [alias]
 	cp = cherry-pick
@@ -55,6 +56,9 @@
 
 [diff]
 	compactionHeuristic = true
+
+[diff "spaceman-diff"]
+  command = ~/.dotfiles/git/spaceman-diff
 
 [pretty]
 	myformat = "format:%Cred%h%Creset -%C(yellow)%d%C(white) %s %Creset- %C(yellow)%an %Cgreen%cr%Creset"

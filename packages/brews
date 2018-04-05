@@ -3,6 +3,8 @@
 PACKAGES=(
   chitchat
   cloc
+  imagemagick
+  jp2a
   node
   python3
   rtv
