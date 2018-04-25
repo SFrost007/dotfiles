@@ -1,5 +1,10 @@
 #!/bin/bash
 
+
+# BACKUP_TYPE (first arg) should be MoviesEtc/TV/Software
+# This should be a symlink within /var/run/usbmount pointing to the root of the drive.
+# Logs are written to /var/log/backupscript
+
 # Process args
 BACKUP_TYPE=$1; shift
 if [ -z $BACKUP_TYPE ] || [ ! -d "/var/run/usbmount/$BACKUP_TYPE" ]; then
@@ -80,11 +85,13 @@ if [[ "$BACKUP_TYPE" = "MoviesEtc" ]]; then
   echo "Running Movies backup" | wall
   backup_dir "/storage/Media/Movies"
   backup_dir "/storage/Media/Snowboard Movies"
+  backup_dir "/storage/Media/Wakeboard Movies"
   backup_dir "/storage/Media/Skate Movies"
+  backup_dir "/storage/Media/Cartoons"
   backup_dir "/storage/Media/Documentaries"
   backup_dir "/storage/Media/Podcasts"
   backup_dir "/storage/Media/Stand-Up"
-  backup_dir "/storage/Documents/My Videos"
+  backup_dir "/storage/My Videos"
 
 elif [[ "$BACKUP_TYPE" = "TV" ]]; then
   echo "Running TV Shows backup" | wall
@@ -97,12 +104,11 @@ elif [[ "$BACKUP_TYPE" = "Software" ]]; then
   backup_dir "/storage/Code/Web"
   backup_dir "/storage/HostingBackup"
   backup_dir "/storage/HostingBackup.old"
-  backup_dir "/storage/Documents/Design"
-  backup_dir "/storage/Documents/Sonniss.com - GDC - Game Audio Bundle"
-  backup_dir "/storage/Documents/Wii Backup"
-  backup_dir "/storage/Documents/eBooks"
+  backup_dir "/storage/Documents"
   backup_dir "/home/simon/HSTemp"
   backup_dir "/home/simon/Code"
+  backup_dir "/storage/PiCamTimelapse"
+  backup_dir "/storage/Media/iTunesMusic"
 
 else
   echo "Unknown backup type!"
