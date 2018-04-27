@@ -18,6 +18,10 @@ _Note: Ubuntu doesn't install curl as default; run `sudo apt install curl` first
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/sfrost007/dotfiles/master/tools/install.sh)"
 ```
+Or on Ubuntu, where `curl` doesn't exist out-of-box:
+```bash
+wget -qO - https://raw.githubusercontent.com/sfrost007/dotfiles/master/tools/install.sh | bash
+```
 
 ### Manual install
 1. Install git, with either `xcode-select --install` or `sudo apt install git`

@@ -114,10 +114,15 @@ load_module() {
   done
 }
 
-print_dotfiles_info() {
-  (check_dir_exists "${DOTFILES_DIR}" && \
-    success "Dotfiles directory exists") || \
-    warn "Dotfiles directory does not exist"
+print_title() {
+  # Generated with `figlet -f slant dotfiles!`
+  echo ''
+  echo '       __      __  _____ __          __'
+  echo '  ____/ /___  / /_/ __(_) /__  _____/ /'
+  echo ' / __  / __ \/ __/ /_/ / / _ \/ ___/ / '
+  echo '/ /_/ / /_/ / /_/ __/ / /  __(__  )_/  '
+  echo '\__,_/\____/\__/_/ /_/_/\___/____(_)   '
+  echo ''
 }
 
 # Prints whether a tool is installed, and if so, which version exists.
@@ -140,7 +145,6 @@ print_current_info() {
   echo_header "Dotfiles installation"
   info "Platform: $(get_platform)"
   info "Shell: $SHELL"
-  print_dotfiles_info
   echo_blank_line
 
   print_tool_info "git"
@@ -190,10 +194,10 @@ run_selected_modules() {
 
 ensure_git_installed() {
   if ! check_command_exists git; then
-    warn "Git is not installed. Installing.."
+    warn "It looks like you don't have git installed. Let's set this up.."
     case `get_platform` in
       $PLATFORM_OSX) xcode-select --install;;
-      $PLATFORM_LINUX*) sudo apt-get install git;;
+      $PLATFORM_LINUX*) sudo apt-get install -y git > /dev/null;;
     esac
     echo_blank_line
   else
@@ -201,6 +205,7 @@ ensure_git_installed() {
   fi
 }
 
+# TODO: Not really needed any more..
 ensure_ssh_key_exists() {
   local SSH_KEY_PATH="$HOME/.ssh/id_rsa"
   if ! check_file_exists "$SSH_KEY_PATH"; then
@@ -253,16 +258,14 @@ manual_install() {
   run_selected_modules
 }
 
-curl_install() {
+auto_install() {
+  print_title
   # While we _could_ download the tarball of the dotfiles, this will leave it
   # disconnected from the git origin. Instead, attempt to install git now.
   ensure_git_installed
   info "Cloning dotfiles with git.."
-  git clone "${_CLONE_SOURCE}" "${DOTFILES_DIR}"
-  cd $DOTFILES_DIR
-  info "Updating submodules"
-  git submodule update --init
-  echo "Triggering main dotfiles install script.."
+  git clone -q --recurse-submodules "${_CLONE_SOURCE}" "${DOTFILES_DIR}"
+  success "Dotfiles cloned! Running manual installer.."
   source "${DOTFILES_DIR}/tools/install.sh"
 }
 
@@ -285,7 +288,7 @@ main() {
   elif [ -e $DOTFILES_DIR ]; then
     manual_install
   else
-    curl_install
+    auto_install
   fi
 }
 
