@@ -23,7 +23,8 @@ _module_valid() {
 _module_coretools_install() {
   case `get_platform` in
     $PLATFORM_LINUX*)
-      sudo apt-get install -y $1 ;;
+      info "Installing $1"
+      sudo apt-get install -y $1 > /dev/null;;
     $PLATFORM_OSX)
       brew install $1 ;;
   esac

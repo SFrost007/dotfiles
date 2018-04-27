@@ -20,7 +20,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/sfrost007/dotfiles/maste
 ```
 Or on Ubuntu, where `curl` doesn't exist out-of-box:
 ```bash
-wget -qO - https://raw.githubusercontent.com/sfrost007/dotfiles/master/tools/install.sh | bash
+bash -c "$(wget -qO - https://raw.githubusercontent.com/sfrost007/dotfiles/master/tools/install.sh)"
 ```
 
 ### Manual install
