@@ -3,6 +3,7 @@
 PACKAGES=(
   chitchat
   cloc
+  figlet
   imagemagick
   jp2a
   node
