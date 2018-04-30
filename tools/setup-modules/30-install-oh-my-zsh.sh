@@ -29,6 +29,7 @@ _module_exec() {
 
   info "Setting ZSH as default shell"
   chsh -s $(grep /zsh$ /etc/shells | tail -1)
+  success "ZSH will not be the default shell until logging in again."
 
   printf "${_GREEN}"
   echo '         __                                     __   '

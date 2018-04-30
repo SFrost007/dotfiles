@@ -95,15 +95,5 @@ _module_exec() {
   mkdir -p ${TARGET_DIR}/.ssh
   link_file ${DOTFILES_DIR}/ssh/config ${TARGET_DIR}/.ssh/config
   link_file ${DOTFILES_DIR}/ssh/config.d ${TARGET_DIR}/.ssh/config.d
-
-  case `get_platform` in
-    $PLATFORM_LINUX)
-      mkdir -p $HOME/.config/lxterminal
-      link_file ${DOTFILES_DIR}/preferences/linux/lxterminal.conf $HOME/.config/lxterminal/
-      ;;
-    $PLATFORM_WSL)
-      # TODO: Link Windows config files (ConEmu, VS?)
-      ;;
-  esac
 }
 
