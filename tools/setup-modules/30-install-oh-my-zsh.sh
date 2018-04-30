@@ -20,14 +20,11 @@ _module_valid() {
 }
 
 _module_exec() {
-  # TODO: Extract the minimal commands based on knowledge of prior setup?
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
   check_command_exists "zsh" || fail "ZSH must be installed to install oh-my-zsh"
 
-  local $TARGET_DIR="$HOME/.oh-my-zsh"
+  local TARGET_DIR="${HOME}/.oh-my-zsh"
   info "Cloning oh-my-zsh to $TARGET_DIR"
-  git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git $TARGET_DIR \
+  git clone -q --depth=1 https://github.com/robbyrussell/oh-my-zsh.git "${TARGET_DIR}" \
     || fail "Failed to clone oh-my-zsh"
 
   info "Setting ZSH as default shell"
