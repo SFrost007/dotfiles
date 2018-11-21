@@ -10,6 +10,7 @@ alias shutdown='sudo shutdown -h now'
 # Useful stuff
 alias myip='ifconfig | grep broadcast | awk -F " " '"'"'{print $2}'"'"
 alias sedrecurse='find . -type f -print | xargs sed -i ""'
+alias wakezion='wakeonlan 2c:76:8a:ab:d4:56'
 
 # Web-dev related stuff
 alias serve='python -m SimpleHTTPServer &'
@@ -38,5 +39,6 @@ case $(uname) in
   Darwin)
     alias fuxcode='rm -rf ~/Library/Developer/Xcode/DerivedData'
     alias ql='quick-look'
+    alias caskupgrade='for i in $(brew cask list); do brew cask install -f $i; done'
     ;;
 esac
