@@ -1,3 +1,5 @@
+Include config.d/*
+
 Host *
   VisualHostKey no
   RemoteForward 52698 localhost:52698
@@ -5,5 +7,3 @@ Host *
 # Exclusions from above forwarding rule
 Host github.com
   ClearAllForwardings Yes
-
-Include config.d/*
