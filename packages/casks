@@ -4,6 +4,7 @@ PACKAGES=(
   1password
   beyond-compare
   cocoarestclient
+  dash
   dropbox
   fluid
   geekbench
