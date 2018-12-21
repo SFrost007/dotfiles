@@ -5,10 +5,7 @@
       "path": "~/Code/WorkProjects/vnc4",
       "folder_exclude_patterns": [
         "bld-*",
-        "artifacts",
-        "^test",
-        "apps/test",
-        "3rdparty"
+        "artifacts"
       ]
     }
   ]
