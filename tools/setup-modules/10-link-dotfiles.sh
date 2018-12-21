@@ -95,6 +95,6 @@ _module_exec() {
   mkdir -p ${TARGET_DIR}/.ssh
   link_file ${DOTFILES_DIR}/ssh/config ${TARGET_DIR}/.ssh/config
   link_file ${DOTFILES_DIR}/ssh/config.d ${TARGET_DIR}/.ssh/config.d
-  link_file ${DOTFILES_DIR}/ssh/cloud_bookmarks ${TARGET_DIR}/.ssh/cloud_bookmarks
+  link_file ${DOTFILES_DIR}/ssh/cloudssh_bookmarks ${TARGET_DIR}/.ssh/cloudssh_bookmarks
 }
 

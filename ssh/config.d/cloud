@@ -2,5 +2,5 @@
 Host *.cloud
   ProxyCommand sh -c "CloudSSH connect %h"
 
-Host PESClassic.cloud
+Host pesclassic.cloud
   User pi
