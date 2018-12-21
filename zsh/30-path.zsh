@@ -13,5 +13,7 @@ function addPathDir() {
 addPathDir $HOME/Code/WorkProjects/builds
 addPathDir $HOME/Code/WorkProjects/tools
 addPathDir /Applications/CMake.app/Contents/bin
+# SDKs
+addPathDir $HOME/Code/SDKs/flutter/bin
 # My scripts
 addPathDir $DOTFILES_DIR/bin
