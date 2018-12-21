@@ -1,0 +1,46 @@
+#!/bin/sh
+
+programs=(
+  appium
+  apt-get
+  brew
+  curl
+  git
+  node
+  npm
+  pip
+  python
+  python3
+  tmux
+  tree
+  vim
+  wget
+  xcodebuild
+  zsh
+)
+
+versionargs=(
+  --version
+  -version
+  -V
+  -v
+)
+
+echo "Fetching version information..."
+
+OUTPUT=""
+for i in "${programs[@]}"; do
+  if [ -x "$(command -v $i)" ]; then
+    for j in "${versionargs[@]}"; do
+      VERSION=`$i $j 2>&1`
+      if [ $? -eq 0 ]; then
+        VERSION=`echo $VERSION | head -n 1 | sed 's/[^0-9.]*\([0-9.]*\).*/\1/'`
+        if [[ ! -z "$VERSION" ]]; then
+          OUTPUT="$OUTPUT\n${i} ${VERSION}"
+          break
+        fi
+      fi
+    done
+  fi
+done
+echo $OUTPUT | column -t
