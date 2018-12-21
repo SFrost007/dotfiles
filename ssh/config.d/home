@@ -3,3 +3,9 @@ Host pizero pizerow picam pithree
 
 Host lappy zion
   User simon
+
+Host pithree
+  Hostname pesclassic.local
+
+Host zion
+  Hostname 192.168.0.200

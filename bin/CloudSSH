@@ -1,0 +1,294 @@
+#!/usr/bin/env python
+
+'''
+============================ Quickstart usage guide ============================
+
+Pre-requisites:
+* hostedRendezvousTool and hostedBrokerTool on path
+* Hosted config at /etc/vnc/HostedConfig-Live.pkg
+* Python 'requests' module installed
+
+1. Register for an SDK account online, create a project and obtain API keys.
+2. On each machine you wish to use (server OR viewer):
+    1. Add the API key and secret to the api_key_file (see below for path).
+       If this file doesn't exist, run CloudSSH once with 'register' to create
+       a template.
+    2. Run CloudSSH with 'register' to create principals for this machine. Or if
+       principals already exist, specify with '--principal' and '--password'
+
+Server-end:
+1. Run this script with 'listen'
+
+Viewer-end:
+1. Add the following to your ~/.ssh/config:
+    Host *.cloud
+      ProxyCommand sh -c "CloudSSH %h"
+2. Create a bookmark for each server you may wish to connect to, giving it a
+   short name (`CloudSSH bookmark add [name] [principal]).
+3. Run `ssh [bookmarkname].cloud
+
+============================== TODO / Unfinished ===============================
+
+* socat will output 'Address already in use' if executed too soon after previous
+  connection. It seems like a similar issue to Appium, where macOS doesn't
+  release the ports immediately. Improvements would be to either detect this
+  message and terminate early, or (ideally) detect and retry with a different
+  port number.
+
+* hostedBrokerTool will often be left running after SSH connection closes. It
+  seems like SSH's ProxyCommand terminates this script immediately when the SSH
+  connection closes, so we don't get a chance to terminate the subprocess.
+
+================================================================================
+'''
+
+import argparse, os, requests, signal, subprocess, sys
+import distutils.spawn
+
+
+class CloudSSH:
+
+  ''' Main entrypoint '''
+  def main(self):
+    self.__check_env()
+    args = self.__get_arg_parser().parse_args()
+    args.func(args)
+
+
+  ''' Connects to the cloud services and forwards any connections to sshd'''
+  def listen(self, args):
+    principal, password = self.__get_credentials()
+    hostedRendezvousTool = subprocess.Popen([
+      'hostedRendezvousTool',
+      '-HostedConfig={}'.format(self.__hosted_cfg),
+      '-Principal={}'.format(principal),
+      '-Password={}'.format(password),
+      '-TargetAddress={}'.format('127.0.0.1:22')],
+      stderr=subprocess.PIPE
+    )
+    while True:
+      err = hostedRendezvousTool.stderr.readline()
+      if args.verbose: self.__log(err.strip())
+
+
+  ''' Connects to a given bookmark name. Should be called from ssh_config.'''
+  def connect(self, args):
+    principal, password = self.__get_credentials()
+    self.__load_bookmarks()
+
+    host = args.target.replace(".cloud", "").lower()
+    if host not in self.__bookmarks:
+      self.__fatal("Unknown bookmark name {}".format(host))
+    self.__log("Connecting to {} via Hosted Services...".format(host))
+
+    # TODO: May need to cycle these ports?
+    HOSTED_PORT=1000
+    TUNNEL_PORT=2201
+
+    # TODO: Need to listen for "Address already in use" and bail early/cycle ports
+    socat = subprocess.Popen([
+      'socat',
+      'TCP-LISTEN:{}'.format(HOSTED_PORT),
+      'TCP-LISTEN:{}'.format(TUNNEL_PORT)],
+      #stderr=subprocess.PIPE
+      )
+
+    # TODO: This halts execution here if nothing is written to stderr
+    #err = socat.stderr.readline()
+    #if 'Address already in use' in err:
+    #  self.__fatal('Socat port {} already in use'.format(HOSTED_PORT))
+
+    hostedBrokerTool = subprocess.Popen([
+      'hostedBrokerTool',
+      self.__bookmarks[host],
+      '-HostedConfig={}'.format(self.__hosted_cfg),
+      '-Principal={}'.format(principal),
+      '-Password={}'.format(password),
+      '-Action={}'.format('Connect'),
+      '-TargetAddress={}:{}'.format('127.0.0.1', HOSTED_PORT)],
+      stderr=subprocess.PIPE)
+
+    while True:
+      err = hostedBrokerTool.stderr.readline()
+      if args.verbose: self.__log(err.strip())
+      if 'Connection established' in err:
+        break
+
+    subprocess.call(['nc', '127.0.0.1', str(TUNNEL_PORT)])
+
+    # TODO: Need to terminate socat and hostedBrokerTool, but execution never
+    # seems to reach this point?
+
+
+  '''
+  Create a cloud principal/password for this computer and save to the config
+  file. Optionally call with '--principal' and '--password' to use pre-created
+  credentials.
+  '''
+  def register(self, args):
+    self.__load_credentials()
+
+    if self.__credentials['_cloud_address'] != '' \
+    or self.__credentials['_cloud_password'] != '':
+      self.__fatal("Principal/password already registered.\nManually clear "
+        "from config file if you really want to re-register principals.")
+
+    if args.principal is not None and args.password is None \
+    or args.principal is None and args.password is not None:
+      self.__fatal("Both principal AND password must be specified if manually"
+        "registering, or omit both to register automatically.")
+
+    if args.principal is not None and args.password is not None:
+      self.__log("Manually registering with pre-created credentials.")
+      self.__credentials['_cloud_address'] = args.principal
+      self.__credentials['_cloud_password'] = args.password
+      self.__save_credentials()
+
+    elif self.__credentials['_api_key'] == '' \
+    or self.__credentials['_api_secret'] == '':
+      self.__fatal("API key and secret must be manually defined in config file")
+
+    else:
+      api_key = self.__credentials['_api_key']
+      api_secret = self.__credentials['_api_secret']
+      r = requests.post('https://api.vnc.com/cloud/1.1/static-address',
+                        auth=(api_key, api_secret),
+                        json={"allowedActions": ["listen", "connect"]})
+      self.__credentials['_cloud_address'] = r.json()['cloudAddress']
+      self.__credentials['_cloud_password'] = r.json()['cloudPassword']
+      self.__save_credentials()
+      self.__log("Credentials created and saved!")
+
+
+  ''' Add a bookmark. Must be called with [name] [principal] '''
+  def add_bookmark(self, args):
+    self.__load_bookmarks()
+    host = args.name.lower()
+    if host in self.__bookmarks:
+      self.__fatal("Bookmark named {} already exists!".format(host))
+    self.__bookmarks[host] = args.principal
+    self.__save_bookmarks()
+
+
+  ''' Must be called with [name]. Fails silently if name does not exist '''
+  def del_bookmark(self, args):
+    self.__load_bookmarks()
+    self.__bookmarks.pop(args.name.lower())
+    self.__save_bookmarks()
+
+
+
+  #================================ Persistence ================================
+
+  __credentials_file=os.path.expanduser("~/.ssh/cloudssh_credentials")
+  __bookmarks_file=os.path.expanduser("~/.ssh/cloudssh_bookmarks")
+  __hosted_cfg="/etc/vnc/HostedConfig-Live.pkg" # Temporary until built in
+
+  def __load_credentials(self):
+    self.__credentials = self.__load_config(self.__credentials_file)
+    if self.__credentials is None: # Create default config and save the template
+      self.__credentials = {}
+      self.__credentials['_api_key'] = ''
+      self.__credentials['_api_secret'] = ''
+      self.__credentials['_cloud_address'] = ''
+      self.__credentials['_cloud_password'] = ''
+      self.__save_config(self.__credentials, self.__credentials_file)
+
+  def __save_credentials(self):
+    self.__save_config(self.__credentials, self.__credentials_file)
+
+
+  def __load_bookmarks(self):
+    self.__bookmarks = self.__load_config(self.__bookmarks_file)
+    if self.__bookmarks is None:
+      self.__bookmarks = {}
+
+  def __save_bookmarks(self):
+    self.__save_config(self.__bookmarks, self.__bookmarks_file)
+
+
+  def __load_config(self, path):
+    if os.path.exists(path):
+      config = {}
+      with open(path, 'r') as file:
+        configlist = file.readlines()
+        for x in configlist:
+          vars = x.split("=")
+          config[vars[0].strip()] = vars[1].strip()
+      return config
+
+  def __save_config(self, data, path):
+    with open(path, 'w+') as file:
+      for key, value in sorted(data.items()):
+        file.write('{0}={1}\n'.format(key, value))
+
+
+  #============================== Internal helpers =============================
+
+  def __get_credentials(self):
+    self.__load_credentials()
+    principal = self.__credentials['_cloud_address']
+    password = self.__credentials['_cloud_password']
+    if principal == '' or password == '':
+      self.__fatal("Principal and password must be defined in config file.\n"
+        "Call script with 'register' to do this")
+    return (principal, password)
+
+
+  ''' Check the required tools are all available on the path '''
+  def __check_env(self):
+    if distutils.spawn.find_executable('hostedRendezvousTool') is None \
+    or distutils.spawn.find_executable('hostedBrokerTool') is None:
+      self.__fatal("Hosted tools (rendezvous + broker) not found on path")
+
+    if distutils.spawn.find_executable('socat') is None:
+      self.__log("Warning! socat not found on path. This is not required for "
+        "running\nserver (listen mode), but IS required to make a connection.")
+
+    if not os.path.exists(self.__hosted_cfg):
+      self.__fatal("Hosted config does not exist at {}".format(hosted_cfg))
+
+  # Log messages via stderr, as invoking via ssh ProxyCommand swallows stdout
+  def __log(self, msg):
+    sys.stderr.write("{}\n".format(msg))
+
+  def __fatal(self, msg):
+    self.__log("Error: {}".format(msg))
+    sys.exit(1)
+
+
+  #============================= Argument handling =============================
+
+  def __get_arg_parser(self):
+    parser = argparse.ArgumentParser(description='Wrapper for making SSH connections via Hosted Services')
+
+    subparsers = parser.add_subparsers(help='Action')
+    p_listen = subparsers.add_parser('listen', help='Listen for SSH connections via the cloud')
+    p_listen.add_argument('-v', '--verbose', help='Verbose output', action="store_true")
+    p_listen.set_defaults(func=self.listen)
+
+    p_connect = subparsers.add_parser('connect', help='Connect to a listening server')
+    p_connect.add_argument('-v', '--verbose', help='Verbose output', action="store_true")
+    p_connect.add_argument('target', help='Bookmark name to create a connection to')
+    p_connect.set_defaults(func=self.connect)
+
+    p_register = subparsers.add_parser('register', help='Register and store credentials for this machine')
+    p_register.add_argument('--principal', help="Pre-created hosted principal to use")
+    p_register.add_argument('--password', help="Pre-created password to use")
+    p_register.set_defaults(func=self.register)
+
+    p_bookmark = subparsers.add_parser('bookmark', help='Modify bookmarks/aliases for principals')
+    p_bookmark_subp = p_bookmark.add_subparsers(help='Action to perform')
+    p_bookmark_add = p_bookmark_subp.add_parser('add', help='Add a bookmark')
+    p_bookmark_add.add_argument('name', help='Name for new bookmark')
+    p_bookmark_add.add_argument('principal', help='Principal (target address) for new bookmark')
+    p_bookmark_add.set_defaults(func=self.add_bookmark)
+    p_bookmark_del = p_bookmark_subp.add_parser('delete', help='Delete a bookmark')
+    p_bookmark_del.add_argument('name', help='Name of bookmark to delete')
+    p_bookmark_del.set_defaults(func=self.del_bookmark)
+
+    return parser
+
+
+if __name__ == "__main__":
+  CloudSSH().main()
