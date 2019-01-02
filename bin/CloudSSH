@@ -39,10 +39,12 @@ Viewer-end:
   seems like SSH's ProxyCommand terminates this script immediately when the SSH
   connection closes, so we don't get a chance to terminate the subprocess.
 
+* Run listen mode in verbose as default, or log to file?
+
 ================================================================================
 '''
 
-import argparse, os, requests, signal, subprocess, sys
+import argparse, os, requests, signal, subprocess, sys, webbrowser
 import distutils.spawn
 
 
@@ -54,6 +56,25 @@ class CloudSSH:
     args = self.__get_arg_parser().parse_args()
     args.func(args)
 
+  ''' Perform first-time setup; adding SSH config and API key placeholder'''
+  def setup(self, args):
+    self.__load_credentials()
+    if self.__credentials['_api_key'] != '':
+      self.__fatal("API key already defined in config file.")
+
+    sshconfig=os.path.expanduser("~/.ssh/config")
+    with open(sshconfig, 'a+') as f:
+      f.write('\n\n')
+      f.write('# CloudSSH connections via hostedBrokerTool and socat\n')
+      f.write('Host *.cloud\n')
+      f.write('  ProxyCommand sh -c "CloudSSH %h"\n')
+    self.__log("CloudSSH configuration has been added to {}".format(sshconfig))
+
+    self.__log("Placeholder config file has been created in {}".format(
+      self.__credentials_file))
+    self.__log("API key must be added to this file.")
+    raw_input("Press Enter to open the Developer portal.")
+    webbrowser.open("https://manage.developer.realvnc.com/")
 
   ''' Connects to the cloud services and forwards any connections to sshd'''
   def listen(self, args):
@@ -158,6 +179,7 @@ class CloudSSH:
       self.__credentials['_cloud_password'] = r.json()['cloudPassword']
       self.__save_credentials()
       self.__log("Credentials created and saved!")
+      self.__log("Cloud address: {}".format(r.json()['cloudAddress']))
 
 
   ''' Add a bookmark. Must be called with [name] [principal] '''
@@ -263,6 +285,9 @@ class CloudSSH:
     parser = argparse.ArgumentParser(description='Wrapper for making SSH connections via Hosted Services')
 
     subparsers = parser.add_subparsers(help='Action')
+    p_setup = subparsers.add_parser('setup', help='Perform first-time setup')
+    p_setup.set_defaults(func=self.setup)
+
     p_listen = subparsers.add_parser('listen', help='Listen for SSH connections via the cloud')
     p_listen.add_argument('-v', '--verbose', help='Verbose output', action="store_true")
     p_listen.set_defaults(func=self.listen)
