@@ -24,6 +24,7 @@ alias gitcompress='git repack && git prune'
 
 # Fun stuff
 alias adventure='emacs -batch -l dunnet'
+alias weather='curl wttr.in'
 
 # One of @janmoesen’s ProTips
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
