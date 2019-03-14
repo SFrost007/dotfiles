@@ -13,3 +13,9 @@
 [submodule "zsh/omz-custom/powerlevel9k"]
 	path = zsh/omz-custom/powerlevel9k
 	url = https://github.com/bhilburn/powerlevel9k.git
+[submodule "zsh/omz-custom/plugins/zsh-syntax-highlighting"]
+	path = zsh/omz-custom/plugins/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+[submodule "zsh/omz-custom/plugins/zsh-autosuggestions"]
+	path = zsh/omz-custom/plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions.git

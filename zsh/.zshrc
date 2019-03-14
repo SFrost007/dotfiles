@@ -42,6 +42,8 @@ plugins=(
 	colorize
 	encode64
 	z
+	zsh-autosuggestions
+	zsh-syntax-highlighting
 )
 if [[ $(uname) == 'Darwin' ]]; then
 	plugins+=(
