@@ -68,6 +68,6 @@
 	diff = $DOTFILES_DIR/git/diff-highlight | less
 
 [help]
-	autocorrect = 50
+	autocorrect = 25
 [diff "plist"]
 	textconv = plutil -convert xml1 -o -
