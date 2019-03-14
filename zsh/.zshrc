@@ -28,6 +28,7 @@ DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
 HYPHEN_INSENSITIVE="true"
 ZSH_CUSTOM=$DOTFILES_DIR/zsh/omz-custom
+setopt PUSHDSILENT
 
 # Bind escape sequences to move around terminal (Needs matching iTerm config)
 # See https://automationengineeringblog.wordpress.com/2017/11/08/oh-my-zsh-and-iterm2-navigation-tip-on-mac-os-x/
