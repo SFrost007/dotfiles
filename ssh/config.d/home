@@ -9,3 +9,8 @@ Host pithree
 
 Host zion
   Hostname 192.168.0.200
+
+Host turing
+  User simon
+  Hostname turing.orangeninja.com
+
