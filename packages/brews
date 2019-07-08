@@ -1,28 +1,34 @@
 #!/bin/sh
 
 PACKAGES=(
-  chitchat
   cloc
   figlet
+  git
   imagemagick
+  iperf3
   jp2a
+  jq
+  mas
   node
   python3
   rtv
-  socat
-  tmux                # +openssl, libevent
+  spark
+  tmux
   tree
+  wakeonlan
   wget
+  youtube-dl
 )
 
 PACKAGES_HOME=(
   exiftool
-  ffmpeg              # +lame, x264, xvid
-  wakeonlan
+  ffmpeg
 )
 
 PACKAGES_WORK=(
   carthage
+  fbsimctl
+  ios-sim
 )
 
 INSTALL_CMD="brew install"

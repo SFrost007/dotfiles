@@ -1,7 +1,10 @@
 #!/bin/sh
 
 PACKAGES=(
+  cocoapods
   pygmentize
+  xcodeproj
+  xcpretty
 )
 
 PACKAGES_HOME=(

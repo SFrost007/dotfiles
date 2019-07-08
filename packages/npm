@@ -1,0 +1,21 @@
+#!/bin/sh
+
+PACKAGES=(
+  figlet
+  ios-ipa-server
+  npm
+)
+
+PACKAGES_HOME=(
+  homebridge
+  homebridge-lifx-lan
+  homebridge-superlights
+  mongodb
+  noble
+  now
+)
+
+PACKAGES_WORK=(
+)
+
+INSTALL_CMD="npm install -g"

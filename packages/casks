@@ -1,32 +1,42 @@
 #!/bin/sh
 
 PACKAGES=(
-  1password
+  android-studio
   beyond-compare
   cocoarestclient
+  colors
   dash
-  dropbox
   fluid
   geekbench
   google-chrome
   iterm2
-  skype
+  qlcolorcode
+  qlmarkdown
+  qlprettypatch
+  qlstephen
+  quicklook-json
+  skitch
   slack
   sourcetree
-  spotify
   sublime-text
+  suspicious-package
   unrarx
+  virtualbox
+  visual-studio-code
   vlc
+  vnc-viewer
 )
 
 PACKAGES_HOME=(
+  1password
   arduino
-  flux
+  discord
+  docker
   fritzing
   geotag
-  kodi
   openemu
-  real-vnc
+  skype
+  spotify
   steam
   transmission
 )
