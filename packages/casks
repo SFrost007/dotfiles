@@ -32,10 +32,6 @@ PACKAGES_HOME=(
 )
 
 PACKAGES_WORK=(
-  cmake               # v3.4.3
-  intellij-idea-ce
-  java
-  key-codes
 )
 
 INSTALL_CMD="brew cask install"

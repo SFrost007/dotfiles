@@ -13,11 +13,6 @@ PACKAGES=(
   tmux                # +openssl, libevent
   tree
   wget
-
-  usbmuxd --HEAD
-  libimobiledevice --HEAD
-  ideviceinstaller
-  ios-deploy
 )
 
 PACKAGES_HOME=(
@@ -27,7 +22,7 @@ PACKAGES_HOME=(
 )
 
 PACKAGES_WORK=(
-  maven
+  carthage
 )
 
 INSTALL_CMD="brew install"
