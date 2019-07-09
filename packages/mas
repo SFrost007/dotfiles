@@ -1,0 +1,24 @@
+#!/bin/sh
+# "Packages" installed from the Mac App Store
+
+PACKAGES=(
+  DaisyDisk
+  Hyperdock
+  Noizio
+  Pixelmator
+)
+
+PACKAGES_HOME=(
+  Reeder 3
+  Tweetbot 2
+  Fantastical
+  Forklift
+)
+
+PACKAGES_WORK=(
+  Apple Configurator 2
+  Bear
+  Gapplin
+)
+
+INSTALL_CMD="mas install" # TODO: Is this correct?
