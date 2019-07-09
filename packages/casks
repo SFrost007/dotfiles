@@ -16,7 +16,6 @@ PACKAGES=(
   qlstephen
   quicklook-json
   skitch
-  slack
   sourcetree
   sublime-text
   suspicious-package
@@ -42,6 +41,7 @@ PACKAGES_HOME=(
 )
 
 PACKAGES_WORK=(
+  slack
 )
 
 INSTALL_CMD="brew cask install"
