@@ -17,7 +17,6 @@ PACKAGES=(
   sublime-text
   suspicious-package
   unrarx
-  virtualbox
   visual-studio-code
   vlc
   vnc-viewer
@@ -35,6 +34,7 @@ PACKAGES_HOME=(
   spotify
   steam
   transmission
+  virtualbox
 )
 
 PACKAGES_WORK=(
