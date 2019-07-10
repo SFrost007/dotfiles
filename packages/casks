@@ -5,9 +5,6 @@ PACKAGES=(
   beyond-compare
   cocoarestclient
   colors
-  dash
-  fluid
-  geekbench
   google-chrome
   iterm2
   qlcolorcode
@@ -41,7 +38,9 @@ PACKAGES_HOME=(
 )
 
 PACKAGES_WORK=(
+  lastpass
   slack
+  zoomus
 )
 
 INSTALL_CMD="brew cask install"
