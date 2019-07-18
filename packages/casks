@@ -6,6 +6,7 @@ PACKAGES=(
   cocoarestclient
   colors
   google-chrome
+  hyperdock
   iterm2
   qlcolorcode
   qlmarkdown
