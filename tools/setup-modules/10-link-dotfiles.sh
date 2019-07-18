@@ -85,6 +85,8 @@ _module_exec() {
   local overwrite_all=false backup_all=false skip_all=false
 
   link_file ${DOTFILES_DIR}/git/.gitconfig ${TARGET_DIR}/.gitconfig
+  link_file ${DOTFILES_DIR}/rtv/rtv.cfg ${TARGET_DIR}/.config/rtv/rtv.cfg
+  link_file ${DOTFILES_DIR}/rtv/.mailcap ${TARGET_DIR}/.mailcap
   link_file ${DOTFILES_DIR}/tmux/oh-my-tmux/.tmux.conf ${TARGET_DIR}/.tmux.conf
   link_file ${DOTFILES_DIR}/tmux/.tmux.conf.local ${TARGET_DIR}/.tmux.conf.local
   link_file ${DOTFILES_DIR}/vim/.vimrc ${TARGET_DIR}/.vimrc

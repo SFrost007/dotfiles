@@ -5,7 +5,7 @@
 #image/x-imgur-album; echo
 
 # Ascii videos
-#video/x-youtube; youtube-dl -q -o - '%s' | mplayer -cache 8192 -vo caca -quiet -; needsterminal
-#video/*; wget '%s' -O - | mplayer -cache 8192 -vo caca -quiet -; needsterminal
+video/x-youtube; youtube-dl -q -o - '%s' | mplayer -cache 8192 -vo caca -quiet -; needsterminal
+video/*; wget '%s' -O - | mplayer -cache 8192 -vo caca -quiet -; needsterminal
 
 image/*; curl -s %s | imgcat && read -n 1; needsterminal

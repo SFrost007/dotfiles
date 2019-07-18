@@ -9,21 +9,22 @@ PACKAGES=(
   iperf3
   jp2a
   jq
+  mplayer
   node
   python3
+  rtv
   spark
   tmux
   tree
   wakeonlan
   wget
+  youtube-dl
 )
 
 PACKAGES_HOME=(
   exiftool
   ffmpeg
   mas
-  rtv
-  youtube-dl
 )
 
 PACKAGES_WORK=(
