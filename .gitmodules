@@ -1,9 +1,11 @@
 [submodule "vim/.vim/bundle/lightline.vim"]
 	path = vim/.vim/bundle/lightline.vim
 	url = https://github.com/itchyny/lightline.vim.git
+	branch = master
 [submodule "tmux/oh-my-tmux"]
 	path = tmux/oh-my-tmux
 	url = https://github.com/gpakosz/.tmux.git
+	branch = master
 [submodule "tools/qtcreator-solarized"]
 	path = tools/solarized/QtCreator
 	url = https://github.com/curonian/qtcreator-solarized.git
@@ -13,9 +15,12 @@
 [submodule "zsh/omz-custom/powerlevel9k"]
 	path = zsh/omz-custom/powerlevel9k
 	url = https://github.com/bhilburn/powerlevel9k.git
+	branch = master
 [submodule "zsh/omz-custom/plugins/zsh-syntax-highlighting"]
 	path = zsh/omz-custom/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+	branch = master
 [submodule "zsh/omz-custom/plugins/zsh-autosuggestions"]
 	path = zsh/omz-custom/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions.git
+	branch = master
