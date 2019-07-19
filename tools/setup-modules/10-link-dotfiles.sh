@@ -89,6 +89,7 @@ _module_exec() {
   link_file ${DOTFILES_DIR}/rtv/.mailcap ${TARGET_DIR}/.mailcap
   link_file ${DOTFILES_DIR}/tmux/oh-my-tmux/.tmux.conf ${TARGET_DIR}/.tmux.conf
   link_file ${DOTFILES_DIR}/tmux/.tmux.conf.local ${TARGET_DIR}/.tmux.conf.local
+  link_file ${DOTFILES_DIR}/twterm ${TARGET_DIR}/.twterm
   link_file ${DOTFILES_DIR}/vim/.vimrc ${TARGET_DIR}/.vimrc
   link_file ${DOTFILES_DIR}/vim/.vim ${TARGET_DIR}/.vim
   link_file ${DOTFILES_DIR}/zsh/.zshrc ${TARGET_DIR}/.zshrc

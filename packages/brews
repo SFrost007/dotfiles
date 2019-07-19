@@ -9,6 +9,7 @@ PACKAGES=(
   iperf3
   jp2a
   jq
+  libidn
   mplayer
   node
   python3

@@ -3,6 +3,7 @@
 PACKAGES=(
   cocoapods
   pygmentize
+  twterm
   xcodeproj
   xcpretty
 )
