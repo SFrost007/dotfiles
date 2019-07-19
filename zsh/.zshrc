@@ -19,8 +19,6 @@ POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="white"
 case $(hostname) in
 	Simons-MacBook.local|Simons-MacBook-Pro.local)
 		DEFAULT_USER="simon";;
-	BURCEI.realvnc.ltd|SILIUS|spf-ubu-d)
-		DEFAULT_USER="spf";;
 esac
 
 # Set some ZSH/oh-my-zsh options
