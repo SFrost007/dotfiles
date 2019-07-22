@@ -26,12 +26,15 @@ DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
 HYPHEN_INSENSITIVE="true"
 ZSH_CUSTOM=$DOTFILES_DIR/zsh/omz-custom
+MAGIC_ENTER_OTHER_COMMAND="ls -lAh ."
 setopt PUSHDSILENT
 
 # Load oh-my-zsh plugins
 plugins=(
 	colored-man-pages
 	encode64
+	magic-enter
+	urltools
 	z
 	zsh-autosuggestions
 	zsh-syntax-highlighting
