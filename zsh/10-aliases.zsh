@@ -44,6 +44,6 @@ case $(uname) in
   Darwin)
     alias fuxcode='rm -rf ~/Library/Developer/Xcode/DerivedData'
     alias ql='quick-look'
-    alias caskupgrade='for i in $(brew cask list); do brew cask install -f $i; done'
+    alias caskupgrade='brew cask reinstall $(brew cask outdated) && brew cleanup'
     ;;
 esac
