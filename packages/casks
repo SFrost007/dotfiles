@@ -1,10 +1,13 @@
 #!/bin/sh
 
+PACKAGE_MANAGER_TITLE="Homebrew Cask"
+PACKAGE_MANAGER_INSTALL_CMD="brew cask install"
+PACKAGE_MANAGER_NEEDS_SUDO=0
+
 PACKAGES=(
   android-studio
   beyond-compare
   cocoarestclient
-  colors
   google-chrome
   hyperdock
   iterm2
@@ -17,7 +20,6 @@ PACKAGES=(
   sourcetree
   sublime-text
   suspicious-package
-  unrarx
   visual-studio-code
   vlc
   vnc-viewer
@@ -43,5 +45,3 @@ PACKAGES_WORK=(
   slack
   zoomus
 )
-
-INSTALL_CMD="brew cask install"

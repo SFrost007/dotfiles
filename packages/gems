@@ -1,5 +1,9 @@
 #!/bin/sh
 
+PACKAGE_MANAGER_TITLE="Ruby Gems"
+PACKAGE_MANAGER_INSTALL_CMD="gem install"
+PACKAGE_MANAGER_NEEDS_SUDO=1
+
 PACKAGES=(
   cocoapods
   pygmentize
@@ -13,5 +17,3 @@ PACKAGES_HOME=(
 
 PACKAGES_WORK=(
 )
-
-INSTALL_CMD="sudo gem install"

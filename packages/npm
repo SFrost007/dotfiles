@@ -1,5 +1,10 @@
 #!/bin/sh
 
+PACKAGE_MANAGER_TITLE="NPM"
+PACKAGE_MANAGER_INSTALL_CMD="npm install -g"
+PACKAGE_MANAGER_NEEDS_SUDO=1
+
+
 PACKAGES=(
   figlet
   ios-ipa-server
@@ -17,5 +22,3 @@ PACKAGES_HOME=(
 
 PACKAGES_WORK=(
 )
-
-INSTALL_CMD="npm install -g"
