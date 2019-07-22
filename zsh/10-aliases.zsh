@@ -4,7 +4,7 @@
 alias cls='clear'
 alias du='du -h'
 alias cp='rsync --progress -ah'
-alias ccat='colorize'
+alias ccat='pygmentize'
 alias shutdown='sudo shutdown -h now'
 b64d() { echo "$1" | base64 -D }
 

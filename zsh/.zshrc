@@ -31,7 +31,6 @@ setopt PUSHDSILENT
 # Load oh-my-zsh plugins
 plugins=(
 	colored-man-pages
-	colorize
 	encode64
 	z
 	zsh-autosuggestions
