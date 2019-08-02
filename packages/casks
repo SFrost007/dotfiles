@@ -8,6 +8,7 @@ PACKAGES=(
   android-studio
   beyond-compare
   cocoarestclient
+  docker
   google-chrome
   hyperdock
   iterm2
@@ -29,7 +30,6 @@ PACKAGES_HOME=(
   1password
   arduino
   discord
-  docker
   fritzing
   geotag
   openemu
@@ -42,6 +42,7 @@ PACKAGES_HOME=(
 
 PACKAGES_WORK=(
   lastpass
+  postman
   slack
   zoomus
 )
