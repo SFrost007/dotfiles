@@ -11,7 +11,7 @@
 	cp = cherry-pick
 	st = status
 	lg = log --graph --pretty=myformat --abbrev-commit --date=relative
-	br = "!git branch -vv --color=always | grep --color=never -v release/"
+	br = "!git branch -vv --color=always"
 	email = config user.email
 	amend = commit --amend --no-edit
 	tempignore = update-index --assume-unchanged
