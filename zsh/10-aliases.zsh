@@ -1,11 +1,8 @@
 #!/bin/zsh
 
 # General shortcuts
-alias cls='clear'
-alias du='du -h'
 alias cp='rsync --progress -ah'
 alias ccat='pygmentize'
-alias shutdown='sudo shutdown -h now'
 b64d() { echo "$1" | base64 -D }
 
 # Useful stuff
@@ -44,6 +41,6 @@ case $(uname) in
   Darwin)
     alias fuxcode='rm -rf ~/Library/Developer/Xcode/DerivedData'
     alias ql='quick-look'
-    alias caskupgrade='brew cask reinstall $(brew cask outdated) && brew cleanup'
+    alias caskupgrade='brew cask upgrade --greedy'
     ;;
 esac
