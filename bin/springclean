@@ -1,0 +1,21 @@
+#!/usr/bin/env zsh
+
+# Script to run regular maintenance tasks
+
+upgrade_oh_my_zsh
+
+# Update homebrew-installed software
+brew update
+brew upgrade
+brew cask upgrade --greedy # Include auto-updating software
+brew cleanup
+
+# TODO: Update other package managers? NPM, Gem, ...
+
+# TODO: Clear out TimeMachine backups
+
+# TODO: Empty trash?
+
+# TODO: Recursively update dotfiles submodules?
+
+# TODO: Clear up old items from device support
