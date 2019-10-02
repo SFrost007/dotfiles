@@ -1,0 +1,11 @@
+#!/bin/sh
+
+echo "Simon's Marzipanify wrapper"
+echo ""
+
+echo "Calling main Marzipanify script for ${1} with glue.."
+export INJECT_MARZIPAN_GLUE=1
+/usr/local/bin/marzipanify ${1}
+
+echo "Cleaning up entitlements.."
+rm Entitlements*
