@@ -9,6 +9,7 @@ PACKAGES=(
   figlet
   git
   gnu-sed
+  ideviceinstaller
   imagemagick
   iperf3
   jp2a
