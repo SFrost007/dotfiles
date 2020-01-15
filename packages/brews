@@ -5,10 +5,13 @@ PACKAGE_MANAGER_INSTALL_CMD="brew install"
 PACKAGE_MANAGER_NEEDS_SUDO=0
 
 PACKAGES=(
+  ag
   cloc
   figlet
   git
   gnu-sed
+  htop
+  hub
   ideviceinstaller
   imagemagick
   iperf3

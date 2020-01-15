@@ -5,7 +5,7 @@ PACKAGE_MANAGER_INSTALL_CMD="brew cask install"
 PACKAGE_MANAGER_NEEDS_SUDO=0
 
 PACKAGES=(
-  android-studio
+  alfred
   beyond-compare
   cocoarestclient
   docker
@@ -17,6 +17,7 @@ PACKAGES=(
   qlprettypatch
   qlstephen
   quicklook-json
+  rocket
   skitch
   sourcetree
   sublime-text
@@ -28,6 +29,7 @@ PACKAGES=(
 
 PACKAGES_HOME=(
   1password
+  android-studio
   arduino
   discord
   fritzing
