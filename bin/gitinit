@@ -1,8 +1,0 @@
-#!/bin/bash
-#
-# Initialise the current dir as a git repo and add/commit all files
-
-git init
-git add .
-git commit -m "Initial commit"
-

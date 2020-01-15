@@ -1,6 +1,0 @@
-# CloudSSH connections via hostedBrokerTool and socat
-Host *.cloud
-  ProxyCommand sh -c "CloudSSH connect %h"
-
-Host pesclassic.cloud
-  User pi

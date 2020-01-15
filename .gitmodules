@@ -6,9 +6,6 @@
 	path = tmux/oh-my-tmux
 	url = https://github.com/gpakosz/.tmux.git
 	branch = master
-[submodule "tools/qtcreator-solarized"]
-	path = tools/solarized/QtCreator
-	url = https://github.com/curonian/qtcreator-solarized.git
 [submodule "tools/solarized-xcode"]
 	path = tools/solarized/Xcode
 	url = https://github.com/ArtSabintsev/Solarized-Dark-for-Xcode.git
