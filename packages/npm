@@ -6,6 +6,7 @@ PACKAGE_MANAGER_NEEDS_SUDO=1
 
 
 PACKAGES=(
+  diff-so-fancy
   figlet
   ios-ipa-server
   npm

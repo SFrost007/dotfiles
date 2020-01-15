@@ -2,7 +2,7 @@
 	name = Simon Frost
 
 [core]
-	pager = less -FRSX
+	pager = diff-so-fancy | less --tabs=4 -RFX
 	editor = vim
 	excludesfile = ~/.dotfiles/git/gitignore_global
 	attributesfile = ~/.dotfiles/git/.gitattributes
@@ -30,7 +30,7 @@
 	status = auto
 	branch = auto
 	interactive = auto
-	ui = auto
+	ui = true
 	pager = true
 
 [color "branch"]
@@ -63,11 +63,21 @@
 [pretty]
 	myformat = "format:%Cred%h%Creset -%C(yellow)%d%C(white) %s %Creset- %C(yellow)%an %Cgreen%cr%Creset"
 
-[pager]
-	show = $DOTFILES_DIR/git/diff-highlight | less
-	diff = $DOTFILES_DIR/git/diff-highlight | less
-
 [help]
 	autocorrect = 25
 [diff "plist"]
 	textconv = plutil -convert xml1 -o -
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = yellow
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[diff-so-fancy]
+	first-run = false
