@@ -40,7 +40,7 @@ case $(uname) in
     ;;
   Darwin)
     alias fuxcode='rm -rf ~/Library/Developer/Xcode/DerivedData'
-    alias ql='quick-look'
+    alias ql='qlmanage -p'
     alias caskupgrade='brew cask upgrade --greedy'
     ;;
 esac
