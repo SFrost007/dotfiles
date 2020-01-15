@@ -10,6 +10,7 @@ PACKAGES=(
   figlet
   git
   gnu-sed
+  howdoi
   htop
   hub
   ideviceinstaller
