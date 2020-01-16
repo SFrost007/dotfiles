@@ -24,7 +24,9 @@ PACKAGES=(
   python3
   rtv
   spark
+  tig
   tmux
+  trash
   tree
   wakeonlan
   wget
@@ -34,6 +36,7 @@ PACKAGES=(
 PACKAGES_HOME=(
   exiftool
   ffmpeg
+  hugo
   mas
 )
 
