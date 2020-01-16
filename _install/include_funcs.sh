@@ -236,6 +236,40 @@ link_file() {
 
 
 ################################################################################
+# OS Info
+################################################################################
+print_os_info() {
+  local os_name="", os_vers=""
+
+  if is_mac; then
+    os_name="macOS"
+  elif is_win; then
+    os_name="Windows"
+  elif is_pi; then
+    os_name="Raspbian"
+  elif is_linux; then
+    if check_file_exists "/etc/lsb-release"; then
+      os_name="Ubuntu"
+    else
+      os_name="$(uname -s)"
+    fi
+  else
+    os_name="Unknown OS"
+  fi
+
+  if is_mac; then
+    os_vers="$(sw_vers -productVersion)"
+  elif [ "${os_name}" == "Ubuntu" ]; then
+    os_vers="$(lsb_release -d | cut -f2 | cut -d' ' -f2)"
+  else
+    os_vers="Unknown version"
+  fi
+
+  print_info "${os_name} ${os_vers}"
+}
+
+
+################################################################################
 # Self-testing function, run if this script is executed rather than sourced
 ################################################################################
 

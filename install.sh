@@ -27,8 +27,10 @@ if [ -e "${FUNCS_SCRIPT}" ]; then
 else
   echo " ⛔️  Functions script does not exist" && exit 1
 fi
-title "Pre-checks..."
 
+
+title "Pre-checks..."
+print_os_info
 if is_online; then
   print_success "Internet connection is online"
 else
@@ -122,7 +124,7 @@ _link_dotfiles() {
   link_file ${DOTFILES_DIR}/ssh/config.d ${TARGET_DIR}/.ssh/config.d
 
   if [[ $symlink_skip_count -gt 0 ]]; then
-    print_success "Skipped ${symlink_skip_count} existing symlinks"
+    print_info "Skipped ${symlink_skip_count} existing symlinks"
   fi
 }
 _link_dotfiles
