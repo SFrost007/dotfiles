@@ -65,13 +65,16 @@ main() {
       fi
 
       if [[ $CLONE_WITH_SSH -eq 1 ]]; then
-        git clone --quiet "git@github.com:SFrost007/dotfiles.git" "${DOTFILES_DIR}"
+        REPO_URL="git@github.com:SFrost007/dotfiles.git"
       else
         print_warning "Cloning dotfiles via HTTPS, updates cannot be committed back."
-        git clone --quiet "https://github.com/SFrost007/dotfiles.git" "${DOTFILES_DIR}"
+        REPO_URL="https://github.com/SFrost007/dotfiles.git"
       fi
+      git clone --recursive --quiet "${REPO_URL}" "${DOTFILES_DIR}"
     else
       print_info "Git does not exist, downloading dotfiles.zip from Github..."
+      print_warning "Cloning via SSH is recommended; this method excludes submodules."
+      print_waiting
       curl -fsSL https://github.com/SFrost007/dotfiles/archive/master.zip > dotfiles.zip
       print_info "Extracting..."
       unzip -q dotfiles.zip && mv dotfiles-master "${DOTFILES_DIR}" && rm dotfiles.zip
