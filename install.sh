@@ -274,7 +274,7 @@ print_warning() {
 }
 
 print_info() {
-  _print_in_white " ℹ️   $1\n"
+  printf " ℹ️   $1\n"
 }
 
 print_deleted() {
