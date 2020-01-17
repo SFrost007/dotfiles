@@ -2,6 +2,8 @@
 set -e
 
 main() {
+  check_if_first_run
+
   ##############################################################################
   # Set default paths (if not already set in ENVs)
   ##############################################################################
@@ -47,7 +49,6 @@ main() {
     if ! ask "Are you sure you want to continue?"; then
       print_info "OK, bye!\n" && exit 0
     fi
-    FIRST_RUN=1
 
     if command_exists "git"; then
       print_info "Using Git to clone to ${DOTFILES_DIR}"
@@ -319,8 +320,14 @@ is_online() {
   if nc -zw1 google.com 443 &>/dev/null; then return 0; else return 1; fi
 }
 
+check_if_first_run() {
+  if ! dir_exists "${DOTFILES_DIR}"; then
+    FIRST_RUN=1
+  fi
+}
+
 is_first_run() {
-  if [ -z "FIRST_RUN" ]; then return 0; else return 1; fi
+  if [ ! -z ${FIRST_RUN+x} ]; then return 0; else return 1; fi
 }
 
 file_exists() {
