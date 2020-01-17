@@ -7,7 +7,6 @@ main() {
   ##############################################################################
   # Set default paths (if not already set in ENVs)
   ##############################################################################
-  REPO_CLONE_URL="git@github.com:SFrost007/dotfiles.git"
   DOTFILES_DIR="${DOTFILES_DIR:-$HOME/.dotfiles}"
   OHMYZSH_DIR="${ZSH:-$HOME/.oh-my-zsh}"
   SETUPTOOLS_DIR="${DOTFILES_DIR}/_install"
@@ -18,19 +17,16 @@ main() {
                       / __  / __ \/ __/ /_/ / / _ \/ ___/                       
                      / /_/ / /_/ / /_/ __/ / /  __(__  )                        
                      \__,_/\____/\__/_/ /_/_/\___/____/                         
-                     \033[0m
+\033[0m
   "
 
   title "Pre-checks..."
   print_os_info
 
-  ##############################################################################
-  # SSH key
-  ##############################################################################
-  if ssh_key_exists; then
-    print_success "SSH key exists"
+  if is_online; then
+    print_success "Internet connection is online"
   else
-    create_ssh_key
+    exit_with_message "Internet connection is offline"
   fi
 
   ##############################################################################
@@ -51,8 +47,29 @@ main() {
     fi
 
     if command_exists "git"; then
-      print_info "Using Git to clone to ${DOTFILES_DIR}"
-      git clone --quiet "${REPO_CLONE_URL}" "${DOTFILES_DIR}"
+      print_info "Using git to clone into ${DOTFILES_DIR}"
+
+      if ssh_key_exists; then
+        print_success "Existing SSH key found"
+      else
+        if ask "No SSH key found. Create one?"; then
+          create_ssh_key
+        fi
+      fi
+
+      if ssh_key_exists; then
+        if ask "Copy SSH key to the clipboard (to add to Github)?"; then
+          copy_ssh_key_and_open_github
+          CLONE_WITH_SSH=1
+        fi
+      fi
+
+      if [[ $CLONE_WITH_SSH -eq 1 ]]; then
+        git clone --quiet "git@github.com:SFrost007/dotfiles.git" "${DOTFILES_DIR}"
+      else
+        print_warning "Cloning dotfiles via HTTPS, updates cannot be committed back."
+        git clone --quiet "https://github.com/SFrost007/dotfiles.git" "${DOTFILES_DIR}"
+      fi
     else
       print_info "Git does not exist, downloading dotfiles.zip from Github..."
       curl -fsSL https://github.com/SFrost007/dotfiles/archive/master.zip > dotfiles.zip
@@ -60,17 +77,6 @@ main() {
       unzip -q dotfiles.zip && mv dotfiles-master "${DOTFILES_DIR}" && rm dotfiles.zip
       print_warning "TODO: Set git origin for dotfiles directory once git exists"
     fi
-  fi
-
-
-  ##############################################################################
-  # Print some pre-run information
-  ##############################################################################
-
-  if is_online; then
-    print_success "Internet connection is online"
-  else
-    exit_with_message "Internet connection is offline"
   fi
 
 
@@ -83,7 +89,7 @@ main() {
     if command_exists "brew"; then
       print_success "Homebrew already installed"
     else
-      print_info "Installing Homebrew..."
+      print_info "Installing Homebrew..." && sleep 2
       /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
   else
@@ -98,7 +104,7 @@ main() {
   if dir_exists "${OHMYZSH_DIR}"; then
     print_success "oh-my-zsh already installed"
   else
-    print_info "Installing oh-my-zsh..."
+    print_info "Installing oh-my-zsh..." && sleep 2
     git clone -q --depth=1 https://github.com/robbyrussell/oh-my-zsh.git "${OHMYZSH_DIR}"
   fi
 
@@ -282,7 +288,7 @@ print_deleted() {
 }
 
 print_waiting() {
-  _print_in_white " ⏳  Press enter to continue..."
+  printf " ⏳  Press enter to continue...\n"
   read
 }
 
@@ -297,7 +303,7 @@ exit_with_message() {
 ask() {
   local reply
   while true; do
-    echo -n " ❓ $1 [y/n] "
+    echo -n " ❓  $1 [y/n] "
     read reply </dev/tty
     case "$reply" in
       Y*|y*) return 0 ;;
@@ -407,17 +413,20 @@ ssh_key_exists() {
 create_ssh_key() {
   print_info "No SSH key found. Creating one..."
   ssh-keygen -t rsa
-  offer_copy_ssh_key_for_github
 }
 
 offer_copy_ssh_key_for_github() {
+  if ask "Copy SSH key (for pasting to Github)?"; then
+    copy_ssh_key_and_open_github
+  fi
+}
+
+copy_ssh_key_and_open_github() {
   if is_mac; then
-    if ask "Copy SSH key (for pasting to Github)?"; then
-      cat "${SSH_KEY_PATH}" | pbcopy
-      open "https://github.com/account/ssh"
-      print_success "Copied to clipboard"
-      print_waiting
-    fi
+    cat "${SSH_KEY_PATH}" | pbcopy
+    open "https://github.com/account/ssh"
+    print_success "Copied to clipboard"
+    print_waiting
   else
     print_warning "TODO: Copy SSH key without pbcopy"
   fi
