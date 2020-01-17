@@ -11,37 +11,33 @@ makes development nice on the machines I use. This is intended to work on:
 
 The easiest install method is to execute the install script directly. This will
 ensure pre-requisites are met, clone the repo to `~/.dotfiles` and run the
-interactive setup script.
-
-_Note: Ubuntu doesn't install curl as default; run `sudo apt install curl` first._
+install script.
 
 ```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/sfrost007/dotfiles/master/tools/install.sh)"
+bash -c "$(curl -fsSL https://git.io/JvTkt)"
 ```
 Or on Ubuntu, where `curl` doesn't exist out-of-box:
 ```bash
-bash -c "$(wget -qO - https://raw.githubusercontent.com/sfrost007/dotfiles/master/tools/install.sh)"
+bash -c "$(wget -qO - https://git.io/JvTkt)"
 ```
+(The above shortened URL is a Github redirect to `install.sh` in this repo).
+
 
 ### Manual install
 1. Install git, with either `xcode-select --install` or `sudo apt install git`
 2. Clone the repository wherever desired
-3. Edit `DOTFILES_DIR` in tools/install.sh (TODO: Only set if not in ENV)
-4. Run tools/install.sh
+3. Set the `DOTFILES_DIR` environment variable (if not `$HOME/.dotfiles`)
+4. Run `install.sh`
 
 
 # Functional overview
-* Setup script is modular (see README in tools/setup-modules for details)
 * Mainly built for zsh. Config will auto-load any .zsh files in the zsh folder
 * Custom scripts/binaries live in the `bin` folder
-* Symlinks are defined explicitly in a setup module
+* TODO warnings remain in `install.sh` for missing functionality
 
 # TODO
-* Find a tidier way to define where symlinks should be created
-* Actually write setup-modules' README
 * Git pull hooks to automatically re-run update scripts
 * Setup module to generate SSH key and replace git origin with ssh version
-* App install via package managers (see packages folder)
 
 ### Thanks to:
 * [Zach Holman](http://github.com/holman/dotfiles) for the dotfiles inspiration
