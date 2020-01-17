@@ -388,28 +388,6 @@ print_os_info() {
 
 
 ################################################################################
-# Platform checks
-################################################################################
-
-is_mac() {
-  if [ $(uname -s) == "Darwin" ]; then return 0; else return 1; fi
-}
-
-is_win() {
-  print_warning "is_win not implemented"; return 1
-  #if [ grep -sq Microsoft /proc/version ]; then return 0; else return 1; fi
-}
-
-is_linux() {
-  print_warning "is_linux not implemented"; return 1
-}
-
-is_pi() {
-  print_warning "is_pi not implemented"; return 1
-}
-
-
-################################################################################
 # SSH key handling
 ################################################################################
 
