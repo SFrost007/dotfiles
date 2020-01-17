@@ -30,6 +30,19 @@ main() {
   fi
 
   ##############################################################################
+  # Install macOS Command Line Tools (inc. git) if not already done
+  ##############################################################################
+  if is_mac; then
+    if file_exists "/Library/Developer/CommandLineTools/usr/bin/git"; then
+      print_success "Command Line Tools installed"
+    else
+      print_info "Requesting install of Xcode Command Line Tools"
+      xcode-select --install
+      print_waiting
+    fi
+  fi
+
+  ##############################################################################
   # Download and extract the repo contents if we're running the script remotely
   ##############################################################################
   if dir_exists "$DOTFILES_DIR"; then
