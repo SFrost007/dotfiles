@@ -91,6 +91,7 @@ main() {
     else
       print_info "Installing Homebrew..." && sleep 2
       /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+      printf "\n\n"
     fi
   else
     print_info "Not macOS, skipping Homebrew"
@@ -120,7 +121,6 @@ main() {
     local overwrite_all=false backup_all=false skip_all=false
 
     link_file ${DOTFILES_DIR}/git/.gitconfig ${TARGET_DIR}/.gitconfig
-    link_file ${DOTFILES_DIR}/rtv/rtv.cfg ${TARGET_DIR}/.config/rtv/rtv.cfg
     link_file ${DOTFILES_DIR}/rtv/.mailcap ${TARGET_DIR}/.mailcap
     link_file ${DOTFILES_DIR}/tmux/oh-my-tmux/.tmux.conf ${TARGET_DIR}/.tmux.conf
     link_file ${DOTFILES_DIR}/tmux/.tmux.conf.local ${TARGET_DIR}/.tmux.conf.local
@@ -130,6 +130,9 @@ main() {
     link_file ${DOTFILES_DIR}/zsh/.zshrc ${TARGET_DIR}/.zshrc
     link_file ${DOTFILES_DIR}/zsh/.zshenv ${TARGET_DIR}/.zshenv
     link_file ${DOTFILES_DIR}/zsh/.hushlogin ${TARGET_DIR}/.hushlogin
+
+    mkdir -p ${TARGET_DIR}/.config/rtv
+    link_file ${DOTFILES_DIR}/rtv/rtv.cfg ${TARGET_DIR}/.config/rtv/rtv.cfg
 
     mkdir -p ${TARGET_DIR}/.ssh
     link_file ${DOTFILES_DIR}/ssh/config ${TARGET_DIR}/.ssh/config
