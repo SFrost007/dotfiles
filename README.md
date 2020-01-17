@@ -1,4 +1,6 @@
-# Simon's dotfiles
+<p align="center">
+<img src="https://i.imgur.com/fEyo7tU.png">
+</p>
 
 This is my collection of dotfiles, configs, scripts, fonts and everything that
 makes development nice on the machines I use. This is intended to work on:
@@ -14,13 +16,12 @@ ensure pre-requisites are met, clone the repo to `~/.dotfiles` and run the
 install script.
 
 ```bash
-bash -c "$(curl -fsSL https://git.io/JvTkt)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/SFrost007/dotfiles/master/install.sh)"
 ```
 Or on Ubuntu, where `curl` doesn't exist out-of-box:
 ```bash
-bash -c "$(wget -qO - https://git.io/JvTkt)"
+bash -c "$(wget -qO - https://raw.githubusercontent.com/SFrost007/dotfiles/master/install.sh)"
 ```
-(The above shortened URL is a Github redirect to `install.sh` in this repo).
 
 
 ### Manual install
