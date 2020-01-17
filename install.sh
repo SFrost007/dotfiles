@@ -3,8 +3,9 @@ set -e
 
 main() {
   ##############################################################################
-  # Set default path if not already set externally
+  # Set default paths (if not already set in ENVs)
   ##############################################################################
+  REPO_CLONE_URL="git@github.com:SFrost007/dotfiles.git"
   DOTFILES_DIR="${DOTFILES_DIR:-$HOME/.dotfiles}"
   OHMYZSH_DIR="${ZSH:-$HOME/.oh-my-zsh}"
   SETUPTOOLS_DIR="${DOTFILES_DIR}/_install"
@@ -19,16 +20,38 @@ main() {
   "
 
   title "Pre-checks..."
+  print_os_info
+
+  ##############################################################################
+  # SSH key
+  ##############################################################################
+  if ssh_key_exists; then
+    print_success "SSH key exists"
+  else
+    create_ssh_key
+  fi
 
   ##############################################################################
   # Download and extract the repo contents if we're running the script remotely
   ##############################################################################
-  if ! dir_exists "$DOTFILES_DIR"; then
-    print_info "Script appears to be running remotely"
+  if dir_exists "$DOTFILES_DIR"; then
+    print_success "Dotfiles dir exists"
+  else
+    print_info "╭───────────────────────────────────────────────────────────────╮"
+    print_info "│ It looks like this is the first time you're using dotfiles.   │"
+    print_info "│                                                               │"
+    print_info "│ This script runs mostly without prompts, and automatically    │"
+    print_info "│ installs/configures software as defined in the config files in│"
+    print_info "│ the repository. You should be sure this is what you want!     │"
+    print_info "╰───────────────────────────────────────────────────────────────╯"
+    if ! ask "Are you sure you want to continue?"; then
+      print_info "OK, bye!\n" && exit 0
+    fi
+    FIRST_RUN=1
+
     if command_exists "git"; then
-      exit_with_message "Git clone of dotfiles not yet implemented"
-      # TODO: Set REMOTE_URL to https or ssh based on presence of SSH key
-      #git clone "${REMOTE_URL}" "${DOTFILES_DIR}"
+      print_info "Using Git to clone to ${DOTFILES_DIR}"
+      git clone --quiet "${REPO_CLONE_URL}" "${DOTFILES_DIR}"
     else
       print_info "Git does not exist, downloading dotfiles.zip from Github..."
       curl -fsSL https://github.com/SFrost007/dotfiles/archive/master.zip > dotfiles.zip
@@ -43,30 +66,10 @@ main() {
   # Print some pre-run information
   ##############################################################################
 
-  print_os_info
   if is_online; then
     print_success "Internet connection is online"
   else
     exit_with_message "Internet connection is offline"
-  fi
-
-  _PREVIOUSLY_RUN_FLAG="${SETUPTOOLS_DIR}/.installed"
-  if file_exists "${_PREVIOUSLY_RUN_FLAG}"; then
-    print_success "Previously installed dotfiles, skipping confirmation"
-  else
-    print_info "╭───────────────────────────────────────────────────────────────╮"
-    print_info "│ It looks like this is the first time you're using dotfiles.   │"
-    print_info "│                                                               │"
-    print_info "│ This script runs mostly without prompts, and automatically    │"
-    print_info "│ installs/configures software as defined in the config files in│"
-    print_info "│ the repository. You should be sure this is what you want!     │"
-    print_info "╰───────────────────────────────────────────────────────────────╯"
-    if ask "Are you sure you want to continue?"; then
-      touch "${_PREVIOUSLY_RUN_FLAG}"
-      FIRST_RUN=1
-    else
-      print_info "OK, bye!\n" && exit 0
-    fi
   fi
 
 
@@ -96,18 +99,6 @@ main() {
   else
     print_info "Installing oh-my-zsh..."
     git clone -q --depth=1 https://github.com/robbyrussell/oh-my-zsh.git "${OHMYZSH_DIR}"
-  fi
-
-
-
-  ##############################################################################
-  # SSH key
-  ##############################################################################
-  if file_exists "${HOME}/.ssh/id_rsa"; then
-    print_success "SSH key exists"
-    print_warning "TODO: Add helpers to create SSH key if missing"
-  else
-    print_warning "No SSH key; you may wish to configure one"
   fi
 
 
@@ -289,6 +280,11 @@ print_deleted() {
   _print_in_red " 🗑   $1\n"
 }
 
+print_waiting() {
+  _print_in_white " ⏳  Press enter to continue..."
+  read
+}
+
 exit_with_message() {
   print_error "$1\n" && exit 1
 }
@@ -414,6 +410,36 @@ is_pi() {
 
 
 ################################################################################
+# SSH key handling
+################################################################################
+
+SSH_KEY_PATH="${HOME}/.ssh/id_rsa.pub"
+
+ssh_key_exists() {
+  if file_exists "${SSH_KEY_PATH}"; then return 0; else return 1; fi
+}
+
+create_ssh_key() {
+  print_info "No SSH key found. Creating one..."
+  ssh-keygen -t rsa
+  offer_copy_ssh_key_for_github
+}
+
+offer_copy_ssh_key_for_github() {
+  if is_mac; then
+    if ask "Copy SSH key (for pasting to Github)?"; then
+      cat "${SSH_KEY_PATH}" | pbcopy
+      open "https://github.com/account/ssh"
+      print_success "Copied to clipboard"
+      print_waiting
+    fi
+  else
+    print_warning "TODO: Copy SSH key without pbcopy"
+  fi
+}
+
+
+################################################################################
 # Symlink creator with prompts
 ################################################################################
 
@@ -424,14 +450,13 @@ link_file() {
   # Protect against doing something unintended and destructive, like removing a
   # directory when trying to link a file and choosing "Overwrite"
   if [[ -d "$dst" && ! -d "$src" ]]; then
-    echo "Linking source file to destination directory not supported"; return 1
+    print_error "Linking source file to destination directory not supported"; return 1
   fi
 
   if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]; then
     if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]; then
       local currentSrc=`readlink "$dst"`
       if [ "$currentSrc" == "$src" ]; then
-        symlink_skip_count=$((symlink_skip_count+1))
         skip=true;
       else
         _print_in_white " ❓  File already exists: $(basename "$dst").\n     [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all? "
@@ -472,9 +497,10 @@ link_file() {
     print_success "Moved $dst to ${dst}.bak"
   fi
 
-  #if [ "$skip" == "true" ]; then
-  #  print_info "Skipped $dst"
-  #fi
+  if [ "$skip" == "true" ]; then
+    symlink_skip_count=$((symlink_skip_count+1))
+    #print_info "Skipped $dst"
+  fi
 
   # Actually create the symlink if required
   if [ "$skip" != "true" ]; then
