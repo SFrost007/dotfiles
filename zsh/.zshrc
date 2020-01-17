@@ -30,6 +30,7 @@ setopt PUSHDSILENT
 
 # Load oh-my-zsh plugins
 plugins=(
+	alias-tips
 	colored-man-pages
 	encode64
 	urltools
