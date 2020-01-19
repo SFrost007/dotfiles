@@ -11,6 +11,7 @@ PACKAGES=(
   docker
   google-chrome
   hyperdock
+  ios-app-signer
   iterm2
   qlcolorcode
   qlimagesize
@@ -19,11 +20,12 @@ PACKAGES=(
   qlstephen
   quicklook-csv
   quicklook-json
-  rocket
   skitch
   sourcetree
   sublime-text
   suspicious-package
+  virtualbox
+  virtualbox-extension-pack
   visual-studio-code
   vlc
   vnc-viewer
@@ -41,7 +43,6 @@ PACKAGES_HOME=(
   spotify
   steam
   transmission
-  virtualbox
 )
 
 PACKAGES_WORK=(

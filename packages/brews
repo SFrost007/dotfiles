@@ -19,6 +19,7 @@ PACKAGES=(
   jp2a
   jq
   libidn
+  libimobiledevice
   mplayer
   node
   python3
@@ -28,6 +29,7 @@ PACKAGES=(
   tmux
   trash
   tree
+  usbmuxd
   wakeonlan
   wget
   youtube-dl
