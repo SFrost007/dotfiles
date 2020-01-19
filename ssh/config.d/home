@@ -8,3 +8,17 @@ Host turing
   User simon
   Hostname orangeninja.com
 
+Host zion
+  Hostname 192.168.0.200
+
+Host pithree
+  Hostname 192.168.0.210
+
+Host pizero
+  Hostname 192.168.0.211
+
+Host pizerow
+  Hostname 192.168.0.212
+
+Host picam
+  Hostname 192.168.0.213
