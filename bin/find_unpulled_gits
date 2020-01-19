@@ -1,0 +1,13 @@
+#!/bin/bash
+
+for dir in $(find . -name '.git' -type d)
+do
+    dir=$(dirname $dir)
+    cd $dir
+
+    if [[ -n $(git incoming) ]]; then
+        echo "${dir}"
+    fi
+
+    cd - > /dev/null
+done
