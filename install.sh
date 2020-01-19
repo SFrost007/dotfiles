@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# TODO: Bash doesn't exist on Alpine
+
 set -e
 
 main() {
@@ -185,6 +187,7 @@ main() {
   if [[ $(echo $SHELL) =~ "zsh" ]]; then
     print_success "ZSH already set as shell"
   else
+    print_warning "TODO: Check whether ZSH exists before trying to set it"
     print_info "Setting shell to ZSH..."
     chsh -s $(grep /zsh$ /etc/shells | tail -1)
     print_success "ZSH will be the default shell on the next session."
@@ -342,6 +345,7 @@ ask_for_sudo() { # https://gist.github.com/cowboy/3118588
 ################################################################################
 
 is_online() {
+  print_warning "TODO: nc doesn't exist on Raspbian, so this fails.."
   if nc -zw1 google.com 443 &>/dev/null; then return 0; else return 1; fi
 }
 
