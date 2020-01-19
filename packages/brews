@@ -7,6 +7,7 @@ PACKAGE_MANAGER_NEEDS_SUDO=0
 PACKAGES=(
   ag
   cloc
+  coreutils
   figlet
   git
   gnu-sed

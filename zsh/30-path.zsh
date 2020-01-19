@@ -9,6 +9,8 @@ function addPathDir() {
     PATH=$1:$PATH
   fi
 }
+# GNU utilities
+addPathDir "/usr/local/opt/coreutils/libexec/gnubin"
 # SDKs
 addPathDir $HOME/Code/SDKs/flutter/bin
 # My scripts

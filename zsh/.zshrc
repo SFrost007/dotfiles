@@ -33,6 +33,7 @@ plugins=(
 	alias-tips
 	colored-man-pages
 	encode64
+	k
 	urltools
 	z
 	zsh-autosuggestions
