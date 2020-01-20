@@ -128,6 +128,19 @@ main() {
 
 
   ##############################################################################
+  # Submodules update
+  ##############################################################################
+  if command_exists "git"; then
+    # TODO: Could do something more "intelligent" here, but this works..
+    print_info "Updating submodules..."
+    git submodule update --init
+  else
+    print_warning "Skipping submodule update as 'git' does not exist"
+  fi
+
+
+
+  ##############################################################################
   # Link dotfiles
   ##############################################################################
   symlink_skip_count=0
