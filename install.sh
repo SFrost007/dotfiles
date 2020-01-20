@@ -1,6 +1,4 @@
-#!/usr/bin/env bash
-# TODO: Bash doesn't exist on Alpine
-
+#!/bin/sh
 set -e
 
 main() {
