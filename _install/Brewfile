@@ -23,6 +23,7 @@ brew "ios-deploy"
 brew "iperf"
 brew "jp2a"
 brew "jq"
+brew "lsd"
 brew "mas"
 brew "neofetch"
 brew "nginx", restart_service: true

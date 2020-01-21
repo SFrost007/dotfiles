@@ -14,6 +14,8 @@ alias wakezion='wakeonlan 2c:76:8a:ab:d4:56'
 alias dotfiles='subl ~/.dotfiles'
 alias yt-dl='youtube-dl -f 137+140 --no-playlist'
 alias k='k -h'
+alias du='du --max-depth=1 --si'
+alias ls='lsd'
 
 # Web-dev related stuff
 alias serve='python -m SimpleHTTPServer &'

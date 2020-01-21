@@ -9,9 +9,9 @@ function chpwd() {
   # List the items if there aren't too many (2 * window
   # height), otherwise show in the non-list mode.
   if (( `ls -l | wc -l` > `tput lines`/2 )); then
-    ls -AG
+    ls -A
   else
-    ls -lAhG
+    ls -lAh
   fi
   echo ''
   if [[ -e ".git" ]] && [[ $(git status -s) ]]; then
