@@ -6,7 +6,9 @@ alias ccat='pygmentize'
 b64d() { echo "$1" | base64 -D }
 
 # Useful stuff
-alias myip='ifconfig | grep broadcast | awk -F " " '"'"'{print $2}'"'"
+alias internalip='ifconfig | grep broadcast | awk -F " " '"'"'{print $2}'"'"
+alias externalip='dig +short myip.opendns.com @resolver1.opendns.com'
+alias myip='echo "Internal: $(internalip)" && echo "External: $(externalip)"'
 alias sedrecurse='find . -type f -print | xargs sed -i ""'
 alias wakezion='wakeonlan 2c:76:8a:ab:d4:56'
 alias dotfiles='subl ~/.dotfiles'
