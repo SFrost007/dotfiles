@@ -13,6 +13,7 @@
 	[
 		".git"
 	],
+	"font_face": "Hack",
 	"highlight_line": true,
 	"ignored_packages":
 	[

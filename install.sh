@@ -205,8 +205,12 @@ main() {
   fi
 
 
-  print_warning "TODO: Install fonts via brew tap caskroom/fonts (or fallbacks)"
-  #cd ~/Library/Fonts && { curl -O 'https://github.com/Falkor/dotfiles/blob/master/fonts/SourceCodePro+Powerline+Awesome+Regular.ttf?raw=true' ; cd -; }
+  ##############################################################################
+  # Font handling
+  ##############################################################################
+  if ! is_mac; then
+    print_warning "TODO: Install fonts without homebrew for non-macOS platforms"
+  fi
 
 
   ##############################################################################
