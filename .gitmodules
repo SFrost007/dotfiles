@@ -24,6 +24,3 @@
 [submodule "zsh/omz-custom/plugins/alias-tips"]
 	path = zsh/omz-custom/plugins/alias-tips
 	url = https://github.com/djui/alias-tips
-[submodule "zsh/omz-custom/plugins/k"]
-	path = zsh/omz-custom/plugins/k
-	url = git@github.com:supercrabtree/k.git

@@ -6,7 +6,6 @@ tap "homebrew/services"
 brew "python", link: false
 brew "bat"
 brew "cloc"
-brew "coreutils"
 brew "exiftool"
 brew "ffmpeg"
 brew "figlet", link: false
