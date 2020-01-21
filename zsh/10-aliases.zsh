@@ -15,6 +15,7 @@ alias dotfiles='subl ~/.dotfiles'
 alias yt-dl='youtube-dl -f 137+140 --no-playlist'
 alias du='du --max-depth=1 --si'
 alias ls='lsd'
+alias rezsh='source ~/.zshrc'
 
 # Web-dev related stuff
 alias serve='python -m SimpleHTTPServer &'
