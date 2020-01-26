@@ -234,7 +234,7 @@ main() {
       install_brew youtube-dl
 
       title "Installing Homebrew Casks..."
-      install_cask 1password
+      #install_cask 1password - Skipped to keep 1Password 6 (from iCloud Drive)
       install_cask alfred
       install_cask android-studio
       install_cask atom
