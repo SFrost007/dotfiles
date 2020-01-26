@@ -173,15 +173,15 @@ main() {
 
 
   ##############################################################################
-  #         ___                                    __                           
-  #        / _ )_______ _    __     ___  ___ _____/ /_____ ____ ____ ___        
-  #       / _  / __/ -_) |/|/ /    / _ \/ _ `/ __/  '_/ _ `/ _ `/ -_|_-<        
-  #      /____/_/  \__/|__,__/    / .__/\_,_/\__/_/\_\\_,_/\_, /\__/___/        
-  #                              /_/                      /___/                 
+  #                    ___           __                                         
+  #                   / _ \___ _____/ /_____ ____ ____ ___                      
+  #                  / ___/ _ `/ __/  '_/ _ `/ _ `/ -_|_-<                      
+  #                 /_/   \_,_/\__/_/\_\\_,_/\_, /\__/___/                      
+  #                                         /___/                               
   ##############################################################################
   if is_mac; then
+    title "Installing Homebrew packages..."
     if command_exists "brew"; then
-      title "Installing Homebrew packages..."
       # General CLI tools
       install_brew bat
       install_brew gnu-sed
@@ -269,41 +269,36 @@ main() {
       install_cask quicklook-json
       install_cask suspicious-package
     else
-      print_warning "Skipping Brew packages as homebrew isn't installed"
+      print_warning "Skipping Brew & Cask packages as homebrew isn't installed"
     fi
-  fi
 
-  ##############################################################################
-  #           __  ___           ___               ______                        
-  #          /  |/  /__ _____  / _ | ___  ___    / __/ /____  _______           
-  #         / /|_/ / _ `/ __/ / __ |/ _ \/ _ \  _\ \/ __/ _ \/ __/ -_)          
-  #        /_/  /_/\_,_/\__/ /_/ |_/ .__/ .__/ /___/\__/\___/_/  \__/           
-  #                               /_/  /_/                                      
-  ##############################################################################
-  if is_mac; then
-    if command_exists "mas"; then
-      print_warning "TODO: Install MAS packages"
+    if command_exists mas; then
+      if mas account > /dev/null; then
+        title "Installing Mac App Store apps..."
+        install_mas_app 824171161   "Affinity Designer"
+        install_mas_app 1037126344  "Apple Configurator"
+        install_mas_app 411643860   "DaisyDisk"
+        install_mas_app 435003921   "Fantastical (Legacy)"
+        install_mas_app 449830122   "HyperDock"
+        install_mas_app 928871589   "Noizio"
+        install_mas_app 407963104   "Pixelmator"
+        install_mas_app 880001334   "Reeder"
+        install_mas_app 557168941   "Tweetbot"
+        install_mas_app 1320666476  "Wipr"
+      else
+        print_warning "Skipping App Store apps as mas isn't signed in"
+      fi
     else
       print_warning "Skipping App Store apps as mas isn't installed"
     fi
-  fi
-
-
-  if is_linux; then
+  elif is_linux; then
     print_warning "TODO: Install apt packages"
   fi
   print_warning "TODO: Install gem packages"
 
 
-  ##############################################################################
-  #           _  _____  __  ___  ___           __                               
-  #          / |/ / _ \/  |/  / / _ \___ _____/ /_____ ____ ____ ___            
-  #         /    / ___/ /|_/ / / ___/ _ `/ __/  '_/ _ `/ _ `/ -_|_-<            
-  #        /_/|_/_/  /_/  /_/ /_/   \_,_/\__/_/\_\\_,_/\_, /\__/___/            
-  #                                                   /___/                     
-  ##############################################################################
+  title "Installing NPM packages..."
   if command_exists "npm"; then
-    print_info "Installing NPM packages..."
     # General tools
     install_npm diff-so-fancy
     install_npm figlet
@@ -316,7 +311,6 @@ main() {
     # install_npm homebridge-lifx-lan
     # install_npm homebridge-superlights
     # install_npm noble
-
     print_if_skipped $npm_skip_count "NPM packages"
   else
     print_warning "Skipping NPM packages as npm isn't installed"
@@ -720,6 +714,16 @@ install_cask() {
     else
       print_error "Error installing $1"
     fi
+  fi
+}
+
+install_mas_app() {
+  if mas list | grep $1 &> /dev/null; then
+    print_success "$2 already installed"
+  else
+    print_info "Installing $2..."
+    mas install $1 > /dev/null
+    print_success "Installed $2"
   fi
 }
 
