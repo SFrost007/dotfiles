@@ -182,6 +182,9 @@ main() {
   if is_mac; then
     title "Installing Homebrew packages..."
     if command_exists "brew"; then
+      # Load taps
+      brew tap homebrew/cask-versions
+
       # General CLI tools
       install_brew bat
       install_brew gnu-sed
@@ -234,7 +237,7 @@ main() {
       install_brew youtube-dl
 
       title "Installing Homebrew Casks..."
-      #install_cask 1password - Skipped to keep 1Password 6 (from iCloud Drive)
+      install_cask 1password6
       install_cask alfred
       install_cask android-studio
       install_cask atom
