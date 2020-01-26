@@ -294,7 +294,6 @@ main() {
   elif is_linux; then
     print_warning "TODO: Install apt packages"
   fi
-  print_warning "TODO: Install gem packages"
 
 
   title "Installing NPM packages..."
@@ -314,6 +313,18 @@ main() {
     print_if_skipped $npm_skip_count "NPM packages"
   else
     print_warning "Skipping NPM packages as npm isn't installed"
+  fi
+
+
+  title "Installing Ruby Gem packages..."
+  if command_exists "gem"; then
+    install_gem cocoapods
+    install_gem pygmentize
+    install_gem twterm
+    install_gem xcodeproj
+    install_gem xcpretty
+  else
+    print_warning "Skipping Ruby Gems as gem isn't installed"
   fi
 
 
@@ -724,6 +735,15 @@ install_mas_app() {
     print_info "Installing $2..."
     mas install $1 > /dev/null
     print_success "Installed $2"
+  fi
+}
+
+install_gem() {
+  if gem list "$1" --installed > /dev/null; then
+    print_success "$1 already installed"
+  else
+    gem install "$1"
+    print_success "Installed $1"
   fi
 }
 
