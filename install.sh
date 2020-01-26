@@ -327,7 +327,6 @@ main() {
   title "Installing Ruby Gem packages..."
   if command_exists "gem"; then
     install_gem cocoapods
-    install_gem pygmentize
     install_gem twterm
     install_gem xcodeproj
     install_gem xcpretty

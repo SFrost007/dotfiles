@@ -2,7 +2,6 @@
 
 # General shortcuts
 alias cp='rsync --progress -ah'
-alias ccat='pygmentize'
 b64d() { echo "$1" | base64 -D }
 
 # Useful stuff
