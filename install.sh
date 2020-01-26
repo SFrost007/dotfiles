@@ -172,15 +172,86 @@ main() {
 
 
 
-  ##############################################################################
-  # Install packages
-  ##############################################################################
   title "Installing packages..."
+  ##############################################################################
+  #         ___                                    __                           
+  #        / _ )_______ _    __     ___  ___ _____/ /_____ ____ ____ ___        
+  #       / _  / __/ -_) |/|/ /    / _ \/ _ `/ __/  '_/ _ `/ _ `/ -_|_-<        
+  #      /____/_/  \__/|__,__/    / .__/\_,_/\__/_/\_\\_,_/\_, /\__/___/        
+  #                              /_/                      /___/                 
+  ##############################################################################
   if is_mac; then
-    print_warning "TODO: Install brew packages"
-    print_warning "TODO: Install cask packages"
-    print_warning "TODO: Install AppStore apps"
-  elif is_linux; then
+    if command_exists "brew"; then
+      print_info "Installing Homebrew packages..."
+      # General CLI tools
+      install_brew bat
+      install_brew gnu-sed
+      install_brew htop
+      install_brew iperf3
+      install_brew lsd
+      install_brew mas
+      install_brew spark
+      install_brew the_silver_searcher
+      install_brew tmux
+      install_brew trash
+      install_brew tree
+      install_brew wakeonlan
+      install_brew wget
+      # Fun stuff
+      install_brew lynx
+      install_brew nethack
+      install_brew rogue
+      install_brew rtv
+      # CLI dev tools
+      install_brew cloc
+      install_brew git
+      install_brew howdoi
+      install_brew hub
+      install_brew jq
+      install_brew node
+      install_brew python3
+      install_brew tig
+      install_brew yq
+      # iOS dev tools
+      install_brew bitrise
+      install_brew carthage
+      install_brew ideviceinstaller
+      install_brew ios-sim
+      install_brew libimobiledevice
+      install_brew sourcery
+      install_brew usbmuxd
+      # Web dev tools
+      install_brew docker
+      install_brew hugo
+      install_brew now-cli
+      # Image/video tools
+      install_brew exiftool
+      install_brew ffmpeg
+      install_brew imagemagick
+      install_brew jp2a
+      install_brew youtube-dl
+    else
+      print_warning "Skipping Brew packages as homebrew isn't installed"
+    fi
+  fi
+
+  ##############################################################################
+  #           __  ___           ___               ______                        
+  #          /  |/  /__ _____  / _ | ___  ___    / __/ /____  _______           
+  #         / /|_/ / _ `/ __/ / __ |/ _ \/ _ \  _\ \/ __/ _ \/ __/ -_)          
+  #        /_/  /_/\_,_/\__/ /_/ |_/ .__/ .__/ /___/\__/\___/_/  \__/           
+  #                               /_/  /_/                                      
+  ##############################################################################
+  if is_mac; then
+    if command_exists "mas"; then
+      print_warning "TODO: Install MAS packages"
+    else
+      print_warning "Skipping App Store apps as mas isn't installed"
+    fi
+  fi
+
+
+  if is_linux; then
     print_warning "TODO: Install apt packages"
   fi
   print_warning "TODO: Install gem packages"
@@ -580,6 +651,19 @@ install_npm() {
     npm_skip_count=$((npm_skip_count+1))
   else
     if [[ $(npm install -g --no-progress $1) ]]; then
+      print_success "Installed $1"
+    else
+      print_error "Error installing $1"
+    fi
+  fi
+}
+
+install_brew() {
+  if brew ls --versions $1 > /dev/null; then
+    print_success "$1 already installed"
+  else
+    print_info "Installing $1..."
+    if [[ $(HOMEBREW_NO_AUTO_UPDATE=1 brew install $1) ]]; then
       print_success "Installed $1"
     else
       print_error "Error installing $1"
