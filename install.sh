@@ -310,7 +310,6 @@ main() {
     # install_npm homebridge-lifx-lan
     # install_npm homebridge-superlights
     # install_npm noble
-    print_if_skipped $npm_skip_count "NPM packages"
   else
     print_warning "Skipping NPM packages as npm isn't installed"
   fi
@@ -688,11 +687,11 @@ link_file() {
 ################################################################################
 # Package installations
 ################################################################################
-npm_skip_count=0
 install_npm() {
   if [[ $(npm list -g --depth=0 --parseable | grep -e "/${1}$") ]]; then
-    npm_skip_count=$((npm_skip_count+1))
+    print_success "$1 already installed"
   else
+    print_info "Installing $1..."
     if [[ $(npm install -g --no-progress $1) ]]; then
       print_success "Installed $1"
     else
