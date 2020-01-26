@@ -264,6 +264,7 @@ main() {
       install_cask steam
       install_cask sublime-text
       install_cask transmission
+      install_cask unrarx
       install_cask virtualbox
       install_cask virtualbox-extension-pack
       install_cask visual-studio-code
@@ -279,6 +280,7 @@ main() {
       install_cask quicklook-csv
       install_cask quicklook-json
       install_cask suspicious-package
+      qlmanage -r
     else
       print_warning "Skipping Brew & Cask packages as homebrew isn't installed"
     fi
