@@ -1,8 +1,0 @@
-#!/bin/sh
-#
-# SF: From https://github.com/danro/dotfiles/blob/master/scripts/getip
-#
-# Uses dyndns.org to get external IP address
-
-curl -s checkip.dyndns.org|sed -e 's/.*Current IP Address: //' -e 's/<.*$//'
-
