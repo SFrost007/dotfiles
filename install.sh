@@ -727,12 +727,10 @@ install_cask() {
     print_success "$1 already installed"
   else
     print_info "Installing $1..."
-    HOMEBREW_CASK_OPTS="--appdir=/Applications"
-    if [[ $(HOMEBREW_NO_AUTO_UPDATE=1 brew cask install $1) ]]; then
-      print_success "Installed $1"
-    else
-      print_error "Error installing $1"
-    fi
+    HOMEBREW_CASK_OPTS="--appdir=/Applications" \
+      HOMEBREW_NO_AUTO_UPDATE=1 \
+      brew cask install $1
+    print_success "Installed $1"
   fi
 }
 
