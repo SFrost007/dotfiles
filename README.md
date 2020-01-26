@@ -3,11 +3,9 @@
 </p>
 
 This is my collection of dotfiles, configs, scripts, fonts and everything that
-makes development nice on the machines I use. This is intended to work on:
-* macOS (High Sierra)
-* Ubuntu (16.04)
-* Windows (under WSL)
-* Raspbian (Jessie x86, Stretch ARM)
+makes development nice on the machines I use. This is primarily intended to work
+on macOS; many of the required utils are not yet installed on Ubuntu/Raspbian.
+Support for WSL would be nice at some point too..
 
 ### Automatic install
 
@@ -39,8 +37,12 @@ bash -c "$(wget -qO - https://raw.githubusercontent.com/SFrost007/dotfiles/maste
 # TODO
 * Git pull hooks to automatically re-run update scripts
 * Setup module to generate SSH key and replace git origin with ssh version
+* Dynamic iTerm profiles ([See here](https://github.com/juliantellez/up))
+* More extensive macOS defaults
+* Support for Ubuntu/Raspbian/Alpine
 
 ### Thanks to:
-* [Zach Holman](http://github.com/holman/dotfiles) for the dotfiles inspiration
+* [Zach Holman](http://github.com/holman/dotfiles) for the original inspiration
+* [Mina Markham](https://github.com/minamarkham/formation) for install script bits
 * Various people/sources mentioned in script headers in `bin`
 * Anyone else who I stole useful things from and forgot about (please shout!)

@@ -4,6 +4,7 @@
 #     https://github.com/kevinSuttle/macOS-Defaults
 #     http://mths.be/macos
 #     https://raw.githubusercontent.com/nnja/new-computer/master/setup.sh
+#     https://github.com/sobolevn/dotfiles/blob/master/macos
 
 # Close PrefPanes to prevent them overwriting these settings
 osascript -e 'tell application "System Preferences" to quit'
