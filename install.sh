@@ -172,7 +172,6 @@ main() {
 
 
 
-  title "Installing packages..."
   ##############################################################################
   #         ___                                    __                           
   #        / _ )_______ _    __     ___  ___ _____/ /_____ ____ ____ ___        
@@ -182,7 +181,7 @@ main() {
   ##############################################################################
   if is_mac; then
     if command_exists "brew"; then
-      print_info "Installing Homebrew packages..."
+      title "Installing Homebrew packages..."
       # General CLI tools
       install_brew bat
       install_brew gnu-sed
@@ -221,7 +220,6 @@ main() {
       install_brew sourcery
       install_brew usbmuxd
       # Web dev tools
-      install_brew docker
       install_brew hugo
       install_brew now-cli
       # Image/video tools
@@ -230,6 +228,46 @@ main() {
       install_brew imagemagick
       install_brew jp2a
       install_brew youtube-dl
+
+      title "Installing Homebrew Casks..."
+      install_cask 1password
+      install_cask alfred
+      install_cask android-studio
+      install_cask arduino
+      install_cask beyond-compare
+      install_cask cocoarestclient
+      install_cask discord
+      install_cask docker
+      install_cask firefox
+      install_cask geotag
+      install_cask google-chrome
+      install_cask ios-app-signer
+      install_cask iterm2
+      install_cask macdown
+      install_cask openemu
+      install_cask skitch
+      install_cask skype
+      install_cask slack
+      install_cask sourcetree
+      install_cask spotify
+      install_cask steam
+      install_cask sublime-text
+      install_cask transmission
+      install_cask virtualbox
+      install_cask virtualbox-extension-pack
+      install_cask visual-studio-code
+      install_cask vlc
+      install_cask vnc-viewer
+      install_cask zoomus
+      # Quicklook plugins
+      install_cask qlcolorcode
+      install_cask qlimagesize
+      install_cask qlmarkdown
+      install_cask qlprettypatch
+      install_cask qlstephen
+      install_cask quicklook-csv
+      install_cask quicklook-json
+      install_cask suspicious-package
     else
       print_warning "Skipping Brew packages as homebrew isn't installed"
     fi
@@ -664,6 +702,20 @@ install_brew() {
   else
     print_info "Installing $1..."
     if [[ $(HOMEBREW_NO_AUTO_UPDATE=1 brew install $1) ]]; then
+      print_success "Installed $1"
+    else
+      print_error "Error installing $1"
+    fi
+  fi
+}
+
+install_cask() {
+  if brew cask ls --versions $1 &> /dev/null; then
+    print_success "$1 already installed"
+  else
+    print_info "Installing $1..."
+    HOMEBREW_CASK_OPTS="--appdir=/Applications"
+    if [[ $(HOMEBREW_NO_AUTO_UPDATE=1 brew cask install $1) ]]; then
       print_success "Installed $1"
     else
       print_error "Error installing $1"
