@@ -1,6 +1,7 @@
 #!/bin/zsh
 
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+export GEM_HOME="${HOME}/.gem"
 
 if hash subl 2>/dev/null; then
   export EDITOR="subl"

@@ -746,6 +746,7 @@ install_gem() {
   if gem list "$1" --installed > /dev/null; then
     print_success "$1 already installed"
   else
+    export GEM_HOME="${HOME}/.gem"
     gem install "$1"
     print_success "Installed $1"
   fi
