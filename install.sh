@@ -186,9 +186,36 @@ main() {
   elif is_linux; then
     print_warning "TODO: Install apt packages"
   fi
-  print_warning "TODO: Install npm packages"
   print_warning "TODO: Install gem packages"
 
+
+  ##############################################################################
+  #           _  _____  __  ___  ___           __                               
+  #          / |/ / _ \/  |/  / / _ \___ _____/ /_____ ____ ____ ___            
+  #         /    / ___/ /|_/ / / ___/ _ `/ __/  '_/ _ `/ _ `/ -_|_-<            
+  #        /_/|_/_/  /_/  /_/ /_/   \_,_/\__/_/\_\\_,_/\_, /\__/___/            
+  #                                                   /___/                     
+  ##############################################################################
+  if command_exists "npm"; then
+    print_info "Installing NPM packages..."
+    # General tools
+    install_npm diff-so-fancy
+    install_npm figlet
+    # Webby development
+    install_npm now
+    install_npm express-generator
+    install_npm mongodb
+    # Homebridge-related packages
+    # install_npm homebridge
+    # install_npm homebridge-lifx-lan
+    # install_npm homebridge-superlights
+    # install_npm noble
+    if [[ $npm_skip_count -gt 0 ]]; then
+      print_info "Skipped ${npm_skip_count} existing NPM packages"
+    fi
+  else
+    print_warning "Skipping NPM packages as npm isn't installed"
+  fi
 
 
   title "Finishing touches..."
@@ -538,6 +565,23 @@ link_file() {
   if [ "$skip" != "true" ]; then
     ln -s "$src" "$dst"
     print_success "Created $dst"
+  fi
+}
+
+
+################################################################################
+# Package installations
+################################################################################
+npm_skip_count=0
+install_npm() {
+  if [[ $(npm list -g --depth=0 --parseable | grep -e "/${1}$") ]]; then
+    npm_skip_count=$((npm_skip_count+1))
+  else
+    if [[ $(npm install -g --no-progress $1) ]]; then
+      print_success "Installed $1"
+    else
+      print_error "Error installing $1"
+    fi
   fi
 }
 
