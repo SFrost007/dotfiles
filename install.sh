@@ -143,7 +143,6 @@ main() {
   ##############################################################################
   # Link dotfiles
   ##############################################################################
-  symlink_skip_count=0
   _link_dotfiles() {
     title "Linking dotfiles..."
     local TARGET_DIR=$HOME
@@ -167,9 +166,7 @@ main() {
     link_file ${DOTFILES_DIR}/ssh/config ${TARGET_DIR}/.ssh/config
     link_file ${DOTFILES_DIR}/ssh/config.d ${TARGET_DIR}/.ssh/config.d
 
-    if [[ $symlink_skip_count -gt 0 ]]; then
-      print_info "Skipped ${symlink_skip_count} existing symlinks"
-    fi
+    print_if_skipped $symlink_skip_count "dotfiles symlinks"
   }
   _link_dotfiles
 
@@ -210,9 +207,8 @@ main() {
     # install_npm homebridge-lifx-lan
     # install_npm homebridge-superlights
     # install_npm noble
-    if [[ $npm_skip_count -gt 0 ]]; then
-      print_info "Skipped ${npm_skip_count} existing NPM packages"
-    fi
+
+    print_if_skipped $npm_skip_count "NPM packages"
   else
     print_warning "Skipping NPM packages as npm isn't installed"
   fi
@@ -354,6 +350,12 @@ print_deleted() {
 print_waiting() {
   printf " ⏳  Press enter to continue...\n"
   read
+}
+
+print_if_skipped() {
+  if [[ $1 -gt 0 ]]; then
+    print_info "Skipped ${1} existing ${2}"
+  fi
 }
 
 exit_with_message() {
@@ -501,7 +503,7 @@ copy_ssh_key_and_open_github() {
 ################################################################################
 # Symlink creator with prompts
 ################################################################################
-
+symlink_skip_count=0
 link_file() {
   local src=$1 dst=$2
   local overwrite= backup= skip= action=
