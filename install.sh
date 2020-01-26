@@ -189,12 +189,15 @@ main() {
       install_brew iperf3
       install_brew lsd
       install_brew mas
+      install_brew neofetch
+      install_brew nmap
       install_brew spark
       install_brew the_silver_searcher
       install_brew tmux
       install_brew trash
       install_brew tree
       install_brew wakeonlan
+      install_brew watch
       install_brew wget
       # Fun stuff
       install_brew lynx
@@ -215,6 +218,7 @@ main() {
       install_brew bitrise
       install_brew carthage
       install_brew ideviceinstaller
+      install_brew ios-deploy
       install_brew ios-sim
       install_brew libimobiledevice
       install_brew sourcery
@@ -233,14 +237,18 @@ main() {
       install_cask 1password
       install_cask alfred
       install_cask android-studio
+      install_cask atom
       install_cask arduino
       install_cask beyond-compare
       install_cask cocoarestclient
       install_cask discord
       install_cask docker
       install_cask firefox
+      install_cask flotato
+      install_cask geekbench
       install_cask geotag
       install_cask google-chrome
+      install_cask handbrake
       install_cask ios-app-signer
       install_cask iterm2
       install_cask macdown
@@ -282,6 +290,7 @@ main() {
         install_mas_app 449830122   "HyperDock"
         install_mas_app 928871589   "Noizio"
         install_mas_app 407963104   "Pixelmator"
+        install_mas_app 568494494   "Pocket"
         install_mas_app 880001334   "Reeder"
         install_mas_app 557168941   "Tweetbot"
         install_mas_app 1320666476  "Wipr"
