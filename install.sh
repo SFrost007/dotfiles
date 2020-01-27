@@ -94,6 +94,7 @@ main() {
       print_warning "TODO: Set git origin for dotfiles directory once git exists"
     fi
   fi
+  pushd "$DOTFILES_DIR" >/dev/null
 
 
 
