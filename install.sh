@@ -256,6 +256,7 @@ main() {
       #install_cask arduino # Requires adoptopenjdk
       install_cask beyond-compare
       install_cask cocoarestclient
+      print_warning "TODO: Skipping install of Discord"
       #install_cask discord # Seems to cause problems with the install script :()
       install_cask docker
       install_cask firefox
@@ -276,6 +277,7 @@ main() {
       install_cask steam
       install_cask sublime-text
       install_cask transmission
+      print_warning "TODO: Skipping install of VirtualBox"
       #install_cask virtualbox
       #install_cask virtualbox-extension-pack
       install_cask visual-studio-code
@@ -712,7 +714,9 @@ link_file() {
 # Package installations
 ################################################################################
 install_npm() {
-  if [[ $(npm list -g --depth=0 --parseable | grep -e "/${1}$") ]]; then
+  if dir_exists "$(npm config get prefix)/lib/node_modules/$1"; then
+    print_success "$1 already installed"
+  elif [[ $(npm list -g --depth=0 --parseable | grep -e "/${1}$") ]]; then
     print_success "$1 already installed"
   else
     print_info "Installing $1..."
@@ -725,7 +729,12 @@ install_npm() {
 }
 
 install_brew() {
-  if brew ls --versions $1 > /dev/null; then
+  # Try the quick check for whether the brew's folder exists.
+  # If that fails, try the slower but more reliable "brew ls --versions"
+  # (for things like python3).
+  if dir_exists "$(brew --cellar)/$1"; then
+    print_success "$1 already installed"
+  elif brew ls --versions $1 > /dev/null; then
     print_success "$1 already installed"
   else
     print_info "Installing $1..."
@@ -738,7 +747,10 @@ install_brew() {
 }
 
 install_cask() {
-  if brew cask ls --versions $1 &> /dev/null; then
+  # Use the same logic as above to check for cask installations
+  if dir_exists "$(brew --prefix)/Caskroom/$1"; then
+    print_success "$1 already installed"
+  elif brew cask ls --versions $1 &> /dev/null; then
     print_success "$1 already installed"
   else
     print_info "Installing $1..."
