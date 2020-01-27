@@ -370,6 +370,7 @@ main() {
       if ask "Set macOS default preferences?"; then
         source "${TOOLS_DIR}/macos/setup_defaults.sh"
       fi
+      cp "${TOOLS_DIR}/macos/Post-Setup TODO.txt" "${HOME}/Desktop"
     else
       print_info "Not first run, skipping macOS defaults script"
     fi
