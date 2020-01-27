@@ -9,7 +9,7 @@ main() {
   ##############################################################################
   DOTFILES_DIR="${DOTFILES_DIR:-$HOME/.dotfiles}"
   OHMYZSH_DIR="${ZSH:-$HOME/.oh-my-zsh}"
-  SETUPTOOLS_DIR="${DOTFILES_DIR}/_install"
+  TOOLS_DIR="${DOTFILES_DIR}/_dotfiles_tools"
 
   printf "\033[1m\033[41m\033[97m
                             __      __  _____ __                                
@@ -368,7 +368,7 @@ main() {
   if is_mac; then
     if is_first_run; then
       if ask "Set macOS default preferences?"; then
-        source "${SETUPTOOLS_DIR}/macos_setup.sh"
+        source "${TOOLS_DIR}/macos/setup_defaults.sh"
       fi
     else
       print_info "Not first run, skipping macOS defaults script"
