@@ -513,8 +513,19 @@ exit_with_message() {
 
 ask() {
   local reply
+
+  # Workaround to detect whether we need -n or \c to prevent newline on echo
+  # https://www.shellscript.sh/tips/echo/
+  if [ "`echo -n`" = "-n" ]; then
+    n=""
+    c="\c"
+  else
+    n="-n"
+    c=""
+  fi
+
   while true; do
-    echo -n " ❓  $1 [y/n] "
+    echo $n " ❓  $1 [y/n] $c"
     read reply </dev/tty
     case "$reply" in
       Y*|y*) return 0 ;;
