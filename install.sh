@@ -233,7 +233,6 @@ main() {
       install_brew ios-deploy
       install_brew ios-sim
       install_brew libimobiledevice
-      install_brew sourcery
       install_brew usbmuxd
       # Web dev tools
       install_brew hugo
@@ -250,7 +249,7 @@ main() {
       install_cask alfred
       install_cask android-studio
       install_cask atom
-      install_cask arduino
+      #install_cask arduino # Requires adoptopenjdk
       install_cask beyond-compare
       install_cask cocoarestclient
       install_cask discord

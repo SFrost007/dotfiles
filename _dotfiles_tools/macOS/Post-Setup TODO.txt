@@ -2,3 +2,5 @@ These items are left as post-setup steps for the user to do.
 
 * Setup MS Keyboard modifiers (`bin/SetupKeyboardModifiers`)
 * Change Spotlight keyboard shortcut, set up Alfred in its place
+* Install Xcode (via App Store or developer portal)
+* brew install sourcery - if needed, requires full Xcode install first
