@@ -276,8 +276,8 @@ main() {
       install_cask steam
       install_cask sublime-text
       install_cask transmission
-      install_cask virtualbox
-      install_cask virtualbox-extension-pack
+      #install_cask virtualbox
+      #install_cask virtualbox-extension-pack
       install_cask visual-studio-code
       install_cask vlc
       install_cask vnc-viewer

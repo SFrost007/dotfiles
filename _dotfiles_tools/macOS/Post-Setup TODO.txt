@@ -5,3 +5,4 @@ These items are left as post-setup steps for the user to do.
 * Install Xcode (via App Store or developer portal)
 * brew install sourcery - if needed, requires full Xcode install first
 * brew cask install discord - This seems to break during the install script
+* Install VirtualBox (can't test in a VM itself?)
