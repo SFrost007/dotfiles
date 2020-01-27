@@ -6,9 +6,6 @@
 	path = tmux/oh-my-tmux
 	url = https://github.com/gpakosz/.tmux.git
 	branch = master
-[submodule "tools/solarized-xcode"]
-	path = tools/solarized/Xcode
-	url = https://github.com/ArtSabintsev/Solarized-Dark-for-Xcode.git
 [submodule "zsh/omz-custom/powerlevel9k"]
 	path = zsh/omz-custom/powerlevel9k
 	url = https://github.com/bhilburn/powerlevel9k.git
