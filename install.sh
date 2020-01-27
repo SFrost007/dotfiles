@@ -723,11 +723,12 @@ install_npm() {
 }
 
 install_brew() {
+  export HOMEBREW_NO_AUTO_UPDATE=1
   if brew ls --versions $1 > /dev/null; then
     print_success "$1 already installed"
   else
     print_info "Installing $1..."
-    if [[ $(HOMEBREW_NO_AUTO_UPDATE=1 brew install $1) ]]; then
+    if [[ $(brew install $1) ]]; then
       print_success "Installed $1"
     else
       print_error "Error installing $1"
