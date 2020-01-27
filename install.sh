@@ -299,12 +299,18 @@ main() {
     fi
 
     if command_exists mas; then
+      title "Installing Mac App Store apps..."
+      if ! mas account > /dev/null; then
+        if ask "Sign in to Mac App Store to install apps?"; then
+          open "/Applications/App Store.app"
+          print_waiting
+        fi
+      fi
       if mas account > /dev/null; then
-        title "Installing Mac App Store apps..."
         install_mas_app 824171161   "Affinity Designer"
         install_mas_app 1037126344  "Apple Configurator"
         install_mas_app 411643860   "DaisyDisk"
-        install_mas_app 435003921   "Fantastical (Legacy)"
+        install_mas_app 435003921   "Fantastical"
         install_mas_app 449830122   "HyperDock"
         install_mas_app 928871589   "Noizio"
         install_mas_app 407963104   "Pixelmator"
