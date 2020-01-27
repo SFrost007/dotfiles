@@ -176,6 +176,9 @@ main() {
     fi
 
     print_if_skipped $symlink_skip_count "dotfiles symlinks"
+
+    # Load environment variables for the rest of the script
+    source "${DOTFILES_DIR}/zsh/20-exports.zsh"
   }
   _link_dotfiles
 
@@ -191,6 +194,8 @@ main() {
   if is_mac; then
     title "Installing Homebrew packages..."
     if command_exists "brew"; then
+      # Disable auto-update to prevent it triggering between packages
+      HOMEBREW_NO_AUTO_UPDATE=1
       # Load taps
       brew tap homebrew/cask-versions
 
@@ -721,7 +726,6 @@ install_npm() {
 }
 
 install_brew() {
-  export HOMEBREW_NO_AUTO_UPDATE=1
   if brew ls --versions $1 > /dev/null; then
     print_success "$1 already installed"
   else
@@ -739,9 +743,7 @@ install_cask() {
     print_success "$1 already installed"
   else
     print_info "Installing $1..."
-    HOMEBREW_CASK_OPTS="--appdir=/Applications" \
-      HOMEBREW_NO_AUTO_UPDATE=1 \
-      brew cask install $1
+    brew cask install $1
     print_success "Installed $1"
   fi
 }
@@ -760,7 +762,6 @@ install_gem() {
   if gem list "$1" --installed > /dev/null; then
     print_success "$1 already installed"
   else
-    export GEM_HOME="${HOME}/.gem"
     gem install "$1"
     print_success "Installed $1"
   fi

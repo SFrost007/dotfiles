@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/sh
 
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export GEM_HOME="${HOME}/.gem"
