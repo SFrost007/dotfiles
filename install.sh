@@ -167,6 +167,14 @@ main() {
     link_file ${DOTFILES_DIR}/ssh/config ${TARGET_DIR}/.ssh/config
     link_file ${DOTFILES_DIR}/ssh/config.d ${TARGET_DIR}/.ssh/config.d
 
+    if is_mac; then
+      XCUSERDATA="${HOME}/Library/Developer/Xcode/UserData"
+      mkdir -p "${XCUSERDATA}"
+      link_file ${DOTFILES_DIR}/Xcode/xcdebugger "${XCUSERDATA}/xcdebugger"
+      link_file ${DOTFILES_DIR}/Xcode/FontAndColorThemes "${XCUSERDATA}/FontAndColorThemes"
+      link_file ${DOTFILES_DIR}/Xcode/KeyBindings "${XCUSERDATA}/KeyBindings"
+    fi
+
     print_if_skipped $symlink_skip_count "dotfiles symlinks"
   }
   _link_dotfiles
