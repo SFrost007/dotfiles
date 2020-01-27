@@ -4,3 +4,4 @@ These items are left as post-setup steps for the user to do.
 * Change Spotlight keyboard shortcut, set up Alfred in its place
 * Install Xcode (via App Store or developer portal)
 * brew install sourcery - if needed, requires full Xcode install first
+* brew cask install discord - This seems to break during the install script

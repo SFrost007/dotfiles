@@ -252,7 +252,7 @@ main() {
       #install_cask arduino # Requires adoptopenjdk
       install_cask beyond-compare
       install_cask cocoarestclient
-      install_cask discord
+      #install_cask discord # Seems to cause problems with the install script :()
       install_cask docker
       install_cask firefox
       install_cask flotato
@@ -272,7 +272,6 @@ main() {
       install_cask steam
       install_cask sublime-text
       install_cask transmission
-      install_cask unrarx
       install_cask virtualbox
       install_cask virtualbox-extension-pack
       install_cask visual-studio-code
