@@ -194,7 +194,7 @@ main() {
     title "Installing Homebrew packages..."
     if command_exists "brew"; then
       # Disable auto-update to prevent it triggering between packages
-      HOMEBREW_NO_AUTO_UPDATE=1
+      export HOMEBREW_NO_AUTO_UPDATE=1
       # Load taps
       brew tap homebrew/cask-versions
 
