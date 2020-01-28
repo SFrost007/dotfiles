@@ -46,8 +46,9 @@ defaults write com.apple.finder ShowStatusBar -bool true
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv" # List view
 defaults write com.apple.finder FXDefaultSearchScope -string "SCcf" # Search current folder
+defaults write com.apple.finder _FXSortFoldersFirst -bool true
 defaults write com.apple.finder ShowRecentTags -boolean false
-defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}"
+defaults write com.apple.finder NewWindowTarget -string "PfHm"
 defaults write -g AppleShowAllExtensions -bool true
 defaults write com.apple.finder QLEnableTextSelection -bool true # QuickLook selection
 # Set desktop to snap-to-grid mode
@@ -59,6 +60,10 @@ defaults write com.apple.finder QLEnableTextSelection -bool true # QuickLook sel
 # Dock preferences
 defaults write com.apple.dock minimize-to-application -bool true
 defaults write com.apple.dock show-recents -bool FALSE
+defaults write com.apple.dock tilesize -int 40 # Dock icon size
+defaults write com.apple.dock magnification -bool true
+defaults write com.apple.dock largesize -int 48
+defaults write com.apple.dock mru-spaces -bool false # Don't reorder spaces
 
 
 # Restart apps to take effect
