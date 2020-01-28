@@ -364,11 +364,12 @@ main() {
   ##############################################################################
   if [[ $(echo $SHELL) =~ "zsh" ]]; then
     print_success "ZSH already set as shell"
-  else
-    print_warning "TODO: Check whether ZSH exists before trying to set it"
+  elif [[ $(cat /etc/shells | grep -e "/zshf$") ]]; then
     print_info "Setting shell to ZSH..."
     chsh -s $(grep /zsh$ /etc/shells | tail -1)
     print_success "ZSH will be the default shell on the next session."
+  else
+    print_warning "ZSH is not installed, not changing shell"
   fi
 
 
