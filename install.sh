@@ -1,15 +1,15 @@
 #!/bin/sh
 set -e
 
+##############################################################################
+# Set default paths (if not already set in ENVs)
+##############################################################################
+DOTFILES_DIR="${DOTFILES_DIR:-$HOME/.dotfiles}"
+OHMYZSH_DIR="${ZSH:-$HOME/.oh-my-zsh}"
+DOTFILES_TOOLS_DIR="${DOTFILES_DIR}/_dotfiles_tools"
+
 main() {
   check_if_first_run
-
-  ##############################################################################
-  # Set default paths (if not already set in ENVs)
-  ##############################################################################
-  DOTFILES_DIR="${DOTFILES_DIR:-$HOME/.dotfiles}"
-  OHMYZSH_DIR="${ZSH:-$HOME/.oh-my-zsh}"
-  TOOLS_DIR="${DOTFILES_DIR}/_dotfiles_tools"
 
   printf "\033[1m\033[41m\033[97m
                             __      __  _____ __                                
@@ -386,9 +386,9 @@ main() {
   if is_mac; then
     if is_first_run; then
       if ask "Set macOS default preferences?"; then
-        source "${TOOLS_DIR}/macos/setup_defaults.sh"
+        source "${DOTFILES_TOOLS_DIR}/macos/setup_defaults.sh"
       fi
-      cp "${TOOLS_DIR}/macos/Post-Setup TODO.txt" "${HOME}/Desktop"
+      cp "${DOTFILES_TOOLS_DIR}/macos/Post-Setup TODO.txt" "${HOME}/Desktop"
     else
       print_info "Not first run, skipping macOS defaults script"
     fi
