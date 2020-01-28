@@ -478,27 +478,27 @@ title() {
 }
 
 print_success() {
-  _print_in_green " ✅  $1\n"
+  _print_in_green "[✓] $1\n"
 }
 
 print_error() {
-  _print_in_red " ⛔️  $1\n"
+  _print_in_red "[𝘅] $1\n"
 }
 
 print_warning() {
-  _print_in_yellow " ⚠️   $1\n"
+  _print_in_yellow "/!\ $1\n"
 }
 
 print_info() {
-  printf " ℹ️   $1\n"
+  printf "[i] $1\n"
 }
 
 print_deleted() {
-  _print_in_red " 🗑   $1\n"
+  _print_in_red "[𝘅] $1\n"
 }
 
 print_waiting() {
-  printf " ⏳  Press enter to continue...\n"
+  printf "[ ] Press enter to continue...\n"
   read
 }
 
