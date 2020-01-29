@@ -283,7 +283,7 @@ main() {
       install_cask visual-studio-code
       install_cask vlc
       install_cask vnc-viewer
-      install_cask zoomus
+      #install_cask zoomus # Don't really need zoom for now, and setup is disruptive
       # Quicklook plugins
       install_cask qlcolorcode
       install_cask qlimagesize
