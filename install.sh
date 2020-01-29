@@ -364,7 +364,7 @@ main() {
   ##############################################################################
   if [[ $(echo $SHELL) =~ "zsh" ]]; then
     print_success "ZSH already set as shell"
-  elif [[ $(cat /etc/shells | grep -e "/zshf$") ]]; then
+  elif [[ $(cat /etc/shells | grep -e "/zsh$") ]]; then
     print_info "Setting shell to ZSH..."
     chsh -s $(grep /zsh$ /etc/shells | tail -1)
     print_success "ZSH will be the default shell on the next session."
