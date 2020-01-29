@@ -1,5 +1,6 @@
 These items are left as post-setup steps for the user to do.
 
+* Set iTerm to load from dotfiles (iTerm -> Prefs -> General -> Prefs -> Load from)
 * Install Xcode (via App Store or developer portal)
 * brew cask install discord - This seems to break during the install script
 * Install VirtualBox (can't test in a VM itself?)
@@ -13,3 +14,4 @@ These items are left as post-setup steps for the user to do.
 * Keyboard
   * Add British (PC) keyboard layout, enable input menu
   * Setup MS Keyboard modifiers (`bin/SetupKeyboardModifiers`)
+* Add Sublime license

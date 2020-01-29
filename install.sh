@@ -172,10 +172,6 @@ main() {
       link_file ${DOTFILES_DIR}/Xcode/xcdebugger "${XCUSERDATA}/xcdebugger"
       link_file ${DOTFILES_DIR}/Xcode/FontAndColorThemes "${XCUSERDATA}/FontAndColorThemes"
       link_file ${DOTFILES_DIR}/Xcode/KeyBindings "${XCUSERDATA}/KeyBindings"
-
-      ITERM_PROFILES="${HOME}/Library/Application Support/iTerm2/DynamicProfiles"
-      mkdir -p "${ITERM_PROFILES}"
-      link_file "${DOTFILES_DIR}/iTerm/profiles.json" "${ITERM_PROFILES}/profiles.json"
     fi
 
     print_if_skipped $symlink_skip_count "dotfiles symlinks"
