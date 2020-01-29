@@ -285,7 +285,7 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>392 866 570 417 0 0 2560 1417 </string>
+	<string>0 993 570 417 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>464 842 570 467 0 0 2560 1417 </string>
 	<key>New Bookmarks</key>
@@ -1602,7 +1602,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>0C7AC242-1BA5-45AC-A709-9FE0F2763FD8</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>11</integer>
+	<integer>12</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -2301,6 +2301,10 @@
 			</dict>
 		</array>
 	</dict>
+	<key>OpenArrangementAtStartup</key>
+	<false/>
+	<key>OpenNoWindowsAtStartup</key>
+	<true/>
 	<key>PrefsCustomFolder</key>
 	<string>/Users/simon/.dotfiles/iTerm</string>
 	<key>SUEnableAutomaticChecks</key>
@@ -2316,6 +2320,8 @@
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SoundForEsc</key>
+	<false/>
+	<key>StatusBarIcon</key>
 	<false/>
 	<key>TabStyleWithAutomaticOption</key>
 	<integer>5</integer>
