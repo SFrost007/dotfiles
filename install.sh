@@ -478,7 +478,7 @@ print_success() {
 }
 
 print_error() {
-  _print_in_red "[𝘅] $1\n"
+  _print_in_red "[X] $1\n"
 }
 
 print_warning() {
@@ -490,11 +490,11 @@ print_info() {
 }
 
 print_deleted() {
-  _print_in_red "[𝘅] $1\n"
+  _print_warning "$1"
 }
 
 print_waiting() {
-  printf "[ ] Press enter to continue...\n"
+  printf "... Press enter to continue...\n"
   read
 }
 
@@ -526,7 +526,7 @@ ask() {
   fi
 
   while true; do
-    echo $n " ❓  $1 [y/n] $c"
+    echo $n "[?] $1 [y/n] $c"
     read reply </dev/tty
     case "$reply" in
       Y*|y*) return 0 ;;
