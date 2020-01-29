@@ -174,7 +174,7 @@ main() {
       link_file ${DOTFILES_DIR}/Xcode/KeyBindings "${XCUSERDATA}/KeyBindings"
 
       ITERM_PROFILES="${HOME}/Library/Application Support/iTerm2/DynamicProfiles"
-      mkdir -p $ITERM_PROFILES
+      mkdir -p "${ITERM_PROFILES}"
       link_file "${DOTFILES_DIR}/iTerm/profiles.json" "${ITERM_PROFILES}/profiles.json"
     fi
 
