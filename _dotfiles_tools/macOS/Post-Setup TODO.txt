@@ -14,4 +14,12 @@ These items are left as post-setup steps for the user to do.
 * Keyboard
   * Add British (PC) keyboard layout, enable input menu
   * Setup MS Keyboard modifiers (`bin/SetupKeyboardModifiers`)
-* Add Sublime license
+  * Disable "Select previous input source" shortcut (conflicts with iTerm)
+* Add licenses for:
+  * SublimeText
+  * BeyondCompare
+* Setup Safari settings:
+  * View -> Show favourites bar
+  * View -> Show status bar
+  * Preferences -> Advanced -> Show full address
+  * Preferences -> Advanced -> Show develop menu in menu bar
