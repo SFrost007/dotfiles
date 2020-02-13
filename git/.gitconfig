@@ -61,7 +61,12 @@
   command = ~/.dotfiles/git/spaceman-diff
 
 [pretty]
-	myformat = "format:%Cred%h%Creset -%C(yellow)%d%C(white) %s %Creset- %C(yellow)%an %Cgreen%cr%Creset"
+	# %h  = abbreviated commit hash
+	# %s  = commit subject
+	# %d  = ref names (branch)
+	# %an = author name
+	# %cr = commit relative date
+	myformat = "format:%C(red)%h%C(reset): %C(white)%s%C(blue)%d %C(reset)- %C(yellow)%an %C(green)%cr%C(reset)"
 
 [help]
 	autocorrect = 25
