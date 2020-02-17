@@ -96,6 +96,8 @@ main() {
   fi
   pushd "$DOTFILES_DIR" >/dev/null
 
+  prompt_for_computer_type_if_not_set
+  print_computer_type
 
 
   title "Core tools..."
@@ -215,11 +217,6 @@ main() {
       install_brew wakeonlan
       install_brew watch
       install_brew wget
-      # Fun stuff
-      install_brew lynx
-      install_brew nethack
-      install_brew rogue
-      install_brew rtv
       # CLI dev tools
       install_brew cloc
       install_brew git
@@ -238,52 +235,70 @@ main() {
       install_brew ios-sim
       install_brew libimobiledevice
       install_brew usbmuxd
-      # Web dev tools
-      install_brew hugo
-      install_brew now-cli
-      # Image/video tools
-      install_brew exiftool
-      install_brew ffmpeg
-      install_brew imagemagick
-      install_brew jp2a
-      install_brew youtube-dl
+
+      if is_home_computer; then
+        print_info "Adding home computer brews"
+        # Terminal fun stuff
+        install_brew lynx
+        install_brew nethack
+        install_brew rogue
+        install_brew rtv
+        # Web dev tools
+        install_brew hugo
+        install_brew now-cli
+        # Image/video tools
+        install_brew exiftool
+        install_brew ffmpeg
+        install_brew imagemagick
+        install_brew jp2a
+        install_brew youtube-dl
+      elif is_work_computer; then
+        print_info "No work-only brews"
+      fi
 
       title "Installing Homebrew Casks..."
-      install_cask 1password6
       install_cask alfred
-      install_cask android-studio
-      install_cask atom
-      #install_cask arduino # Requires adoptopenjdk
       install_cask beyond-compare
       install_cask cocoarestclient
-      print_warning "TODO: Skipping install of Discord"
-      #install_cask discord # Seems to cause problems with the install script :()
       install_cask docker
       install_cask firefox
       install_cask flotato
       install_cask geekbench
-      install_cask geotag
       install_cask google-chrome
-      install_cask handbrake
       install_cask ios-app-signer
       install_cask iterm2
       install_cask macdown
-      install_cask openemu
       install_cask skitch
-      install_cask skype
       install_cask slack
       install_cask sourcetree
-      install_cask spotify
-      install_cask steam
       install_cask sublime-text
-      install_cask transmission
-      print_warning "TODO: Skipping install of VirtualBox"
-      #install_cask virtualbox
-      #install_cask virtualbox-extension-pack
       install_cask visual-studio-code
       install_cask vlc
       install_cask vnc-viewer
       #install_cask zoomus # Don't really need zoom for now, and setup is disruptive
+
+      if is_home_computer; then
+        print_info "Adding home computer casks"
+        install_cask 1password6
+        install_cask android-studio
+        print_warning "TODO: Skipping install of Arduino"
+        #install_cask arduino # Requires adoptopenjdk
+        print_warning "TODO: Skipping install of Discord"
+        #install_cask discord # Seems to cause problems with the install script
+        install_cask geotag
+        install_cask handbrake
+        install_cask openemu
+        install_cask skype
+        install_cask spotify
+        install_cask steam
+        install_cask transmission
+        print_warning "TODO: Skipping install of VirtualBox"
+        #install_cask virtualbox
+        #install_cask virtualbox-extension-pack
+      elif is_work_computer; then
+        print_info "No work-only casks"
+      fi
+
       # Quicklook plugins
       install_cask qlcolorcode
       install_cask qlimagesize
@@ -338,11 +353,15 @@ main() {
     install_npm now
     install_npm express-generator
     install_npm mongodb
-    # Homebridge-related packages
-    # install_npm homebridge
-    # install_npm homebridge-lifx-lan
-    # install_npm homebridge-superlights
-    # install_npm noble
+
+    if is_home_computer; then
+      # Homebridge-related packages
+      install_npm homebridge
+      install_npm homebridge-lifx-lan
+      install_npm homebridge-superlights
+      install_npm noble
+    fi
+
   else
     print_warning "Skipping NPM packages as npm isn't installed"
   fi
@@ -570,6 +589,58 @@ dir_exists() {
 
 command_exists() {
   type $1 >/dev/null 2>&1 || return 1; return 0;
+}
+
+################################################################################
+# "Computer type" checks for value stored in _DOTFILES_COMPTYPE variable
+################################################################################
+
+_COMPTYPE_HOME="Home"
+_COMPTYPE_WORK="Work"
+_COMPTYPE_FILE="${DOTFILES_TOOLS_DIR}/.computertype"
+
+load_computer_type() {
+  if file_exists "${_COMPTYPE_FILE}"; then
+    source "${_COMPTYPE_FILE}"
+  fi
+}
+
+prompt_for_computer_type_if_not_set() {
+  load_computer_type
+  if [ -z ${_DOTFILES_COMPTYPE} ]; then
+    if ask "Is this a home [y] or work [n] computer?"; then
+      echo "_DOTFILES_COMPTYPE=${_COMPTYPE_HOME}" > "${_COMPTYPE_FILE}"
+    else
+      echo "_DOTFILES_COMPTYPE=${_COMPTYPE_WORK}" > "${_COMPTYPE_FILE}"
+    fi
+  fi
+}
+
+print_computer_type() {
+  load_computer_type
+  if [ -z ${_DOTFILES_COMPTYPE} ]; then
+    print_warning "Computer type not set"
+  else
+    print_info "Computer type: ${_DOTFILES_COMPTYPE}"
+  fi
+}
+
+is_home_computer() {
+  load_computer_type
+  if [ "${_DOTFILES_COMPTYPE}" == "${_COMPTYPE_HOME}" ]; then
+    return 0
+  else 
+    return 1
+  fi
+}
+
+is_work_computer() {
+  load_computer_type
+  if [ "${_DOTFILES_COMPTYPE}" == "${_COMPTYPE_WORK}" ]; then
+    return 0
+  else 
+    return 1
+  fi
 }
 
 ################################################################################
