@@ -202,6 +202,7 @@ main() {
 
       # General CLI tools
       install_brew bat
+      install_brew figlet
       install_brew gnu-sed
       install_brew htop
       install_brew iperf3
@@ -323,16 +324,18 @@ main() {
       fi
       if mas account > /dev/null; then
         install_mas_app 824171161   "Affinity Designer"
-        install_mas_app 1037126344  "Apple Configurator"
         install_mas_app 411643860   "DaisyDisk"
-        install_mas_app 435003921   "Fantastical"
         install_mas_app 449830122   "HyperDock"
         install_mas_app 928871589   "Noizio"
         install_mas_app 407963104   "Pixelmator"
-        install_mas_app 568494494   "Pocket"
         install_mas_app 880001334   "Reeder"
         install_mas_app 557168941   "Tweetbot"
         install_mas_app 1320666476  "Wipr"
+        install_mas_app 1491071483  "Tot"
+        if is_home_computer; then
+          install_mas_app 435003921   "Fantastical"
+          install_mas_app 568494494   "Pocket"
+        fi
       else
         print_warning "Skipping App Store apps as mas isn't signed in"
       fi
@@ -348,7 +351,6 @@ main() {
   if command_exists "npm"; then
     # General tools
     install_npm diff-so-fancy
-    install_npm figlet
     # Webby development
     install_npm now
     install_npm express-generator
