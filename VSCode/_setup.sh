@@ -8,4 +8,9 @@ ln -s "${DOTFILES_DIR}/VSCode/settings.json" "${VSCODE_USER_DIR}/settings.json"
 ln -s "${DOTFILES_DIR}/VSCode/keybindings.json" "${VSCODE_USER_DIR}/keybindings.json"
 ln -s "${DOTFILES_DIR}/VSCode/snippets/" "${VSCODE_USER_DIR}"
 
+code --install-extension CoenraadS.bracket-pair-colorizer-2
+code --install-extension Dart-Code.dart-code
 code --install-extension Dart-Code.flutter
+code --install-extension eamodio.gitlens
+code --install-extension msjsdiag.vscode-react-native
+code --install-extension RobbOwen.synthwave-vscode
