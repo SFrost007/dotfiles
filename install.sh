@@ -217,6 +217,7 @@ main() {
       install_brew tree
       install_brew wakeonlan
       install_brew watch
+      install_brew watchman
       install_brew wget
       # CLI dev tools
       install_brew cloc
@@ -356,6 +357,9 @@ main() {
     install_npm now
     install_npm express-generator
     install_npm mongodb
+    # React dev
+    install_npm expo-cli
+    install_npm react-native-cli
 
     if is_home_computer; then
       # Homebridge-related packages
