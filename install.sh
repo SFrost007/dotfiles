@@ -266,6 +266,7 @@ main() {
       install_cask flotato
       install_cask geekbench
       install_cask google-chrome
+      install_cask google-cloud-sdk
       install_cask ios-app-signer
       install_cask iterm2
       install_cask macdown
