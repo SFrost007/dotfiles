@@ -21,4 +21,4 @@ code --install-extension Dart-Code.dart-code
 code --install-extension Dart-Code.flutter
 code --install-extension eamodio.gitlens
 code --install-extension msjsdiag.vscode-react-native
-code --install-extension RobbOwen.synthwave-vscode
+code --install-extension auchenberg.vscode-browser-preview
