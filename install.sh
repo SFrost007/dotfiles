@@ -259,6 +259,7 @@ main() {
       fi
 
       title "Installing Homebrew Casks..."
+      install_cask 1password6
       install_cask alfred
       install_cask beyond-compare
       install_cask cocoarestclient
@@ -282,7 +283,6 @@ main() {
 
       if is_home_computer; then
         print_info "Adding home computer casks"
-        install_cask 1password6
         install_cask android-studio
         print_warning "TODO: Skipping install of Arduino"
         #install_cask arduino # Requires adoptopenjdk
@@ -357,6 +357,7 @@ main() {
     install_npm now
     install_npm express-generator
     install_npm mongodb
+    install_npm typescript
     # React dev
     install_npm expo-cli
     install_npm react-native-cli
