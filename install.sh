@@ -6,7 +6,7 @@ set -e
 ##############################################################################
 DOTFILES_DIR="${DOTFILES_DIR:-$HOME/.dotfiles}"
 OHMYZSH_DIR="${ZSH:-$HOME/.oh-my-zsh}"
-DOTFILES_TOOLS_DIR="${DOTFILES_DIR}/_dotfiles_tools"
+DOTFILES_TOOLS_DIR="${DOTFILES_DIR}/dotfiles"
 
 main() {
   check_if_first_run
