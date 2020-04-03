@@ -1,22 +1,16 @@
 #!/bin/zsh
 
-# General shortcuts
-alias cp='rsync --progress -ah'
-b64d() { echo "$1" | base64 -D }
-
-# Useful stuff
-alias internalip='ifconfig | grep broadcast | awk -F " " '"'"'{print $2}'"'"
-alias externalip='dig +short myip.opendns.com @resolver1.opendns.com'
-alias myip='echo "Internal: $(internalip)" && echo "External: $(externalip)"'
-alias sedrecurse='find . -type f -print | xargs sed -i ""'
-alias wakezion='wakeonlan 2c:76:8a:ab:d4:56'
-alias dotfiles='subl ~/.dotfiles'
-alias yt-dl='youtube-dl -f 137+140 --no-playlist'
-alias du='du -d1 -h'
-alias ls='lsd'
+# Terminal utils
+alias itermClear="printf '\e]50;ClearScrollback\a'"
 alias rezsh='source ~/.zshrc'
+alias dotfiles='subl ~/.dotfiles'
+alias sedrecurse='find . -type f -print | xargs sed -i ""'
+alias tmuxtitle='tmux rename-window $1'
+alias termtitle='echo -ne "\033]0;$@\007";'
 
-# Overrides to built-in commands
+# Override built-in commands
+alias cp='rsync --progress -ah'
+alias du='du -d1 -h'
 if type lsd >/dev/null 2>&1; then
   alias ls='lsd'
 fi
@@ -24,23 +18,24 @@ if type trash >/dev/null 2>&1; then
   alias rm='trash'
 fi
 
+# Networking
+alias internalip='ifconfig | grep broadcast | awk -F " " '"'"'{print $2}'"'"
+alias externalip='dig +short myip.opendns.com @resolver1.opendns.com'
+alias myip='echo "Internal: $(internalip)" && echo "External: $(externalip)"'
+alias wakezion='wakeonlan 2c:76:8a:ab:d4:56'
+
 # Web-dev related stuff
 alias serve='python -m SimpleHTTPServer &'
 alias stopserve='pkill -f SimpleHTTPServer'
-alias prettyjson='python -m json.tool'
-
-# Source control
-alias gitcompress='git repack && git prune'
 
 # Fun stuff
 alias adventure='emacs -batch -l dunnet'
 alias weather='curl wttr.in'
-cheat() { curl "cheat.sh/$1" }
+alias yt-dl='youtube-dl -f 137+140 --no-playlist'
 
-# One of @janmoesen’s ProTips
-for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
-  alias "$method"="lwp-request -m '$method'"
-done
+# Reference
+cheat() { curl "cheat.sh/$1" }
+pman() { man -t "$@" | open -f -a Preview; }
 
 # OS-specific aliases
 case $(uname) in
@@ -55,5 +50,6 @@ case $(uname) in
     alias fuxcode='rm -rf ~/Library/Developer/Xcode/DerivedData'
     alias ql='qlmanage -p'
     alias caskupgrade='brew cask upgrade --greedy'
+    alias addDockSpace='defaults write com.apple.dock persistent-apps -array-add "{\"tile-type\"=\"spacer-tile\";}" && killall Dock'
     ;;
 esac

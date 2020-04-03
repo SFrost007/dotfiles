@@ -1,5 +1,0 @@
-#!/bin/bash
-
-# Sets the tmux window title
-
-tmux rename-window $1
