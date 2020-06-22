@@ -210,6 +210,7 @@ main() {
       install_brew mas
       install_brew neofetch
       install_brew nmap
+      install_brew ranger
       install_brew spark
       install_brew the_silver_searcher
       install_brew tmux
