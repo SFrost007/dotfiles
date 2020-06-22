@@ -256,6 +256,8 @@ main() {
         install_brew youtube-dl
       elif is_work_computer; then
         print_info "No work-only brews"
+        install_brew openjdk
+        sudo ln -sfn /usr/local/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
       fi
 
       title "Installing Homebrew Casks..."

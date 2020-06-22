@@ -11,6 +11,7 @@ function addPathDir() {
 }
 # SDKs
 addPathDir $HOME/Code/SDKs/flutter/bin
+addPathDir /usr/local/opt/openjdk/bin
 # Ruby gems
 addPathDir $GEM_HOME/bin
 # My scripts
