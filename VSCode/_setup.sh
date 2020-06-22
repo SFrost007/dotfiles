@@ -22,3 +22,4 @@ code --install-extension Dart-Code.flutter
 code --install-extension eamodio.gitlens
 code --install-extension msjsdiag.vscode-react-native
 code --install-extension auchenberg.vscode-browser-preview
+code --install-extension hediet.vscode-drawio
