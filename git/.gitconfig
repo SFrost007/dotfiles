@@ -15,7 +15,7 @@
 	email = config user.email
 	amend = commit --amend --no-edit
 	tempignore = update-index --assume-unchanged
-	unignore = update-index --really-refresh
+	unignore = update-index --no-assume-unchanged
 	currbranch = symbolic-ref --short HEAD
 	incoming = "!git fetch -q && git log --pretty=myformat --no-merges $(git currbranch)..origin/$(git currbranch);"
 	incomingdiff = "!git fetch -q && git diff --stat $(git currbranch)..origin/$(git currbranch);"
