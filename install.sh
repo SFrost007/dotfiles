@@ -71,9 +71,9 @@ main() {
       fi
 
       if ssh_key_exists; then
+        CLONE_WITH_SSH=1
         if ask "Copy SSH key to the clipboard (to add to Github)?"; then
           copy_ssh_key_and_open_github
-          CLONE_WITH_SSH=1
         fi
       fi
 
