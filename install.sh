@@ -262,10 +262,8 @@ main() {
 
       title "Installing Homebrew Casks..."
       install_cask 1password6
-      install_cask alfred
       install_cask beyond-compare
       install_cask cocoarestclient
-      install_cask docker
       install_cask firefox
       install_cask flotato
       install_cask geekbench
@@ -273,7 +271,6 @@ main() {
       install_cask google-cloud-sdk
       install_cask ios-app-signer
       install_cask iterm2
-      install_cask macdown
       install_cask skitch
       install_cask slack
       install_cask sourcetree
@@ -281,39 +278,38 @@ main() {
       install_cask visual-studio-code
       install_cask vlc
       install_cask vnc-viewer
-      #install_cask zoomus # Don't really need zoom for now, and setup is disruptive
+      print_warning "TODO: Skipping install of VirtualBox"
+      #install_cask virtualbox
+      #install_cask virtualbox-extension-pack
 
       if is_home_computer; then
         print_info "Adding home computer casks"
         install_cask android-studio
-        print_warning "TODO: Skipping install of Arduino"
-        #install_cask arduino # Requires adoptopenjdk
         print_warning "TODO: Skipping install of Discord"
         #install_cask discord # Seems to cause problems with the install script
         install_cask geotag
         install_cask handbrake
         install_cask openemu
         install_cask skype
-        install_cask spotify
         install_cask steam
         install_cask transmission
-        print_warning "TODO: Skipping install of VirtualBox"
-        #install_cask virtualbox
-        #install_cask virtualbox-extension-pack
       elif is_work_computer; then
-        print_info "No work-only casks"
+        print_info "Adding work-only brews"
+        install_cask docker
+        #install_cask zoomus # Setup is disruptive, install manually later
       fi
 
       # Quicklook plugins
-      install_cask qlcolorcode
-      install_cask qlimagesize
-      install_cask qlmarkdown
-      install_cask qlprettypatch
-      install_cask qlstephen
-      install_cask quicklook-csv
-      install_cask quicklook-json
-      install_cask suspicious-package
-      qlmanage -r
+      print_warning "TODO: Skipping install of QuickLook plugins"
+      #install_cask qlcolorcode
+      #install_cask qlimagesize
+      #install_cask qlmarkdown
+      #install_cask qlprettypatch
+      #install_cask qlstephen
+      #install_cask quicklook-csv
+      #install_cask quicklook-json
+      #install_cask suspicious-package
+      #qlmanage -r
     else
       print_warning "Skipping Brew & Cask packages as homebrew isn't installed"
     fi
