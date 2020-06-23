@@ -83,6 +83,7 @@ main() {
         print_warning "Cloning dotfiles via HTTPS, updates cannot be committed back."
         REPO_URL="https://github.com/SFrost007/dotfiles.git"
       fi
+      print_info "Cloning dotfiles repo from ${REPO_URL}..."
       git clone --recursive --quiet "${REPO_URL}" "${DOTFILES_DIR}"
     else
       print_info "Git does not exist, downloading dotfiles.zip from Github..."
