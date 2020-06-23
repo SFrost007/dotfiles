@@ -515,7 +515,7 @@ print_info() {
 }
 
 print_deleted() {
-  _print_warning "$1"
+  print_warning "$1"
 }
 
 print_waiting() {
