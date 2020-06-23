@@ -1,19 +1,18 @@
 #!/bin/zsh
 
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 export DOTFILES_DIR=$HOME/.dotfiles
 
-# Set name of the theme to load.
-ZSH_THEME="powerlevel9k/powerlevel9k"
-POWERLEVEL9K_MODE='nerdfont-complete'
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context background_jobs dir)
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status vcs time)
-POWERLEVEL9K_STATUS_VERBOSE=false
-POWERLEVEL9K_DIR_HOME_FOREGROUND="white"
-POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="white"
-POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="white"
+# Set name of the theme to load - Powerlevel10k has its own config (.p10k.zsh)
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set the default user based on the hostnames of computers I use
 case $(hostname) in
@@ -47,4 +46,7 @@ fi
 source $ZSH/oh-my-zsh.sh
 
 # Load all .zsh files within this folder
-for file in ${DOTFILES_DIR}/zsh/*.zsh; do source $file; done
+for file in ${DOTFILES_DIR}/zsh/*-*.zsh; do source $file; done
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

@@ -158,6 +158,7 @@ main() {
     link_file ${DOTFILES_DIR}/vim/.vimrc ${TARGET_DIR}/.vimrc
     link_file ${DOTFILES_DIR}/vim/.vim ${TARGET_DIR}/.vim
     link_file ${DOTFILES_DIR}/zsh/.zshrc ${TARGET_DIR}/.zshrc
+    link_file ${DOTFILES_DIR}/zsh/.p10k.zsh ${TARGET_DIR}/.p10k.zsh
     link_file ${DOTFILES_DIR}/zsh/.zshenv ${TARGET_DIR}/.zshenv
     link_file ${DOTFILES_DIR}/zsh/.hushlogin ${TARGET_DIR}/.hushlogin
 
