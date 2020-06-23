@@ -851,7 +851,7 @@ install_brew() {
     print_info "Installing $1..."
     if is_big_sur; then
       # Don't consume the installation log so we can check what's happening
-      brew install $i
+      brew install $1
     else
       if [[ $(brew install $1) ]]; then
         print_success "Installed $1"
