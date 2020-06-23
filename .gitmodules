@@ -21,3 +21,6 @@
 [submodule "zsh/omz-custom/plugins/alias-tips"]
 	path = zsh/omz-custom/plugins/alias-tips
 	url = https://github.com/djui/alias-tips
+[submodule "zsh/omz-custom/powerlevel10k"]
+	path = zsh/omz-custom/powerlevel10k
+	url = https://github.com/romkatv/powerlevel10k.git
