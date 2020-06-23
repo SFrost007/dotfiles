@@ -121,7 +121,7 @@ main() {
       print_success "Homebrew already installed"
     else
       print_info "Installing Homebrew..." && sleep 2
-      /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
       printf "\n\n"
     fi
   else
