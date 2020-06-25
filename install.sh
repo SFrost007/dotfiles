@@ -380,15 +380,6 @@ main() {
     # React dev
     install_npm expo-cli
     install_npm react-native-cli
-
-    if is_home_computer; then
-      # Homebridge-related packages
-      install_npm homebridge
-      install_npm homebridge-lifx-lan
-      install_npm homebridge-superlights
-      install_npm noble
-    fi
-
   else
     print_warning "Skipping NPM packages as npm isn't installed"
   fi
