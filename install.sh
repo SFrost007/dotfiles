@@ -345,8 +345,6 @@ main() {
         install_mas_app 407963104   "Pixelmator"
         install_mas_app 880001334   "Reeder"
         install_mas_app 557168941   "Tweetbot"
-        install_mas_app 1320666476  "Wipr"
-        install_mas_app 1491071483  "Tot"
         if is_home_computer; then
           install_mas_app 435003921   "Fantastical"
           install_mas_app 568494494   "Pocket"
