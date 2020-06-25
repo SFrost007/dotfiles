@@ -15,8 +15,7 @@ chflags nohidden ~/Library
 sudo chflags nohidden /Volumes
 
 # Global preferences
-defaults write com.apple.menuextra.battery ShowPercent YES
-#defaults write com.apple.AppleMultitouchTrackpad ActuationStrength -int 0 # Silent clicking
+#defaults write com.apple.menuextra.battery ShowPercent YES # No longer works
 defaults write com.apple.desktopservices DSDontWriteNetworkStores true # DS_Store files on networks
 defaults write com.apple.LaunchServices LSQuarantine -bool false # Disable "Are you sure" on new apps
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true # Expanded Save dialog
@@ -33,7 +32,9 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3 # Full UI tab-key access
 
 
-# Trackpad preferences
+# Trackpad preferences - several of these don't work since Catalina, and only set the UI state
+# of the checkbox in System Preferences without actually changing the behaviour
+defaults write com.apple.AppleMultitouchTrackpad ActuationStrength -int 0 # Silent clicking
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false # Disable "Natural" scrolling
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true # Tap-to-click
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
@@ -41,7 +42,7 @@ defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
 
 # Finder preferences
-defaults write com.apple.finder ShowPathbar -bool true
+defaults write com.apple.finder ShowPathbar -bool true # No longer works in Big Sur
 defaults write com.apple.finder ShowStatusBar -bool true
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv" # List view

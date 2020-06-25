@@ -43,7 +43,6 @@ main() {
       print_warning "Skipping check for /Library/Developer/CommandLineTools;"
       print_warning "xcode-select --install doesn't work on Big Sur anyway."
       print_warning "You should install Xcode 12 and enable its tools."
-      print_waiting
     elif file_exists "/Library/Developer/CommandLineTools/usr/bin/git"; then
       print_success "Command Line Tools installed"
     else
@@ -213,6 +212,13 @@ main() {
       # Load taps
       brew tap homebrew/cask-versions
 
+      # Common pre-requisites
+      if is_big_sur; then
+        brew install --force-bottle python@3.8
+      else
+        install_brew python3
+      fi
+
       # General CLI tools
       install_brew bat
       install_brew figlet
@@ -240,7 +246,6 @@ main() {
       install_brew hub
       install_brew jq
       install_brew node
-      install_brew python3
       install_brew tig
       install_brew yq
       # iOS dev tools
@@ -263,8 +268,8 @@ main() {
         install_brew hugo
         install_brew now-cli
         # Image/video tools
-        install_brew exiftool
-        install_brew ffmpeg
+        #install_brew exiftool # Requires adoptopenjdk
+        #install_brew ffmpeg # Requires adoptopenjdk
         install_brew imagemagick
         install_brew jp2a
         install_brew youtube-dl
@@ -330,7 +335,11 @@ main() {
       title "Installing Mac App Store apps..."
       if ! mas account > /dev/null; then
         if ask "Sign in to Mac App Store to install apps?"; then
-          open "/Applications/App Store.app"
+          if is_big_sur; then
+            open "/System/Applications/App Store.app"
+          else
+            open "/Applications/App Store.app"
+          fi
           print_waiting
         fi
       fi
