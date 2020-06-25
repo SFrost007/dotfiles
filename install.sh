@@ -373,7 +373,6 @@ main() {
     # General tools
     install_npm diff-so-fancy
     # Webby development
-    install_npm now
     install_npm express-generator
     install_npm mongodb
     install_npm typescript
