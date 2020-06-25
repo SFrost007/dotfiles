@@ -377,9 +377,6 @@ main() {
     install_npm express-generator
     install_npm mongodb
     install_npm typescript
-    # React dev
-    install_npm expo-cli
-    install_npm react-native-cli
   else
     print_warning "Skipping NPM packages as npm isn't installed"
   fi
