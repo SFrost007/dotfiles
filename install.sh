@@ -212,13 +212,6 @@ main() {
       # Load taps
       brew tap homebrew/cask-versions
 
-      # Common pre-requisites
-      if is_big_sur; then
-        brew install --force-bottle python@3.8
-      else
-        install_brew python3
-      fi
-
       # General CLI tools
       install_brew bat
       install_brew figlet
@@ -246,6 +239,7 @@ main() {
       install_brew hub
       install_brew jq
       install_brew node
+      install_brew python3
       install_brew tig
       install_brew yq
       # iOS dev tools
