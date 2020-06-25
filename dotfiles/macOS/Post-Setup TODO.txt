@@ -10,16 +10,13 @@ These items are left as post-setup steps for the user to do.
 * Set up Finder sidebar and toolbar
   * Remove Recents and add Pictures
   * Remove Group, Action, Share; add Delete and New Folder
-* Change Spotlight keyboard shortcut (cmd+shift+space) to avoid Alfred
 * Keyboard
   * Add British (PC) keyboard layout, enable input menu
   * Setup MS Keyboard modifiers (`bin/SetupKeyboardModifiers`)
   * Disable "Select previous input source" shortcut (conflicts with iTerm)
+* Open 1Password, select sync via iCloud, load license, allow 1P Mini
 * Add licenses for:
   * SublimeText
   * BeyondCompare
-* Setup Safari settings:
-  * View -> Show favourites bar
-  * View -> Show status bar
-  * Preferences -> Advanced -> Show full address
-  * Preferences -> Advanced -> Show develop menu in menu bar
+* Open SourceTree, Preferences, untick Allow to modify global configurations
+* Run `compaudit | xargs chmod g-w,o-w` after enabling ZSH (doesn't work from script)
