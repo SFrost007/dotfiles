@@ -41,6 +41,7 @@
 	"theme_tab_separator": true,
 	"theme_tabset_line_visible": true,
 	"translate_tabs_to_spaces": true,
+	"ui_native_titlebar": true,
 	"wide_caret": true,
 	"word_wrap": "false"
 }
