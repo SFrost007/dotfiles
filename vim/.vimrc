@@ -92,6 +92,9 @@ autocmd BufReadPost *
   \   exe "normal! g`\"" |
   \ endif
 
+" Git commit messages show column limit
+autocmd FileType gitcommit set colorcolumn=+1
+
 
 " Allow :w!! to ask for sudo permission
 cmap w!! %!sudo tee > /dev/null %
