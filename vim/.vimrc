@@ -5,6 +5,7 @@ set nocompatible
 
 " ============================= General Config ================================
 set number								" Enable line numbers
+set number relativenumber
 set backspace=indent,eol,start			" Allow backspace in insert mode
 set history=1000						" Number of history commands to save
 set ruler								" Show the cursor position all the time
