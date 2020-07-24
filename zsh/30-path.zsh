@@ -15,3 +15,5 @@ addPathDir $HOME/Code/SDKs/flutter/bin
 addPathDir $GEM_HOME/bin
 # My scripts
 addPathDir $DOTFILES_DIR/bin
+# Machine-local (not git controlled) binaries
+addPathDir $HOME/.bin
