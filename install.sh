@@ -235,6 +235,7 @@ main() {
       # CLI dev tools
       install_brew cloc
       install_brew git
+      install_brew httpie
       install_brew howdoi
       install_brew hub
       install_brew jq
@@ -273,8 +274,11 @@ main() {
 
       title "Installing Homebrew Casks..."
       install_cask 1password6
+      install_cask alfred
       install_cask beyond-compare
+      install_cask bitbar
       install_cask cocoarestclient
+      install_cask db-browser-for-sqlite
       install_cask firefox
       install_cask flotato
       install_cask geekbench
@@ -282,6 +286,7 @@ main() {
       install_cask google-cloud-sdk
       install_cask ios-app-signer
       install_cask iterm2
+      install_cask mongodb-compass
       install_cask skitch
       install_cask slack
       install_cask sourcetree
