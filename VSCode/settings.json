@@ -12,5 +12,6 @@
     "enableSdkFormatter": false,
     "debugExternalLibraries": true,
     "debugSdkLibraries": true
-  }
+  },
+  "gitlens.codeLens.enabled": false
 }
