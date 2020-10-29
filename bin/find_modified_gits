@@ -1,0 +1,44 @@
+#!/bin/sh
+
+echo "Scanning for git repositories..."
+for dir in $(find . -name '.git' -type d | sort); do
+    dir=$(dirname $dir)
+    cd $dir
+
+    STATE=""
+
+    if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
+        STATE="untracked-files ${STATE}"
+    fi
+
+    if ! git diff --quiet 2> /dev/null; then
+        STATE="modified ${STATE}"
+    fi
+
+    if ! git diff --cached --quiet 2> /dev/null; then
+        STATE="staged ${STATE}"
+    fi
+
+    if [[ -n $(git stash list) ]]; then
+        STATE="stashed ${STATE}"
+    fi
+
+    if ! git fetch 2> /dev/null; then
+        STATE="noremote ${STATE}"
+    fi
+    
+    if [[ -n $(git br | grep 'ahead') ]]; then
+        STATE="unpushed ${STATE}"
+    fi
+    if [[ -n $(git br | grep 'behind') ]]; then
+        STATE="unpulled ${STATE}"
+    fi
+
+    if [[ -n $STATE ]]; then
+        echo "\033[1;31m${dir}: ${STATE}"
+    else
+        echo "\033[1;32mChecked ${dir}"
+    fi
+
+    cd - > /dev/null
+done
