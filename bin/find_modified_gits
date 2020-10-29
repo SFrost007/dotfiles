@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "Scanning for git repositories..."
+echo "\033[1;37mScanning for git repositories..."
 for dir in $(find . -name '.git' -type d | sort); do
     dir=$(dirname $dir)
     cd $dir
@@ -41,4 +41,11 @@ for dir in $(find . -name '.git' -type d | sort); do
     fi
 
     cd - > /dev/null
+done
+
+echo ""
+echo "\033[1;37mScanning for flagged nogit directories..."
+for dir in $(find . -name '.nogit' -type f | sort); do
+    dir=$(dirname $dir)
+    echo "\033[1;31m${dir}: Non-git"
 done
