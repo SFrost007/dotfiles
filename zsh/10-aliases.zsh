@@ -24,6 +24,7 @@ alias internalip='ifconfig | grep broadcast | awk -F " " '"'"'{print $2}'"'"
 alias externalip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias myip='echo "Internal: $(internalip)" && echo "External: $(externalip)"'
 alias wakezion='wakeonlan 2c:76:8a:ab:d4:56'
+alias wakedesky='wakeonlan 00:24:1d:cf:0f:d4'
 
 # Web-dev related stuff
 alias serve='python -m SimpleHTTPServer &'
