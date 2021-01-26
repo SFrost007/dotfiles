@@ -25,4 +25,4 @@ Host picam
 
 Host 351p
   Hostname 192.168.0.231
-  User ark
+  User root
