@@ -132,8 +132,7 @@ main() {
   if dir_exists "${OHMYZSH_DIR}"; then
     print_success "oh-my-zsh already installed"
   else
-    print_info "Installing oh-my-zsh..." && sleep 2
-    git clone -q --depth=1 https://github.com/robbyrussell/oh-my-zsh.git "${OHMYZSH_DIR}"
+    source "${DOTFILES_TOOLS_DIR}/install_ohmyzsh.sh"
   fi
 
 
