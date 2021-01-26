@@ -116,13 +116,7 @@ main() {
   # Homebrew
   ##############################################################################
   if is_mac; then
-    if command_exists "brew"; then
-      print_success "Homebrew already installed"
-    else
-      print_info "Installing Homebrew..." && sleep 2
-      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-      printf "\n\n"
-    fi
+    source "${DOTFILES_TOOLS_DIR}/macOS/install_homebrew.sh"
   else
     print_info "Not macOS, skipping Homebrew"
   fi
@@ -205,130 +199,7 @@ main() {
   #                                         /___/                               
   ##############################################################################
   if is_mac; then
-    title "Installing Homebrew packages..."
-    if command_exists "brew"; then
-      # Disable auto-update to prevent it triggering between packages
-      export HOMEBREW_NO_AUTO_UPDATE=1
-      # Load taps
-      brew tap homebrew/cask-versions
-
-      # General CLI tools
-      install_brew bat
-      install_brew figlet
-      install_brew gnu-sed
-      install_brew htop
-      install_brew iperf3
-      install_brew lsd
-      install_brew mas
-      install_brew neofetch
-      install_brew nmap
-      install_brew ranger
-      install_brew spark
-      install_brew the_silver_searcher
-      install_brew tmux
-      install_brew trash
-      install_brew tree
-      install_brew wakeonlan
-      install_brew watch
-      install_brew watchman
-      install_brew wget
-      # CLI dev tools
-      install_brew cloc
-      install_brew git
-      install_brew httpie
-      install_brew howdoi
-      install_brew hub
-      install_brew jq
-      install_brew node
-      install_brew python3
-      install_brew tig
-      install_brew yq
-      # iOS dev tools
-      install_brew bitrise
-      install_brew carthage
-      install_brew ideviceinstaller
-      install_brew ios-deploy
-      install_brew ios-sim
-      install_brew libimobiledevice
-      install_brew usbmuxd
-
-      if is_home_computer; then
-        print_info "Adding home computer brews"
-        # Terminal fun stuff
-        install_brew lynx
-        install_brew nethack
-        install_brew rogue
-        install_brew rtv
-        # Web dev tools
-        install_brew hugo
-        install_brew now-cli
-        # Image/video tools
-        #install_brew exiftool # Requires adoptopenjdk
-        #install_brew ffmpeg # Requires adoptopenjdk
-        install_brew imagemagick
-        install_brew jp2a
-        install_brew youtube-dl
-      elif is_work_computer; then
-        print_info "No work-only brews"
-      fi
-
-      title "Installing Homebrew Casks..."
-      install_cask 1password6
-      install_cask alfred
-      install_cask beyond-compare
-      install_cask bitbar
-      install_cask cocoarestclient
-      install_cask db-browser-for-sqlite
-      install_cask firefox
-      install_cask flotato
-      install_cask geekbench
-      install_cask google-chrome
-      install_cask google-cloud-sdk
-      install_cask ios-app-signer
-      install_cask iterm2
-      install_cask mongodb-compass
-      install_cask skitch
-      install_cask slack
-      install_cask sourcetree
-      install_cask sublime-text
-      install_cask visual-studio-code
-      install_cask vlc
-      install_cask vnc-viewer
-      print_warning "TODO: Skipping install of VirtualBox"
-      #install_cask virtualbox
-      #install_cask virtualbox-extension-pack
-
-      if is_home_computer; then
-        print_info "Adding home computer casks"
-        install_cask android-studio
-        print_warning "TODO: Skipping install of Discord"
-        #install_cask discord # Seems to cause problems with the install script
-        install_cask geotag
-        install_cask handbrake
-        install_cask openemu
-        install_cask skype
-        install_cask steam
-        install_cask transmission
-      elif is_work_computer; then
-        print_info "Adding work-only brews"
-        install_cask docker
-        #install_cask zoomus # Setup is disruptive, install manually later
-      fi
-
-      # Quicklook plugins
-      print_warning "TODO: Skipping install of QuickLook plugins"
-      #install_cask qlcolorcode
-      #install_cask qlimagesize
-      #install_cask qlmarkdown
-      #install_cask qlprettypatch
-      #install_cask qlstephen
-      #install_cask quicklook-csv
-      #install_cask quicklook-json
-      #install_cask suspicious-package
-      #qlmanage -r
-    else
-      print_warning "Skipping Brew & Cask packages as homebrew isn't installed"
-    fi
+    source "${DOTFILES_TOOLS_DIR}/packages/install_brews.sh"
 
     if command_exists mas; then
       title "Installing Mac App Store apps..."
@@ -829,42 +700,6 @@ install_npm() {
     else
       print_error "Error installing $1"
     fi
-  fi
-}
-
-install_brew() {
-  # Try the quick check for whether the brew's folder exists.
-  # If that fails, try the slower but more reliable "brew ls --versions"
-  # (for things like python3).
-  if dir_exists "$(brew --cellar)/$1"; then
-    print_success "$1 already installed"
-  elif brew ls --versions $1 > /dev/null; then
-    print_success "$1 already installed"
-  else
-    print_info "Installing $1..."
-    if is_big_sur; then
-      # Don't consume the installation log so we can check what's happening
-      brew install $1
-    else
-      if [[ $(brew install $1) ]]; then
-        print_success "Installed $1"
-      else
-        print_error "Error installing $1"
-      fi
-    fi
-  fi
-}
-
-install_cask() {
-  # Use the same logic as above to check for cask installations
-  if dir_exists "$(brew --prefix)/Caskroom/$1"; then
-    print_success "$1 already installed"
-  elif brew cask ls --versions $1 &> /dev/null; then
-    print_success "$1 already installed"
-  else
-    print_info "Installing $1..."
-    brew cask install $1
-    print_success "Installed $1"
   fi
 }
 
