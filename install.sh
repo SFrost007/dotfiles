@@ -172,19 +172,9 @@ main() {
   elif is_linux; then
     print_warning "TODO: Install apt packages"
   fi
-
+  # General packages
   source "${DOTFILES_TOOLS_DIR}/packages/install_npms.sh"
-
-
-
-  title "Installing Ruby Gem packages..."
-  if command_exists "gem"; then
-    install_gem cocoapods
-    install_gem xcodeproj
-    install_gem xcpretty
-  else
-    print_warning "Skipping Ruby Gems as gem isn't installed"
-  fi
+  source "${DOTFILES_TOOLS_DIR}/packages/install_gems.sh"
 
 
   title "Finishing touches..."
@@ -305,15 +295,6 @@ copy_ssh_key_and_open_github() {
 ################################################################################
 # Package installations
 ################################################################################
-install_gem() {
-  if gem list "$1" --installed > /dev/null; then
-    print_success "$1 already installed"
-  else
-    gem install "$1"
-    print_success "Installed $1"
-  fi
-}
-
 
 install_font() {
   local FONTS_DIR
