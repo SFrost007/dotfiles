@@ -154,43 +154,9 @@ main() {
   ##############################################################################
   # Link dotfiles
   ##############################################################################
-  _link_dotfiles() {
-    title "Linking dotfiles..."
-    local TARGET_DIR=$HOME
-    local overwrite_all=false backup_all=false skip_all=false
-
-    link_file ${DOTFILES_DIR}/git/.gitconfig ${TARGET_DIR}/.gitconfig
-    link_file ${DOTFILES_DIR}/rtv/.mailcap ${TARGET_DIR}/.mailcap
-    link_file ${DOTFILES_DIR}/tmux/oh-my-tmux/.tmux.conf ${TARGET_DIR}/.tmux.conf
-    link_file ${DOTFILES_DIR}/tmux/.tmux.conf.local ${TARGET_DIR}/.tmux.conf.local
-    link_file ${DOTFILES_DIR}/vim/.vimrc ${TARGET_DIR}/.vimrc
-    link_file ${DOTFILES_DIR}/vim/.vim ${TARGET_DIR}/.vim
-    link_file ${DOTFILES_DIR}/zsh/.zshrc ${TARGET_DIR}/.zshrc
-    link_file ${DOTFILES_DIR}/zsh/.p10k.zsh ${TARGET_DIR}/.p10k.zsh
-    link_file ${DOTFILES_DIR}/zsh/.zshenv ${TARGET_DIR}/.zshenv
-    link_file ${DOTFILES_DIR}/zsh/.hushlogin ${TARGET_DIR}/.hushlogin
-
-    mkdir -p ${TARGET_DIR}/.config/rtv
-    link_file ${DOTFILES_DIR}/rtv/rtv.cfg ${TARGET_DIR}/.config/rtv/rtv.cfg
-
-    mkdir -p ${TARGET_DIR}/.ssh
-    link_file ${DOTFILES_DIR}/ssh/config ${TARGET_DIR}/.ssh/config
-    link_file ${DOTFILES_DIR}/ssh/config.d ${TARGET_DIR}/.ssh/config.d
-
-    if is_mac; then
-      XCUSERDATA="${HOME}/Library/Developer/Xcode/UserData"
-      mkdir -p "${XCUSERDATA}"
-      link_file ${DOTFILES_DIR}/Xcode/xcdebugger "${XCUSERDATA}/xcdebugger"
-      link_file ${DOTFILES_DIR}/Xcode/FontAndColorThemes "${XCUSERDATA}/FontAndColorThemes"
-      link_file ${DOTFILES_DIR}/Xcode/KeyBindings "${XCUSERDATA}/KeyBindings"
-    fi
-
-    print_if_skipped $symlink_skip_count "dotfiles symlinks"
-
-    # Load environment variables for the rest of the script
-    source "${DOTFILES_DIR}/zsh/20-exports.zsh"
-  }
-  _link_dotfiles
+  source "${DOTFILES_TOOLS_DIR}/link_dotfiles.sh"
+  # Load environment variables for the rest of the script
+  source "${DOTFILES_DIR}/zsh/20-exports.zsh"
 
 
 
@@ -376,78 +342,6 @@ copy_ssh_key_and_open_github() {
     print_warning "TODO: Copy SSH key without pbcopy"
   fi
 }
-
-
-################################################################################
-# Symlink creator with prompts
-################################################################################
-symlink_skip_count=0
-link_file() {
-  local src=$1 dst=$2
-  local overwrite= backup= skip= action=
-
-  # Protect against doing something unintended and destructive, like removing a
-  # directory when trying to link a file and choosing "Overwrite"
-  if [[ -d "$dst" && ! -d "$src" ]]; then
-    print_error "Linking source file to destination directory not supported"; return 1
-  fi
-
-  if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]; then
-    if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]; then
-      local currentSrc=`readlink "$dst"`
-      if [ "$currentSrc" == "$src" ]; then
-        skip=true;
-      else
-        _print_in_white " ❓  File already exists: $(basename "$dst").\n     [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all? "
-        read -n 1 action
-        echo ""
-
-        case "$action" in
-          o )
-            overwrite=true;;
-          O )
-            overwrite_all=true;;
-          b )
-            backup=true;;
-          B )
-            backup_all=true;;
-          s )
-            skip=true;;
-          S )
-            skip_all=true;;
-          * )
-            ;;
-        esac
-      fi
-    fi
-  fi
-
-  overwrite=${overwrite:-$overwrite_all}
-  backup=${backup:-$backup_all}
-  skip=${skip:-$skip_all}
-
-  if [ "$overwrite" == "true" ]; then
-    rm -rf "$dst"
-    print_deleted "Removed $dst"
-  fi
-
-  if [ "$backup" == "true" ]; then
-    mv "$dst" "${dst}.bak"
-    print_success "Moved $dst to ${dst}.bak"
-  fi
-
-  if [ "$skip" == "true" ]; then
-    symlink_skip_count=$((symlink_skip_count+1))
-    #print_info "Skipped $dst"
-  fi
-
-  # Actually create the symlink if required
-  if [ "$skip" != "true" ]; then
-    ln -s "$src" "$dst"
-    print_success "Created $dst"
-  fi
-}
-
 
 ################################################################################
 # Package installations
