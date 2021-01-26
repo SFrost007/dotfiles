@@ -173,18 +173,8 @@ main() {
     print_warning "TODO: Install apt packages"
   fi
 
+  source "${DOTFILES_TOOLS_DIR}/packages/install_npms.sh"
 
-  title "Installing NPM packages..."
-  if command_exists "npm"; then
-    # General tools
-    install_npm diff-so-fancy
-    # Webby development
-    install_npm express-generator
-    install_npm mongodb
-    install_npm typescript
-  else
-    print_warning "Skipping NPM packages as npm isn't installed"
-  fi
 
 
   title "Installing Ruby Gem packages..."
@@ -315,21 +305,6 @@ copy_ssh_key_and_open_github() {
 ################################################################################
 # Package installations
 ################################################################################
-install_npm() {
-  if dir_exists "$(npm config get prefix)/lib/node_modules/$1"; then
-    print_success "$1 already installed"
-  elif [[ $(npm list -g --depth=0 --parseable | grep -e "/${1}$") ]]; then
-    print_success "$1 already installed"
-  else
-    print_info "Installing $1..."
-    if [[ $(npm install -g --no-progress $1) ]]; then
-      print_success "Installed $1"
-    else
-      print_error "Error installing $1"
-    fi
-  fi
-}
-
 install_gem() {
   if gem list "$1" --installed > /dev/null; then
     print_success "$1 already installed"
