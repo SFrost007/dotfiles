@@ -20,3 +20,6 @@
 [submodule "zsh/omz-custom/powerlevel10k"]
 	path = zsh/omz-custom/powerlevel10k
 	url = https://github.com/romkatv/powerlevel10k.git
+[submodule "git/diff-so-fancy"]
+	path = git/diff-so-fancy
+	url = https://github.com/so-fancy/diff-so-fancy.git
