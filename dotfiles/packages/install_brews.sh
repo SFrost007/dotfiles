@@ -28,7 +28,6 @@ BREWS=(
   wget
   # CLI dev tools
   cloc
-  diff-so-fancy
   git
   httpie
   howdoi
