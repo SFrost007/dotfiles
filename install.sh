@@ -125,8 +125,6 @@ main() {
     print_info "Not macOS, skipping Homebrew"
   fi
 
-
-
   ##############################################################################
   # oh-my-zsh
   ##############################################################################
@@ -136,20 +134,15 @@ main() {
     source "${DOTFILES_TOOLS_DIR}/install_ohmyzsh.sh"
   fi
 
-
-
   ##############################################################################
   # Submodules update
   ##############################################################################
   if command_exists "git"; then
-    # TODO: Could do something more "intelligent" here, but this works..
     print_info "Updating submodules..."
     git submodule update --init
   else
     print_warning "Skipping submodule update as 'git' does not exist"
   fi
-
-
 
   ##############################################################################
   # Link dotfiles
@@ -159,13 +152,8 @@ main() {
   source "${DOTFILES_DIR}/zsh/20-exports.zsh"
 
 
-
   ##############################################################################
-  #                    ___           __                                         
-  #                   / _ \___ _____/ /_____ ____ ____ ___                      
-  #                  / ___/ _ `/ __/  '_/ _ `/ _ `/ -_|_-<                      
-  #                 /_/   \_,_/\__/_/\_\\_,_/\_, /\__/___/                      
-  #                                         /___/                               
+  # Packages
   ##############################################################################
   if is_mac; then
     source "${DOTFILES_TOOLS_DIR}/packages/install_brews.sh"
@@ -205,9 +193,9 @@ main() {
   if is_mac; then
     if is_first_run; then
       if ask "Set macOS default preferences?"; then
-        source "${DOTFILES_TOOLS_DIR}/macos/setup_defaults.sh"
+        source "${DOTFILES_TOOLS_DIR}/macOS/setup_defaults.sh"
       fi
-      cp "${DOTFILES_TOOLS_DIR}/macos/Post-Setup TODO.txt" "${HOME}/Desktop"
+      cp "${DOTFILES_TOOLS_DIR}/macOS/Post-Setup TODO.txt" "${HOME}/Desktop"
     else
       print_info "Not first run, skipping macOS defaults script"
     fi
@@ -228,16 +216,6 @@ main() {
   \n"
 }
 
-
-
-
-################################################################################
-#          __ __    __               ____              __  _             
-#         / // /__ / /__  ___ ____  / __/_ _____  ____/ /_(_)__  ___  ___
-#        / _  / -_) / _ \/ -_) __/ / _// // / _ \/ __/ __/ / _ \/ _ \(_-<
-#       /_//_/\__/_/ .__/\__/_/   /_/  \_,_/_//_/\__/\__/_/\___/_//_/___/
-#                 /_/                                                    
-################################################################################
 
 
 ################################################################################
@@ -293,10 +271,6 @@ copy_ssh_key_and_open_github() {
 
 
 ################################################################################
-#                  ___                          _      __ 
-#                 / _ \__ _____    ___ ________(_)__  / /_
-#                / , _/ // / _ \  (_-</ __/ __/ / _ \/ __/
-#               /_/|_|\_,_/_//_/ /___/\__/_/ /_/ .__/\__/ 
-#                                             /_/         
+# Run script
 ################################################################################
 main
