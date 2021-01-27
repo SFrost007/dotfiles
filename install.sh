@@ -46,6 +46,7 @@ main() {
       print_warning "Skipping check for /Library/Developer/CommandLineTools;"
       print_warning "xcode-select --install doesn't work on Big Sur anyway."
       print_warning "You should install Xcode 12 and enable its tools."
+      print_waiting
     elif file_exists "/Library/Developer/CommandLineTools/usr/bin/git"; then
       print_success "Command Line Tools installed"
     else

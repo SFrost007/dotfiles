@@ -200,7 +200,8 @@ is_mac() {
 }
 
 is_big_sur() {
-  if [ $(sw_vers -productVersion) == "10.16" ]; then return 0; else return 1; fi
+  if ! is_mac; then return 1; fi
+  if (( $(echo "$(sw_vers -productVersion) > 11" | bc -l) )); then return 0; else return 1; fi
 }
 
 is_win() {
