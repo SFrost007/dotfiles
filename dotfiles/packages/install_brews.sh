@@ -59,7 +59,6 @@ CASKS=(
   flotato
   #geekbench
   #google-chrome
-  google-cloud-sdk
   ios-app-signer
   iterm2
   mongodb-compass
