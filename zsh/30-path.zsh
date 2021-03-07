@@ -19,3 +19,8 @@ addPathDir $DOTFILES_DIR/bin
 addPathDir $DOTFILES_DIR/git/diff-so-fancy
 # Machine-local (not git controlled) binaries
 addPathDir $HOME/.bin
+
+# Special handling for homebrew on M1 macs
+if [ -e /opt/homebrew/bin/brew ]; then
+  eval $(/opt/homebrew/bin/brew shellenv)
+fi

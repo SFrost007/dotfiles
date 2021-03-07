@@ -49,7 +49,7 @@ BREWS=(
 
 
 CASKS=(
-  1password6
+  homebrew/cask-versions/1password6
   #alfred
   beyond-compare
   #bitbar

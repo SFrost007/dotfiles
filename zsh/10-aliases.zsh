@@ -53,5 +53,10 @@ case $(uname) in
     alias ql='qlmanage -p'
     alias caskupgrade='brew cask upgrade --greedy'
     alias addDockSpace='defaults write com.apple.dock persistent-apps -array-add "{\"tile-type\"=\"spacer-tile\";}" && killall Dock'
+    # M1 Mac specific aliases
+    if [ "$(uname -m)" = "arm64" ]; then
+      # Cocoapods doesn't yet work on M1 Macs, so alias 'pod' to run it via Rosetta
+      alias pod='arch -x86_64 pod'
+    fi
     ;;
 esac

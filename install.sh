@@ -9,6 +9,7 @@ OHMYZSH_DIR="${ZSH:-$HOME/.oh-my-zsh}"
 DOTFILES_TOOLS_DIR="${DOTFILES_DIR}/dotfiles"
 title_count=1
 
+# TODO: This fails if DOTFILES_DIR doesn't exist..
 source "${DOTFILES_TOOLS_DIR}/inc/funcs.sh"
 
 main() {
@@ -36,18 +37,7 @@ main() {
   # Install macOS Command Line Tools (inc. git) if not already done
   ##############################################################################
   if is_mac; then
-    if is_big_sur; then
-      # Note: We need to skip installing the CommandLineTools on Big Sur for now
-      # and force scripts to use the Xcode 12 versions. This means manually
-      # installing Xcode 12 and enabling its CommandLineTools, *and* ensuring
-      # /Library/Developer/CommandLineTools doesn't exist to supercede it in
-      # the path. This is left as an exercise for the user.
-      print_warning "Big Sur Beta!"
-      print_warning "Skipping check for /Library/Developer/CommandLineTools;"
-      print_warning "xcode-select --install doesn't work on Big Sur anyway."
-      print_warning "You should install Xcode 12 and enable its tools."
-      print_waiting
-    elif file_exists "/Library/Developer/CommandLineTools/usr/bin/git"; then
+    if file_exists "/Library/Developer/CommandLineTools/usr/bin/git"; then
       print_success "Command Line Tools installed"
     else
       print_info "Requesting install of Xcode Command Line Tools"
