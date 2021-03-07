@@ -19,6 +19,7 @@ BREWS=(
   ranger
   spark
   the_silver_searcher
+  tldr
   tmux
   trash
   tree

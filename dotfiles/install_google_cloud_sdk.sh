@@ -10,6 +10,7 @@ fi
 
 export CLOUDSDK_CORE_DISABLE_PROMPTS=1
 export CLOUDSDK_INSTALL_DIR="${HOME}/Code/SDKs/"
+mkdir -p CLOUDSDK_INSTALL_DIR
 
 # Note this will attempt to execute the install script and fail with:
 #    The following components are unknown [kuberun, anthoscli]
