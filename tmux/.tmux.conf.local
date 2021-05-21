@@ -255,7 +255,7 @@ tmux_conf_copy_to_os_clipboard=true
 #set -g status-position top
 
 # Show titles on panes
-set -g pane-border-status top
+#set -g pane-border-status top
 
 # Enable mouse support
 set -g mouse on

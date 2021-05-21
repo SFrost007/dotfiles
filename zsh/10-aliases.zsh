@@ -5,6 +5,7 @@ alias itermClear="printf '\e]50;ClearScrollback\a'"
 alias rezsh='source ~/.zshrc'
 alias dotfiles='subl ~/.dotfiles'
 alias sedrecurse='find . -type f -print | xargs sed -i ""'
+alias tmuxtitle='twintitle $1'
 alias twintitle='tmux rename-window $1'
 alias tpanetitle='printf "\033]2;%s\033\\" "$1"'
 alias termtitle='echo -ne "\033]0;$@\007";'
