@@ -23,6 +23,10 @@ Host pizerow
 Host picam
   Hostname 192.168.0.213
 
-Host 351p
+Host 351elec
   Hostname 192.168.0.231
   User root
+
+Host arkOS
+  Hostname 192.168.0.231
+  User ark
