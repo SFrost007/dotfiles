@@ -39,7 +39,6 @@ BREWS=(
   tig
   yq
   # iOS dev tools
-  #bitrise
   carthage
   ideviceinstaller
   ios-deploy
@@ -52,9 +51,11 @@ BREWS=(
 CASKS=(
   homebrew/cask-versions/1password6
   #alfred
+  balenaetcher
   beyond-compare
   #bitbar
   cocoarestclient
+  dash
   db-browser-for-sqlite
   firefox
   flotato
@@ -71,9 +72,6 @@ CASKS=(
   vnc-viewer
   zoom
 )
-
-print_warning "TODO: Skipping scripted install of VirtualBox cask"
-#CASKS+=(virtualbox virtualbox-extension-pack)
 
 
 print_warning "TODO: Skipping install of QuickLook plugins"
@@ -97,12 +95,9 @@ if is_home_computer; then
     nethack
     rogue
     rtv
-    # Web dev tools
-    #hugo
-    #now-cli
     # Image/video tools
     #exiftool # Requires adoptopenjdk
-    #ffmpeg # Requires adoptopenjdk
+    ffmpeg
     imagemagick
     jp2a
     youtube-dl
