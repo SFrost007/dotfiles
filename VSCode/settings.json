@@ -13,5 +13,6 @@
     "debugExternalLibraries": true,
     "debugSdkLibraries": true
   },
-  "gitlens.codeLens.enabled": false
+  "gitlens.codeLens.enabled": false,
+  "workbench.colorTheme": "One Dark Pro"
 }
