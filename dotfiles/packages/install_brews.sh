@@ -94,7 +94,6 @@ if is_home_computer; then
     lynx
     nethack
     rogue
-    rtv
     # Image/video tools
     #exiftool # Requires adoptopenjdk
     ffmpeg
