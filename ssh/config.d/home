@@ -23,10 +23,24 @@ Host pizerow
 Host picam
   Hostname 192.168.0.213
 
+# Anbernic devices - all share the same USB adapter so end up with the same
+# reserved IP. So use HostkeyAlias to differentiate in known_hosts.
+
 Host 351elec
+  HostkeyAlias 351elec
   Hostname 192.168.0.231
   User root
 
 Host arkOS
+  HostkeyAlias arkOS
   Hostname 192.168.0.231
   User ark
+
+Host 350m
+  HostkeyAlias 350m
+  Hostname 192.168.0.231
+  User root
+
+Host 350mUSB
+  Hostname 10.1.1.2
+  User root
