@@ -54,6 +54,7 @@ CASKS=(
   balenaetcher
   beyond-compare
   #bitbar
+  choosy
   cocoarestclient
   dash
   db-browser-for-sqlite
