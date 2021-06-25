@@ -26,6 +26,7 @@ code --install-extension usernamehw.errorlens
 code --install-extension zhuangtongfa.material-theme
 # Javascript
 code --install-extension msjsdiag.vscode-react-native
+code --install-extension ronnidc.nunjucks
 # Dart
 code --install-extension Dart-Code.dart-code
 code --install-extension Dart-Code.flutter
@@ -38,4 +39,3 @@ code --install-extension wingrunr21.vscode-ruby
 # Docker
 code --install-extension ms-azuretools.vscode-docker
 code --install-extension ms-vscode-remote.remote-containers
-

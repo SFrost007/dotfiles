@@ -14,5 +14,6 @@
     "debugSdkLibraries": true
   },
   "gitlens.codeLens.enabled": false,
-  "workbench.colorTheme": "One Dark Pro"
+  "workbench.colorTheme": "One Dark Pro",
+  "terminal.integrated.tabs.enabled": true
 }
