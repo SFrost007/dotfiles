@@ -68,7 +68,7 @@
 	# %d  = ref names (branch)
 	# %an = author name
 	# %cr = commit relative date
-	myformat = "format:%C(red)%h %C(white)%s - %C(yellow)%an %C(green)%cr%C(blue)%d%C(reset)"
+	myformat = "format:%C(red)%h%C(blue)%d %C(white)%s - %C(yellow)%an %C(green)%cr%C(reset)"
 
 [help]
 	autocorrect = 25
