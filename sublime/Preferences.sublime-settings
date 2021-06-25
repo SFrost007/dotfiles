@@ -17,7 +17,7 @@
 	"highlight_line": true,
 	"ignored_packages":
 	[
-		"Vintage"
+		"Vintage",
 	],
 	"rulers":
 	[
@@ -43,5 +43,5 @@
 	"translate_tabs_to_spaces": true,
 	"ui_native_titlebar": true,
 	"wide_caret": true,
-	"word_wrap": "false"
+	"word_wrap": "false",
 }
