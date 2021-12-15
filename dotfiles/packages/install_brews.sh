@@ -65,6 +65,7 @@ CASKS=(
   ios-app-signer
   iterm2
   mongodb-compass
+  sf-symbols
   skitch
   sourcetree
   sublime-text
