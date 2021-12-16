@@ -51,8 +51,6 @@ BREWS=(
 CASKS=(
   #alfred
   beyond-compare
-  #bitbar
-  choosy
   cocoarestclient
   dash
   db-browser-for-sqlite
@@ -142,7 +140,7 @@ _main() {
   fi
 
   # Restart QuickLook
-  qlmanage -r
+  # qlmanage -r
 }
 
 install_brew() {
