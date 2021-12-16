@@ -42,6 +42,7 @@
 	"theme_tabset_line_visible": true,
 	"translate_tabs_to_spaces": true,
 	"ui_native_titlebar": true,
+	"update_check": false,
 	"wide_caret": true,
 	"word_wrap": "false",
 }

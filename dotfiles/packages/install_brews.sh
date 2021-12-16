@@ -68,7 +68,6 @@ CASKS=(
   sf-symbols
   skitch
   sourcetree
-  sublime-text
   visual-studio-code
   vlc
   vnc-viewer
@@ -137,6 +136,7 @@ _main() {
     for pkg in ${CASKS[@]}; do
       install_cask $pkg
     done
+    install_sublime
   else
     print_warning "Skipping Brew & Cask packages as homebrew isn't installed"
   fi
@@ -181,5 +181,12 @@ install_cask() {
   fi
 }
 
+# Sublime text switched to new licensing with v4, so install the last v3 build on HomeBrew (3.211, 10/4/2021).
+# Technically the last working build is 4105, from https://download.sublimetext.com/sublime_text_build_4105_mac.zip
+# or https://download.sublimetext.com/sublime_text_build_4105_x64.zip (Windows).
+# `sublime-text.rb` in this directory is saved from https://raw.githubusercontent.com/Homebrew/homebrew-cask/57fc71c2e4e9cd78071eb44faced090567be8bfe/Casks/sublime-text.rb
+install_sublime() {
+  brew install -s sublime-text.rb
+}
 
 _main
