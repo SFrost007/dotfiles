@@ -49,9 +49,7 @@ BREWS=(
 
 
 CASKS=(
-  homebrew/cask-versions/1password6
   #alfred
-  balenaetcher
   beyond-compare
   #bitbar
   choosy
@@ -59,18 +57,14 @@ CASKS=(
   dash
   db-browser-for-sqlite
   firefox
-  flotato
   #geekbench
-  #google-chrome
   ios-app-signer
   iterm2
-  mongodb-compass
   sf-symbols
   skitch
   sourcetree
   visual-studio-code
   vlc
-  vnc-viewer
   zoom
 )
 
@@ -104,14 +98,18 @@ if is_home_computer; then
   )
 
   CASKS+=(
+    homebrew/cask-versions/1password6
     #android-studio
+    balenaetcher
     discord
     geotag
     #handbrake
+    mongodb-compass
     openemu
     skype
     steam
     transmission
+    vnc-viewer
   )
 fi
 
@@ -119,6 +117,8 @@ if is_work_computer; then
   print_info "Adding work computer brews/casks"
   CASKS+=(
     docker
+    #flotato
+    google-chrome
     slack
   )
 fi
