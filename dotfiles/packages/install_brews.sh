@@ -36,6 +36,7 @@ BREWS=(
   jq
   node
   python3
+  swiftlint
   tig
   yq
   # iOS dev tools
@@ -90,6 +91,7 @@ if is_home_computer; then
     # Image/video tools
     #exiftool # Requires adoptopenjdk
     ffmpeg
+    google-cloud-sdk
     imagemagick
     jp2a
     youtube-dl
@@ -117,6 +119,7 @@ if is_work_computer; then
     docker
     #flotato
     google-chrome
+    insomnia
     slack
   )
 fi
