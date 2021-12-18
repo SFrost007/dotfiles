@@ -48,6 +48,8 @@ defaults write com.apple.finder NewWindowTarget -string "PfHm"
 defaults write -g AppleShowAllExtensions -bool true
 defaults write NSGlobalDomain NSToolbarTitleViewRolloverDelay -float 0.1
 defaults write com.apple.finder QLEnableTextSelection -bool true # QuickLook selection
+# Show proxy icons
+defaults write com.apple.finder NSWindowSupportsAutomaticInlineTitle -bool false
 # Set desktop to snap-to-grid mode
 /usr/libexec/PlistBuddy -c \
   "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid"\
@@ -62,6 +64,8 @@ defaults write com.apple.dock magnification -bool true
 defaults write com.apple.dock largesize -int 48
 defaults write com.apple.dock mru-spaces -bool false # Don't reorder spaces
 defaults write com.apple.dock orientation -string right
+defaults write com.apple.dock autohide-time-modifier -float 0.25
+defaults write com.apple.dock autohide-delay -float 0
 
 
 # Restart apps to take effect
