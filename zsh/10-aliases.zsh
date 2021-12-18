@@ -9,6 +9,7 @@ alias tmuxtitle='twintitle $1'
 alias twintitle='tmux rename-window $1'
 alias tpanetitle='printf "\033]2;%s\033\\" "$1"'
 alias termtitle='echo -ne "\033]0;$@\007";'
+alias zipeachfile='for file in *; do zip ${file%.*}.zip $file; done'
 
 # Override built-in commands
 alias cp='rsync --progress -ah'
