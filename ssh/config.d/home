@@ -36,10 +36,15 @@ Host arkOS
   Hostname 192.168.0.231
   User ark
 
-Host 350m
-  HostkeyAlias 350m
+Host 350adam
+  HostkeyAlias 350adam
   Hostname 192.168.0.231
-  User root
+  User od
+
+Host 350beta
+  HostkeyAlias 350beta
+  Hostname 192.168.0.231
+  User od
 
 Host 350mUSB
   Hostname 10.1.1.2
