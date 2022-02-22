@@ -12,6 +12,8 @@ function addPathDir() {
 # SDKs
 addPathDir $HOME/Code/SDKs/flutter/bin
 addPathDir $HOME/Code/SDKs/google-cloud-sdk/bin
+addPathDir $HOME/Code/SDKs/android-cli-tools/bin
+addPathDir $HOME/Code/SDKs/android-platform-tools
 # Ruby gems
 addPathDir $GEM_HOME/bin
 # My scripts
