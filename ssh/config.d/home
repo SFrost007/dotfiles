@@ -1,51 +1,27 @@
-Host pizero pizerow picam pithree
-  User pi
-
 Host lappy zion
   User simon
-
-Host turing
-  User simon
-  Hostname orangeninja.com
 
 Host zion
   Hostname 192.168.0.200
 
+##### Raspberry Pis #####
+
+Host pizero pizerow picam pithree
+  User pi
 Host pithree
   Hostname 192.168.0.210
-
 Host pizero
   Hostname 192.168.0.211
-
 Host pizerow
   Hostname 192.168.0.212
-
 Host picam
   Hostname 192.168.0.213
 
-# Anbernic devices - all share the same USB adapter so end up with the same
-# reserved IP. So use HostkeyAlias to differentiate in known_hosts.
+##### Anbernic devices #####
 
 Host 351elec
   HostkeyAlias 351elec
   Hostname 192.168.0.231
   User root
-
-Host arkOS
-  HostkeyAlias arkOS
-  Hostname 192.168.0.231
-  User ark
-
-Host 350adam
-  HostkeyAlias 350adam
-  Hostname 192.168.0.231
-  User od
-
-Host 350beta
-  HostkeyAlias 350beta
-  Hostname 192.168.0.231
-  User od
-
-Host 350mUSB
-  Hostname 10.1.1.2
+Host rg552
   User root
