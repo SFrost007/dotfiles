@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Symlinks all defined dotfiles into place, with some platform-specific additions.
 # Each line in FILES_TO_LINK denotes a pair of filenames; the first is used as
