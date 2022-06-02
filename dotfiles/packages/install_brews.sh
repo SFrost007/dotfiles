@@ -62,6 +62,7 @@ CASKS=(
   sf-symbols
   skitch
   sourcetree
+  utm
   visual-studio-code
   vlc
   zoom
@@ -104,6 +105,7 @@ if is_home_computer; then
     discord
     geotag
     #handbrake
+    maestral
     mongodb-compass
     openemu
     skype
