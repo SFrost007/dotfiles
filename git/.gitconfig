@@ -14,8 +14,11 @@
 	br = "branch --format=\"%(if)%(HEAD)%(then)%(color:green)%(end)%(HEAD) %(align:position=left,width=40)%(refname:short)%(end) %(if)%(push:remotename)%(then)%(color:blue)%(push:remotename) %(end)%(if)%(upstream:track,nobracket)%(then)%(color:red)%(upstream:track,nobracket) %(end)%(color:reset)%(contents:subject)\""
 	email = config user.email
 	amend = commit --amend --no-edit
-	tempignore = update-index --assume-unchanged
-	unignore = update-index --no-assume-unchanged
+
+	tempignore = update-index --skip-worktree
+	unignore = update-index --no-skip-worktree
+	ignored = "!git ls-files -v | grep ^S"
+
 	currbranch = symbolic-ref --short HEAD
 	incoming = "!git fetch -q && git log --pretty=myformat --no-merges $(git currbranch)..origin/$(git currbranch);"
 	incomingdiff = "!git fetch -q && git diff --stat $(git currbranch)..origin/$(git currbranch);"

@@ -152,7 +152,7 @@ tmux_conf_theme_right_separator_sub=''
 #     - #{username}
 #     - #{username_ssh}
 tmux_conf_theme_status_left=' #S #{prefix} ||'
-tmux_conf_theme_status_right=' #{loadavg} | #{username}#{root} | #{hostname} '
+tmux_conf_theme_status_right=' #{loadavg} | #{username}#{root} | #{hostname} (#(ipconfig getifaddr en0))'
 
 # status left style
 tmux_conf_theme_status_left_fg='#000000,#e4e4e4,#e4e4e4'  # black, white , white

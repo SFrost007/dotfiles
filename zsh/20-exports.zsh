@@ -13,4 +13,4 @@ fi
 # Ensure dotfiles are listed first in ls, and enable coloured output
 export LC_COLLATE="C"
 export CLICOLOR=true
-export LSCOLORS="exfxcxdxbxegedabagacad"
+export LS_COLORS="exfxcxdxbxegedabagacad"

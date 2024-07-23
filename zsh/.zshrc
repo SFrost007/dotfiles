@@ -29,7 +29,7 @@ setopt PUSHDSILENT
 
 # Load oh-my-zsh plugins
 plugins=(
-	alias-tips
+	#alias-tips
 	colored-man-pages
 	gcloud
 	z

@@ -22,7 +22,7 @@ if type trash >/dev/null 2>&1; then
 fi
 
 # Networking
-alias internalip='ifconfig | grep broadcast | awk -F " " '"'"'{print $2}'"'"
+alias internalip='ipconfig getifaddr en0'
 alias externalip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias myip='echo "Internal: $(internalip)" && echo "External: $(externalip)"'
 alias wakezion='wakeonlan 2c:76:8a:ab:d4:56'
