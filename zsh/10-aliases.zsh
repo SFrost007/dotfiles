@@ -3,7 +3,7 @@
 # Terminal utils
 alias itermClear="printf '\e]50;ClearScrollback\a'"
 alias rezsh='source ~/.zshrc'
-alias dotfiles='subl ~/.dotfiles'
+alias dotfiles='code ~/.dotfiles'
 alias sedrecurse='find . -type f -print | xargs sed -i ""'
 alias tmuxtitle='twintitle $1'
 alias twintitle='tmux rename-window $1'
