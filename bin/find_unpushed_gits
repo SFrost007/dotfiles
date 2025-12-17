@@ -1,12 +1,16 @@
-#!/bin/bash
+#!/bin/sh
 
-for dir in $(find . -name '.git' -type d)
+for dir in $(find . -name '.git' -type d | grep -v ".build")
 do
     dir=$(dirname $dir)
     cd $dir
 
-    if [[ -n $(git outgoing) ]]; then
-        echo "${dir}"
+    if [[ -z "$(git remote)" ]]; then
+        echo "\033[1;33m${dir} has no remotes"
+    elif [[ -n $(git outgoing) ]]; then
+        echo "\033[1;31m${dir} has unpushed commits"
+    else
+        echo "\033[1;32mChecked ${dir}"
     fi
 
     cd - > /dev/null

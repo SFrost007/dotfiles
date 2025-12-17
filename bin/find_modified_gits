@@ -34,7 +34,9 @@ for dir in $(find . -name '.git' -type d | sort); do
         STATE="unpulled ${STATE}"
     fi
 
-    if [[ -n $STATE ]]; then
+    if [ "$STATE" = "unpulled " ]; then
+        echo "\033[1;33m${dir}: ${STATE}"
+    elif [[ -n $STATE ]]; then
         echo "\033[1;31m${dir}: ${STATE}"
     else
         echo "\033[1;32mChecked ${dir}"
