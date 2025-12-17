@@ -33,16 +33,6 @@
                </BreakpointActionProxy>
             </Actions>
             <Locations>
-               <Location
-                  uuid = "56D14CFB-BD6B-4988-BFF0-AF619390A9B6 - ade5d303d30d7f37"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[UIViewController viewDidAppear:]"
-                  moduleName = "UIKitCore"
-                  usesParentBreakpointCondition = "Yes"
-                  offsetFromSymbolStart = "0">
-               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -56,16 +46,6 @@
             symbolName = "UIViewAlertForUnsatisfiableConstraints"
             moduleName = "">
             <Locations>
-               <Location
-                  uuid = "5EE01E98-FF79-49EB-A774-165E507D4130 - ba3ad5676a792f38"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "UIViewAlertForUnsatisfiableConstraints"
-                  moduleName = "UIKitCore"
-                  usesParentBreakpointCondition = "Yes"
-                  offsetFromSymbolStart = "0">
-               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -79,16 +59,6 @@
             symbolName = "CTFontLogSystemFontNameRequest"
             moduleName = "">
             <Locations>
-               <Location
-                  uuid = "CADFC492-B872-4C1D-B67B-44EDE5216B00 - cc795092e7cc15c2"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CTFontLogSystemFontNameRequest"
-                  moduleName = "CoreText"
-                  usesParentBreakpointCondition = "Yes"
-                  offsetFromSymbolStart = "0">
-               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -102,16 +72,6 @@
             symbolName = "UIApplicationEndBackgroundTaskError"
             moduleName = "">
             <Locations>
-               <Location
-                  uuid = "F276C417-58C3-4361-847C-AD4EC8AE2606 - f2e10d4c094b9b69"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "UIApplicationEndBackgroundTaskError"
-                  moduleName = "UIKitCore"
-                  usesParentBreakpointCondition = "Yes"
-                  offsetFromSymbolStart = "0">
-               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -133,16 +93,6 @@
                </BreakpointActionProxy>
             </Actions>
             <Locations>
-               <Location
-                  uuid = "2C666E9F-5C93-4F03-9DD2-989F79709D62 - 9a6bdd25733d424f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "objc_msgSend"
-                  moduleName = "libobjc.A.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  offsetFromSymbolStart = "0">
-               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -156,16 +106,6 @@
             symbolName = "NSKVODeallocateBreak"
             moduleName = "">
             <Locations>
-               <Location
-                  uuid = "19403C9C-8975-4DE6-8C05-1040A5C60123 - 52ae26cba8f8e259"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "NSKVODeallocateBreak"
-                  moduleName = "Foundation"
-                  usesParentBreakpointCondition = "Yes"
-                  offsetFromSymbolStart = "0">
-               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -194,16 +134,6 @@
                </BreakpointActionProxy>
             </Actions>
             <Locations>
-               <Location
-                  uuid = "0211286C-4078-43B9-917F-05E0F884E494 - 68815ea4fdaa5b95"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[UIViewController viewDidLoad]"
-                  moduleName = "UIKitCore"
-                  usesParentBreakpointCondition = "Yes"
-                  offsetFromSymbolStart = "0">
-               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
