@@ -55,21 +55,27 @@ BREWS=(
 
 CASKS=(
   #alfred
+  android-file-transfer
+  balenaetcher
   beyond-compare
   cocoarestclient
-  dash
+  #dash
   db-browser-for-sqlite
+  docker
   firefox
   #geekbench
+  google-chrome
   ios-app-signer
   iterm2
+  itsycal
+  monitorcontrol
   sf-symbols
-  skitch
+  #skitch
   sourcetree
-  utm
+  #utm
   visual-studio-code
   vlc
-  zoom
+  #zoom
 )
 
 
@@ -101,7 +107,6 @@ if is_home_computer; then
 
   CASKS+=(
     homebrew/cask-versions/1password6
-    #android-studio
     balenaetcher
     discord
     geotag
@@ -119,10 +124,12 @@ fi
 if is_work_computer; then
   print_info "Adding work computer brews/casks"
   CASKS+=(
-    docker
+    android-studio
     #flotato
-    google-chrome
-    insomnia
+    #insomnia
+    microsoft-teams
+    postman
+    proxyman
     slack
   )
 fi
