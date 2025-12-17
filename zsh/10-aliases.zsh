@@ -21,6 +21,9 @@ if type trash >/dev/null 2>&1; then
   alias rm='trash'
 fi
 
+# More memorable wrapper for QR decoding library and stripping prefix
+qrdecode() { zbarimg -q "$1" | sed 's/^QR-Code://' }
+
 # Networking
 alias internalip='ipconfig getifaddr en0'
 alias externalip='dig +short myip.opendns.com @resolver1.opendns.com'

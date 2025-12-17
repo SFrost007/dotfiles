@@ -27,6 +27,7 @@ BREWS=(
   watch
   watchman
   wget
+  zbar
   # CLI dev tools
   cloc
   git
