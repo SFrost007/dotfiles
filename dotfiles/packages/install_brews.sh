@@ -8,6 +8,8 @@ title "Installing Homebrew packages..."
 BREWS=(
   # General CLI tools
   bat
+  exiftool
+  ffmpeg
   figlet
   gnu-sed
   htop
@@ -47,7 +49,7 @@ BREWS=(
   ios-deploy
   #ios-sim
   libimobiledevice
-  usbmuxd
+  libusbmuxd
 )
 
 
@@ -91,9 +93,6 @@ if is_home_computer; then
     lynx
     nethack
     rogue
-    # Image/video tools
-    #exiftool # Requires adoptopenjdk
-    ffmpeg
     google-cloud-sdk
     imagemagick
     jp2a
