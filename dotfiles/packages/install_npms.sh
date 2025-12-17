@@ -5,10 +5,6 @@ source "${BASH_SOURCE%/*}/../inc/funcs.sh"
 NPM_PACKAGES=(
   # General tools
   diff-so-fancy
-  # Web development
-  express-generator
-  mongodb
-  typescript
 )
 
 _main() {
