@@ -5,5 +5,5 @@ Host *
   RemoteForward 52698 localhost:52698
 
 # Exclusions from above forwarding rule
-Host github.com gitlab.com localhost
+Host github.com gitlab.com localhost github-personal
   ClearAllForwardings Yes
