@@ -1,15 +1,15 @@
-Host lappy zion
+Host lappy
   User simon
-
-Host zion
-  Hostname 192.168.0.200
 
 ##### Raspberry Pis #####
 
-Host pizero pizerow picam pithree
+Host pizero pizerow picam
   User pi
 Host pithree
-  Hostname 192.168.0.210
+  User simon
+
+Host pithree
+  Hostname 192.168.0.203
 Host pizero
   Hostname 192.168.0.211
 Host pizerow
@@ -17,11 +17,27 @@ Host pizerow
 Host picam
   Hostname 192.168.0.213
 
-##### Anbernic devices #####
+##### Retro Handhelds #####
 
-Host 351elec
-  HostkeyAlias 351elec
-  Hostname 192.168.0.231
+Host odin
+  Hostname 192.168.0.204
+  Port 2222
+
+Host steamdeck
+  Hostname 192.168.0.212
+  User deck
+
+Host rgb30
   User root
-Host rg552
+
+Host arkOS
+  Hostname 192.168.0.211
+  User ark
+
+Host brick
+  Hostname 192.168.0.214
+  User trimui
+
+# Tailscale name
+Host cloudserver
   User root
