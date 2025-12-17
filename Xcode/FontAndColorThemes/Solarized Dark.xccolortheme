@@ -28,8 +28,6 @@
 	<string>0.933333 0.909804 0.835294 1</string>
 	<key>DVTConsoleTextSelectionColor</key>
 	<string>0.027451 0.211765 0.258824 1</string>
-	<key>DVTDebuggerInstructionPointerColor</key>
-	<string>0.513725 0.580392 0.588235 1</string>
 	<key>DVTFontAndColorVersion</key>
 	<integer>1</integer>
 	<key>DVTFontSizeModifier</key>
@@ -150,6 +148,16 @@
 		<string>0.576471 0.631373 0.631373 1</string>
 		<key>xcode.syntax.preprocessor</key>
 		<string>0.709804 0.537255 0 1</string>
+		<key>xcode.syntax.regex</key>
+		<string>0.796078 0.294118 0.0862745 1</string>
+		<key>xcode.syntax.regex.capturename</key>
+		<string>0.521569 0.6 0 1</string>
+		<key>xcode.syntax.regex.charname</key>
+		<string>0.521569 0.6 0 1</string>
+		<key>xcode.syntax.regex.number</key>
+		<string>0.862745 0.196078 0.184314 1</string>
+		<key>xcode.syntax.regex.other</key>
+		<string>0.576471 0.631373 0.631373 1</string>
 		<key>xcode.syntax.string</key>
 		<string>0.796078 0.294118 0.0862745 1</string>
 		<key>xcode.syntax.url</key>
