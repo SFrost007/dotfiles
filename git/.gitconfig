@@ -26,6 +26,7 @@
 	supush = "!git push --set-upstream origin $(git currbranch);"
 	difflog = "!git log $1 ^$(git currbranch) --oneline"
 	conflicts = "!git diff --name-only | uniq | xargs code --"
+	recents = "branch -a --sort=-committerdate"
 
 [color]
 	diff = auto
