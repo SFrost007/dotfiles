@@ -94,3 +94,5 @@
 	first-run = false
 [pull]
 	rebase = false
+[init]
+	defaultBranch = main
