@@ -45,4 +45,5 @@
 	"update_check": false,
 	"wide_caret": true,
 	"word_wrap": "false",
+	"index_files": true,
 }
