@@ -7,7 +7,6 @@ GEMS=(
 
 if is_mac; then
   GEMS+=(
-    cocoapods
     xcodeproj
     xcpretty
   )

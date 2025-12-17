@@ -42,6 +42,7 @@ BREWS=(
   yq
   # iOS dev tools
   carthage
+  cocoapods
   ideviceinstaller
   ios-deploy
   #ios-sim
