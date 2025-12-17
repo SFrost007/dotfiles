@@ -8,7 +8,7 @@
     "editor.suggest.snippetsPreventQuickSuggestions": false,
     "editor.suggestSelection": "first",
     "editor.tabCompletion": "onlySnippets",
-    "editor.wordBasedSuggestions": false,
+    "editor.wordBasedSuggestions": "off",
     "enableSdkFormatter": false,
     "debugExternalLibraries": true,
     "debugSdkLibraries": true
@@ -18,5 +18,10 @@
   "terminal.integrated.tabs.enabled": true,
   "editor.inlineSuggest.enabled": true,
   "security.workspace.trust.untrustedFiles": "open",
-  "editor.largeFileOptimizations": false
+  "editor.largeFileOptimizations": false,
+  "editor.guides.bracketPairs": true,
+  "workbench.startupEditor": "none",
+  "workbench.editorAssociations": {
+    "*.svg": "default"
+  }
 }
