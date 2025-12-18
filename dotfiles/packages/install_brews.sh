@@ -6,76 +6,83 @@ title "Installing Homebrew packages..."
 
 
 BREWS=(
-  # General CLI tools
-  bat
-  exiftool
-  ffmpeg
-  figlet
-  gnu-sed
-  htop
-  iperf3
-  lsd
-  mas
-  neofetch
-  nmap
-  ranger
-  spark
-  the_silver_searcher
-  tldr
-  tmux
-  trash
-  tree
-  wakeonlan
-  watch
-  watchman
-  wget
-  zbar
-  # CLI dev tools
-  cloc
-  git
-  httpie
-  howdoi
-  hub
-  jq
-  node
-  python3
-  swiftlint
-  tig
-  yq
-  # iOS dev tools
-  carthage
-  cocoapods
-  ideviceinstaller
-  ios-deploy
-  #ios-sim
-  libimobiledevice
-  libusbmuxd
+  bat                   # Colorised 'cat' replacement
+  carthage              # iOS Package manager
+  cloc                  # Count lines of code
+  cocoapods             # iOS Package manager
+  exiftool              # Photo metadata
+  ffmpeg                # Video processing
+  figlet                # Ascii art
+  git                   # Up to date SCM (+lfs +extras)
+  #grep                  # GNU-compatible 'grep'
+  gnu-sed               # Search/replace
+  #howdoi                # Primitive AI assistant
+  #htop                  # Task manager
+  #hub                   # Github helper
+  #httpie                # Web request helper
+  ideviceinstaller      # iOS IPA installer
+  imagemagick           # Image manipulation tool
+  ios-deploy            # iOS IPA installer
+  iperf3                # Network performance monitor
+  jq                    # JSON processor
+  #libadwaita            # Gnome UI library?
+  lsd                   # Colorised/iconised 'ls' replacement
+  mas                   # Mac App Store
+  #mvfst                # "QUIC transport protocol implementation"?
+  neofetch              # System info
+  nmap                  # Network tool
+  node                  # Updated Javascript runtime
+  pngcrush              # PNG Compressor
+  python3               # Updated Python runtime
+  #ranger                # CLI file browser
+  spark                 # CLI graphs (used by scripts)
+  swiftlint             # Swift linter
+  #the_silver_searcher   # 'grep' replacement
+  #tig                   # CLI git browser
+  tldr                  # Shorter man pages
+  tmux                  # Terminal Multiplexer
+  #trash                 # Shortcut to move things to the trash
+  tree                  # Recursive file lister
+  wakeonlan             # Network tool
+  watch                 # Re-run terminal commands periodically
+  watchman              # Run commands on file system changes
+  wget                  # Network tool
+  xcbeautify            # Building swift outside Xcode
+  xcode-build-server    # Building swift outside Xcode
+  yq                    # YAML processor
+  yt-dlp                # Youtube downloader
+  zbar                  # QR code scanner
 )
 
 
 CASKS=(
   #alfred
-  android-file-transfer
-  balenaetcher
-  beyond-compare
-  cocoarestclient
-  #dash
-  db-browser-for-sqlite
-  docker
-  firefox
-  #geekbench
-  google-chrome
-  ios-app-signer
-  iterm2
-  itsycal
-  monitorcontrol
-  sf-symbols
-  #skitch
-  sourcetree
-  #utm
-  visual-studio-code
-  vlc
-  #zoom
+  android-file-transfer             # Copy files to Android devices
+  balenaetcher                      # Flash SD cards
+  beyond-compare                    # Diff tool (licensed)
+  chatgpt                           # AI Agent
+  cocoarestclient                   # HTTP request tester
+  #dash                              # Documentation browser
+  db-browser-for-sqlite             # SQLite browser
+  devcleaner                        # Clean up iOS dev resources
+  docker                            # Container manager
+  firefox                           # Web browser
+  #flotato                           # Website app-ifier
+  geekbench                         # Benchmark tool
+  google-chrome                     # Web browser
+  ios-app-signer                    # iOS IPA tool
+  iterm2                            # Terminal app
+  itsycal                           # Menubar calendar
+  #microsoft-teams                   # Video call tool (just use the site)
+  monitorcontrol                    # Control brightness/volume natively
+  sf-symbols                        # iOS dev tool
+  #skitch                            # Image markup tool
+  slack                             # Chat
+  sourcetree                        # Git browser
+  sublime-text                      # Text editor
+  trae                              # AI agent IDE
+  visual-studio-code                # Text editor
+  vlc                               # Media player
 )
 
 
@@ -95,42 +102,78 @@ print_warning "TODO: Skipping install of QuickLook plugins"
 if is_home_computer; then
   print_info "Adding home computer brews/casks"
   BREWS+=(
-    # Terminal fun stuff
-    lynx
-    nethack
-    rogue
-    google-cloud-sdk
-    imagemagick
-    jp2a
-    youtube-dl
+    apktool                         # Reverse-engineer APKs
+    bchunk                          # Convert bin/cue to iso/cdr
+    certbot                         # LetsEncrypt helper
+    chargepoint/xcparse/xcparse     # Extract screenshots from XCTest
+    #cmake                           # Build tool
+    #folderify                       # Add icons to folders, built into Tahoe
+    freeimage                       # Graphics library
+    #gobject-introspection           # No idea
+    #google-cloud-sdk                # SDK for managing Google Cloud instances
+    #guile                           # No idea
+    httrack                         # Website mirror-er
+    #icu4c                           # No idea
+    jp2a                            # JPEG to Ascii converter
+    llvm                            # Compiler
+    lynx                            # Terminal web browser
+    #mbedtls                         # No idea
+    nethack                         # Terminal game
+    #nghttp2                         # C HTTP library
+    p7zip                           # 7zip library
+    rclone                          # Network tool
+    rogue                           # Terminal game
+    rom-tools                       # ROM management
+    #six                             # Deprecated python library
+    #smartmontools                   # HDD SMART monitor
+    #unison                          # File management tool
+    xdelta                          # ROM patch tool
+    #youtube-dl                      # Replaced by yt-dlp
   )
 
   CASKS+=(
+    #android-studio                  # Android IDE
     homebrew/cask-versions/1password6
-    balenaetcher
-    discord
-    geotag
-    #handbrake
-    maestral
-    mongodb-compass
-    openemu
-    skype
-    steam
-    transmission
-    vnc-viewer
+    discord                         # Chat
+    geotag                          # Photo EXIF editor  
+    handbrake                       # Video processor
+    #iina                            # Media player
+    #maestral                        # Dropbox replacement
+    #mongodb-compass                 # Database browser
+    multipatch                      # ROM patching tool
+    openemu                         # Emulator frontend
+    #openmtp                         # Android file browser
+    #qlstephen                       # Quicklook tool
+    #skype                           # Video call tool (deprecated)
+    #spotify                         # Streaming music
+    steam                           # Games store
+    syncthing                       # File sync utility
+    #syntax-highlight                # Quicklook code viewer (deprecated?)
+    transmission                    # "File utility"
+    utm                             # Virtual machine manager
+    vnc-viewer                      # Remote desktop client
+    #xcodes                          # Xcode downloader
+    #zoom                           # Video calls
   )
 fi
 
 if is_work_computer; then
   print_info "Adding work computer brews/casks"
+  BREWS+=(
+    fontforge                       # Font manipulation
+  )
+
   CASKS+=(
-    android-studio
-    #flotato
-    #insomnia
-    microsoft-teams
-    postman
-    proxyman
-    slack
+    android-studio                  # Android IDE
+    claude                          # AI Agent
+    codex                           # AI Agent
+    fontforge                       # Font manipulation
+    ghostty                         # Terminal app
+    #insomnia                       # REST client
+    ollama                          # AI Tooling
+    postman                         # REST client/documentation
+    proxyman                        # iOS request interceptor
+    sequel-ace                      # Database browser
   )
 fi
 
