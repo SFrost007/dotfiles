@@ -1,7 +1,7 @@
 #!/bin/sh
 
 echo "\033[1;37mScanning for git repositories..."
-for dir in $(find . -name '.git' -type d | sort); do
+for dir in $(find . -name '.git' -type d | grep -v ".build" | sort); do
     dir=$(dirname $dir)
     cd $dir
 
@@ -20,7 +20,12 @@ for dir in $(find . -name '.git' -type d | sort); do
     fi
 
     if [[ -n $(git stash list) ]]; then
-        STATE="stashed ${STATE}"
+        STASHES=$(git stash list | wc -l | awk '{print $1}')
+        if [ "${STASHES}" -eq 1 ] && git stash list | grep -qi 'Logging'; then
+            STATE="stashed (Logging) ${STATE}"
+        else
+            STATE="stashed (${STASHES}) ${STATE}"
+        fi
     fi
 
     if ! git fetch 2> /dev/null; then
@@ -30,16 +35,16 @@ for dir in $(find . -name '.git' -type d | sort); do
     if [[ -n $(git br | grep 'ahead') ]]; then
         STATE="unpushed ${STATE}"
     fi
-    if [[ -n $(git br | grep 'behind') ]]; then
+    if [[ -n $(git br | grep 'behind' | grep '*') ]]; then
         STATE="unpulled ${STATE}"
     fi
 
-    if [ "$STATE" = "unpulled " ]; then
-        echo "\033[1;33m${dir}: ${STATE}"
+    if [[ "$STATE" == "unpulled " || "$STATE" == "stashed (Logging) " || "$STATE" == "unpulled stashed (Logging) " ]]; then
+        echo "\033[1;33m${dir}: ${STATE}" # Yellow
     elif [[ -n $STATE ]]; then
-        echo "\033[1;31m${dir}: ${STATE}"
+        echo "\033[1;31m${dir}: ${STATE}" # Red
     else
-        echo "\033[1;32mChecked ${dir}"
+        echo "\033[1;32mChecked ${dir}" # Green
     fi
 
     cd - > /dev/null
