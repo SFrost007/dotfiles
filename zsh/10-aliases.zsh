@@ -17,9 +17,9 @@ alias du='du -d1 -h'
 if type lsd >/dev/null 2>&1; then
   alias ls='lsd'
 fi
-if type trash >/dev/null 2>&1; then
-  alias rm='trash'
-fi
+#if type trash >/dev/null 2>&1; then
+#  alias rm='trash'
+#fi
 
 # More memorable wrapper for QR decoding library and stripping prefix
 qrdecode() { zbarimg -q "$1" | sed 's/^QR-Code://' }
