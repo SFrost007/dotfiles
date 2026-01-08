@@ -1,6 +1,8 @@
 #!/bin/sh
 
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+export HOMEBREW_NO_ENV_HINTS=1
+
 export GEM_HOME="${HOME}/.gem"
 export CLOUDSDK_PYTHON="/usr/bin/python"
 
