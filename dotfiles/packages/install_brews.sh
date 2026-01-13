@@ -171,7 +171,6 @@ if is_work_computer; then
     fontforge                       # Font manipulation
     ghostty                         # Terminal app
     #insomnia                       # REST client
-    ollama                          # AI Tooling
     postman                         # REST client/documentation
     proxyman                        # iOS request interceptor
     sequel-ace                      # Database browser
