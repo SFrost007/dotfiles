@@ -169,7 +169,6 @@ if is_work_computer; then
     claude-code                     # AI Agent
     codex                           # AI Agent
     fontforge                       # Font manipulation
-    ghostty                         # Terminal app
     #insomnia                       # REST client
     postman                         # REST client/documentation
     proxyman                        # iOS request interceptor
