@@ -17,3 +17,6 @@ xcuserdata
 
 # 'my_' prefixed files at the top level, e.g. for local scripts or diffs
 my_*
+
+# Claude local files
+.claude/settings.local.json
