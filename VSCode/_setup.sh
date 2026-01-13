@@ -20,3 +20,4 @@ echo ""
 code --install-extension eamodio.gitlens
 code --install-extension earshinov.filter-lines
 code --install-extension usernamehw.errorlens
+code --install-extension anthropic.claude-code

@@ -60,3 +60,6 @@ case $(uname) in
     alias addDockSpace='defaults write com.apple.dock persistent-apps -array-add "{\"tile-type\"=\"spacer-tile\";}" && killall Dock'
     ;;
 esac
+
+# AI
+claude-add-sentry() { claude mcp add --scope project --transport http sentry https://mcp.sentry.dev/mcp/appoly/$1 }

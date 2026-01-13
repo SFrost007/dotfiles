@@ -166,6 +166,7 @@ if is_work_computer; then
   CASKS+=(
     android-studio                  # Android IDE
     claude                          # AI Agent
+    claude-code                     # AI Agent
     codex                           # AI Agent
     fontforge                       # Font manipulation
     ghostty                         # Terminal app
