@@ -8,12 +8,22 @@
 	attributesfile = ~/.dotfiles/git/.gitattributes
 
 [alias]
-	cp = cherry-pick
 	st = status
 	lg = log --graph --pretty=myformat --abbrev-commit --date=relative
-	br = "branch --format=\"%(if)%(HEAD)%(then)%(color:green)%(end)%(HEAD) %(align:position=left,width=40)%(refname:short)%(end) %(if)%(push:remotename)%(then)%(color:blue)%(push:remotename) %(end)%(if)%(upstream:track,nobracket)%(then)%(color:red)%(upstream:track,nobracket) %(end)%(color:reset)%(contents:subject)\""
+	# Custom branch list format: Name, pushed, date, ahead/behind, commit message
+	br = "branch --format=\"\
+%(if)%(HEAD)%(then)%(color:green)%(end)%(HEAD) \
+%(align:position=left,width=40)%(refname:short)%(end) \
+%(if)%(push:remotename)%(then)%(color:blue)%(if:equals=origin)%(push:remotename)%(then)✓%(else)%(push:remotename)%(end)%(else)%(color:red)x%(end) \
+%(color:yellow)%(committerdate:short)%(color:reset) \
+%(if)%(upstream:track)%(then)%(color:red)%(upstream:track,nobracket) %(end)\
+%(color:reset)%(contents:subject)\
+\""
+ 	# br sorted by recents
+	brr = "br --sort=-committerdate"
 	email = config user.email
 	amend = commit --amend --no-edit
+	pick = cherry-pick
 
 	tempignore = update-index --skip-worktree
 	unignore = update-index --no-skip-worktree
