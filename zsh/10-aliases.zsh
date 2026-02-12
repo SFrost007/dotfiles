@@ -63,3 +63,4 @@ esac
 
 # AI
 claude-add-sentry() { claude mcp add --scope project --transport http sentry https://mcp.sentry.dev/mcp/appoly/$1 }
+alias cb='cd ~/.agents/clawbot-lite && claude --dangerously-skip-permissions'
