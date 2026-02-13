@@ -9,7 +9,7 @@
 
 [alias]
 	st = status
-	lg = log --graph --pretty=myformat --abbrev-commit --date=relative
+	lg = "!f() { git log --graph --pretty=myformat --abbrev-commit --date=relative --color=always \"$@\" | git-lg-decorate | less -RFX; }; f"
 	# Custom branch list format: Name, pushed, date, ahead/behind, commit message
 	br = "branch --format=\"\
 %(if)%(HEAD)%(then)%(color:green)%(end)%(HEAD) \

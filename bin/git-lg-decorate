@@ -1,0 +1,48 @@
+#!/usr/bin/env perl
+# git-lg-decorate: replaces redundant "origin/branch" decorations with
+# a green tick appended to the local branch name.
+
+use strict;
+use warnings;
+
+while (my $line = <STDIN>) {
+    if ($line =~ /^(.*?)\(([^)]+)\)(.*)$/s) {
+        my ($before, $decs, $after) = ($1, $2, $3);
+        my @refs = split /,\s*/, $decs;
+
+        # Categorise refs
+        my (%locals, %has_origin);
+        for my $ref (@refs) {
+            (my $name = $ref) =~ s/^HEAD -> //;
+            if ($name =~ m{^origin/(.+)}) {
+                $has_origin{$1} = 1;
+            } elsif ($name !~ m{^tag:\s} && $name ne 'HEAD') {
+                $locals{$name} = 1;
+            }
+        }
+
+        # Rebuild: replace origin/X with ✓, merge tick with following entry
+        my @new;
+        my $pending_tick = 0;
+        for my $ref (@refs) {
+            (my $name = $ref) =~ s/^HEAD -> //;
+            if ($name =~ m{^origin/(.+)}) {
+                if ($locals{$1}) {
+                    $pending_tick = 1;
+                    next;
+                }
+            }
+            if ($pending_tick) {
+                push @new, "\x1b[32m✓\x1b[34m $ref";
+                $pending_tick = 0;
+            } else {
+                push @new, $ref;
+            }
+        }
+        # Tick was the last entry (no following ref to merge with)
+        push @new, "\x1b[32m✓\x1b[34m" if $pending_tick;
+
+        $line = $before . '(' . join(', ', @new) . ')' . $after;
+    }
+    print $line;
+}
