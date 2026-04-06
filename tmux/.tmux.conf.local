@@ -267,3 +267,7 @@ set -g visual-activity on
 set -g visual-silence on
 set -g visual-bell off
 set -g bell-action any
+
+# Fix nested shift+enter
+bind -n S-Enter send-keys "[13;2u"
+
