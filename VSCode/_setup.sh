@@ -17,8 +17,17 @@ ln -s "${DOTFILES_DIR}/VSCode/snippets/" "${VSCODE_USER_DIR}"
 echo ""
 
 # General
+code --install-extension anthropic.claude-code
 code --install-extension eamodio.gitlens
 code --install-extension earshinov.filter-lines
-code --install-extension usernamehw.errorlens
-code --install-extension anthropic.claude-code
+code --install-extension llvm-vs-code-extensions.lldb-dap
+code --install-extension mechatroner.rainbow-csv
+code --install-extension ms-python.debugpy
+code --install-extension ms-python.python
+code --install-extension ms-python.vscode-pylance
+code --install-extension ms-python.vscode-python-envs
 code --install-extension shd101wyy.markdown-preview-enhanced
+code --install-extension swiftlang.swift-vscode
+code --install-extension tomoki1207.pdf
+code --install-extension usernamehw.errorlens
+code --install-extension yzane.markdown-pdf
