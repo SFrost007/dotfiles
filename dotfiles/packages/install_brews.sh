@@ -85,18 +85,11 @@ CASKS=(
   vlc                               # Media player
 )
 
-
-print_warning "TODO: Skipping install of QuickLook plugins"
-#CASKS+=(
-#  qlcolorcode 
-#  qlimagesize 
-#  qlmarkdown 
-#  qlprettypatch 
-#  qlstephen
-#  quicklook-csv
-#  quicklook-json
-#  suspicious-package
-#)
+# Quicklook plugins (with wrapper apps for newer)
+CASKS+=(
+  qlmarkdown
+  syntax-highlight
+)
 
 
 if is_home_computer; then
