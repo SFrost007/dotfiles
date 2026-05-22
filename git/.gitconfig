@@ -24,6 +24,11 @@
 	email = config user.email
 	amend = commit --amend --no-edit
 	pick = cherry-pick
+	# fixup & autosquash workflow
+	fix = "!f() { \
+			if [ -z \"$1\" ]; then echo 'usage: git fix <commit-sha>' >&2; return 1; fi; \
+			git commit --fixup=\"$1\" && git rebase --autosquash --autostash \"$1\"^; \
+	}; f"
 
 	tempignore = update-index --skip-worktree
 	unignore = update-index --no-skip-worktree
