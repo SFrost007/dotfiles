@@ -38,6 +38,6 @@ Host brick
   Hostname 192.168.0.214
   User trimui
 
-# Tailscale name
 Host cloudserver
+  Hostname cs.simonfrost.dev
   User root
