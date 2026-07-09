@@ -12,8 +12,9 @@ alias termtitle='echo -ne "\033]0;$@\007";'
 alias zipeachfile='for file in *; do zip ${file%.*}.zip $file; done'
 
 # Override built-in commands
-alias cp='rsync --progress -ah'
-alias du='du -d1 -h'
+# Note: Removed again due to instability with scripts/agents assuming 'cp' is stock
+#alias cp='rsync --progress -ah'
+#alias du='du -d1 -h'
 if type lsd >/dev/null 2>&1; then
   alias ls='lsd'
 fi
