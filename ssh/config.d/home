@@ -19,16 +19,9 @@ Host picam
 
 ##### Retro Handhelds #####
 
-Host odin
-  Hostname 192.168.0.204
-  Port 2222
-
 Host steamdeck
   Hostname 192.168.0.212
   User deck
-
-Host rgb30
-  User root
 
 Host arkOS
   Hostname 192.168.0.211
@@ -36,7 +29,7 @@ Host arkOS
 
 Host brick
   Hostname 192.168.0.214
-  User trimui
+  User root
 
 Host cloudserver
   Hostname cs.simonfrost.dev
