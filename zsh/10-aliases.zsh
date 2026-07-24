@@ -13,6 +13,8 @@ alias zipeachfile='for file in *; do zip ${file%.*}.zip $file; done'
 
 # Override built-in commands
 # Note: Removed again due to instability with scripts/agents assuming 'cp' is stock
+# `cp -R dir dest` breaks under this alias — rsync reads -R as --relative and recreates the full
+# source path inside dest (e.g. dest/path/to/dir/...) instead of copying the directory.
 #alias cp='rsync --progress -ah'
 #alias du='du -d1 -h'
 if type lsd >/dev/null 2>&1; then
