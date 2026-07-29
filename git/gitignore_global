@@ -20,3 +20,6 @@ my_*
 
 # Claude local files
 .claude/settings.local.json
+
+# Muxy AI status cache - probably a temporary bug but keeps showing up
+status-cache.json
