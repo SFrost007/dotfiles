@@ -28,11 +28,15 @@ for dir in $(find . -name '.git' -type d | grep -v ".build" | sort); do
         fi
     fi
 
-    if ! git fetch 2> /dev/null; then
+    HAS_REMOTE=1
+    if [[ -z "$(git remote)" ]]; then
+        HAS_REMOTE=0
+        STATE="noorigin ${STATE}"
+    elif ! git fetch 2> /dev/null; then
         STATE="noremote ${STATE}"
     fi
     
-    if [[ -n $(git br | grep 'ahead') ]]; then
+    if [ "${HAS_REMOTE}" -eq 1 ] && [[ -n $(git log --branches --not --remotes --oneline) ]]; then
         STATE="unpushed ${STATE}"
     fi
     if [[ -n $(git br | grep 'behind' | grep '*') ]]; then
