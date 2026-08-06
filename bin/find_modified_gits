@@ -1,27 +1,29 @@
 #!/bin/sh
 
 echo "\033[1;37mScanning for git repositories..."
-for dir in $(find . -name '.git' -type d | grep -v ".build" | sort); do
-    dir=$(dirname $dir)
-    cd $dir
+find . -name '.git' -type d -print0 | sort -z | while IFS= read -r -d '' path; do
+    case "$path" in
+        *.build*) continue ;;
+    esac
+    dir="${path%/*}"
 
     STATE=""
 
-    if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
+    if [[ -n $(git -C "$dir" ls-files --other --exclude-standard 2> /dev/null) ]]; then
         STATE="untracked-files ${STATE}"
     fi
 
-    if ! git diff --quiet 2> /dev/null; then
+    if ! git -C "$dir" diff --quiet 2> /dev/null; then
         STATE="modified ${STATE}"
     fi
 
-    if ! git diff --cached --quiet 2> /dev/null; then
+    if ! git -C "$dir" diff --cached --quiet 2> /dev/null; then
         STATE="staged ${STATE}"
     fi
 
-    if [[ -n $(git stash list) ]]; then
-        STASHES=$(git stash list | wc -l | awk '{print $1}')
-        if [ "${STASHES}" -eq 1 ] && git stash list | grep -qi 'Logging'; then
+    if [[ -n $(git -C "$dir" stash list) ]]; then
+        STASHES=$(git -C "$dir" stash list | wc -l | awk '{print $1}')
+        if [ "${STASHES}" -eq 1 ] && git -C "$dir" stash list | grep -qi 'Logging'; then
             STATE="stashed (Logging) ${STATE}"
         else
             STATE="stashed (${STASHES}) ${STATE}"
@@ -29,17 +31,17 @@ for dir in $(find . -name '.git' -type d | grep -v ".build" | sort); do
     fi
 
     HAS_REMOTE=1
-    if [[ -z "$(git remote)" ]]; then
+    if [[ -z "$(git -C "$dir" remote)" ]]; then
         HAS_REMOTE=0
         STATE="noorigin ${STATE}"
-    elif ! git fetch 2> /dev/null; then
+    elif ! git -C "$dir" fetch 2> /dev/null; then
         STATE="noremote ${STATE}"
     fi
     
-    if [ "${HAS_REMOTE}" -eq 1 ] && [[ -n $(git log --branches --not --remotes --oneline) ]]; then
+    if [ "${HAS_REMOTE}" -eq 1 ] && [[ -n $(git -C "$dir" log --branches --not --remotes --oneline) ]]; then
         STATE="unpushed ${STATE}"
     fi
-    if [[ -n $(git br | grep 'behind' | grep '*') ]]; then
+    if [[ -n $(git -C "$dir" br | grep 'behind' | grep '*') ]]; then
         STATE="unpulled ${STATE}"
     fi
 
@@ -50,13 +52,10 @@ for dir in $(find . -name '.git' -type d | grep -v ".build" | sort); do
     else
         echo "\033[1;32mChecked ${dir}" # Green
     fi
-
-    cd - > /dev/null
 done
 
 echo ""
 echo "\033[1;37mScanning for flagged nogit directories..."
-for dir in $(find . -name '.nogit' -type f | sort); do
-    dir=$(dirname $dir)
-    echo "\033[1;31m${dir}: Non-git"
+find . -name '.nogit' -type f -print0 | sort -z | while IFS= read -r -d '' path; do
+    echo "\033[1;31m${path%/*}: Non-git"
 done
