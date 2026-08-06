@@ -1,12 +1,25 @@
 #!/bin/sh
 
+FETCH_JOBS=12
+
+REPOS=$(mktemp)
+FETCH_FAILURES=$(mktemp)
+trap 'rm -f "${REPOS}" "${FETCH_FAILURES}"' EXIT
+trap 'rm -f "${REPOS}" "${FETCH_FAILURES}"; exit 130' INT TERM
+
 echo "\033[1;37mScanning for git repositories..."
 find . -name '.git' -type d -print0 | sort -z | while IFS= read -r -d '' path; do
     case "$path" in
         *.build*) continue ;;
     esac
-    dir="${path%/*}"
+    printf '%s\0' "${path%/*}"
+done > "${REPOS}"
 
+echo "\033[1;37mFetching remotes ($(tr -cd '\0' < "${REPOS}" | wc -c | tr -d ' ') repositories, ${FETCH_JOBS} at a time)..."
+xargs -0 -P "${FETCH_JOBS}" -I {} sh -c 'git -C "$1" fetch --quiet 2> /dev/null || printf "%s\n" "$1"' _ {} \
+    < "${REPOS}" > "${FETCH_FAILURES}"
+
+while IFS= read -r -d '' dir; do
     STATE=""
 
     if [[ -n $(git -C "$dir" ls-files --other --exclude-standard 2> /dev/null) ]]; then
@@ -34,7 +47,7 @@ find . -name '.git' -type d -print0 | sort -z | while IFS= read -r -d '' path; d
     if [[ -z "$(git -C "$dir" remote)" ]]; then
         HAS_REMOTE=0
         STATE="noorigin ${STATE}"
-    elif ! git -C "$dir" fetch 2> /dev/null; then
+    elif grep -qxF "$dir" "${FETCH_FAILURES}"; then
         STATE="noremote ${STATE}"
     fi
     
@@ -52,7 +65,7 @@ find . -name '.git' -type d -print0 | sort -z | while IFS= read -r -d '' path; d
     else
         echo "\033[1;32mChecked ${dir}" # Green
     fi
-done
+done < "${REPOS}"
 
 echo ""
 echo "\033[1;37mScanning for flagged nogit directories..."
