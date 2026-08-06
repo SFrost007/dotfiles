@@ -1,19 +1,23 @@
 #!/bin/sh
+# Keep this as sh: macOS runs sh as bash with xpg_echo, which the \033 colour escapes below rely on.
 
 FETCH_JOBS=12
 
 REPOS=$(mktemp)
+NOGITS=$(mktemp)
 FETCH_FAILURES=$(mktemp)
-trap 'rm -f "${REPOS}" "${FETCH_FAILURES}"' EXIT
-trap 'rm -f "${REPOS}" "${FETCH_FAILURES}"; exit 130' INT TERM
+trap 'rm -f "${REPOS}" "${NOGITS}" "${FETCH_FAILURES}"' EXIT
+trap 'rm -f "${REPOS}" "${NOGITS}" "${FETCH_FAILURES}"; exit 130' INT TERM
 
 echo "\033[1;37mScanning for git repositories..."
-find . -name '.git' -type d -print0 | sort -z | while IFS= read -r -d '' path; do
-    case "$path" in
-        *.build*) continue ;;
-    esac
-    printf '%s\0' "${path%/*}"
-done > "${REPOS}"
+find . \( -name '.build' -o -name 'SourcePackages' \) -prune -o \
+    -name '.git' -type d -prune -print0 -o -name '.nogit' -type f -print0 |
+    sort -z | while IFS= read -r -d '' path; do
+        case "${path##*/}" in
+            .git) printf '%s\0' "${path%/*}" >&3 ;;
+            .nogit) printf '%s\0' "${path%/*}" >&4 ;;
+        esac
+    done 3> "${REPOS}" 4> "${NOGITS}"
 
 echo "\033[1;37mFetching remotes ($(tr -cd '\0' < "${REPOS}" | wc -c | tr -d ' ') repositories, ${FETCH_JOBS} at a time)..."
 xargs -0 -P "${FETCH_JOBS}" -I {} sh -c 'git -C "$1" fetch --quiet 2> /dev/null || printf "%s\n" "$1"' _ {} \
@@ -34,9 +38,10 @@ while IFS= read -r -d '' dir; do
         STATE="staged ${STATE}"
     fi
 
-    if [[ -n $(git -C "$dir" stash list) ]]; then
-        STASHES=$(git -C "$dir" stash list | wc -l | awk '{print $1}')
-        if [ "${STASHES}" -eq 1 ] && git -C "$dir" stash list | grep -qi 'Logging'; then
+    STASH_LIST=$(git -C "$dir" stash list)
+    if [[ -n $STASH_LIST ]]; then
+        STASHES=$(printf '%s\n' "$STASH_LIST" | wc -l | awk '{print $1}')
+        if [ "${STASHES}" -eq 1 ] && printf '%s\n' "$STASH_LIST" | grep -qi 'Logging'; then
             STATE="stashed (Logging) ${STATE}"
         else
             STATE="stashed (${STASHES}) ${STATE}"
@@ -51,10 +56,12 @@ while IFS= read -r -d '' dir; do
         STATE="noremote ${STATE}"
     fi
     
-    if [ "${HAS_REMOTE}" -eq 1 ] && [[ -n $(git -C "$dir" log --branches --not --remotes --oneline) ]]; then
+    if [ "${HAS_REMOTE}" -eq 1 ] && [[ -n $(git -C "$dir" log --branches --not --remotes --oneline -1) ]]; then
         STATE="unpushed ${STATE}"
     fi
-    if [[ -n $(git -C "$dir" br | grep 'behind' | grep '*') ]]; then
+
+    BEHIND=$(git -C "$dir" rev-list --count "HEAD..@{u}" 2> /dev/null)
+    if [ -n "${BEHIND}" ] && [ "${BEHIND}" -gt 0 ]; then
         STATE="unpulled ${STATE}"
     fi
 
@@ -69,6 +76,6 @@ done < "${REPOS}"
 
 echo ""
 echo "\033[1;37mScanning for flagged nogit directories..."
-find . -name '.nogit' -type f -print0 | sort -z | while IFS= read -r -d '' path; do
-    echo "\033[1;31m${path%/*}: Non-git"
-done
+while IFS= read -r -d '' dir; do
+    echo "\033[1;31m${dir}: Non-git"
+done < "${NOGITS}"
