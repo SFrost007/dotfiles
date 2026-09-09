@@ -41,7 +41,6 @@ alias stopserve='pkill -f SimpleHTTPServer'
 # Fun stuff
 alias adventure='emacs -batch -l dunnet'
 alias weather='curl wttr.in'
-alias yt-dl='youtube-dl -f 137+140 --no-playlist'
 
 # Reference
 cheat() { curl "cheat.sh/$1" }
