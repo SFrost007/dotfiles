@@ -62,9 +62,6 @@
 [status]
 	showuntrackedfiles = all
 
-[push]
-	default = tracking
-
 [rerere]
 	enabled = true
 	autoupdate = true
