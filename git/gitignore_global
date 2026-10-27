@@ -23,3 +23,5 @@ my_*
 
 # Muxy AI status cache - probably a temporary bug but keeps showing up
 status-cache.json
+
+AGENT-CHAT-*.md
