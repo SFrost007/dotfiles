@@ -1,0 +1,242 @@
+#!/usr/bin/env python3
+"""Move a project folder and carry its Claude Code history, memory and per-project settings with it.
+
+OLD may be a parent folder: every Claude project beneath it is migrated. If OLD has already
+been moved to NEW (e.g. in Finder), only Claude's state is migrated.
+"""
+import argparse
+import json
+import os
+import re
+import shutil
+import sys
+import time
+from pathlib import Path
+
+HOME = Path.home()
+CLAUDE = HOME / ".claude"
+PROJECTS = CLAUDE / "projects"
+SESSIONS = CLAUDE / "sessions"
+CONFIG = HOME / ".claude.json"
+HISTORY = CLAUDE / "history.jsonl"
+TEXT_SUFFIXES = {".jsonl", ".json", ".md"}
+CWD_FIELD = re.compile(r'"cwd":"((?:[^"\\]|\\.)*)"')
+
+
+def encode(path):
+    return re.sub(r"[^A-Za-z0-9]", "-", path)
+
+
+def under(path, root):
+    return path == root or path.startswith(root + "/")
+
+
+def remap(path, old, new):
+    return new + path[len(old):]
+
+
+def project_path_of(folder):
+    for transcript in folder.rglob("*.jsonl"):
+        with transcript.open(errors="replace") as fh:
+            for line in fh:
+                for match in CWD_FIELD.finditer(line):
+                    cwd = json.loads(f'"{match.group(1)}"')
+                    if encode(cwd) == folder.name:
+                        return cwd
+    return None
+
+
+def find_project_folders(old):
+    prefix = encode(old)
+    found = {}
+    for folder in sorted(PROJECTS.iterdir()) if PROJECTS.is_dir() else []:
+        if not folder.is_dir():
+            continue
+        if folder.name == prefix:
+            found[folder] = old
+        elif folder.name.startswith(prefix + "-"):
+            path = project_path_of(folder)
+            if path and under(path, old):
+                found[folder] = path
+    return found
+
+
+def running_sessions():
+    live = []
+    for f in SESSIONS.glob("*.json") if SESSIONS.is_dir() else []:
+        try:
+            info = json.loads(f.read_text())
+            os.kill(int(info["pid"]), 0)
+            live.append(info)
+        except (OSError, ValueError, KeyError):
+            continue
+    return live
+
+
+def format_sessions(sessions):
+    return "\n".join(
+        f"  {s['pid']:>6}  {s.get('name', '-'):<28} {s.get('status', '-'):<5}  {s.get('cwd', '?')}"
+        for s in sorted(sessions, key=lambda s: s.get("cwd", ""))
+    )
+
+
+class Rewriter:
+    def __init__(self, old, new, projects):
+        # Encoded folder names appear inside paths like ~/.claude/projects/<name>/memory.
+        self.rules = [(re.compile(re.escape(old) + r"(?![A-Za-z0-9._-])"), new)]
+        self.rules += [
+            (re.compile("projects/" + re.escape(encode(p)) + r"(?![A-Za-z0-9-])"),
+             "projects/" + encode(remap(p, old, new)))
+            for p in projects
+        ]
+
+    def text(self, s):
+        for pattern, replacement in self.rules:
+            s = pattern.sub(lambda _: replacement, s)
+        return s
+
+    def deep(self, value):
+        if isinstance(value, str):
+            return self.text(value)
+        if isinstance(value, list):
+            return [self.deep(v) for v in value]
+        if isinstance(value, dict):
+            return {k: self.deep(v) for k, v in value.items()}
+        return value
+
+    def file(self, path):
+        try:
+            original = path.read_text()
+        except UnicodeDecodeError:
+            return False
+        updated = self.text(original)
+        if updated == original:
+            return False
+        write_atomic(path, updated)
+        return True
+
+
+def write_atomic(path, content):
+    tmp = path.with_name(path.name + ".claude-mv.tmp")
+    tmp.write_text(content)
+    shutil.copymode(path, tmp)
+    os.replace(tmp, path)
+
+
+def merge_collisions(src, dst):
+    if not dst.exists():
+        return []
+    return [str(f.relative_to(src)) for f in src.rglob("*")
+            if f.is_file() and (dst / f.relative_to(src)).exists()]
+
+
+def merge_move(src, dst):
+    if not dst.exists():
+        shutil.move(src, dst)
+        return
+    for f in sorted(src.rglob("*")):
+        if f.is_file():
+            target = dst / f.relative_to(src)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            os.replace(f, target)
+    shutil.rmtree(src)
+
+
+def fail(message):
+    sys.exit(f"claude-mv: {message}")
+
+
+def main():
+    parser = argparse.ArgumentParser(prog="claude-mv", description=__doc__,
+                                     formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("old", nargs="?")
+    parser.add_argument("new", nargs="?")
+    parser.add_argument("--dry-run", action="store_true", help="show what would change")
+    parser.add_argument("--list", action="store_true", help="list open Claude sessions and exit")
+    args = parser.parse_args()
+
+    if args.list:
+        live = running_sessions()
+        print(format_sessions(live) if live else "No open Claude sessions")
+        return
+    if not args.old or not args.new:
+        parser.error("OLD and NEW are required")
+
+    old = os.path.abspath(os.path.expanduser(args.old))
+    new = os.path.abspath(os.path.expanduser(args.new))
+    if old == new or under(new, old) or under(old, new):
+        fail("OLD and NEW must not contain each other")
+
+    old_exists, new_exists = os.path.exists(old), os.path.exists(new)
+    if old_exists and new_exists:
+        fail(f"both {old} and {new} exist")
+    if not old_exists and not new_exists:
+        fail(f"neither {old} nor {new} exists")
+    move_files = old_exists
+
+    live = running_sessions()
+    if live and not args.dry_run:
+        fail(f"quit these Claude sessions first:\n{format_sessions(live)}")
+
+    folders = find_project_folders(old)
+    config = json.loads(CONFIG.read_text()) if CONFIG.exists() else {}
+    config_keys = [k for k in config.get("projects", {}) if under(k, old)]
+
+    moves = [(folder, PROJECTS / encode(remap(path, old, new))) for folder, path in folders.items()]
+    collisions = [f"{dst.name}/{c}" for src, dst in moves for c in merge_collisions(src, dst)]
+    if collisions:
+        fail("these files already exist in the destination folders:\n  " + "\n  ".join(collisions))
+
+    print(f"{'Would move' if args.dry_run else 'Moving'} {old} -> {new}" if move_files
+          else f"{old} already moved to {new}; migrating Claude state only")
+    for src, dst in moves:
+        print(f"  history/memory: {src.name} -> {dst.name}{' (merge)' if dst.exists() else ''}")
+    for key in config_keys:
+        print(f"  settings: {key} -> {remap(key, old, new)}")
+    if not moves and not config_keys:
+        print("  no Claude state found for this path")
+    if args.dry_run:
+        return
+
+    backup = CLAUDE / "backups" / f"claude-mv-{time.strftime('%Y%m%d-%H%M%S')}"
+    backup.mkdir(parents=True)
+    for path in (CONFIG, HISTORY):
+        if path.exists():
+            shutil.copy2(path, backup / path.name)
+    for src, _ in moves:
+        shutil.copytree(src, backup / "projects" / src.name, symlinks=True)
+    print(f"Backup: {backup}")
+
+    if move_files:
+        os.makedirs(os.path.dirname(new), exist_ok=True)
+        shutil.move(old, new)
+
+    rewriter = Rewriter(old, new, folders.values())
+    rewritten = 0
+    for src, dst in moves:
+        merge_move(src, dst)
+        for f in dst.rglob("*"):
+            if f.is_file() and f.suffix in TEXT_SUFFIXES:
+                rewritten += rewriter.file(f)
+    if HISTORY.exists():
+        rewritten += rewriter.file(HISTORY)
+
+    if config:
+        projects = config.get("projects", {})
+        migrated = {}
+        for key, entry in projects.items():
+            if under(key, old):
+                target = remap(key, old, new)
+                migrated[target] = {**projects.get(target, {}), **rewriter.deep(entry)}
+            elif key not in migrated:
+                migrated[key] = entry
+        config["projects"] = migrated
+        if "githubRepoPaths" in config:
+            config["githubRepoPaths"] = rewriter.deep(config["githubRepoPaths"])
+        write_atomic(CONFIG, json.dumps(config, indent=2, ensure_ascii=False) + "\n")
+
+    print(f"Done: {len(moves)} project folder(s), {len(config_keys)} settings entr(ies), {rewritten} file(s) rewritten")
+
+
+if __name__ == "__main__":
+    main()
